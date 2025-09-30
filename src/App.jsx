@@ -29,10 +29,10 @@ export default function App() {
               Relacionamentos com sentido, decisões com coragem, <span className="text-[#235FAA]">vida com direção</span>.
             </h1>
             <p className="mt-5 text-white/80 max-w-2xl">
-              Sou Felipe Melo Souza Santos (CRP 03/15591), psicólogo clínico e terapeuta de casais. Trabalho com ACT (Terapia de Aceitação e Compromisso) e IBCT (Terapia Comportamental Integrativa de Casal), em intervenções baseadas em processos e valores.
+              Sou Felipe Santos (CRP 03/15591), psicólogo clínico e terapeuta de casais. Trabalho com ACT (Terapia de Aceitação e Compromisso) e IBCT (Terapia Comportamental Integrativa de Casal), em intervenções baseadas em processos e valores.
             </p>
             <div className="mt-8 flex flex-col sm:flex-row gap-3">
-              <a href="https://api.whatsapp.com/send?phone=" className="inline-flex items-center justify-center rounded-xl bg-[#235FAA] px-5 py-3 font-medium hover:brightness-110">Falar no WhatsApp</a>
+              <a href="https://api.whatsapp.com/send?phone=5571987865549" className="inline-flex items-center justify-center rounded-xl bg-[#235FAA] px-5 py-3 font-medium hover:brightness-110">Falar no WhatsApp</a>
               <a href="#contato" className="inline-flex items-center justify-center rounded-xl border border-white/20 px-5 py-3 font-medium hover:bg-white/5">Ver disponibilidade</a>
             </div>
             <div className="mt-10 grid grid-cols-2 sm:grid-cols-4 gap-4 text-xs text-white/60">
@@ -72,7 +72,7 @@ export default function App() {
           />
           <ServiceCard
             number="02"
-            title="Terapia de Casal (hetero monogâmica)"
+            title="Terapia de Casal"
             items={[
               "Comunicação e reconciliação de diferenças (IBCT)",
               "Mapeamento de padrões (\"modo sobrevivência\", banco emocional)",
@@ -135,7 +135,7 @@ export default function App() {
       <footer className="border-t border-white/10">
         <div className="mx-auto max-w-6xl px-4 py-10 text-sm text-white/70">
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-            <div><strong>Felipe Melo Souza Santos</strong> — Psicólogo Clínico • CRP 03/15591</div>
+            <div><strong>Felipe Santos</strong> — Psicólogo Clínico • CRP 03/15591</div>
             <div className="flex gap-4">
               <a href="#" className="hover:opacity-80">Política de Privacidade</a>
               <a href="#" className="hover:opacity-80">Termos de Uso</a>
