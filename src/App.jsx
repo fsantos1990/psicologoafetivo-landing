@@ -75,7 +75,7 @@ export default function App() {
             title="Terapia de Casal (hetero monogâmica)"
             items={[
               "Comunicação e reconciliação de diferenças (IBCT)",
-              "Mapeamento de padrões ("modo sobrevivência", banco emocional)",
+              "Mapeamento de padrões (\"modo sobrevivência\", banco emocional)",
               "Reforço do compromisso, intimidade e compaixão",
             ]}
           />
