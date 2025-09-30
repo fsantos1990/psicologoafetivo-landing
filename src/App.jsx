@@ -13,7 +13,20 @@ export default function App() {
             <a href="#atendimento" className="hover:opacity-80">Atendimento</a>
             <a href="#abordagem" className="hover:opacity-80">Abordagem</a>
             <a href="#faq" className="hover:opacity-80">Perguntas</a>
+            <a
+              href="https://api.whatsapp.com/send?phone=5571987865549"
+              className="hover:opacity-80"
+            >
+              Agendar
+            </a>
           </nav>
+          <a
+            href="https://api.whatsapp.com/send?phone=5571987865549"
+            className="inline-flex items-center rounded-xl bg-[#235FAA] px-4 py-2 text-sm font-medium hover:brightness-110 focus:outline-none focus:ring-2 focus:ring-[#235FAA]"
+          >
+            Falar no WhatsApp
+          </a>
+        </div>
       </header>
 
       {/* Hero */}
@@ -33,6 +46,14 @@ export default function App() {
               <p className="mt-5 text-white/80 max-w-2xl">
                 Sou Felipe Santos (CRP 03/15591), psicólogo clínico e terapeuta de casais. Trabalho com ACT (Terapia de Aceitação e Compromisso) e IBCT (Terapia Comportamental Integrativa de Casal), em intervenções baseadas em processos e valores.
               </p>
+              <div className="mt-8">
+                <a
+                  href="https://api.whatsapp.com/send?phone=5571987865549"
+                  className="inline-flex items-center justify-center rounded-xl bg-[#235FAA] px-5 py-3 font-medium hover:brightness-110"
+                >
+                  Agendar pelo WhatsApp
+                </a>
+              </div>
               <div className="mt-10 grid grid-cols-2 sm:grid-cols-4 gap-4 text-xs text-white/60">
                 <div className="rounded-xl border border-white/10 p-3">Atendimento online</div>
                 <div className="rounded-xl border border-white/10 p-3">Casais &amp; Adultos</div>
@@ -83,7 +104,7 @@ export default function App() {
           />
           <ServiceCard
             number="02"
-            title="Terapia de Casal"
+            title="Terapia de Casal (hetero monogâmica)"
             items={[
               'Comunicação e reconciliação de diferenças (IBCT)',
               'Mapeamento de padrões ("modo sobrevivência", banco emocional)',
@@ -114,18 +135,23 @@ export default function App() {
         </div>
       </section>
 
-      {/* CTA intermédio */}
+      {/* CTA intermediário (WhatsApp) */}
       <section className="mx-auto max-w-6xl px-4 py-16">
         <div className="rounded-2xl border border-white/10 p-8 md:p-10 bg-gradient-to-br from-[#235FAA]/20 to-transparent">
           <h3 className="text-xl md:text-2xl font-semibold">Pronto para começar uma conversa?</h3>
-          <p className="mt-2 text-white/80">Envie uma mensagem e retornarei com horários e próximos passos.</p>
-          <div className="mt-6 flex flex-col sm:flex-row gap-3">
+          <p className="mt-2 text-white/80">
+            Me chame e envio horários e próximos passos no próprio WhatsApp.
+          </p>
+          <div className="mt-6">
             <a
               href="https://api.whatsapp.com/send?phone=5571987865549"
               className="inline-flex justify-center rounded-xl bg-[#235FAA] px-5 py-3 font-medium hover:brightness-110"
             >
-              WhatsApp
+              Falar no WhatsApp
             </a>
+          </div>
+        </div>
+      </section>
 
       {/* FAQ */}
       <section id="faq" className="bg-white/5">
@@ -135,7 +161,7 @@ export default function App() {
             <Faq q="Como funcionam as sessões online?" a="Usamos plataforma segura (link enviado no agendamento). Duração média de 50 minutos." />
             <Faq q="Você atende convênio?" a="Atendo particular. Posso emitir recibo para reembolso quando aplicável." />
             <Faq q="Atende casais de culturas diferentes?" a="Sim. Experiência com casais multiculturais e atendimento bilíngue (PT/EN) quando necessário." />
-            <Faq q="Como marcar?" a="Envie mensagem no WhatsApp. Retorno com horários e instruções." />
+            <Faq q="Como marcar?" a="Clique em 'Falar no WhatsApp' e combinamos os horários por lá." />
           </div>
         </div>
       </section>
