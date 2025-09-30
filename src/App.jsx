@@ -13,15 +13,7 @@ export default function App() {
             <a href="#atendimento" className="hover:opacity-80">Atendimento</a>
             <a href="#abordagem" className="hover:opacity-80">Abordagem</a>
             <a href="#faq" className="hover:opacity-80">Perguntas</a>
-            <a href="#contato" className="hover:opacity-80">Agendar</a>
           </nav>
-          <a
-            href="#contato"
-            className="inline-flex items-center rounded-xl bg-[#235FAA] px-4 py-2 text-sm font-medium hover:brightness-110 focus:outline-none focus:ring-2 focus:ring-[#235FAA]"
-          >
-            Agendar sessão
-          </a>
-        </div>
       </header>
 
       {/* Hero */}
@@ -134,15 +126,6 @@ export default function App() {
             >
               WhatsApp
             </a>
-            <a
-              href="#contato"
-              className="inline-flex justify-center rounded-xl border border-white/20 px-5 py-3 font-medium hover:bg-white/5"
-            >
-              Formulário de contato
-            </a>
-          </div>
-        </div>
-      </section>
 
       {/* FAQ */}
       <section id="faq" className="bg-white/5">
@@ -152,21 +135,9 @@ export default function App() {
             <Faq q="Como funcionam as sessões online?" a="Usamos plataforma segura (link enviado no agendamento). Duração média de 50 minutos." />
             <Faq q="Você atende convênio?" a="Atendo particular. Posso emitir recibo para reembolso quando aplicável." />
             <Faq q="Atende casais de culturas diferentes?" a="Sim. Experiência com casais multiculturais e atendimento bilíngue (PT/EN) quando necessário." />
-            <Faq q="Como marcar?" a="Clique em ‘Agendar sessão’ ou envie mensagem no WhatsApp. Retorno com horários e instruções." />
+            <Faq q="Como marcar?" a="Envie mensagem no WhatsApp. Retorno com horários e instruções." />
           </div>
         </div>
-      </section>
-
-      {/* Contato */}
-      <section id="contato" className="mx-auto max-w-6xl px-4 py-16">
-        <h2 className="text-2xl md:text-3xl font-semibold">Contato</h2>
-        <form className="mt-6 grid gap-4 max-w-xl" onSubmit={(e) => e.preventDefault()}>
-          <input className="w-full rounded-xl bg-transparent border border-white/20 px-4 py-3" placeholder="Seu nome" />
-          <input className="w-full rounded-xl bg-transparent border border-white/20 px-4 py-3" placeholder="Seu email" type="email" />
-          <textarea className="w-full rounded-xl bg-transparent border border-white/20 px-4 py-3" placeholder="Como posso ajudar?" rows="4" />
-          <button className="rounded-xl bg-[#235FAA] px-5 py-3 font-medium hover:brightness-110" type="button">Enviar</button>
-          <p className="text-xs text-white/60">Ao enviar, você concorda com o tratamento dos dados conforme a LGPD. Sem spam.</p>
-        </form>
       </section>
 
       {/* Footer */}
