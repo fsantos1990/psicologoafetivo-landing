@@ -46,14 +46,6 @@ export default function App() {
               <p className="mt-5 text-white/80 max-w-2xl">
                 Sou Felipe Santos (CRP 03/15591), psicólogo clínico e terapeuta de casais. Trabalho com ACT (Terapia de Aceitação e Compromisso) e IBCT (Terapia Comportamental Integrativa de Casal), em intervenções baseadas em processos e valores.
               </p>
-              <div className="mt-8">
-                <a
-                  href="https://api.whatsapp.com/send?phone=5571987865549"
-                  className="inline-flex items-center justify-center rounded-xl bg-[#235FAA] px-5 py-3 font-medium hover:brightness-110"
-                >
-                  Agendar pelo WhatsApp
-                </a>
-              </div>
               <div className="mt-10 grid grid-cols-2 sm:grid-cols-4 gap-4 text-xs text-white/60">
                 <div className="rounded-xl border border-white/10 p-3">Atendimento online</div>
                 <div className="rounded-xl border border-white/10 p-3">Casais &amp; Adultos</div>
