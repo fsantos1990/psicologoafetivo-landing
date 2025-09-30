@@ -21,20 +21,39 @@ export default function App() {
 
       {/* Hero */}
       <section id="home" className="relative overflow-hidden">
-        <div className="absolute inset-0 opacity-20 bg-[radial-gradient(ellipse_at_top,#235FAA_0%,transparent_60%)]" />
-        <div className="mx-auto max-w-6xl px-4 py-20 md:py-28">
-          <div className="max-w-3xl">
-            <p className="text-xs tracking-widest uppercase text-white/70">Psicoterapia para adultos e casais (online)</p>
-            <h1 className="mt-3 text-3xl md:text-5xl font-bold leading-tight">
-              Relacionamentos com sentido, decisões com coragem, <span className="text-[#235FAA]">vida com direção</span>.
-            </h1>
-            <p className="mt-5 text-white/80 max-w-2xl">
-              Sou Felipe Santos (CRP 03/15591), psicólogo clínico e terapeuta de casais. Trabalho com ACT (Terapia de Aceitação e Compromisso) e IBCT (Terapia Comportamental Integrativa de Casal), em intervenções baseadas em processos e valores.
-            </p>
-            <div className="mt-8 flex flex-col sm:flex-row gap-3">
-              <a href="https://api.whatsapp.com/send?phone=5571987865549" className="inline-flex items-center justify-center rounded-xl bg-[#235FAA] px-5 py-3 font-medium hover:brightness-110">Falar no WhatsApp</a>
-              <a href="#contato" className="inline-flex items-center justify-center rounded-xl border border-white/20 px-5 py-3 font-medium hover:bg-white/5">Ver disponibilidade</a>
-            </div>
+  <div className="absolute inset-0 opacity-20 bg-[radial-gradient(ellipse_at_top,#235FAA_0%,transparent_60%)]" />
+  <div className="mx-auto max-w-6xl px-4 py-20 md:py-28">
+    <div className="grid gap-10 md:grid-cols-2 items-center">
+      {/* Texto */}
+      <div className="max-w-3xl">
+        <p className="text-xs tracking-widest uppercase text-white/70">Psicoterapia para adultos e casais (online)</p>
+        <h1 className="mt-3 text-3xl md:text-5xl font-bold leading-tight">
+          Relacionamentos com sentido, decisões com coragem, <span className="text-[#235FAA]">vida com direção</span>.
+        </h1>
+        <p className="mt-5 text-white/80 max-w-2xl">
+          Sou Felipe Santos (CRP 03/15591), psicólogo clínico e terapeuta de casais. Trabalho com ACT e IBCT...
+        </p>
+        <div className="mt-8 flex flex-col sm:flex-row gap-3">
+          <a href="https://api.whatsapp.com/send?phone=5571987865549" className="inline-flex items-center justify-center rounded-xl bg-[#235FAA] px-5 py-3 font-medium hover:brightness-110">Falar no WhatsApp</a>
+          <a href="#contato" className="inline-flex items-center justify-center rounded-xl border border-white/20 px-5 py-3 font-medium hover:bg-white/5">Ver disponibilidade</a>
+        </div>
+      </div>
+
+      {/* Foto principal (hero) */}
+      <div className="justify-self-center md:justify-self-end">
+        <img
+          src="/maj-hero.webp"
+          alt="Felipe Santos — Psicólogo Afetivo"
+          className="w-full max-w-md rounded-2xl object-cover ring-1 ring-white/20 shadow-2xl"
+          loading="eager"
+          width="800"
+          height="500"
+        />
+      </div>
+    </div>
+  </div>
+</section>
+
             <div className="mt-10 grid grid-cols-2 sm:grid-cols-4 gap-4 text-xs text-white/60">
               <div className="rounded-xl border border-white/10 p-3">Atendimento online</div>
               <div className="rounded-xl border border-white/10 p-3">Casais & Adultos</div>
