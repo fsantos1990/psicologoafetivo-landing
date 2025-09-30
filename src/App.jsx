@@ -105,7 +105,7 @@ export default function App() {
           />
           <ServiceCard
             number="02"
-            title="Terapia de Casal (hetero monogâmica)"
+            title="Terapia de Casal"
             items={[
               'Comunicação e reconciliação de diferenças (IBCT)',
               'Mapeamento de padrões ("modo sobrevivência", banco emocional)',
