@@ -15,49 +15,64 @@ export default function App() {
             <a href="#faq" className="hover:opacity-80">Perguntas</a>
             <a href="#contato" className="hover:opacity-80">Agendar</a>
           </nav>
-          <a href="#contato" className="inline-flex items-center rounded-xl bg-[#235FAA] px-4 py-2 text-sm font-medium hover:brightness-110 focus:outline-none focus:ring-2 focus:ring-[#235FAA]">Agendar sessão</a>
+          <a
+            href="#contato"
+            className="inline-flex items-center rounded-xl bg-[#235FAA] px-4 py-2 text-sm font-medium hover:brightness-110 focus:outline-none focus:ring-2 focus:ring-[#235FAA]"
+          >
+            Agendar sessão
+          </a>
         </div>
       </header>
 
       {/* Hero */}
-<section id="home" className="relative overflow-hidden">
-  <div className="absolute inset-0 opacity-20 bg-[radial-gradient(ellipse_at_top,#235FAA_0%,transparent_60%)]" />
-  <div className="mx-auto max-w-6xl px-4 py-20 md:py-28">
-    <div className="grid gap-10 md:grid-cols-2 items-center">
-      {/* Texto */}
-      <div className="max-w-3xl">
-        <p className="text-xs tracking-widest uppercase text-white/70">
-          Psicoterapia para adultos e casais (online)
-        </p>
-        <h1 className="mt-3 text-3xl md:text-5xl font-bold leading-tight">
-          Relacionamentos com sentido, decisões com coragem,{" "}
-          <span className="text-[#235FAA]">vida com direção</span>.
-        </h1>
-        <p className="mt-5 text-white/80 max-w-2xl">
-          Sou Felipe Santos (CRP 03/15591), psicólogo clínico e terapeuta de casais. Trabalho com ACT (Terapia de Aceitação e Compromisso) e IBCT (Terapia Comportamental Integrativa de Casal), em intervenções baseadas em processos e valores.
-        </p>
-        <div classNam
+      <section id="home" className="relative overflow-hidden">
+        <div className="absolute inset-0 opacity-20 bg-[radial-gradient(ellipse_at_top,#235FAA_0%,transparent_60%)]" />
+        <div className="mx-auto max-w-6xl px-4 py-20 md:py-28">
+          <div className="grid gap-10 md:grid-cols-2 items-center">
+            {/* Texto */}
+            <div className="max-w-3xl">
+              <p className="text-xs tracking-widest uppercase text-white/70">
+                Psicoterapia para adultos e casais (online)
+              </p>
+              <h1 className="mt-3 text-3xl md:text-5xl font-bold leading-tight">
+                Relacionamentos com sentido, decisões com coragem,{' '}
+                <span className="text-[#235FAA]">vida com direção</span>.
+              </h1>
+              <p className="mt-5 text-white/80 max-w-2xl">
+                Sou Felipe Santos (CRP 03/15591), psicólogo clínico e terapeuta de casais. Trabalho com ACT (Terapia de Aceitação e Compromisso) e IBCT (Terapia Comportamental Integrativa de Casal), em intervenções baseadas em processos e valores.
+              </p>
+              <div className="mt-8 flex flex-col sm:flex-row gap-3">
+                <a
+                  href="https://api.whatsapp.com/send?phone=5571987865549"
+                  className="inline-flex items-center justify-center rounded-xl bg-[#235FAA] px-5 py-3 font-medium hover:brightness-110"
+                >
+                  Falar no WhatsApp
+                </a>
+                <a
+                  href="#contato"
+                  className="inline-flex items-center justify-center rounded-xl border border-white/20 px-5 py-3 font-medium hover:bg-white/5"
+                >
+                  Ver disponibilidade
+                </a>
+              </div>
+              <div className="mt-10 grid grid-cols-2 sm:grid-cols-4 gap-4 text-xs text-white/60">
+                <div className="rounded-xl border border-white/10 p-3">Atendimento online</div>
+                <div className="rounded-xl border border-white/10 p-3">Casais &amp; Adultos</div>
+                <div className="rounded-xl border border-white/10 p-3">Baseado em evidências</div>
+                <div className="rounded-xl border border-white/10 p-3">Confidencialidade (LGPD)</div>
+              </div>
+            </div>
 
-      {/* Foto principal (hero) */}
-      <div className="justify-self-center md:justify-self-end">
-        <img
-          src="/maj-hero.webp"
-          alt="Felipe Santos — Psicólogo Afetivo"
-          className="w-full max-w-md rounded-2xl object-cover ring-1 ring-white/20 shadow-2xl"
-          loading="eager"
-          width="800"
-          height="500"
-        />
-      </div>
-    </div>
-  </div>
-</section>
-
-            <div className="mt-10 grid grid-cols-2 sm:grid-cols-4 gap-4 text-xs text-white/60">
-              <div className="rounded-xl border border-white/10 p-3">Atendimento online</div>
-              <div className="rounded-xl border border-white/10 p-3">Casais & Adultos</div>
-              <div className="rounded-xl border border-white/10 p-3">Baseado em evidências</div>
-              <div className="rounded-xl border border-white/10 p-3">Confidencialidade (LGPD)</div>
+            {/* Foto principal (hero) */}
+            <div className="justify-self-center md:justify-self-end">
+              <img
+                src="/maj-hero.webp"
+                alt="Felipe Santos — Psicólogo Afetivo"
+                className="w-full max-w-md rounded-2xl object-cover ring-1 ring-white/20 shadow-2xl"
+                loading="eager"
+                width="800"
+                height="500"
+              />
             </div>
           </div>
         </div>
@@ -83,18 +98,18 @@ export default function App() {
             number="01"
             title="Terapia Individual (adultos)"
             items={[
-              "Ansiedade, regulação emocional, propósito e valores",
-              "Padrões relacionais: autocrítica, evitação, dependência",
-              "Construção de rotina e decisões alinhadas",
+              'Ansiedade, regulação emocional, propósito e valores',
+              'Padrões relacionais: autocrítica, evitação, dependência',
+              'Construção de rotina e decisões alinhadas',
             ]}
           />
           <ServiceCard
             number="02"
-            title="Terapia de Casal"
+            title="Terapia de Casal (hetero monogâmica)"
             items={[
-              "Comunicação e reconciliação de diferenças (IBCT)",
-              "Mapeamento de padrões (\"modo sobrevivência\", banco emocional)",
-              "Reforço do compromisso, intimidade e compaixão",
+              'Comunicação e reconciliação de diferenças (IBCT)',
+              'Mapeamento de padrões ("modo sobrevivência", banco emocional)',
+              'Reforço do compromisso, intimidade e compaixão',
             ]}
           />
         </div>
@@ -105,9 +120,18 @@ export default function App() {
         <div className="mx-auto max-w-6xl px-4 py-16">
           <h2 className="text-2xl md:text-3xl font-semibold">Minha abordagem</h2>
           <div className="mt-6 grid gap-6 md:grid-cols-3">
-            <ApproachCard title="Processos, não rótulos" text="Olho para padrões que mantêm sofrimento e afastam você do que importa (flexibilidade psicológica)." />
-            <ApproachCard title="Valores na prática" text="Convertendo clareza de valores em pequenas ações viáveis no dia a dia." />
-            <ApproachCard title="Cuidado ético" text="Sem promessas, sem sensacionalismo. Confidencialidade e respeito à sua história." />
+            <ApproachCard
+              title="Processos, não rótulos"
+              text="Olho para padrões que mantêm sofrimento e afastam você do que importa (flexibilidade psicológica)."
+            />
+            <ApproachCard
+              title="Valores na prática"
+              text="Convertendo clareza de valores em pequenas ações viáveis no dia a dia."
+            />
+            <ApproachCard
+              title="Cuidado ético"
+              text="Sem promessas, sem sensacionalismo. Confidencialidade e respeito à sua história."
+            />
           </div>
         </div>
       </section>
@@ -118,8 +142,18 @@ export default function App() {
           <h3 className="text-xl md:text-2xl font-semibold">Pronto para começar uma conversa?</h3>
           <p className="mt-2 text-white/80">Envie uma mensagem e retornarei com horários e próximos passos.</p>
           <div className="mt-6 flex flex-col sm:flex-row gap-3">
-            <a href="https://api.whatsapp.com/send?phone=" className="inline-flex justify-center rounded-xl bg-[#235FAA] px-5 py-3 font-medium hover:brightness-110">WhatsApp</a>
-            <a href="#contato" className="inline-flex justify-center rounded-xl border border-white/20 px-5 py-3 font-medium hover:bg-white/5">Formulário de contato</a>
+            <a
+              href="https://api.whatsapp.com/send?phone=5571987865549"
+              className="inline-flex justify-center rounded-xl bg-[#235FAA] px-5 py-3 font-medium hover:brightness-110"
+            >
+              WhatsApp
+            </a>
+            <a
+              href="#contato"
+              className="inline-flex justify-center rounded-xl border border-white/20 px-5 py-3 font-medium hover:bg-white/5"
+            >
+              Formulário de contato
+            </a>
           </div>
         </div>
       </section>
