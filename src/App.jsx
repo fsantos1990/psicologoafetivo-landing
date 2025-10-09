@@ -7,8 +7,17 @@ export default function App() {
       {/* Navbar */}
       <header className="sticky top-0 z-50 backdrop-blur supports-[backdrop-filter]:bg-black/50 bg-black/70 border-b border-white/10">
         <div className="mx-auto max-w-6xl px-4 py-3 flex items-center justify-between">
-          <a href="#home" className="font-semibold tracking-wide">@psicologoafetivo</a>
-          <nav className="hidden md:flex gap-6 text-sm">
+         <a href="#home" className="flex items-center gap-3 p-2" aria-label="Felipe Santos — Psicólogo Afetivo">
+  <img
+    src="/logo.png"
+    alt="Felipe Santos — Psicólogo Afetivo"
+    className="h-8 w-auto md:h-9"
+    loading="eager"
+    width="180"
+    height="36"
+  />
+  <span className="sr-only">@psicologoafetivo</span>
+</a>
             <a href="#sobre" className="hover:opacity-80">Sobre</a>
             <a href="#atendimento" className="hover:opacity-80">Atendimento</a>
             <a href="#abordagem" className="hover:opacity-80">Abordagem</a>
