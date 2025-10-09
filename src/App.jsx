@@ -7,17 +7,19 @@ export default function App() {
       {/* Navbar */}
       <header className="sticky top-0 z-50 backdrop-blur supports-[backdrop-filter]:bg-black/50 bg-black/70 border-b border-white/10">
         <div className="mx-auto max-w-6xl px-4 py-3 flex items-center justify-between">
-         <a href="#home" className="flex items-center gap-3 p-2" aria-label="Felipe Santos — Psicólogo Afetivo">
-  <img
-    src="/logo.png"
-    alt="Felipe Santos — Psicólogo Afetivo"
-    className="h-8 w-auto md:h-9"
-    loading="eager"
-    width="180"
-    height="36"
-  />
-  <span className="sr-only">@psicologoafetivo</span>
-</a>
+          <a href="#home" className="flex items-center gap-3 p-2" aria-label="Felipe Santos — Psicólogo Afetivo">
+            <img
+              src="/logo.png"
+              alt="Felipe Santos — Psicólogo Afetivo"
+              className="h-8 w-auto md:h-9"
+              loading="eager"
+              width="180"
+              height="36"
+            />
+            <span className="sr-only">@psicologoafetivo</span>
+          </a>
+
+          <nav className="hidden md:flex gap-6 text-sm">
             <a href="#sobre" className="hover:opacity-80">Sobre</a>
             <a href="#atendimento" className="hover:opacity-80">Atendimento</a>
             <a href="#abordagem" className="hover:opacity-80">Abordagem</a>
@@ -29,6 +31,7 @@ export default function App() {
               Agendar
             </a>
           </nav>
+
           <a
             href="https://api.whatsapp.com/send?phone=5571987865549"
             className="inline-flex items-center rounded-xl bg-[#235FAA] px-4 py-2 text-sm font-medium hover:brightness-110 focus:outline-none focus:ring-2 focus:ring-[#235FAA]"
@@ -55,6 +58,14 @@ export default function App() {
               <p className="mt-5 text-white/80 max-w-2xl">
                 Sou Felipe Santos (CRP 03/15591), psicólogo clínico e terapeuta de casais. Trabalho com ACT (Terapia de Aceitação e Compromisso) e IBCT (Terapia Comportamental Integrativa de Casal), em intervenções baseadas em processos e valores.
               </p>
+              <div className="mt-8">
+                <a
+                  href="https://api.whatsapp.com/send?phone=5571987865549"
+                  className="inline-flex items-center justify-center rounded-xl bg-[#235FAA] px-5 py-3 font-medium hover:brightness-110"
+                >
+                  Agendar pelo WhatsApp
+                </a>
+              </div>
               <div className="mt-10 grid grid-cols-2 sm:grid-cols-4 gap-4 text-xs text-white/60">
                 <div className="rounded-xl border border-white/10 p-3">Atendimento online</div>
                 <div className="rounded-xl border border-white/10 p-3">Casais &amp; Adultos</div>
