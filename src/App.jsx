@@ -25,7 +25,9 @@ export default function App() {
             <a href="#abordagem" className="hover:opacity-80">Abordagem</a>
             <a href="#faq" className="hover:opacity-80">Perguntas</a>
             <a
-              href="https://api.whatsapp.com/send?phone=5571987865549"
+              href="https://wa.me/5571987865549"
+              target="_blank"
+              rel="noopener noreferrer"
               className="hover:opacity-80"
             >
               Agendar
@@ -33,7 +35,9 @@ export default function App() {
           </nav>
 
           <a
-            href="https://api.whatsapp.com/send?phone=5571987865549"
+            href="https://wa.me/5571987865549"
+            target="_blank"
+            rel="noopener noreferrer"
             className="inline-flex items-center rounded-xl bg-[#235FAA] px-4 py-2 text-sm font-medium hover:brightness-110 focus:outline-none focus:ring-2 focus:ring-[#235FAA]"
           >
             Falar no WhatsApp
@@ -43,9 +47,9 @@ export default function App() {
 
       {/* Hero */}
       <section id="home" className="relative overflow-hidden">
-        - <div className="absolute inset-0 opacity-20 bg-[radial-gradient(ellipse_at_top,#235FAA_0%,transparent_60%)]" />
-+ <div className="absolute inset-0 opacity-20 pointer-events-none bg-[radial-gradient(ellipse_at_top,#235FAA_0%,transparent_60%)]" />
-        <div className="mx-auto max-w-6xl px-4 py-20 md:py-28">
+        {/* overlay visual sem capturar clique */}
+        <div className="absolute inset-0 opacity-20 pointer-events-none bg-[radial-gradient(ellipse_at_top,#235FAA_0%,transparent_60%)]" />
+        <div className="relative z-10 mx-auto max-w-6xl px-4 py-20 md:py-28">
           <div className="grid gap-10 md:grid-cols-2 items-center">
             {/* Texto */}
             <div className="max-w-3xl">
@@ -61,7 +65,9 @@ export default function App() {
               </p>
               <div className="mt-8">
                 <a
-                  href="https://api.whatsapp.com/send?phone=5571987865549"
+                  href="https://wa.me/5571987865549"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="inline-flex items-center justify-center rounded-xl bg-[#235FAA] px-5 py-3 font-medium hover:brightness-110"
                 >
                   Agendar pelo WhatsApp
@@ -157,7 +163,9 @@ export default function App() {
           </p>
           <div className="mt-6">
             <a
-              href="https://api.whatsapp.com/send?phone=5571987865549"
+              href="https://wa.me/5571987865549"
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex justify-center rounded-xl bg-[#235FAA] px-5 py-3 font-medium hover:brightness-110"
             >
               Falar no WhatsApp
