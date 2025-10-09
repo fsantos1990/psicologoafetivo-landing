@@ -43,7 +43,8 @@ export default function App() {
 
       {/* Hero */}
       <section id="home" className="relative overflow-hidden">
-        <div className="absolute inset-0 opacity-20 bg-[radial-gradient(ellipse_at_top,#235FAA_0%,transparent_60%)]" />
+        - <div className="absolute inset-0 opacity-20 bg-[radial-gradient(ellipse_at_top,#235FAA_0%,transparent_60%)]" />
++ <div className="absolute inset-0 opacity-20 pointer-events-none bg-[radial-gradient(ellipse_at_top,#235FAA_0%,transparent_60%)]" />
         <div className="mx-auto max-w-6xl px-4 py-20 md:py-28">
           <div className="grid gap-10 md:grid-cols-2 items-center">
             {/* Texto */}
