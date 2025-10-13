@@ -180,7 +180,11 @@ src="https://www.facebook.com/tr?id=PIXEL_ID_AQUI&ev=PageView&noscript=1"/></nos
           <div class="p-6 rounded-2xl border border-gray-200 bg-white shadow-sm text-center">
             <p class="text-sm text-gray-700">Investimento</p>
             <p id="price-el-2" class="text-3xl font-extrabold mt-1">R$ 39</p>
-            <a id="buy-btn" href="https://pay.hotmart.com/G96223351O" class="mt-4 inline-block px-6 py-3 rounded-2xl bg-black text-white font-semibold hover:opacity-80 transition w-full" target="_blank" rel="noopener">Comprar agora</a>
+            <a href="https://pay.hotmart.com/G96223351O"
+   target="_blank" rel="noopener"
+   onclick="try{fbq('track','InitiateCheckout',{value:39.00,currency:'BRL'});}catch(e){}">
+  Comprar agora
+</a>
             <p class="mt-2 text-xs text-gray-600">Pagamento seguro • Acesso imediato</p>
           </div>
         </div>
