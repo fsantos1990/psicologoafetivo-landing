@@ -1,0 +1,266 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Decodificando o Amor — Página de Vendas</title>
+    <meta name="description" content="Guia prático baseado em ACT e IBCT para transformar conflitos em intimidade.">
+    <!-- Tailwind Play CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              brand: {
+                blue: '#235FAA',
+                gray: '#DDDDDD'
+              }
+            },
+            borderRadius: {
+              '2xl': '1rem',
+              '3xl': '1.5rem'
+            }
+          }
+        }
+      }
+    </script>
+    <style>
+      body, button { font-family: Arial, ui-sans-serif, system-ui; }
+    </style>
+  </head>
+  <body class="bg-white text-black min-h-screen">
+    <header class="sticky top-0 z-50 backdrop-blur bg-white/80 border-b border-gray-200">
+      <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <div class="w-9 h-9 rounded-2xl bg-black"></div>
+          <div class="leading-none">
+            <p class="font-semibold">Psicólogo Afetivo — Felipe Santos</p>
+            <p class="text-sm text-gray-600">ACT • IBCT • Casais & Adultos</p>
+          </div>
+        </div>
+        <nav class="hidden md:flex items-center gap-6 text-sm">
+          <a href="#sobre" class="hover:opacity-70">Sobre</a>
+          <a href="#conteudo" class="hover:opacity-70">Conteúdo</a>
+          <a href="#bonus" class="hover:opacity-70">Bônus</a>
+          <a href="#faq" class="hover:opacity-70">FAQ</a>
+        </nav>
+        <a id="header-cta" href="#comprar" class="px-4 py-2 rounded-xl bg-black text-white font-semibold hover:opacity-80 transition">Comprar agora</a>
+      </div>
+    </header>
+
+    <main>
+      <section class="max-w-6xl mx-auto px-4 py-16 grid md:grid-cols-2 gap-10 items-center">
+        <div>
+          <span class="inline-block text-xs tracking-widest uppercase bg-black text-white px-3 py-1 rounded-full">Livro</span>
+          <h1 class="mt-4 text-4xl md:text-5xl font-extrabold leading-tight">
+            Decodificando o Amor: <span class="text-brand-blue">Segredos Científicos</span> para Transformar Conflitos em Intimidade
+          </h1>
+          <p class="mt-5 text-lg text-gray-800">
+            Um guia direto, baseado em ACT e IBCT, para sair dos ciclos de briga, recuperar responsividade e construir proximidade real — sem receitas mágicas.
+          </p>
+          <ul class="mt-6 space-y-2" id="benefits-list"></ul>
+          <div class="mt-8 flex items-center gap-4">
+            <a id="hero-cta" href="#comprar" class="px-6 py-3 rounded-2xl bg-black text-white font-semibold hover:opacity-80 transition">Quero meu exemplar</a>
+            <p id="price-el" class="text-sm text-gray-700"></p>
+          </div>
+          <p class="mt-3 text-xs text-gray-600">Pagamento seguro • Acesso imediato à versão digital • Garantia 7 dias</p>
+        </div>
+        <div class="relative">
+          <div class="aspect-[3/4] w-full rounded-3xl border border-gray-200 shadow-xl overflow-hidden">
+            <img src="./assets/capa-placeholder.png" alt="Capa do livro" class="w-full h-full object-cover" />
+          </div>
+          <div class="absolute -bottom-4 -right-4 bg-black text-white px-4 py-2 rounded-xl text-sm shadow-lg">E-book em PDF</div>
+        </div>
+      </section>
+
+      <section class="border-y border-gray-200 bg-gray-50">
+        <div class="max-w-6xl mx-auto px-4 py-10 grid md:grid-cols-3 gap-6">
+          <div class="p-6 rounded-2xl bg-white border border-gray-200 shadow-sm"><p class="font-semibold">Mais de 2.000 horas de consultório/ano</p></div>
+          <div class="p-6 rounded-2xl bg-white border border-gray-200 shadow-sm"><p class="font-semibold">Baseado em evidências (ACT e IBCT)</p></div>
+          <div class="p-6 rounded-2xl bg-white border border-gray-200 shadow-sm"><p class="font-semibold">Exercícios práticos e aplicáveis</p></div>
+        </div>
+      </section>
+
+      <section class="max-w-6xl mx-auto px-4 py-16 grid md:grid-cols-2 gap-10">
+        <div class="p-8 rounded-3xl border border-gray-200">
+          <h2 class="text-2xl font-bold">Para quem é</h2>
+          <ul class="mt-4 space-y-2 text-gray-800">
+            <li>• Casais vivendo ciclos repetitivos de conflito</li>
+            <li>• Pessoas que desejam relações maduras, estáveis e afetivas</li>
+            <li>• Profissionais e estudantes que querem aplicar ACT/IBCT no dia a dia</li>
+          </ul>
+        </div>
+        <div class="p-8 rounded-3xl border border-gray-200">
+          <h2 class="text-2xl font-bold">Para quem não é</h2>
+          <ul class="mt-4 space-y-2 text-gray-800">
+            <li>• Quem busca fórmulas milagrosas</li>
+            <li>• Conteúdos sem prática e sem evidência</li>
+            <li>• Leituras que reforçam culpabilização</li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="conteudo" class="max-w-6xl mx-auto px-4 py-16">
+        <h2 class="text-3xl font-extrabold">O que você vai aprender</h2>
+        <div id="chapters-grid" class="mt-8 grid md:grid-cols-2 gap-6"></div>
+      </section>
+
+      <section id="bonus" class="max-w-6xl mx-auto px-4 py-16">
+        <div class="p-8 rounded-3xl border border-gray-200">
+          <h2 class="text-3xl font-extrabold">Bônus</h2>
+          <ul class="mt-6 space-y-3 text-gray-800">
+            <li>• Folha de Exercícios: "Mapa de Conversas Difíceis" (PDF)</li>
+            <li>• Checklist de Responsividade no Cotidiano (PDF)</li>
+            <li>• Acesso a atualizações futuras da edição digital</li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="max-w-6xl mx-auto px-4 py-16">
+        <h2 class="text-3xl font-extrabold">O que leitores e pacientes dizem</h2>
+        <div class="mt-8 grid md:grid-cols-3 gap-6">
+          <div class="p-6 rounded-2xl border border-gray-200 bg-white shadow-sm">
+            <p class="italic">“Transformou nossas conversas difíceis em pontes de aproximação.”</p>
+            <p class="mt-3 text-sm text-gray-700">— L., professora</p>
+          </div>
+          <div class="p-6 rounded-2xl border border-gray-200 bg-white shadow-sm">
+            <p class="italic">“Prático, direto e humano. Sem fórmulas mágicas.”</p>
+            <p class="mt-3 text-sm text-gray-700">— R., contador</p>
+          </div>
+          <div class="p-6 rounded-2xl border border-gray-200 bg-white shadow-sm">
+            <p class="italic">“Finalmente entendi o tal ‘modo sobrevivência’.”</p>
+            <p class="mt-3 text-sm text-gray-700">— M., designer</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="sobre" class="max-w-6xl mx-auto px-4 py-16 grid md:grid-cols-3 gap-10 items-start">
+        <div class="md:col-span-2">
+          <h2 class="text-3xl font-extrabold">Sobre o autor</h2>
+          <p class="mt-4 text-gray-800">Felipe Melo Souza Santos é psicólogo clínico, professor e terapeuta de adultos e casais. Trabalha com ACT (Acceptance and Commitment Therapy) e IBCT (Integrative Behavioral Couple Therapy), ajudando pessoas a construir relações intencionais, com compromisso, intimidade e compaixão. Conhecido como @psicologoafetivo.</p>
+          <ul class="mt-4 text-gray-800 space-y-2">
+            <li>• Atuação focada em casais heterossexuais monogâmicos</li>
+            <li>• Integra prática clínica, pesquisa e ensino</li>
+            <li>• Autor de materiais clínicos e cursos sobre relacionamentos</li>
+          </ul>
+        </div>
+        <div class="p-6 rounded-2xl border border-gray-200 bg-gray-50">
+          <p class="font-semibold">Formato e acesso</p>
+          <ul class="mt-3 space-y-2 text-gray-800">
+            <li>• E-book em PDF (download imediato)</li>
+            <li>• Atualizações futuras incluídas</li>
+            <li>• Leitura em qualquer dispositivo</li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="max-w-6xl mx-auto px-4 py-16" id="oferta">
+        <div class="p-8 rounded-3xl border border-gray-200 grid md:grid-cols-3 gap-10 items-center">
+          <div class="md:col-span-2">
+            <h2 class="text-3xl font-extrabold">Pronto para iniciar uma nova fase?</h2>
+            <p class="mt-3 text-gray-800">Aplique em casa o que a ciência dos relacionamentos já sabe que funciona. Sem jargões, sem fórmulas mágicas — com prática, clareza e compromisso.</p>
+            <p class="mt-2 text-sm text-gray-600">Garantia incondicional de 7 dias.</p>
+          </div>
+          <div class="p-6 rounded-2xl border border-gray-200 bg-white shadow-sm text-center">
+            <p class="text-sm text-gray-700">Investimento</p>
+            <p id="price-el-2" class="text-3xl font-extrabold mt-1"></p>
+            <a id="buy-btn" href="#comprar" class="mt-4 inline-block px-6 py-3 rounded-2xl bg-black text-white font-semibold hover:opacity-80 transition w-full">Comprar agora</a>
+            <p class="mt-2 text-xs text-gray-600">Pagamento seguro • Acesso imediato</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="faq" class="max-w-6xl mx-auto px-4 py-16">
+        <h2 class="text-3xl font-extrabold">Perguntas frequentes</h2>
+        <div id="faq-grid" class="mt-8 grid md:grid-cols-2 gap-6"></div>
+      </section>
+    </main>
+
+    <footer class="border-t border-gray-200">
+      <div class="max-w-6xl mx-auto px-4 py-8 flex flex-col md:flex-row items-center justify-between gap-4">
+        <p class="text-sm">© <span id="year"></span> Felipe Melo Souza Santos — @psicologoafetivo</p>
+        <div class="flex items-center gap-4 text-sm">
+          <a href="#" class="hover:opacity-70">Termos de uso</a>
+          <a href="#" class="hover:opacity-70">Política de privacidade</a>
+        </div>
+      </div>
+    </footer>
+
+    <!-- JSON-LD -->
+    <script type="application/ld+json" id="jsonld"></script>
+
+    <!-- Config JS (edite aqui preço e checkout) -->
+    <script>
+      const CONFIG = {
+        price: "R$ 97", // edite
+        checkoutUrl: "#comprar", // cole o link da Hotmart/Gumroad
+        benefits: [
+          "Entender por que os mesmos conflitos se repetem e como interromper o ciclo",
+          "Transformar discussões em oportunidades reais de intimidade",
+          "Comunicar-se sem ataque, defesa ou fuga",
+          "Reconstruir compromisso, cuidado e admiração no dia a dia",
+          "Expandir a relação com base em valores — não em impulsos"
+        ],
+        chapters: [
+          { title: "1. O Mapa do Conflito", desc: "Por que brigamos pelas mesmas coisas? O padrão matricial e o 'modo sobrevivência'." },
+          { title: "2. Banco Emocional & Cassino do Amor", desc: "Quatro As (atenção, apoio, afeto e alegria) e por que gestos grandiosos não salvam vínculos." },
+          { title: "3. Responsividade", desc: "A ciência da reciprocidade: como responder ao outro sem se perder de si." },
+          { title: "4. Comunicação que Aproxima", desc: "Ferramentas práticas de ACT e IBCT para conversas difíceis." },
+          { title: "5. Compromisso, Intimidade e Compaixão", desc: "Três pilares para atravessar crises e cultivar um amor adulto." },
+          { title: "6. Planos de Ação Baseados em Valores", desc: "Do insight à prática: rotinas, rituais e pequenos acordos." }
+        ],
+        faqs: [
+          { q: "Este livro é só para casais?", a: "Não. Ele ajuda tanto quem está em relacionamento quanto quem está solteira(o), porque foca processos que sustentam vínculos saudáveis e escolhas conscientes." },
+          { q: "Preciso conhecer ACT ou IBCT?", a: "Não. As ideias são apresentadas em linguagem clara, com exercícios guiados e exemplos reais do consultório." },
+          { q: "Quanto tempo de leitura?", a: "Leitura fluida, com capítulos curtos e exercícios práticos que você pode aplicar em 20–30 minutos por dia." },
+          { q: "Tem garantia?", a: "Sim. 7 dias para ler e, se não fizer sentido para você, é só solicitar reembolso pela plataforma de pagamento." }
+        ]
+      };
+
+      // Preenche conteúdo dinâmico
+      document.getElementById('year').textContent = new Date().getFullYear();
+      document.getElementById('price-el').textContent = CONFIG.price;
+      document.getElementById('price-el-2').textContent = CONFIG.price;
+      document.getElementById('header-cta').href = CONFIG.checkoutUrl;
+      document.getElementById('hero-cta').href = CONFIG.checkoutUrl;
+      document.getElementById('buy-btn').href = CONFIG.checkoutUrl;
+
+      const bl = document.getElementById('benefits-list');
+      CONFIG.benefits.forEach(b => {
+        const li = document.createElement('li');
+        li.className = "flex items-start gap-3";
+        li.innerHTML = '<span class="mt-1 w-2.5 h-2.5 rounded-full" style="background:#235FAA"></span><span>'+b+'</span>';
+        bl.appendChild(li);
+      });
+
+      const cg = document.getElementById('chapters-grid');
+      CONFIG.chapters.forEach(c => {
+        const div = document.createElement('div');
+        div.className = "p-6 rounded-2xl border border-gray-200";
+        div.innerHTML = '<p class="font-semibold">'+c.title+'</p><p class="mt-2 text-gray-800">'+c.desc+'</p>';
+        cg.appendChild(div);
+      });
+
+      const fq = document.getElementById('faq-grid');
+      CONFIG.faqs.forEach(f => {
+        const div = document.createElement('div');
+        div.className = "p-6 rounded-2xl border border-gray-200";
+        div.innerHTML = '<p class="font-semibold">'+f.q+'</p><p class="mt-2 text-gray-800">'+f.a+'</p>';
+        fq.appendChild(div);
+      });
+
+      // JSON-LD
+      const jsonld = {
+        "@context": "https://schema.org",
+        "@type": "Book",
+        "name": "Decodificando o Amor",
+        "author": {"@type": "Person", "name": "Felipe Melo Souza Santos"},
+        "workExample": {"@type": "BookFormatType", "bookFormat": "EBook"},
+        "inLanguage": "pt-BR",
+        "publisher": "Psicólogo Afetivo"
+      };
+      document.getElementById('jsonld').textContent = JSON.stringify(jsonld);
+    </script>
+  </body>
+</html>
