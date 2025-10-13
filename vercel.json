@@ -1,8 +1,0 @@
-{
-  "headers": [
-    { "source": "/site.webmanifest", "headers": [{ "key": "Cache-Control", "value": "no-cache" }] },
-    { "source": "/favicon.ico", "headers": [{ "key": "Cache-Control", "value": "no-cache" }] },
-    { "source": "/(favicon-16x16|favicon-32x32|apple-touch-icon|android-chrome-192x192|android-chrome-512x512)\\.png",
-      "headers": [{ "key": "Cache-Control", "value": "max-age=3600" }] }
-  ]
-}
