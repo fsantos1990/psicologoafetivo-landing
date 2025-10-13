@@ -5,7 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Decodificando o Amor — Página de Vendas</title>
     <meta name="description" content="Guia prático baseado em ACT e IBCT para transformar conflitos em intimidade.">
-    <!-- Tailwind Play CDN -->
+    <link rel="canonical" href="https://www.psicologoafetivo.com.br/decodificando"/>
+    <meta property="og:title" content="Decodificando o Amor — Transforme conflitos em intimidade"/>
+    <meta property="og:description" content="Guia prático baseado em ACT e IBCT para relacionamentos mais conscientes."/>
+    <meta property="og:image" content="https://www.psicologoafetivo.com.br/decodificando/assets/capa-placeholder.png"/>
+    <meta property="og:type" content="website"/>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
       tailwind.config = {
@@ -25,9 +29,7 @@
         }
       }
     </script>
-    <style>
-      body, button { font-family: Arial, ui-sans-serif, system-ui; }
-    </style>
+    <style>body, button { font-family: Arial, ui-sans-serif, system-ui; }</style>
   </head>
   <body class="bg-white text-black min-h-screen">
     <header class="sticky top-0 z-50 backdrop-blur bg-white/80 border-b border-gray-200">
@@ -45,7 +47,7 @@
           <a href="#bonus" class="hover:opacity-70">Bônus</a>
           <a href="#faq" class="hover:opacity-70">FAQ</a>
         </nav>
-        <a id="header-cta" href="#comprar" class="px-4 py-2 rounded-xl bg-black text-white font-semibold hover:opacity-80 transition">Comprar agora</a>
+        <a id="header-cta" href="https://pay.hotmart.com/G96223351O" class="px-4 py-2 rounded-xl bg-black text-white font-semibold hover:opacity-80 transition" target="_blank" rel="noopener">Comprar agora</a>
       </div>
     </header>
 
@@ -61,8 +63,8 @@
           </p>
           <ul class="mt-6 space-y-2" id="benefits-list"></ul>
           <div class="mt-8 flex items-center gap-4">
-            <a id="hero-cta" href="#comprar" class="px-6 py-3 rounded-2xl bg-black text-white font-semibold hover:opacity-80 transition">Quero meu exemplar</a>
-            <p id="price-el" class="text-sm text-gray-700"></p>
+            <a id="hero-cta" href="https://pay.hotmart.com/G96223351O" class="px-6 py-3 rounded-2xl bg-black text-white font-semibold hover:opacity-80 transition" target="_blank" rel="noopener">Quero meu exemplar</a>
+            <p id="price-el" class="text-sm text-gray-700">R$ 39</p>
           </div>
           <p class="mt-3 text-xs text-gray-600">Pagamento seguro • Acesso imediato à versão digital • Garantia 7 dias</p>
         </div>
@@ -164,8 +166,8 @@
           </div>
           <div class="p-6 rounded-2xl border border-gray-200 bg-white shadow-sm text-center">
             <p class="text-sm text-gray-700">Investimento</p>
-            <p id="price-el-2" class="text-3xl font-extrabold mt-1"></p>
-            <a id="buy-btn" href="#comprar" class="mt-4 inline-block px-6 py-3 rounded-2xl bg-black text-white font-semibold hover:opacity-80 transition w-full">Comprar agora</a>
+            <p id="price-el-2" class="text-3xl font-extrabold mt-1">R$ 39</p>
+            <a id="buy-btn" href="https://pay.hotmart.com/G96223351O" class="mt-4 inline-block px-6 py-3 rounded-2xl bg-black text-white font-semibold hover:opacity-80 transition w-full" target="_blank" rel="noopener">Comprar agora</a>
             <p class="mt-2 text-xs text-gray-600">Pagamento seguro • Acesso imediato</p>
           </div>
         </div>
@@ -179,7 +181,7 @@
 
     <footer class="border-t border-gray-200">
       <div class="max-w-6xl mx-auto px-4 py-8 flex flex-col md:flex-row items-center justify-between gap-4">
-        <p class="text-sm">© <span id="year"></span> Felipe Melo Souza Santos — @psicologoafetivo</p>
+        <p class="text-sm">© 2025 Felipe Melo Souza Santos — @psicologoafetivo</p>
         <div class="flex items-center gap-4 text-sm">
           <a href="#" class="hover:opacity-70">Termos de uso</a>
           <a href="#" class="hover:opacity-70">Política de privacidade</a>
@@ -187,14 +189,8 @@
       </div>
     </footer>
 
-    <!-- JSON-LD -->
-    <script type="application/ld+json" id="jsonld"></script>
-
-    <!-- Config JS (edite aqui preço e checkout) -->
     <script>
       const CONFIG = {
-        price: "R$ 97", // edite
-        checkoutUrl: "#comprar", // cole o link da Hotmart/Gumroad
         benefits: [
           "Entender por que os mesmos conflitos se repetem e como interromper o ciclo",
           "Transformar discussões em oportunidades reais de intimidade",
@@ -217,14 +213,6 @@
           { q: "Tem garantia?", a: "Sim. 7 dias para ler e, se não fizer sentido para você, é só solicitar reembolso pela plataforma de pagamento." }
         ]
       };
-
-      // Preenche conteúdo dinâmico
-      document.getElementById('year').textContent = new Date().getFullYear();
-      document.getElementById('price-el').textContent = CONFIG.price;
-      document.getElementById('price-el-2').textContent = CONFIG.price;
-      document.getElementById('header-cta').href = CONFIG.checkoutUrl;
-      document.getElementById('hero-cta').href = CONFIG.checkoutUrl;
-      document.getElementById('buy-btn').href = CONFIG.checkoutUrl;
 
       const bl = document.getElementById('benefits-list');
       CONFIG.benefits.forEach(b => {
@@ -249,18 +237,6 @@
         div.innerHTML = '<p class="font-semibold">'+f.q+'</p><p class="mt-2 text-gray-800">'+f.a+'</p>';
         fq.appendChild(div);
       });
-
-      // JSON-LD
-      const jsonld = {
-        "@context": "https://schema.org",
-        "@type": "Book",
-        "name": "Decodificando o Amor",
-        "author": {"@type": "Person", "name": "Felipe Melo Souza Santos"},
-        "workExample": {"@type": "BookFormatType", "bookFormat": "EBook"},
-        "inLanguage": "pt-BR",
-        "publisher": "Psicólogo Afetivo"
-      };
-      document.getElementById('jsonld').textContent = JSON.stringify(jsonld);
     </script>
   </body>
 </html>
