@@ -114,7 +114,7 @@ export default function App() {
         <div className="mt-8 grid gap-6 md:grid-cols-2">
           <ServiceCard
             number="01"
-            title="Terapia Individual (adultos)"
+            title="Terapia Individual para Adultos"
             items={[
               'Ansiedade, regulação emocional, propósito e valores',
               'Padrões relacionais: autocrítica, evitação, dependência',
@@ -123,7 +123,7 @@ export default function App() {
           />
           <ServiceCard
             number="02"
-            title="Terapia de Casal (hetero monogâmica)"
+            title="Terapia de Casal"
             items={[
               'Comunicação e reconciliação de diferenças (IBCT)',
               'Mapeamento de padrões ("modo sobrevivência", banco emocional)',
