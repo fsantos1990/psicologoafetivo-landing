@@ -20,11 +20,17 @@
         .cover {
             background-color: #235FAA; /* Azul Profundo */
             color: #FFFFFF;
-            padding: 100px 30px;
+            padding: 50px 30px; /* Reduzi o padding para caber a logo */
             text-align: center;
             border-radius: 8px;
             margin-bottom: 40px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+        .logo {
+            max-width: 150px;
+            height: auto;
+            margin-bottom: 30px;
+            border-radius: 50%; /* Borda circular para a logo/perfil */
         }
         .cover .title-tag {
             font-size: 1.1em;
@@ -99,18 +105,19 @@
             font-weight: bold;
         }
         .whatsapp-button {
-            display: inline-flex;
+            display: inline-block; /* Corrigido para display block ou inline-block */
             align-items: center;
             justify-content: center;
-            border-radius: 12px; /* Aumentando o arredondamento */
+            border-radius: 12px;
             background-color: #235FAA;
             color: #FFFFFF;
-            padding: 15px 30px; /* Aumentando o padding */
+            padding: 15px 30px;
             font-size: 1.1em;
             font-weight: bold;
             text-decoration: none;
             margin-top: 30px;
             transition: background-color 0.3s;
+            text-align: center; /* Garante que o texto dentro do botão seja centralizado */
         }
         .whatsapp-button:hover {
             filter: brightness(1.1);
@@ -120,6 +127,7 @@
 <body>
 
     <div class="cover">
+        <img src="https://www.psicologoafetivo.com.br/logo.webp" alt="Logo Felipe Santos Psicólogo Afetivo" class="logo">
         <p class="title-tag">GUIA DE ESPECIALISTA | TERAPIA DE CASAL</p>
         <h1>IBCT: Aceitação e Compromisso</h1>
         <p class="subtitle">Troque a Luta de Poder pela Aceitação e Transformação Mútua — A Ciência por Trás dos Relacionamentos Extraordinários.</p>
@@ -165,7 +173,7 @@
 
     <div class="footer">
         <p class="normal-bold">A hora de transformar seu relacionamento é agora.</p>
-        <p>Felipe Santos – Psicólogo Afetivo. CRP 03/XXXX.</p>
+        <p>Felipe Santos – Psicólogo Afetivo. <span class="normal-bold">CRP 03/15591.</span></p>
         <p>Acesse o meu consultório online: <a href="www.psicologoafetivo.com.br">www.psicologoafetivo.com.br</a></p>
 
         <div class="mt-8">
