@@ -1,5 +1,10 @@
 import React, { useEffect, useState } from 'react'
 
+// --- URLs centrais (muda aqui se trocar caminhos / UTMs) ---
+const ACT_INFO_URL  = "/info/act.html?utm_source=site&utm_medium=cta&utm_campaign=info-act";
+const IBCT_INFO_URL = "/info/ibct.html?utm_source=site&utm_medium=cta&utm_campaign=info-ibct";
+const POLICY_URL    = "/info/politica.html";
+
 // --- DEFINIÇÕES DOS COMPONENTES AUXILIARES ---
 
 const StatCard = ({ title, text }) => (
@@ -43,13 +48,11 @@ const Faq = ({ q, a }) => (
 );
 
 // --- 2. COMPONENTE PARA EXIBIÇÃO DE ARTIGOS ---
-const ArticleDisplay = ({ article, onBack, whatsappUrl }) => {
-  // Scrolla para o topo da página ao carregar o artigo
+const ArticleDisplay = ({ article, onBack }) => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [article]);
 
-  // Otimização de SEO: Define o título da página para o título do artigo
   useSeoMetadata(
     article.title,
     article.content[0].text,
@@ -73,25 +76,23 @@ const ArticleDisplay = ({ article, onBack, whatsappUrl }) => {
         Por {article.author} | Publicado em {article.date}
       </p>
 
-      {/* Imagem de Destaque (Creative Commons) */}
+      {/* Imagem de Destaque */}
       <div className="mt-8 mb-12">
         <img
           src={article.featuredImage}
           alt={`Imagem de destaque para o artigo: ${article.title}`}
           className="w-full h-auto rounded-xl object-cover ring-1 ring-white/10"
-          // Fallback para placeholder caso o arquivo não seja encontrado
           onError={(e) => { e.target.onerror = null; e.target.src = "https://placehold.co/800x450/1c3d5e/ffffff?text=Imagem+do+Artigo"; }}
         />
         <p className="text-xs text-white/50 mt-2">
-          Fonte: Imagem Creative Commons (URL: {article.featuredImage})
+          Fonte: Imagem de uso livre (URL: {article.featuredImage})
         </p>
       </div>
 
-      {/* Conteúdo do Artigo Formatado */}
+      {/* Conteúdo do Artigo */}
       <div className="space-y-8 prose prose-invert prose-lg max-w-none text-white/90">
         {article.content.map((block, index) => {
           if (block.type === 'paragraph') {
-            // CORREÇÃO: Usando dangerouslySetInnerHTML para renderizar o <strong>
             return <p key={index} dangerouslySetInnerHTML={{ __html: block.text }} />;
           }
           if (block.type === 'heading') {
@@ -101,29 +102,25 @@ const ArticleDisplay = ({ article, onBack, whatsappUrl }) => {
         })}
       </div>
 
-      {/* CTA Final do Artigo — DOIS BOTÕES ESPECÍFICOS */}
+      {/* CTA Final — leva para as páginas explicativas */}
       <div className="mt-12 pt-8 border-t border-white/10 text-center">
-        <h3 className="text-xl font-semibold">Este conteúdo foi útil? Agende sua sessão online.</h3>
+        <h3 className="text-xl font-semibold">Este conteúdo foi útil? Entenda como funciona e, se fizer sentido, agende.</h3>
         <p className="mt-2 text-white/80">
-          O conhecimento é o primeiro passo. Clique abaixo para dar o segundo, agendando sua Terapia de Casal Online (IBCT) ou Terapia Individual.
+          Primeiro, leia os detalhes das modalidades. No fim da página há o botão para falar no WhatsApp.
         </p>
 
         <div className="mt-4 flex flex-wrap gap-3 justify-center">
           <a
-            href={whatsappUrl('casal','blog-article-cta')}
-            target="_blank"
-            rel="noopener noreferrer"
+            href={IBCT_INFO_URL + "&utm_content=blog-article-cta"}
             className="inline-flex justify-center rounded-xl bg-[#235FAA] px-5 py-3 font-medium hover:brightness-110"
           >
-            Terapia de Casal (WhatsApp)
+            Terapia de Casal — IBCT (como funciona)
           </a>
           <a
-            href={whatsappUrl('individual','blog-article-cta')}
-            target="_blank"
-            rel="noopener noreferrer"
+            href={ACT_INFO_URL + "&utm_content=blog-article-cta"}
             className="inline-flex justify-center rounded-xl border border-white/10 px-5 py-3 font-medium hover:brightness-110"
           >
-            Terapia Individual (WhatsApp)
+            Terapia Individual — ACT (como funciona)
           </a>
         </div>
       </div>
@@ -131,12 +128,11 @@ const ArticleDisplay = ({ article, onBack, whatsappUrl }) => {
   );
 };
 
-// --- NOVO: COMPONENTE DE LISTAGEM DE BLOG (Blog Home) ---
+// --- LISTA DO BLOG ---
 const BlogHome = ({ articles, navigateToArticle, navigateToHome }) => {
-  // Otimização de SEO: Título específico para a página de lista do blog
   useSeoMetadata(
     "Blog Psicólogo Afetivo Online | Artigos sobre Casais, Ansiedade e ACT",
-    "Leia artigos de blog sobre terapia de casal online (IBCT), ansiedade, autoestima e a eficácia da Terapia de Aceitação e Compromisso (ACT) no formato virtual.",
+    "Leia artigos de blog sobre terapia de casal online (IBCT), ansiedade, autoestima e ACT.",
     "blog psicólogo afetivo, artigos terapia casal, ansiedade online, terapia ACT",
     jsonLdSchemaBlogList
   );
@@ -146,7 +142,6 @@ const BlogHome = ({ articles, navigateToArticle, navigateToHome }) => {
       <h1 className="text-4xl md:text-5xl font-bold mb-4">Blog Psicólogo Afetivo Online</h1>
       <p className="text-white/70 text-lg max-w-3xl mb-12">Artigos sobre Terapia de Casal, Relacionamentos, ACT e bem-estar afetivo, focados no atendimento online.</p>
 
-      {/* Lista de Artigos */}
       <div className="grid md:grid-cols-2 gap-8">
         {articles.map((article) => (
           <div key={article.slug} className="rounded-2xl border border-white/10 p-6 bg-white/5 transition duration-300 hover:border-[#235FAA]">
@@ -165,27 +160,28 @@ const BlogHome = ({ articles, navigateToArticle, navigateToHome }) => {
         ))}
       </div>
 
-      {/* Fallback para a Home/CTA */}
       <div className="mt-20 text-center border-t border-white/10 pt-12">
-        <h3 className="text-2xl font-semibold">Pronto para a Terapia?</h3>
+        <h3 className="text-2xl font-semibold">Pronto para começar?</h3>
         <p className="mt-2 text-white/80 max-w-2xl mx-auto">
-          Se você não quer apenas ler, mas sim começar a transformar seu relacionamento ou vida individual, use o link abaixo para ir direto à nossa página de agendamento.
+          Vá até a página da modalidade, leia como funciona e agende pelo botão no final.
         </p>
-        <button onClick={navigateToHome} className="mt-4 inline-flex justify-center rounded-xl bg-[#235FAA] px-5 py-3 font-medium hover:brightness-110">
-          Ir para a Página Inicial e Agendar
+        <div className="mt-4 flex flex-wrap gap-3 justify-center">
+          <a href={ACT_INFO_URL + "&utm_content=blog-list-cta"} className="inline-flex justify-center rounded-xl bg-[#235FAA] px-5 py-3 font-medium hover:brightness-110">ACT (Individual)</a>
+          <a href={IBCT_INFO_URL + "&utm_content=blog-list-cta"} className="inline-flex justify-center rounded-xl border border-white/10 px-5 py-3 font-medium hover:brightness-110">IBCT (Casal)</a>
+        </div>
+        <button onClick={navigateToHome} className="mt-6 inline-flex justify-center rounded-xl px-5 py-3 font-medium hover:brightness-110 border border-white/10">
+          Ir para a Página Inicial
         </button>
       </div>
     </div>
   );
 }
 
-// --- 1. FUNÇÃO DE INJEÇÃO DE METADADOS (SIMULAÇÃO DE HELMET) ---
+// --- 1. SEO HELPER ---
 const useSeoMetadata = (title, description, keywords, schema) => {
   useEffect(() => {
-    // Definindo o Title
     document.title = title;
 
-    // Injetando a Meta Description
     let metaDescription = document.querySelector('meta[name="description"]');
     if (!metaDescription) {
       metaDescription = document.createElement('meta');
@@ -194,7 +190,6 @@ const useSeoMetadata = (title, description, keywords, schema) => {
     }
     metaDescription.setAttribute('content', description);
 
-    // Injetando Keywords (menos importante hoje, mas ainda útil)
     let metaKeywords = document.querySelector('meta[name="keywords"]');
     if (!metaKeywords) {
       metaKeywords = document.createElement('meta');
@@ -203,7 +198,6 @@ const useSeoMetadata = (title, description, keywords, schema) => {
     }
     metaKeywords.setAttribute('content', keywords);
 
-    // Injetando Schema Markup (JSON-LD) para Rich Snippets
     let scriptSchema = document.getElementById('schema-json-ld');
     if (!scriptSchema) {
       scriptSchema = document.createElement('script');
@@ -212,12 +206,10 @@ const useSeoMetadata = (title, description, keywords, schema) => {
       document.head.appendChild(scriptSchema);
     }
     scriptSchema.textContent = JSON.stringify(schema, null, 2);
-
   }, [title, description, keywords, schema]);
 };
 
-// --- 4. CONFIGURAÇÕES DE SCHEMA MARKUP (JSON-LD) ---
-
+// --- 4. SCHEMA MARKUP ---
 const jsonLdSchemaBase = {
   "@context": "https://schema.org",
   "@type": "Psychologist",
@@ -228,34 +220,25 @@ const jsonLdSchemaBase = {
     "https://www.instagram.com/psicologoafetivo/",
     "https://api.whatsapp.com/send?phone=5571987865549"
   ],
-  "hasCredential": {
-    "@type": "MedicalSpecialty",
-    "name": "Psicologia Clínica, CRP 03/15591"
-  },
-  "areaServed": {
-    "@type": "Country",
-    "name": "Brasil"
-  },
+  "hasCredential": { "@type": "MedicalSpecialty", "name": "Psicologia Clínica, CRP 03/15591" },
+  "areaServed": { "@type": "Country", "name": "Brasil" },
   "serviceType": ["Telepsicologia", "Terapia de Casal Online", "Terapia Individual Online"]
 };
 
-// Schema para a página principal (Home)
 const jsonLdSchemaHome = {
   ...jsonLdSchemaBase,
-  "description": "Felipe Santos, Psicólogo Afetivo (CRP 03/15591). Especialista em terapia de casal e individual online. Agende sua teleconsulta.",
+  "description": "Felipe Santos, Psicólogo Afetivo (CRP 03/15591). Especialista em terapia de casal e individual online. Agende sua teleconsulta."
 };
 
-// Schema para a lista de artigos (Blog Home)
 const jsonLdSchemaBlogList = {
   "@context": "https://schema.org",
   "@type": "CollectionPage",
   "mainEntityOfPage": "https://www.psicologoafetivo.com.br/blog",
   "name": "Blog Psicólogo Afetivo Online",
-  "description": "Artigos sobre Terapia de Casal, Ansiedade, Autoestima e a eficácia da Terapia ACT e IBCT no formato online.",
+  "description": "Artigos sobre Terapia de Casal, Ansiedade, Autoestima e ACT no formato online.",
   "publisher": jsonLdSchemaBase
 };
 
-// Schema dinâmico para cada artigo (usado no ArticleDisplay)
 const jsonLdSchemaArticle = (article) => ({
   "@context": "https://schema.org",
   "@type": "BlogPosting",
@@ -268,7 +251,9 @@ const jsonLdSchemaArticle = (article) => ({
   "description": article.content[0].text
 });
 
-// --- 3. CONTEÚDO DOS ARTIGOS (COM IMAGENS DE DESTAQUE) ---
+// --- 3. CONTEÚDO DOS ARTIGOS ---
+// (seus três artigos anteriores permanecem)
+
 const articleData1 = {
   slug: 'terapia-casal-online-ibct',
   title: 'Terapia de Casal Online: Por que a IBCT é a Abordagem mais Afetiva?',
@@ -317,82 +302,53 @@ const articleData3 = {
   ]
 };
 
-// --- LISTA DE TODOS OS ARTIGOS (simulação de um CMS) ---
-const articles = [articleData1, articleData2, articleData3];
+// --- NOVO ARTIGO (seu texto) ---
+const articleData4 = {
+  slug: 'nem-tudo-que-te-incomoda-no-parceiro',
+  title: 'Nem tudo que te incomoda no seu parceiro é um problema a ser resolvido',
+  author: 'Felipe Santos, Psicólogo Afetivo (CRP 03/15591)',
+  date: 'Outubro de 2025',
+  featuredImage: '/diferencas-parceiros.jpg',
+  content: [
+    { type: 'paragraph', text: 'Se você tem intimidade com o(a) seu parceiro(a), é bem provável que você conheça muitas coisas sobre ele(a) que você gostaria que fossem diferentes. Pode ser uma soma de algumas coisas "bem chatinhas", ou "aquilo" que você considera insuportável, e que você gostaria muito que fosse diferente. Você consegue identificar o que é?' },
+    { type: 'paragraph', text: 'Pode ser uma forma de falar. Pode ser o modo dela(e) lidar com o mundo quando está estressada(o), ou simplesmente o modo como ele lida com os problemas quando eles ocorrem: Ele levanta de imediato para tentar resolver, "de qualquer jeito"? Ela para pra pensar "demais" antes de agir? É um hobby? O que é? Pense um pouco a respeito.' },
+    { type: 'paragraph', text: 'Nesse momento, eu te convido para olhar para o seu parceiro e observar tudo o que sua mente te diz sobre esse comportamento, essa ação, esse modo de lidar, essa coisa que você acha ser insuportável. Apenas observe. Pegue um caderninho e comece a anotar todas as vezes que esse pensamento surge. E apenas observe. Só isso!' },
+    { type: 'paragraph', text: 'Quando você tiver isso em mente, você talvez consiga perceber o quanto que esse incômodo pode vir justamente porque você está "num polo oposto". E o quanto que você tem buscado formas de trazer o seu parceiro ou parceira para ser mais parecido com você nesse aspecto. E talvez sua mente esteja te dizendo que a relação ficará melhor QUANDO isso acontecer.' },
+    { type: 'paragraph', text: 'Mas é pouco provável que isso aconteça. Tem duas verdades escondidas aí dentro de você: 1) você se interessou por seu(a) parceiro(a) porque ele age de algumas formas diferente de você, de modo complementar e 2) talvez o seu modo de lidar também seja incômodo pelo seu parceiro. Você gostaria de abrir mão do seu jeito de ser para ser mais parecido com o seu parceiro?' },
+    { type: 'paragraph', text: 'Um relacionamento sólido é aquele no qual as diferenças se complementam. Gentilmente, aprenda a apreciar aquilo que o seu parceiro tem e que você não tem, e vice-versa. Nem sempre vai funcionar... E tá tudo bem. Gentilmente, traga sua atenção de volta ao que te mantém nessa relação.' }
+  ]
+};
+
+// --- LISTA COMPLETA (novo artigo vai primeiro) ---
+const articles = [articleData4, articleData1, articleData2, articleData3];
 
 export default function App() {
   const [currentPage, setCurrentPage] = useState('HOME');
   const [currentArticle, setCurrentArticle] = useState(null);
 
-  // PALAVRAS-CHAVE FOCO
   const seoTitleHome = "Psicólogo Online Afetivo | Terapia de Casal e Individual (ACT/IBCT)";
-  const seoDescriptionHome = "Felipe Santos, Psicólogo Afetivo (CRP 03/15591). Especialista em terapia de casal e individual online. Ajudo você a construir relacionamentos com sentido e decisões com coragem. Agende sua teleconsulta.";
+  const seoDescriptionHome = "Felipe Santos, Psicólogo Afetivo (CRP 03/15591). Especialista em terapia de casal e individual online. Agende sua teleconsulta.";
   const seoKeywords = "psicólogo online, terapia de casal online, psicólogo afetivo, terapia para relacionamentos, Felipe Santos CRP 03/15591, terapia ACT online, IBCT, ansiedade, autoestima, amor consciente";
 
-  // SEO para a página atual
   const currentSchema = currentPage === 'HOME' ? jsonLdSchemaHome : (currentPage === 'BLOG_LIST' ? jsonLdSchemaBlogList : jsonLdSchemaArticle(currentArticle));
   const currentTitle = currentPage === 'ARTICLE' ? currentArticle.title : seoTitleHome;
   const currentDescription = currentPage === 'ARTICLE' ? currentArticle.content[0].text : seoDescriptionHome;
 
-  // Atualiza metadados dinamicamente
   useSeoMetadata(currentTitle, currentDescription, seoKeywords, currentSchema);
 
-  // --- WHATSAPP HELPERS (usar api.whatsapp.com) ---
-  const WHATSAPP = '5571987865549';
-  const getSrc = () => {
-    const params = new URLSearchParams(window.location.search);
-    return [
-      params.get('utm_source') || 'site',
-      params.get('utm_medium') || 'direct',
-      params.get('utm_campaign') || (currentPage === 'HOME' ? 'home' : currentPage.toLowerCase())
-    ].join('-');
-  };
-  // tipo: 'individual' (default) | 'casal'
-  const whatsappUrl = (tipo = 'individual', srcOverride) => {
-    const src = srcOverride || getSrc();
-    const isCasal = String(tipo).toLowerCase() === 'casal';
-    const msg = isCasal
-      ? `Oi, Felipe! Somos um casal e buscamos terapia de casal (IBCT, online). Podemos falar? — via ${src}`
-      : `Oi, Felipe! Quero terapia individual (online). Podemos falar? — via ${src}`;
-    return `https://api.whatsapp.com/send?phone=${WHATSAPP}&text=${encodeURIComponent(msg)}`;
-  };
-
   // Navegação
-  const navigateToHome = () => {
-    setCurrentPage('HOME');
-    setCurrentArticle(null);
-    window.scrollTo(0, 0);
-  };
-  const navigateToBlogList = () => {
-    setCurrentPage('BLOG_LIST');
-    setCurrentArticle(null);
-    window.scrollTo(0, 0);
-  };
+  const navigateToHome = () => { setCurrentPage('HOME'); setCurrentArticle(null); window.scrollTo(0, 0); };
+  const navigateToBlogList = () => { setCurrentPage('BLOG_LIST'); setCurrentArticle(null); window.scrollTo(0, 0); };
   const navigateToArticle = (slug) => {
     const article = articles.find(a => a.slug === slug);
-    if (article) {
-      setCurrentArticle(article);
-      setCurrentPage('ARTICLE');
-      window.scrollTo(0, 0);
-    }
+    if (article) { setCurrentArticle(article); setCurrentPage('ARTICLE'); window.scrollTo(0, 0); }
   };
   const handleNavLinkClick = (e, targetPage) => {
     e.preventDefault();
-    if (targetPage === 'HOME') {
-      navigateToHome();
-    } else if (targetPage === 'BLOG_LIST') {
-      navigateToBlogList();
-    } else if (currentPage === 'HOME') {
-      window.location.href = e.currentTarget.href;
-    } else {
-      navigateToHome();
-      setTimeout(() => {
-        window.location.href = e.currentTarget.href;
-      }, 100);
-    }
+    if (targetPage === 'HOME') navigateToHome();
+    else if (targetPage === 'BLOG_LIST') navigateToBlogList();
   };
 
-  // Render
   const renderContent = () => {
     if (currentPage === 'HOME') {
       return (
@@ -412,26 +368,22 @@ export default function App() {
                     <span className="text-[#235FAA]">Relacionamentos e Afetos</span>.
                   </h1>
                   <p className="mt-5 text-white/80 max-w-2xl">
-                    Sou Felipe Santos (CRP 03/15591), psicólogo clínico e <strong>terapeuta de casais online</strong>. Trabalho com ACT (Terapia de Aceitação e Compromisso) e IBCT (Terapia Comportamental Integrativa de Casal), em intervenções focadas em <strong>intimidade, compromisso e valores</strong>.
+                    Sou Felipe Santos (CRP 03/15591), psicólogo clínico e <strong>terapeuta de casais online</strong>. Trabalho com ACT e IBCT, em intervenções focadas em <strong>intimidade, compromisso e valores</strong>.
                   </p>
 
-                  {/* DOIS BOTÕES ESPECÍFICOS */}
+                  {/* CTAs: levam para ACT/IBCT (como funciona) */}
                   <div className="mt-8 flex flex-wrap gap-3">
                     <a
-                      href={whatsappUrl('individual','home-hero')}
-                      target="_blank"
-                      rel="noopener noreferrer"
+                      href={ACT_INFO_URL + "&utm_content=home-hero"}
                       className="inline-flex items-center justify-center rounded-xl bg-[#235FAA] px-5 py-3 font-medium hover:brightness-110"
                     >
-                      Terapia Individual (WhatsApp)
+                      Terapia Individual — ACT (como funciona)
                     </a>
                     <a
-                      href={whatsappUrl('casal','home-hero')}
-                      target="_blank"
-                      rel="noopener noreferrer"
+                      href={IBCT_INFO_URL + "&utm_content=home-hero"}
                       className="inline-flex items-center justify-center rounded-xl border border-white/10 px-5 py-3 font-medium hover:brightness-110"
                     >
-                      Terapia de Casal (IBCT) (WhatsApp)
+                      Terapia de Casal — IBCT (como funciona)
                     </a>
                   </div>
 
@@ -443,7 +395,7 @@ export default function App() {
                   </div>
                 </div>
 
-                {/* Foto principal (hero) */}
+                {/* Imagem hero */}
                 <div className="justify-self-center md:justify-self-end">
                   <img
                     src="/maj-hero.webp"
@@ -472,7 +424,7 @@ export default function App() {
           <section id="atendimento" className="mx-auto max-w-6xl px-4 py-16">
             <h2 className="text-2xl md:text-3xl font-semibold">Serviços de Terapia Online e Abordagens Afetivas</h2>
             <p className="mt-3 text-white/80 max-w-3xl">
-              Intervenções focadas em metas claras e valores pessoais, com plano de cuidado adaptado à sua realidade. Sem promessas de resultado — trabalho ético e colaborativo, <strong>realizado 100% online</strong>.
+              Intervenções focadas em metas claras e valores pessoais, com plano de cuidado adaptado à sua realidade. Sem promessas — trabalho ético e colaborativo, <strong>100% online</strong>.
             </p>
             <div className="mt-8 grid gap-6 md:grid-cols-2">
               <ServiceCard
@@ -517,29 +469,19 @@ export default function App() {
             </div>
           </section>
 
-          {/* CTA intermediário — DOIS BOTÕES */}
+          {/* CTA intermediário — leva para ACT/IBCT */}
           <section className="mx-auto max-w-6xl px-4 py-16">
             <div className="rounded-2xl border border-white/10 p-8 md:p-10 bg-gradient-to-br from-[#235FAA]/20 to-transparent">
-              <h3 className="text-xl md:text-2xl font-semibold">Pronto para começar sua Terapia Online?</h3>
+              <h3 className="text-xl md:text-2xl font-semibold">Comece pelo começo: entenda como funciona</h3>
               <p className="mt-2 text-white/80">
-                Me chame no WhatsApp e envio horários disponíveis e próximos passos para agendar sua primeira sessão.
+                Leia a modalidade e, no final da página, clique em Agendar no WhatsApp (com a confirmação de leitura da Política).
               </p>
               <div className="mt-6 flex flex-wrap gap-3">
-                <a
-                  href={whatsappUrl('individual','home-cta')}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex justify-center rounded-xl bg-[#235FAA] px-5 py-3 font-medium hover:brightness-110"
-                >
-                  Individual (WhatsApp)
+                <a href={ACT_INFO_URL + "&utm_content=home-cta"} className="inline-flex justify-center rounded-xl bg-[#235FAA] px-5 py-3 font-medium hover:brightness-110">
+                  ACT — Terapia Individual (como funciona)
                 </a>
-                <a
-                  href={whatsappUrl('casal','home-cta')}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex justify-center rounded-xl border border-white/10 px-5 py-3 font-medium hover:brightness-110"
-                >
-                  Casal IBCT (WhatsApp)
+                <a href={IBCT_INFO_URL + "&utm_content=home-cta"} className="inline-flex justify-center rounded-xl border border-white/10 px-5 py-3 font-medium hover:brightness-110">
+                  IBCT — Terapia de Casal (como funciona)
                 </a>
               </div>
             </div>
@@ -551,9 +493,9 @@ export default function App() {
               <h2 className="text-2xl md:text-3xl font-semibold">Perguntas Frequentes sobre Terapia Online</h2>
               <div className="mt-8 grid gap-4 md:grid-cols-2">
                 <Faq q="Como funcionam as sessões online de psicoterapia?" a="Usamos plataforma segura (link enviado no agendamento). Duração média de 50 minutos. Você só precisa de um local com privacidade e boa conexão." />
-                <Faq q="Qual o valor da sessão online e você atende convênio?" a="Atendo particular. Posso emitir recibo para reembolso quando aplicável. Para valores, clique em 'Falar no WhatsApp' e peça a tabela de investimento." />
-                <Faq q="A Terapia de Casal Online funciona para problemas de intimidade?" a="Sim. O formato online é muito eficaz. Trabalhamos com o modelo IBCT para mapear e transformar padrões de interação, reforçando o compromisso e a intimidade do casal." />
-                <Faq q="Como marcar a primeira sessão?" a="Clique em 'Falar no WhatsApp' e combinamos os horários por lá. O pagamento é feito antes da sessão via Pix ou transferência." />
+                <Faq q="Você atende convênio ou emite recibo para reembolso?" a="Atendo particular e emito nota fiscal/recibo quando aplicável. Para valores, leia a página da modalidade e finalize pelo botão no fim da página." />
+                <Faq q="A Terapia de Casal Online funciona para problemas de intimidade?" a="Sim. Trabalhamos com IBCT para mapear e transformar padrões de interação, reforçando compromisso e intimidade do casal." />
+                <Faq q="Como marcar a primeira sessão?" a="Acesse a página da modalidade (ACT ou IBCT), leia como funciona e clique em Agendar no WhatsApp ao final." />
               </div>
             </div>
           </section>
@@ -563,7 +505,7 @@ export default function App() {
             <div className="text-center">
               <h2 className="text-2xl md:text-3xl font-semibold">Conhecimento para Cultivar Afeto</h2>
               <p className="mt-3 text-white/70 max-w-2xl mx-auto">
-                Leia nossos artigos e entenda como a Terapia ACT e IBCT podem transformar seu relacionamento e sua vida individual.
+                Leia os artigos e entenda como ACT e IBCT ajudam na vida real.
               </p>
               <button onClick={navigateToBlogList} className="mt-4 inline-block text-[#235FAA] hover:underline font-medium text-lg">
                 Ir para o Blog &rarr;
@@ -575,7 +517,7 @@ export default function App() {
     } else if (currentPage === 'BLOG_LIST') {
       return <BlogHome articles={articles} navigateToArticle={navigateToArticle} navigateToHome={navigateToHome} />;
     } else if (currentPage === 'ARTICLE') {
-      return <ArticleDisplay article={currentArticle} onBack={navigateToBlogList} whatsappUrl={whatsappUrl} />;
+      return <ArticleDisplay article={currentArticle} onBack={navigateToBlogList} />;
     }
   };
 
@@ -598,28 +540,22 @@ export default function App() {
             <span className="sr-only">@psicologoafetivo</span>
           </a>
 
+          {/* NAV atualizado: manda para ACT/IBCT em vez de Whats direto */}
           <nav className="hidden md:flex gap-6 text-sm">
             <a href="#sobre" onClick={(e) => handleNavLinkClick(e, 'HOME')} className="hover:opacity-80">Sobre</a>
             <a href="#atendimento" onClick={(e) => handleNavLinkClick(e, 'HOME')} className="hover:opacity-80">Atendimento</a>
             <a href="#abordagem" onClick={(e) => handleNavLinkClick(e, 'HOME')} className="hover:opacity-80">Abordagem</a>
             <a href="#" onClick={navigateToBlogList} className={`hover:opacity-80 font-bold ${currentPage === 'BLOG_LIST' || currentPage === 'ARTICLE' ? 'text-[#235FAA]' : 'text-white'}`}>Blog</a>
-            <a
-              href={whatsappUrl('individual','nav-agendar')}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:opacity-80"
-            >
-              Agendar
-            </a>
+            <a href={ACT_INFO_URL + "&utm_content=nav-act"} className="hover:opacity-80">ACT (Individual)</a>
+            <a href={IBCT_INFO_URL + "&utm_content=nav-ibct"} className="hover:opacity-80">IBCT (Casal)</a>
           </nav>
 
+          {/* Botão destacado → página explicativa (ACT) */}
           <a
-            href={whatsappUrl('individual','nav-cta')}
-            target="_blank"
-            rel="noopener noreferrer"
+            href={ACT_INFO_URL + "&utm_content=nav-cta"}
             className="inline-flex items-center rounded-xl bg-[#235FAA] px-4 py-2 text-sm font-medium hover:brightness-110 focus:outline-none focus:ring-2 focus:ring-[#235FAA]"
           >
-            Falar no WhatsApp
+            Como Funciona
           </a>
         </div>
       </header>
@@ -632,8 +568,8 @@ export default function App() {
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
             <div><strong>Felipe Santos</strong> — Psicólogo Clínico <strong>Online</strong> • CRP 03/15591</div>
             <div className="flex gap-4">
-              <a href="#" className="hover:opacity-80">Política de Privacidade</a>
-              <a href="#" className="hover:opacity-80">Termos de Uso</a>
+              <a href={POLICY_URL} className="hover:opacity-80">Política de Agendamento</a>
+              <a href="#" className="hover:opacity-80" onClick={(e)=>{e.preventDefault(); alert('Termos de Uso: em breve.');}}>Termos de Uso</a>
             </div>
           </div>
           <div className="mt-4">© {new Date().getFullYear()} Psicólogo Afetivo. Todos os direitos reservados.</div>
