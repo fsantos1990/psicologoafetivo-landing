@@ -66,10 +66,10 @@
       <h1>Supervisão clínica — ACT & IBCT, do rigor à sessão real</h1>
       <p class="lead">Roteiro claro para casos complexos: tolerância unificada, aceitação empática e tarefas <strong>que não viram munição</strong>. Você sai com scripts, critérios e marcadores observáveis para a próxima sessão.</p>
       <div style="display:flex;gap:12px;flex-wrap:wrap">
-        <a class="btn" href="#zap" onclick="openWhatsApp('primeiro contato','short','instagram-bio-supervisao');return false;" title="Agendar pelo WhatsApp" aria-label="Agendar supervisão pelo WhatsApp">Agendar supervisão pelo WhatsApp</a>
+        <a class="btn" href="https://api.whatsapp.com/send?phone=5571987865549" onclick="openWhatsApp('primeiro contato','short','instagram-bio-supervisao');return false;" title="Agendar pelo WhatsApp" aria-label="Agendar supervisão pelo WhatsApp">Agendar supervisão pelo WhatsApp</a>
         <a class="btn secondary" href="#formatos">Ver formatos e como funciona</a>
       </div>
-      <p class="note" style="margin-top:10px">Agendamentos são feitos diretamente comigo. Clique no botão acima ou <a class="kbd" href="#zap" onclick="openWhatsApp('mensagem direta','short','instagram-bio-supervisao');return false;">fale comigo no WhatsApp</a>.</p>
+      <p class="note" style="margin-top:10px">Agendamentos são feitos diretamente comigo. Clique no botão acima ou <a class="kbd" href="https://api.whatsapp.com/send?phone=5571987865549"://api.whatsapp.com/send?phone=5571987865549" onclick="openWhatsApp('mensagem direta','short','instagram-bio-supervisao');return false;">fale comigo no WhatsApp</a>.</p>
     </div>
   </header>
 
@@ -136,12 +136,12 @@
           <div class="card">
             <strong>Individual (50 min)</strong>
             <p class="meta">Foco cirúrgico no caso; scripts e critérios aplicáveis na semana.</p>
-            <a class="btn" href="#zap" onclick="openWhatsApp('individual','long','supervisao-cta-individual');return false;" title="Agendar supervisão individual pelo WhatsApp">Agendar individual (WhatsApp)</a>
+            <a class="btn" href="https://api.whatsapp.com/send?phone=5571987865549" onclick="openWhatsApp('individual','long','supervisao-cta-individual');return false;" title="Agendar supervisão individual pelo WhatsApp">Agendar individual (WhatsApp)</a>
           </div>
           <div class="card">
             <strong>Grupo (90 min)</strong>
             <p class="meta">Casos complexos, demonstrações e protocolos comuns.</p>
-            <a class="btn" href="#zap" onclick="openWhatsApp('grupo','long','supervisao-cta-grupo');return false;" title="Entrar na lista de grupos pelo WhatsApp">Entrar na lista (WhatsApp)</a>
+            <a class="btn" href="https://api.whatsapp.com/send?phone=5571987865549"s://api.whatsapp.com/send?phone=5571987865549"onclick="openWhatsApp('grupo','long','supervisao-cta-grupo');return false;" title="Entrar na lista de grupos pelo WhatsApp">Entrar na lista (WhatsApp)</a>
           </div>
         </div>
         <p class="note">Valores e datas pelo WhatsApp. Clique em um dos botões acima.</p>
@@ -193,10 +193,10 @@
     <section class="section" id="cta-final">
       <div class="container">
         <h2>Pronto para decidir ao vivo com mais segurança?</h2>
-        <p class="lead">Clique abaixo para reservar sua vaga ou entrar na lista para grupos.</p>
+        <p class="lead">Clique abaixo para reservar sua vaga ou entre na lista para grupos.</p>
         <div style="display:flex;gap:12px;flex-wrap:wrap">
-          <a class="btn" href="#zap" onclick="openWhatsApp('primeiro contato','short','cta-final-supervisao');return false;" title="Agendar pelo WhatsApp">Agendar agora (WhatsApp)</a>
-          <a class="btn secondary" href="#zap" onclick="openWhatsApp('grupo','long','cta-final-grupo');return false;">Entrar na lista (WhatsApp)</a>
+          <a class="btn" href="https://api.whatsapp.com/send?phone=5571987865549" onclick="openWhatsApp('primeiro contato','short','instagram-bio-supervisao');return false;" title="Agendar pelo WhatsApp">Agendar agora (WhatsApp)</a>
+          <a class="btn secondary" href="https://api.whatsapp.com/send?phone=5571987865549" onclick="openWhatsApp('grupo','long','supervisao-cta-grupo');return false;">Entrar na lista (WhatsApp)</a>
         </div>
       </div>
     </section>
@@ -207,45 +207,33 @@
       <p class="meta">© <span id="y"></span> Felipe Santos · @psicologoafetivo · ACT & IBCT · Todos os direitos reservados</p>
     </div>
   </footer>
-
   <script>
-    // WhatsApp no formato internacional, sem + e sem espaços
-    const WHATSAPP = '5571987865549';
+  const WHATSAPP = '5571987865549';
+  const params = new URLSearchParams(window.location.search);
+  const SRC = [
+    params.get('utm_source') || 'site',
+    params.get('utm_medium') || 'direct',
+    params.get('utm_campaign') || 'supervisao'
+  ].join('-');
 
-    // Coleta UTMs da URL para rotular a origem (ex.: instagram-bio-supervisao)
-    const params = new URLSearchParams(window.location.search);
-    const SRC = [
-      params.get('utm_source') || 'site',
-      params.get('utm_medium') || 'direct',
-      params.get('utm_campaign') || 'supervisao'
-    ].join('-');
-
-    // Abre WhatsApp com mensagem longa (padrão) ou curta (para stories/QR)
-    function openWhatsApp(formato, variant, source) {
-      const src = source || SRC;
-
-      const longMsg =
-        'Olá, Felipe! Vim do site /supervisao e busco supervisão ACT/IBCT.' +
-        '\nFormato: ' + (formato || 'a definir') +
-        '\nDisponibilidades: ____' +
-        '\nCRP: ____' +
-        '\nResumo do caso (2-3 linhas): ____' +
-        '\n[origem: ' + src + ']';
-
-      const shortMsg =
-        'Olá, Felipe! Supervisão ACT/IBCT. ' +
-        'Formato: ' + (formato || 'a definir') +
-        ' · Disponibilidades: ____ · CRP: ____ ' +
-        '[origem: ' + src + ']';
-
-      const msg = (variant === 'short') ? shortMsg : longMsg;
-      const url = `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(msg)}`;
-      window.open(url, '_blank', 'noopener');
-    }
-
-    // Atualiza o ano no rodapé
-    const yEl = document.getElementById('y');
-    if (yEl) yEl.textContent = new Date().getFullYear();
-  </script>
+  function openWhatsApp(formato, variant, source){
+    const src = source || SRC;
+    const longMsg = 'Olá, Felipe! Vim do site /supervisao e busco supervisão ACT/IBCT.'+
+      '\nFormato: ' + (formato||'a definir') +
+      '\nDisponibilidades: ____' +
+      '\nCRP: ____' +
+      '\nResumo do caso (2-3 linhas): ____' +
+      '\n[origem: ' + src + ']';
+    const shortMsg = 'Olá, Felipe! Supervisão ACT/IBCT. '+
+      'Formato: ' + (formato||'a definir') +
+      ' · Disponibilidades: ____ · CRP: ____ ' +
+      '[origem: ' + src + ']';
+    const msg = (variant==='short') ? shortMsg : longMsg;
+    const url = `https://api.whatsapp.com/send?phone=${WHATSAPP}&text=${encodeURIComponent(msg)}`;
+    window.open(url, '_blank', 'noopener');
+  }
+  const yEl = document.getElementById('y');
+  if (yEl) yEl.textContent = new Date().getFullYear();
+</script>
 </body>
 </html>
