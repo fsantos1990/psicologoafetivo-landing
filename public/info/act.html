@@ -1,198 +1,87 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GUIA PROFISSIONAL: Terapia Individual ACT</title>
-    <style>
-        /* CONFIGURAÇÕES GLOBAIS: Fundo Preto, Texto Branco (Revisado para o estilo marcante) */
-        body {
-            font-family: Arial, sans-serif;
-            color: #FFFFFF; /* Texto branco */
-            background-color: #000000; /* Fundo preto */
-            line-height: 1.6;
-            margin: 0 auto;
-            max-width: 800px;
-            padding: 30px;
-        }
-
-        /* ESTILO DA CAPA - Visual Marcante e Branding Forte */
-        .cover {
-            background-color: #235FAA; /* Azul Profundo */
-            color: #FFFFFF;
-            padding: 50px 30px;
-            text-align: center;
-            border-radius: 8px;
-            margin-bottom: 40px;
-            box-shadow: 0 4px 15px rgba(255, 255, 255, 0.2); /* Sombra clara no fundo escuro */
-        }
-        .logo {
-            max-width: 150px;
-            height: auto;
-            margin-bottom: 30px;
-            border-radius: 50%;
-        }
-        .cover .title-tag {
-            font-size: 1.1em;
-            letter-spacing: 2px;
-            margin-bottom: 10px;
-            font-weight: 300;
-        }
-        .cover h1 {
-            font-size: 3em;
-            text-transform: uppercase;
-            line-height: 1.1;
-            margin: 0;
-        }
-        .cover .subtitle {
-            font-size: 1.4em;
-            margin-top: 20px;
-            font-weight: 400;
-        }
-
-        /* TÍTULOS DE SEÇÃO - Autoridade e Elegância */
-        h2 {
-            color: #FFFFFF; /* Título em Branco */
-            font-size: 1.8em;
-            border-bottom: 4px solid #235FAA; /* Linha de Azul Profundo */
-            padding-bottom: 8px;
-            margin-top: 50px;
-            font-weight: bold;
-        }
-
-        /* DESTAQUES E CONTEÚDO (Correção dos Negritos) */
-        .section-content {
-            margin-bottom: 40px;
-        }
-        .section-content p {
-            margin-bottom: 15px;
-        }
-        .author-name {
-            font-weight: bold;
-            font-size: 1.1em;
-            color: #235FAA; /* Azul Profundo para o Branding Pessoal */
-        }
-        /* Termos Técnicos em Destaque (Bold + Cor) */
-        .bold-term {
-            font-weight: bold;
-            color: #235FAA;
-        }
-        /* Negrito Normal para o corpo do texto */
-        .normal-bold {
-            font-weight: bold;
-            color: #FFFFFF; /* Negrito em branco, para se manter em contraste */
-        }
-        .highlight-list {
-            list-style: none;
-            padding-left: 0;
-        }
-        .highlight-list li {
-            background-color: #DDDDDD; /* Cinza Claro para blocos de informação */
-            color: #000000; /* Texto preto no bloco cinza para legibilidade */
-            padding: 10px;
-            margin-bottom: 10px;
-            border-radius: 5px;
-            border-left: 5px solid #235FAA;
-        }
-        .highlight-list li .bold-term {
-            color: #235FAA; /* Mantém a cor do termo dentro da lista */
-        }
-
-
-        /* RODAPÉ E CTA - Corrigido para ser legível */
-        .footer {
-            margin-top: 60px;
-            padding-top: 25px;
-            border-top: 2px solid #DDDDDD;
-            text-align: center;
-        }
-        .footer a {
-            color: #FFFFFF; /* Links normais em branco */
-            text-decoration: none;
-            font-weight: bold;
-        }
-        .whatsapp-button {
-            display: inline-block;
-            border-radius: 12px;
-            background-color: #235FAA;
-            color: #FFFFFF; /* Texto Branco DENTRO DO BOTÃO */
-            padding: 15px 30px;
-            font-size: 1.1em;
-            font-weight: bold;
-            text-decoration: none;
-            margin-top: 30px;
-            transition: background-color 0.3s;
-            text-align: center;
-        }
-        .whatsapp-button:hover {
-            filter: brightness(1.2);
-        }
-    </style>
+<!doctype html>
+h1{margin:0 0 8px 0;font-size:28px}
+h2{font-size:18px;color:var(--azul);margin:0}
+main{max-width:820px;margin:0 auto;padding:24px 20px}
+section{margin:28px 0}
+.card{background:#FAFAFA;border:1px solid var(--cinza);padding:16px;border-radius:12px}
+ul{margin:12px 0 0 18px}
+.cta{display:block;text-align:center;margin:28px 0;padding:16px;border-radius:10px;background:var(--azul);color:#FFF;text-decoration:none;font-weight:bold}
+.cta:focus,.cta:hover{filter:brightness(0.95)}
+.muted{color:#444}
+footer{border-top:1px solid var(--cinza);padding:16px 20px;font-size:14px;color:#444}
+a{color:var(--azul)}
+</style>
 </head>
 <body>
+<header>
+<h1>Terapia Individual com ACT — menos autocobrança, mais direção</h1>
+<h2>Você no comando: clareza de valores, passos possíveis e presença no que importa.</h2>
+</header>
 
-    <div class="cover">
-        <img src="https://www.psicologoafetivo.com.br/logo.webp" alt="Logo Felipe Santos Psicólogo Afetivo" class="logo">
-        <p class="title-tag">GUIA DE ESPECIALISTA | TERAPIA INDIVIDUAL</p>
-        <h1>ACT: Liberdade e Propósito</h1>
-        <p class="subtitle">Como a Ansiedade e Padrões Relacionais Bloqueiam o Amor Próprio — Um Guia para a Autonomia Afetiva.</p>
-    </div>
 
-    <div class="section-content">
-        <h2>Introdução: O Psicólogo Afetivo</h2>
-        <p>Olá! Eu sou <span class="author-name">Felipe Santos, o seu Psicólogo Afetivo</span>. Se você luta contra a ansiedade, se sente preso em padrões de autocrítica ou repete ciclos de dependência nos relacionamentos, este guia é o seu ponto de partida. Minha terapia é focada em adultos, utilizando o <span class="bold-term">Método ACT (Terapia de Aceitação e Compromisso)</span> para construir uma vida guiada por propósito e não por dor, promovendo sua <span class="normal-bold">autonomia afetiva</span>.</p>
-    </div>
+<main>
+<section class="card">
+<strong>Pra quem é</strong>
+<ul>
+<li>Pessoas lidando com ansiedade, ruminação, procrastinação, esgotamento ou dor relacional.</li>
+<li>Quem deseja agir com consistência com o que valoriza, mesmo com desconforto.</li>
+</ul>
+</section>
 
-    <div class="section-content">
-        <h2>1. O Ciclo do Sofrimento Adulto (Dor)</h2>
-        <p><span class="normal-bold">Sua Ansiedade e Padrões Relacionais:</span> Sua dor é um indicador de que você está no <span class="bold-term">padrão matricial</span>, reagindo em um <span class="normal-bold">modo sobrevivência</span> que prioriza evitar o desconforto em vez de buscar seus valores.</p>
-        <p>Exploramos as dores mais comuns:</p>
-        <ul class="highlight-list">
-            <li><span class="bold-term">Ansiedade que paralisa:</span> A tentativa de controlar a vida e as emoções que resulta na perda de flexibilidade.</li>
-            <li>A autoexigência da <span class="bold-term">Autocrítica:</span> A fusão cognitiva que transforma pensamentos destrutivos em fatos.</li>
-            <li>A repetição de ciclos de <span class="bold-term">Dependência nos afetos:</span> Onde você troca a liberdade pela segurança ilusória de um vínculo.</li>
-        </ul>
-        <p>Reconhecer que você está em um estado de <span class="bold-term">Inflexibilidade Psicológica</span> é o primeiro passo para a mudança.</p>
-    </div>
 
-    <div class="section-content">
-        <h2>2. O Método ACT e Seus Pilares</h2>
-        <p><span class="normal-bold">Como a ACT Transforma a Ação (Foco nos Valores):</span> A ACT não busca eliminar suas emoções; ela busca <span class="bold-term">construir Regulação Emocional</span> para que você possa AGIR mesmo sentindo ansiedade. O foco é na <span class="bold-term">Construção de Rotina e Decisões Alinhadas ao seu Propósito e Valores</span>.</p>
-        <p>Trabalhamos os seis processos centrais do <span class="bold-term">Hexaflex</span>, utilizando a <span class="normal-bold">Narrativa Funcional</span> para reescrever sua história e construir um <span class="bold-term">Eu-como-Contexto</span> (Self-as-Contexto) robusto, que observa os pensamentos sem se fundir a eles.</p>
-        <p>O objetivo é claro: trocar a dependência da reação automática pela liberdade da <span class="bold-term">Ação Comprometida</span> na direção da sua vida mais autêntica.</p>
-    </div>
+<section class="card">
+<strong>Pra quem não é</strong>
+<ul>
+<li>Quem espera “sumir com pensamentos” sem praticar novas respostas.</li>
+<li>Quem busca laudo/parecer (não realizo).</li>
+</ul>
+</section>
 
-    <div class="section-content">
-        <h2>3. O Processo da Terapia Individual</h2>
-        <p><span class="normal-bold">O que Esperar das Sessões:</span> Trabalharemos ativamente a <span class="bold-term">Flexibilidade Psicológica</span>, ensinando você a se desvencilhar de pensamentos destrutivos através da <span class="bold-term">Defusão Cognitiva</span>.</p>
-        <p>O objetivo é:</p>
-        <ul class="highlight-list">
-            <li>Alcançar <span class="bold-term">clareza</span> para suas decisões afetivas e profissionais.</li>
-            <li>Permitir que você pare de apenas reagir (modo sobrevivência) e comece a <span class="bold-term">escolher o sentido que sua vida deve ter</span>, guiado por seus valores.</li>
-            <li>Construir rotinas que reforcem os comportamentos de investimento em você, em seu <span class="normal-bold">banco emocional</span> (os 4 As - atenção, apoio, afeto e alegria).</li>
-        </ul>
-    </div>
 
-    <div class="section-content">
-        <h2>Conclusão</h2>
-        <p><span class="normal-bold">O Próximo Passo é Viver com Propósito:</span> Você está pronto(a) para trocar a dependência pela liberdade de escolha? A transformação está na ação e no compromisso de viver uma vida baseada nos seus valores mais profundos.</p>
-    </div>
+<section class="card">
+<strong>Como funciona (ACT, sem jargão)</strong>
+<p>Trabalhamos três processos no dia a dia:</p>
+<ul>
+<li><b>Abertura</b>: aceitar o que não controlamos sem lutar contra tudo.</li>
+<li><b>Consciência</b>: presença e desfusão de pensamentos que travam.</li>
+<li><b>Engajamento</b>: pequenas ações alinhadas aos <b>seus valores</b>.</li>
+</ul>
+</section>
 
-    <div class="footer">
-        <p class="normal-bold">A sua liberdade de escolha começa no primeiro agendamento.</p>
-        <p>Felipe Santos – Psicólogo Afetivo. <span class="normal-bold">CRP 03/15591.</span></p>
 
-        <div class="mt-8">
-            <a
-              href="https://wa.me/5571987865549"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="whatsapp-button"
-            >
-              Agendar pelo WhatsApp
-            </a>
-        </div>
-    </div>
+<section class="card">
+<strong>Primeira sessão</strong>
+<ul>
+<li>Entendo seu contexto e o que dói hoje.</li>
+<li>Nomeamos 2 valores-bússola e definimos 1 ação mínima para esta semana.</li>
+<li>Combinamos frequência e acompanhamento.</li>
+</ul>
+</section>
 
+
+<section class="card">
+<strong>Frequência, valor e nota fiscal</strong>
+<p>Sessões online de <b>50 minutos</b>. <b>R$ 300</b> por sessão (emito <b>nota fiscal</b>). Opcional: <i>plano por assinatura</i> mensal para quem deseja regularidade.</p>
+</section>
+
+
+<section class="card">
+<strong>Reagendamento e cancelamento</strong>
+<p>Reagendamentos com <b>24h</b> de antecedência sem custo. Cancelamentos com menos de 24h são cobrados. <a href="/info/politica.html">Ver política completa</a>.</p>
+</section>
+
+
+<a class="cta" href="https://wa.me/5571987865549?text=Ol%C3%A1%2C%20li%20a%20p%C3%A1gina%20ACT%20e%20estou%20ciente%20das%20condi%C3%A7%C3%B5es.%20Quero%20agendar%20Terapia%20Individual%20(ACT).%20Prefer%C3%AAncia%20de%20hor%C3%A1rio%3A%20%5Bmanh%C3%A3%7Ctarde%7Cnoite%5D%2C%20%5Bseg%E2%80%93sex%5D.">
+Agendar no WhatsApp — ACT (Individual)
+</a>
+
+
+<p class="muted">Atendimento online | Psicólogo Felipe Santos — CRP/03 15591</p>
+</main>
+
+
+<footer>
+Dúvidas pontuais? Você pode me escrever no WhatsApp após ler a página. Sem áudios, por favor.
+</footer>
 </body>
 </html>
