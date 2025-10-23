@@ -14,27 +14,32 @@
     }
     *{box-sizing:border-box}
     html,body{margin:0;padding:0;background:var(--white);color:var(--black);font-family:Arial, Helvetica, sans-serif;line-height:1.5}
-    a{color:var(--blue);text-decoration:none}
     .wrap{max-width:980px;margin:0 auto;padding:24px}
-    .topbar{background:var(--black);color:var(--white);padding:10px 0;text-align:center;font-size:.95rem}
+    .topbar{background:var(--black);color:var(--white);padding:12px 0;text-align:center;font-size:1rem;letter-spacing:.2px}
     header{padding:28px 0 10px;border-bottom:1px solid var(--gray)}
-    h1{font-size:2rem;margin:0 0 10px}
-    .sub{max-width:70ch}
+    h1{font-size:2.2rem;margin:0 0 8px}
+    .sub{max-width:70ch;font-size:1.05rem}
     .grid{display:grid;gap:20px}
     @media(min-width:900px){.grid-2{grid-template-columns:1.1fr .9fr}}
     .card{background:#FAFAFA;border:1px solid var(--gray);border-radius:16px;padding:20px}
     ul.check{list-style:none;padding:0;margin:0}
     ul.check li{padding-left:28px;position:relative;margin:8px 0}
     ul.check li:before{content:"✓";position:absolute;left:0;top:0;color:var(--blue);font-weight:bold}
-    .price{display:flex;align-items:baseline;gap:10px;margin:10px 0 16px}
-    .price .now{font-size:1.8rem;font-weight:900;color:var(--blue)}
-    .cta{display:inline-block;background:var(--blue);color:var(--white);padding:14px 18px;border-radius:12px;font-weight:700;letter-spacing:.2px}
-    .cta:hover{filter:brightness(.95)}
-    .widget-box{background:#FFFFFF;border:2px dashed var(--blue);border-radius:16px;padding:16px;margin-top:12px}
-    .note{font-size:.9rem;color:#333}
-    footer{border-top:1px solid var(--gray);margin-top:32px;padding-top:16px;font-size:.85rem;color:#333}
-    .trust{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
-    .trust .t{flex:1 1 120px;background:#F7F7F7;border:1px solid var(--gray);border-radius:8px;padding:10px;text-align:center;font-size:.85rem}
+    .price{display:flex;align-items:baseline;gap:10px;margin:12px 0 16px}
+    .price .now{font-size:2rem;font-weight:900;color:var(--blue)}
+    /* CTA Focus */
+    .cta-zone{background:linear-gradient(180deg,#f7f9ff,#ffffff);border:1px solid var(--gray);border-radius:20px;padding:24px;text-align:center;box-shadow:0 6px 24px rgba(0,0,0,.06)}
+    .cta-heading{font-size:1.4rem;margin:0 0 4px}
+    .cta-sub{margin:0 0 16px;color:#333}
+    .cta-wrap{display:flex;justify-content:center}
+    .cta-wrap .hotmart__button-checkout{display:inline-block;transform:scale(1.12);transition:transform .15s ease, box-shadow .15s ease}
+    .cta-wrap .hotmart__button-checkout:focus{outline:3px solid rgba(35,95,170,.35);border-radius:14px}
+    .cta-wrap .hotmart__button-checkout:hover{transform:scale(1.16);}
+    .badge{display:inline-block;background:var(--blue);color:#fff;padding:6px 10px;border-radius:999px;font-weight:800;letter-spacing:.3px;font-size:.85rem}
+    .trust{display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin-top:8px}
+    .trust .t{flex:1 1 120px;background:#F7F7F7;border:1px solid var(--gray);border-radius:8px;padding:10px;text-align:center;font-size:.9rem}
+    .note{font-size:.92rem;color:#333}
+    footer{border-top:1px solid var(--gray);margin-top:32px;padding-top:16px;font-size:.9rem;color:#333;text-align:center}
   </style>
 </head>
 <body>
@@ -49,7 +54,6 @@
           <div class="now">R$ 10</div>
           <div class="note">pagamento único • acesso por e-mail</div>
         </div>
-
         <div class="trust" aria-label="Selos de confiança">
           <div class="t">Base científica</div>
           <div class="t">Aplicação prática</div>
@@ -70,35 +74,42 @@
       </div>
     </header>
 
-    <section id="checkout" style="margin-top:22px">
-      <div class="card">
-        <h2 style="margin-top:0">Finalizar compra</h2>
-        <p class="note">Use o checkout integrado abaixo. Após a confirmação do pagamento, você será direcionada(o) automaticamente para a <strong>página intermediária</strong> com uma oferta exclusiva.</p>
+    <section id="checkout" style="margin-top:24px">
+      <div class="cta-zone">
+        <p class="badge" aria-label="Oferta exclusiva">Oferta exclusiva</p>
+        <h2 class="cta-heading">Finalize por <strong>R$ 10</strong> e libere a próxima etapa</h2>
+        <p class="cta-sub">Clique no botão abaixo para concluir a compra com segurança. Após a confirmação, você segue direto para a <strong>página intermediária</strong> com a próxima oferta.</p>
 
-        <!-- INÍCIO DO WIDGET DO CHECKOUT -->
-        <div class="widget-box" aria-label="Área do widget do checkout">
-          <strong>Widget do Checkout</strong>
-          <p class="note">
-            Cole aqui o <em>código do widget do seu provedor</em> (ex.: Hotmart SmartCheckout).<br>
-            <strong>Importante:</strong> configure no provedor o <em>redirect pós-compra</em> para a URL da página intermediária (upsell).
-          </p>
+        <!-- Hotmart Widget Loader (async, único) -->
+        <script>
+          (function(){
+            if(!window.__hotmartWidgetInjected){
+              window.__hotmartWidgetInjected = true;
+              var s = document.createElement('script');
+              s.src = 'https://static.hotmart.com/checkout/widget.min.js';
+              s.async = true;
+              document.head.appendChild(s);
+              var l = document.createElement('link');
+              l.rel = 'stylesheet';
+              l.href = 'https://static.hotmart.com/css/hotmart-fb.min.css';
+              document.head.appendChild(l);
+            }
+          })();
+        </script>
 
-          <!-- Exemplo ilustrativo (substitua pelo seu snippet oficial):
-          <script src="URL_DO_WIDGET_DO_CHECKOUT.js"></script>
-          <div id="hotmart-checkout"></div>
-          <script>
-            // Se o provedor permitir, defina a URL de redirecionamento após compra:
-            // window.HOTMART_CHECKOUT_REDIRECT = "https://SEU_DOMINIO.com/upsell-intermediaria/";
-          </script>
-          -->
+        <!-- ÚNICO botão do checkout (sem links diretos alternativos) -->
+        <div class="cta-wrap">
+          <a
+            href="https://pay.hotmart.com/P78652605U?checkoutMode=10"
+            class="hotmart-fb hotmart__button-checkout"
+            onclick="return false;"
+            rel="noopener noreferrer"
+            aria-label="Abrir checkout em modal">
+            <img src="https://static.hotmart.com/img/btn-buy-green.png" alt="Comprar agora por R$ 10">
+          </a>
         </div>
-        <!-- FIM DO WIDGET DO CHECKOUT -->
 
-        <p class="note" style="margin-top:12px">Se preferir o link direto, você também pode usar: <a href="https://pay.hotmart.com/P78652605U?checkoutMode=10" rel="noopener">abrir checkout oficial</a>.</p>
-
-        <p style="margin-top:14px">
-          <a class="cta" href="https://pay.hotmart.com/P78652605U?checkoutMode=10" rel="noopener">Comprar agora por R$ 10</a>
-        </p>
+        <p class="note" style="margin-top:10px">Pagamento processado pelo Hotmart. Após a aprovação, você será levado automaticamente à próxima etapa.</p>
       </div>
     </section>
 
@@ -109,10 +120,11 @@
   </div>
 
   <script>
-    // Opcional: se o widget emitir eventos, você pode escutar e forçar um redirect.
-    // Substitua URL_INTERMEDIARIA pelo endereço público da sua página intermediária.
+    // Redireciono pós-compra (opcional)
+    // Substitua abaixo pela URL pública da sua página intermediária (upsell).
     const UPSALE_URL = "URL_INTERMEDIARIA";
-    // Exemplo genérico (troque por eventos reais do provedor, se existirem)
+
+    // Listener genérico: ajuste para eventos reais do widget, se disponíveis.
     window.addEventListener("message", (e)=>{
       try{
         if(typeof e.data === "string" && e.data.includes("checkout:approved")){
@@ -123,5 +135,9 @@
       }catch(err){/* noop */}
     });
   </script>
+
+  <noscript>
+    <p style="text-align:center;padding:8px 0;color:#333">Ative o JavaScript para concluir sua compra pelo Hotmart.</p>
+  </noscript>
 </body>
 </html>
