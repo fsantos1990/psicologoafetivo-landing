@@ -81,16 +81,33 @@
         <p class="cta-sub">Clique no botão abaixo para concluir a compra com segurança. Após a confirmação, você segue direto para a <strong>página intermediária</strong> com a próxima oferta.</p>
 
         <!-- Hotmart Widget Loader (async, único) -->
-       <!-- HOTMART - Sales Funnel Widget -->
-<!--- sales funnel container --->
-<div id="hotmart-sales-funnel"></div>
+        <script>
+          (function(){
+            if(!window.__hotmartWidgetInjected){
+              window.__hotmartWidgetInjected = true;
+              var s = document.createElement('script');
+              s.src = 'https://static.hotmart.com/checkout/widget.min.js';
+              s.async = true;
+              document.head.appendChild(s);
+              var l = document.createElement('link');
+              l.rel = 'stylesheet';
+              l.href = 'https://static.hotmart.com/css/hotmart-fb.min.css';
+              document.head.appendChild(l);
+            }
+          })();
+        </script>
 
-<!--- script load and setup --->
-<script src="https://checkout.hotmart.com/lib/hotmart-checkout-elements.js"></script>
-<script>
-checkoutElements.init('salesFunnel').mount('#hotmart-sales-funnel')
-</script>
-<!-- HOTMART - Sales Funnel Widget -->
+        <!-- ÚNICO botão do checkout (sem links diretos alternativos) -->
+        <div class="cta-wrap">
+          <a
+            href="https://pay.hotmart.com/P78652605U?checkoutMode=10"
+            class="hotmart-fb hotmart__button-checkout"
+            onclick="return false;"
+            rel="noopener noreferrer"
+            aria-label="Abrir checkout em modal">
+            <img src="https://static.hotmart.com/img/btn-buy-green.png" alt="Comprar agora por R$ 10">
+          </a>
+        </div>
 
         <p class="note" style="margin-top:10px">Pagamento processado pelo Hotmart. Após a aprovação, você será levado automaticamente à próxima etapa.</p>
       </div>
