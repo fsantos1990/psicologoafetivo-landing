@@ -104,22 +104,16 @@
     </footer>
   </div>
 
-  <script>
-    // Redireciono pós-compra (opcional)
-    // Substitua abaixo pela URL pública da sua página intermediária (upsell).
-    const UPSALE_URL = "URL_INTERMEDIARIA";
+<!-- HOTMART - Sales Funnel Widget -->
+<!--- sales funnel container --->
+<div id="hotmart-sales-funnel"></div>
 
-    // Listener genérico: ajuste para eventos reais do widget, se disponíveis.
-    window.addEventListener("message", (e)=>{
-      try{
-        if(typeof e.data === "string" && e.data.includes("checkout:approved")){
-          if(UPSALE_URL && UPSALE_URL !== "URL_INTERMEDIARIA"){
-            window.location.href = UPSALE_URL;
-          }
-        }
-      }catch(err){/* noop */}
-    });
-  </script>
+<!--- script load and setup --->
+<script src="https://checkout.hotmart.com/lib/hotmart-checkout-elements.js"></script>
+<script>
+checkoutElements.init('salesFunnel').mount('#hotmart-sales-funnel')
+</script>
+<!-- HOTMART - Sales Funnel Widget -->
 
   <noscript>
     <p style="text-align:center;padding:8px 0;color:#333">Ative o JavaScript para concluir sua compra pelo Hotmart.</p>
