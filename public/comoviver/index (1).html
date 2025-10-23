@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Como viver um amor que faz sentido — Checkout</title>
+  <meta name="description" content="E-book prático por R$ 10. Construa relações que façam sentido com passos simples e baseados em evidências.">
+  <style>
+    :root{
+      --gray:#DDDDDD;
+      --black:#000000;
+      --blue:#235FAA;
+      --white:#FFFFFF;
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0;background:var(--white);color:var(--black);font-family:Arial, Helvetica, sans-serif;line-height:1.5}
+    a{color:var(--blue);text-decoration:none}
+    .wrap{max-width:980px;margin:0 auto;padding:24px}
+    .topbar{background:var(--black);color:var(--white);padding:10px 0;text-align:center;font-size:.95rem}
+    header{padding:28px 0 10px;border-bottom:1px solid var(--gray)}
+    h1{font-size:2rem;margin:0 0 10px}
+    .sub{max-width:70ch}
+    .grid{display:grid;gap:20px}
+    @media(min-width:900px){.grid-2{grid-template-columns:1.1fr .9fr}}
+    .card{background:#FAFAFA;border:1px solid var(--gray);border-radius:16px;padding:20px}
+    ul.check{list-style:none;padding:0;margin:0}
+    ul.check li{padding-left:28px;position:relative;margin:8px 0}
+    ul.check li:before{content:"✓";position:absolute;left:0;top:0;color:var(--blue);font-weight:bold}
+    .price{display:flex;align-items:baseline;gap:10px;margin:10px 0 16px}
+    .price .now{font-size:1.8rem;font-weight:900;color:var(--blue)}
+    .cta{display:inline-block;background:var(--blue);color:var(--white);padding:14px 18px;border-radius:12px;font-weight:700;letter-spacing:.2px}
+    .cta:hover{filter:brightness(.95)}
+    .widget-box{background:#FFFFFF;border:2px dashed var(--blue);border-radius:16px;padding:16px;margin-top:12px}
+    .note{font-size:.9rem;color:#333}
+    footer{border-top:1px solid var(--gray);margin-top:32px;padding-top:16px;font-size:.85rem;color:#333}
+    .trust{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+    .trust .t{flex:1 1 120px;background:#F7F7F7;border:1px solid var(--gray);border-radius:8px;padding:10px;text-align:center;font-size:.85rem}
+  </style>
+</head>
+<body>
+  <div class="topbar">Checkout seguro • Conteúdo digital com entrega imediata</div>
+
+  <div class="wrap">
+    <header class="grid grid-2">
+      <div>
+        <h1>Como viver um amor que faz sentido</h1>
+        <p class="sub">E-book direto ao ponto, para quem quer alinhar valores, criar intimidade real e tomar decisões melhores no amor.</p>
+        <div class="price" aria-label="Preço">
+          <div class="now">R$ 10</div>
+          <div class="note">pagamento único • acesso por e-mail</div>
+        </div>
+
+        <div class="trust" aria-label="Selos de confiança">
+          <div class="t">Base científica</div>
+          <div class="t">Aplicação prática</div>
+          <div class="t">Entrega imediata</div>
+          <div class="t">Suporte por e-mail</div>
+        </div>
+      </div>
+      <div>
+        <div class="card">
+          <h2 style="margin-top:0">O que você recebe</h2>
+          <ul class="check">
+            <li>Fundamentos para relações intencionais</li>
+            <li>Exercícios rápidos de valores e limites</li>
+            <li>Checklist de comunicação clara</li>
+            <li>Leitura leve, prática e aplicável</li>
+          </ul>
+        </div>
+      </div>
+    </header>
+
+    <section id="checkout" style="margin-top:22px">
+      <div class="card">
+        <h2 style="margin-top:0">Finalizar compra</h2>
+        <p class="note">Use o checkout integrado abaixo. Após a confirmação do pagamento, você será direcionada(o) automaticamente para a <strong>página intermediária</strong> com uma oferta exclusiva.</p>
+
+        <!-- INÍCIO DO WIDGET DO CHECKOUT -->
+        <div class="widget-box" aria-label="Área do widget do checkout">
+          <strong>Widget do Checkout</strong>
+          <p class="note">
+            Cole aqui o <em>código do widget do seu provedor</em> (ex.: Hotmart SmartCheckout).<br>
+            <strong>Importante:</strong> configure no provedor o <em>redirect pós-compra</em> para a URL da página intermediária (upsell).
+          </p>
+
+          <!-- Exemplo ilustrativo (substitua pelo seu snippet oficial):
+          <script src="URL_DO_WIDGET_DO_CHECKOUT.js"></script>
+          <div id="hotmart-checkout"></div>
+          <script>
+            // Se o provedor permitir, defina a URL de redirecionamento após compra:
+            // window.HOTMART_CHECKOUT_REDIRECT = "https://SEU_DOMINIO.com/upsell-intermediaria/";
+          </script>
+          -->
+        </div>
+        <!-- FIM DO WIDGET DO CHECKOUT -->
+
+        <p class="note" style="margin-top:12px">Se preferir o link direto, você também pode usar: <a href="https://pay.hotmart.com/P78652605U?checkoutMode=10" rel="noopener">abrir checkout oficial</a>.</p>
+
+        <p style="margin-top:14px">
+          <a class="cta" href="https://pay.hotmart.com/P78652605U?checkoutMode=10" rel="noopener">Comprar agora por R$ 10</a>
+        </p>
+      </div>
+    </section>
+
+    <footer>
+      <p><strong>Felipe Santos — Psicólogo Afetivo</strong><br>
+      Conteúdo educativo, baseado em ACT e IBCT. Não substitui acompanhamento psicológico.</p>
+    </footer>
+  </div>
+
+  <script>
+    // Opcional: se o widget emitir eventos, você pode escutar e forçar um redirect.
+    // Substitua URL_INTERMEDIARIA pelo endereço público da sua página intermediária.
+    const UPSALE_URL = "URL_INTERMEDIARIA";
+    // Exemplo genérico (troque por eventos reais do provedor, se existirem)
+    window.addEventListener("message", (e)=>{
+      try{
+        if(typeof e.data === "string" && e.data.includes("checkout:approved")){
+          if(UPSALE_URL && UPSALE_URL !== "URL_INTERMEDIARIA"){
+            window.location.href = UPSALE_URL;
+          }
+        }
+      }catch(err){/* noop */}
+    });
+  </script>
+</body>
+</html>
