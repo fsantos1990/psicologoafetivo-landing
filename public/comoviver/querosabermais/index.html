@@ -1,1 +1,47 @@
-<!doctype html><title>Upsell Decod</title><p>Widget do upsell aqui.</p>
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Decodificando o Amor — Upsell</title>
+  <meta name="description" content="Decodificando o Amor — Upsell">
+  <style>
+    :root{
+      --gray:#DDDDDD; --black:#000000; --blue:#235FAA; --white:#FFFFFF;
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0;background:var(--white);color:var(--black);font-family:Arial, Helvetica, sans-serif;line-height:1.5}
+    .wrap{max-width:980px;margin:0 auto;padding:24px}
+    .card{background:#FAFAFA;border:1px solid var(--gray);border-radius:16px;padding:24px}
+    h1{margin:0 0 8px}
+    .badge{display:inline-block;background:var(--blue);color:#fff;padding:6px 10px;border-radius:999px;font-weight:800;letter-spacing:.3px;font-size:.9rem}
+    .center{text-align:center}
+    .note{color:#333;font-size:.95rem}
+    .cta-zone{background:linear-gradient(180deg,#f7f9ff,#ffffff);border:1px solid var(--gray);border-radius:20px;padding:24px;text-align:center;box-shadow:0 6px 24px rgba(0,0,0,.06);margin-top:18px}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    
+<section class="card center">
+  <span class="badge">Oferta intermediária</span>
+  <h1>Adicionar <em>Decodificando o Amor</em> por R$ 40</h1>
+  <p class="note">Oferta exclusiva para quem acabou de adquirir o e-book. Clique abaixo para confirmar em <strong>1 clique</strong>.</p>
+
+  <div class="cta-zone">
+    <!-- HOTMART - Sales Funnel Widget -->
+<!--- sales funnel container --->
+<div id="hotmart-sales-funnel"></div>
+
+<!--- script load and setup --->
+<script src="https://checkout.hotmart.com/lib/hotmart-checkout-elements.js"></script>
+<script>
+checkoutElements.init('salesFunnel').mount('#hotmart-sales-funnel')
+</script>
+<!-- HOTMART - Sales Funnel Widget -->
+  </div>
+</section>
+
+  </div>
+</body>
+</html>
