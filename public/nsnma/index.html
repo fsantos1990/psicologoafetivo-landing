@@ -109,6 +109,218 @@
       </div>
     </div>
   </div>
+
+<section id="quiz" class="section">
+  <div class="container">
+    <h2 class="h2">Descubra seu Cluster</h2>
+    <p class="muted">Responda 12 perguntas rápidas para saber qual dor está mais ativa e qual trilha começar.</p>
+    <form id="cluster-quiz"></form>
+    <div id="quiz-actions" style="margin-top:16px;">
+  <div class="card" style="margin-bottom:12px;">
+    <label for="lead-email" class="h3" style="font-size:14px;margin:0 0 6px;display:block;">Receba seu resultado por e-mail (opcional)</label>
+    <input id="lead-email" type="email" placeholder="seuemail@exemplo.com" style="width:100%;padding:10px;border:1px solid #ddd;border-radius:10px;">
+    <label style="display:block;margin-top:8px;font-size:12px;color:#555;">
+      <input id="lead-consent" type="checkbox"> Concordo em receber meu resultado e conteúdos do curso por e-mail.
+    </label>
+    <div id="lead-error" class="fine" style="color:#B00020;display:none;margin-top:6px;">Preencha um e-mail válido e aceite o consentimento.</div>
+  </div>
+      <button type="button" id="quiz-submit" class="cta cta-primary">Ver meu resultado</button>
+      <button type="button" id="quiz-reset" class="cta cta-ghost" style="margin-left:8px;">Limpar</button>
+    </div>
+    <div id="quiz-result" class="card" style="margin-top:18px; display:none;"></div>
+  </div>
+</section>
+
+<script>
+(function() {
+  const questions = [
+    { id:1, text:"Ele fala que quer algo comigo, mas raramente combina algo com antecedência.", clusters:[1,3] },
+    { id:2, text:"Depois de momentos ótimos, ele some por dias.", clusters:[3] },
+    { id:3, text:"Evito dizer NÃO para não gerar briga ou afastamento.", clusters:[2] },
+    { id:4, text:"Discussões escalam rápido e terminam sem reparo.", clusters:[6] },
+    { id:5, text:"Penso nele o tempo todo e checo mensagens/redes.", clusters:[7] },
+    { id:6, text:"Falo sobre valores e planos, mas a relação não sai do lugar.", clusters:[1] },
+    { id:7, text:"Sinto culpa ou medo depois de colocar um limite.", clusters:[2] },
+    { id:8, text:"Ele evita microacordos (tipo marcar algo com antecedência).", clusters:[1,3] },
+    { id:9, text:"Depois de brigas, cada um se afasta sem reparar.", clusters:[6] },
+    { id:10, text:"Tenho filhos e me sinto sobrecarregada na rotina doméstica.", clusters:[5] },
+    { id:11, text:"Tenho me perdido de mim (rotinas básicas/auto-cuidado).", clusters:[4] },
+    { id:12, text:"Sinto ansiedade se não confiro o celular por muito tempo.", clusters:[7] }
+  ];
+
+  const options = ["Nunca", "Às vezes", "Frequentemente", "Quase sempre"];
+  const weights = [0, 1, 2, 3]; // mapeia cada opção para pontuação
+
+  const clusterNames = {
+  // === Lead capture helpers ===
+  const LEAD_ENDPOINT = window.LEAD_ENDPOINT || "https://formspree.io/f/yourid"; // substitua pelo seu endpoint
+  function getUTMs() {
+    const p = new URLSearchParams(window.location.search);
+    const utm = {};
+    ["utm_source","utm_medium","utm_campaign","utm_content","utm_term"].forEach(k=>{ if(p.get(k)) utm[k]=p.get(k); });
+    return utm;
+  }
+  function validEmail(e){ return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e); }
+  async function sendLead(payload) {
+    try {
+      const res = await fetch(LEAD_ENDPOINT, { method: "POST", headers: {"Content-Type":"application/json"}, body: JSON.stringify(payload) });
+      if (!res.ok) throw new Error("HTTP " + res.status);
+      return true;
+    } catch(err) {
+      const body = encodeURIComponent("Resultado do quiz\n\n" + JSON.stringify(payload, null, 2));
+      window.location.href = "mailto:?subject=Resultado do quiz — NSNMA&body=" + body;
+      return false;
+    }
+  }
+
+    1: "Compromisso invisível",
+    2: "Fronteiras esburacadas",
+    3: "Indisponibilidade",
+    4: "Autonegligência",
+    5: "Sobrecarga materna",
+    6: "Comunicação reativa",
+    7: "Atenção sequestrada"
+  };
+
+  const clusterCTAs = {
+    1: {
+      title: "Comece pela Trilha A — Critério Observável (7 dias)",
+      bullets: ["Intensidade ≠ compromisso", "Microacordos observáveis", "Planilha de consistência"],
+      link: "https://pay.hotmart.com/H71326438T"
+    },
+    3: {
+      title: "Comece pela Trilha A — Critério Observável (7 dias)",
+      bullets: ["Extinção de picos (cassino do amor)", "Evidência semanal", "Microacordos"],
+      link: "https://pay.hotmart.com/H71326438T"
+    },
+    2: {
+      title: "Comece pela Trilha B — FOCAR & Limites",
+      bullets: ["FOCAR em 30s", "Limite com convite", "Roteiro de reparo"],
+      link: "https://pay.hotmart.com/H71326438T"
+    },
+    6: {
+      title: "Comece pela Trilha B — FOCAR & Limites",
+      bullets: ["Scripts ao vivo/WhatsApp", "Time-out com retorno", "Microacordo pós-conflito"],
+      link: "https://pay.hotmart.com/H71326438T"
+    },
+    7: {
+      title: "Comece pela Trilha C — Higiene da Atenção",
+      bullets: ["Agenda 3×3 min/dia", "Desfusão simples", "STOP de checagem"],
+      link: "https://pay.hotmart.com/H71326438T"
+    },
+    4: {
+      title: "Reaproxime-se dos seus valores",
+      bullets: ["1 valor → 1 ação/dia", "Rotina mínima de auto-cuidado", "Cartões de bolso"],
+      link: "https://pay.hotmart.com/H71326438T"
+    },
+    5: {
+      title: "Parceria na rotina (mães)",
+      bullets: ["Contratos de microtarefas", "Horários críticos", "Checklist turno invisível"],
+      link: "https://pay.hotmart.com/H71326438T"
+    }
+  };
+
+  // Render questions
+  const form = document.getElementById('cluster-quiz');
+  questions.forEach(q => {
+    const field = document.createElement('div');
+    field.className = 'card';
+    field.style.marginTop = '10px';
+    const h = document.createElement('div');
+    h.className = 'h3';
+    h.textContent = q.id + ". " + q.text;
+    field.appendChild(h);
+    options.forEach((opt, idx) => {
+      const id = `q${q.id}_${idx}`;
+      const label = document.createElement('label');
+      label.style.display = 'inline-block';
+      label.style.marginRight = '14px';
+      const input = document.createElement('input');
+      input.type = 'radio';
+      input.name = `q${q.id}`;
+      input.value = weights[idx];
+      input.id = id;
+      label.appendChild(input);
+      const span = document.createElement('span');
+      span.textContent = " " + opt;
+      label.appendChild(span);
+      field.appendChild(label);
+    });
+    form.appendChild(field);
+  });
+
+  function calcResult() {
+    const clusterScores = {1:0,2:0,3:0,4:0,5:0,6:0,7:0};
+    for (let q of questions) {
+      const radios = document.getElementsByName('q' + q.id);
+      let val = 0;
+      for (let r of radios) if (r.checked) val = parseInt(r.value || 0);
+      for (let c of q.clusters) {
+        clusterScores[c] += val;
+      }
+    }
+    // sort clusters by score desc
+    const sorted = Object.entries(clusterScores).sort((a,b)=>b[1]-a[1]);
+    const top = sorted[0]; // [cluster, score]
+    const second = sorted[1];
+    return { scores: clusterScores, top, second };
+  }
+
+  function renderResult(res) {
+    const box = document.getElementById('quiz-result');
+    const topCluster = parseInt(res.top[0]);
+    const topName = clusterNames[topCluster];
+    const secCluster = parseInt(res.second[0]);
+    const secName = clusterNames[secCluster];
+
+    const cta = clusterCTAs[topCluster] || {title:"Próximo passo recomendado", bullets:["Prática semanal"], link:"https://pay.hotmart.com/H71326438T"};
+
+    let html = `<div class="h3">Seu resultado: <b>${topCluster} — ${topName}</b></div>`;
+    html += `<p class="muted">Secundário: ${secCluster} — ${secName}</p>`;
+    html += `<div class="card" style="margin-top:8px;"><b>${cta.title}</b><ul class="list">`;
+    for (let b of cta.bullets) html += `<li>${b}</li>`;
+    html += `</ul><p style="margin-top:8px;"><a class="cta cta-primary" target="_blank" rel="noopener" href="${cta.link}">Entrar agora — R$ 297</a> <a class="cta cta-ghost" href="#diagnostico">Voltar</a></p></div>`;
+
+    // small table with all scores
+    html += `<p class="fine" style="margin-top:8px;">Pontuações: `;
+    const parts = [];
+    for (const [k,v] of Object.entries(res.scores)) parts.push(`${k}:${v}`);
+    html += parts.join(" · ");
+    html += `</p>`;
+
+    box.innerHTML = html;
+box.style.display = 'block';
+const email = document.getElementById('lead-email')?.value?.trim();
+const consent = document.getElementById('lead-consent')?.checked;
+const err = document.getElementById('lead-error');
+if (email) {
+  if (!validEmail(email) || !consent) {
+    if (err) err.style.display = 'block';
+  } else {
+    if (err) err.style.display = 'none';
+    const payload = { email, consent, timestamp: new Date().toISOString(), topCluster: topCluster, secondCluster: secCluster, scores: res.scores, utm: getUTMs(), page: window.location.href };
+    sendLead(payload);
+  }
+}
+    box.scrollIntoView({behavior:"smooth"});
+  }
+
+  document.getElementById('quiz-submit').addEventListener('click', function() {
+    const res = calcResult();
+    renderResult(res);
+  });
+
+  document.getElementById('quiz-reset').addEventListener('click', function() {
+    const inputs = document.querySelectorAll('#cluster-quiz input[type=radio]');
+    inputs.forEach(i=>i.checked=false);
+    const box = document.getElementById('quiz-result');
+    box.style.display = 'none';
+    box.innerHTML = '';
+    window.scrollTo({top: document.getElementById('quiz').offsetTop - 40, behavior: 'smooth'});
+  });
+})();
+</script>
+
 </section>
 
 <section class="section">
