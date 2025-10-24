@@ -252,75 +252,97 @@ const jsonLdSchemaArticle = (article) => ({
 });
 
 // --- 3. CONTEÚDO DOS ARTIGOS ---
-// (seus três artigos anteriores permanecem)
-
-const articleData1 = {
-  slug: 'terapia-casal-online-ibct',
-  title: 'Terapia de Casal Online: Por que a IBCT é a Abordagem mais Afetiva?',
+// --- NOVO ARTIGO (acolhedor para quem quer ajuda com “vício”/uso compulsivo de conteúdo adulto) ---
+const articleData5 = {
+  slug: 'conteudo-adulto-intimidade-terapia-online',
+  title: 'Quando o “conteúdo adulto” vira fuga: como reconstruir a intimidade (e por onde começar)',
   author: 'Felipe Santos, Psicólogo Afetivo (CRP 03/15591)',
   date: 'Outubro de 2025',
-  featuredImage: '/terapia-de-casal.jpg',
+  featuredImage: 'https://www.psicologoafetivo.com.br/intimidade-vicio.jpg',
   content: [
-    { type: 'paragraph', text: 'Em um mundo cada vez mais conectado e, paradoxalmente, isolado, a terapia de casal online surgiu como uma ferramenta poderosa para nutrir relacionamentos. Muitas vezes, casais esperam anos até que os padrões de sofrimento estejam profundamente enraizados antes de procurar ajuda. Nosso objetivo, com a Terapia Comportamental Integrativa de Casal (IBCT), é intervir de forma <strong>colaborativa e afetiva</strong>, focando em aceitação e mudança.' },
-    { type: 'heading', text: 'O Que É a IBCT? Aceitação Antes da Mudança' },
-    { type: 'paragraph', text: 'A IBCT (Integrative Behavioral Couple Therapy) reconhece que conflitos são inevitáveis. Diferente de abordagens que focam apenas em técnicas de comunicação, a IBCT integra a promoção da aceitação mútua e a construção de um "banco emocional" positivo. Primeiro, ajudamos o casal a entender o padrão de sofrimento (onde as diferenças viram briga). Depois, criamos a base para uma mudança significativa, que é mais fácil de ocorrer a partir de um lugar de aceitação e compaixão.' },
-    { type: 'heading', text: 'A Vantagem do Formato Online para Casais' },
-    { type: 'paragraph', text: 'A teleconsulta oferece privacidade e conforto incomparáveis. O casal pode estar em seu ambiente seguro, o que muitas vezes reduz a ansiedade e permite uma abertura emocional mais rápida. A flexibilidade de horário também elimina a logística de deslocamento, facilitando a manutenção da regularidade das sessões, crucial para o sucesso da terapia de casal. O sigilo é garantido, respeitando a LGPD.' },
-    { type: 'paragraph', text: 'Neste formato online, trabalhamos juntos para identificar os valores do relacionamento e convertê-los em <strong>ações concretas</strong> que reforçam o vínculo. Se você e seu parceiro(a) buscam mais intimidade, compromisso e uma comunicação compassiva, a IBCT online é um caminho eficaz e afetivo.' }
-  ]
-};
-
-const articleData2 = {
-  slug: 'ansiedade-autoestima-terapia-act',
-  title: 'Ansiedade e Autoestima: Como a Terapia ACT Online Ajuda a Viver com o que Importa',
-  author: 'Felipe Santos, Psicólogo Afetivo (CRP 03/15591)',
-  date: 'Outubro de 2025',
-  featuredImage: '/ansiedade.jpg',
-  content: [
-    { type: 'paragraph', text: 'A ansiedade e a baixa autoestima andam lado a lado, muitas vezes nos paralisando e nos impedindo de viver de acordo com nossos <strong>valores mais profundos</strong>. A Terapia de Aceitação e Compromisso (ACT) oferece um caminho diferente: em vez de lutar contra os pensamentos e sentimentos desconfortáveis, aprendemos a aceitá-los e, mesmo assim, agir em direção ao que realmente importa em nossa vida afetiva e profissional.' },
-    { type: 'heading', text: 'O Loop da Ansiedade e da Autoestima' },
-    { type: 'paragraph', text: 'Quando a autoestima está baixa, a mente costuma disparar pensamentos autocríticos ("Eu não sou bom o suficiente", "Vou falhar"). A reação natural é tentar controlar ou evitar esses sentimentos (a famosa esquiva experiencial), o que, ironicamente, aumenta a ansiedade e o ciclo de sofrimento. A ACT nos convida a notar esses pensamentos sem nos fundirmos a eles (defusão cognitiva).' },
-    { type: 'heading', text: 'Compromisso com Seus Valores Afetivos Online' },
-    { type: 'paragraph', text: 'A terapia ACT online foca em identificar seus valores (ex: ser um parceiro amoroso, ser um profissional dedicado). Em seguida, trabalhamos para criar <strong>ações comprometidas</strong>, que são passos pequenos e concretos em direção a esses valores, mesmo que a ansiedade esteja presente. A sessão online, realizada no seu ambiente, é um espaço seguro e flexível para praticar a atenção plena (mindfulness) e desenvolver a flexibilidade psicológica.' },
-    { type: 'paragraph', text: 'O objetivo não é eliminar a ansiedade, mas sim mudar o relacionamento que você tem com ela, permitindo que você retome o controle da sua direção de vida. Se você sente que a autocrítica e a ansiedade estão dominando suas escolhas, a ACT online é uma excelente ferramenta para encontrar mais coragem e sentido.' }
-  ]
-};
-
-const articleData3 = {
-  slug: 'relacionamentos-espelhos-amor-consciente',
-  title: 'Relacionamentos são Espelhos: Use os Conflitos para Construir um Amor Consciente e Afetivo Online',
-  author: 'Felipe Santos, Psicólogo Afetivo (CRP 03/15591)',
-  date: 'Outubro de 2025',
-  featuredImage: '/casal-espelho.jpg',
-  content: [
-    { type: 'paragraph', text: 'Relacionamentos são, de fato, como espelhos. Não aqueles que apenas refletem a aparência, mas os que revelam, com clareza brutal, o que está escondido em nosso interior. É fácil parecer equilibrado quando estamos sozinhos, mas é na convivência diária com o outro que nossas feridas mais antigas se manifestam: a pressa em julgar, a defensividade, o medo paralisante de ser rejeitado, a dificuldade de confiar e a falta de regulação emocional.' },
-    { type: 'heading', text: 'O Convite da Fragilidade: Por que Nossos Defeitos Aparecem no Relacionamento' },
-    { type: 'paragraph', text: 'É crucial entender que esses sinais não significam fracasso no relacionamento, mas sim <strong>convites</strong> para o autoconhecimento e o amadurecimento. Quando seu parceiro(a) aciona uma dor sua, ele está apontando, sem querer, para aquilo que ainda precisa de cuidado dentro de você. Encarar essa fragilidade com compaixão e sem autocrítica é o primeiro passo para o crescimento individual e a saúde do casal.' },
-    { type: 'heading', text: 'De Conflito para Crescimento: A Abordagem Afetiva' },
-    { type: 'paragraph', text: 'Um relacionamento saudável não é definido pela ausência de conflitos, mas sim pela capacidade de transformar esses conflitos em oportunidades de aprendizado e intimidade. É no calor da discussão que aprendemos a regular emoções intensas, a colocar limites com clareza e sem perder a ternura, e a sermos resilientes diante das diferenças. Isso é o que chamamos de <strong>Amor Consciente</strong>.' },
-    { type: 'paragraph', text: 'Quando olhamos para esse espelho mágico com o apoio profissional, temos a chance de encarar a imagem que ele mostra com <strong>coragem</strong>. E é nessa coragem, cultivada na terapia, que mora a possibilidade real de transformação afetiva. A Terapia de Casal Online pode ser o espaço seguro para você aprender a se relacionar de um jeito novo, rompendo padrões de sofrimento.' }
-  ]
-};
-
-// --- NOVO ARTIGO (seu texto) ---
-const articleData4 = {
-  slug: 'nem-tudo-que-te-incomoda-no-parceiro',
-  title: 'Nem tudo que te incomoda no seu parceiro é um problema a ser resolvido',
-  author: 'Felipe Santos, Psicólogo Afetivo (CRP 03/15591)',
-  date: 'Outubro de 2025',
-  featuredImage: '/diferencas-parceiros.jpg',
-  content: [
-    { type: 'paragraph', text: 'Se você tem intimidade com o(a) seu parceiro(a), é bem provável que você conheça muitas coisas sobre ele(a) que você gostaria que fossem diferentes. Pode ser uma soma de algumas coisas "bem chatinhas", ou "aquilo" que você considera insuportável, e que você gostaria muito que fosse diferente. Você consegue identificar o que é?' },
-    { type: 'paragraph', text: 'Pode ser uma forma de falar. Pode ser o modo dela(e) lidar com o mundo quando está estressada(o), ou simplesmente o modo como ele lida com os problemas quando eles ocorrem: Ele levanta de imediato para tentar resolver, "de qualquer jeito"? Ela para pra pensar "demais" antes de agir? É um hobby? O que é? Pense um pouco a respeito.' },
-    { type: 'paragraph', text: 'Nesse momento, eu te convido para olhar para o seu parceiro e observar tudo o que sua mente te diz sobre esse comportamento, essa ação, esse modo de lidar, essa coisa que você acha ser insuportável. Apenas observe. Pegue um caderninho e comece a anotar todas as vezes que esse pensamento surge. E apenas observe. Só isso!' },
-    { type: 'paragraph', text: 'Quando você tiver isso em mente, você talvez consiga perceber o quanto que esse incômodo pode vir justamente porque você está "num polo oposto". E o quanto que você tem buscado formas de trazer o seu parceiro ou parceira para ser mais parecido com você nesse aspecto. E talvez sua mente esteja te dizendo que a relação ficará melhor QUANDO isso acontecer.' },
-    { type: 'paragraph', text: 'Mas é pouco provável que isso aconteça. Tem duas verdades escondidas aí dentro de você: 1) você se interessou por seu(a) parceiro(a) porque ele age de algumas formas diferente de você, de modo complementar e 2) talvez o seu modo de lidar também seja incômodo pelo seu parceiro. Você gostaria de abrir mão do seu jeito de ser para ser mais parecido com o seu parceiro?' },
-    { type: 'paragraph', text: 'Um relacionamento sólido é aquele no qual as diferenças se complementam. Gentilmente, aprenda a apreciar aquilo que o seu parceiro tem e que você não tem, e vice-versa. Nem sempre vai funcionar... E tá tudo bem. Gentilmente, traga sua atenção de volta ao que te mantém nessa relação.' }
+    {
+      type: 'paragraph',
+      text:
+        'Se você está lendo isto porque sente que perdeu o controle sobre o consumo de <strong>conteúdo adulto</strong>, antes de qualquer coisa, <strong>bem-vindo</strong>. Aqui não tem moralismo nem julgamento. Tem acolhimento, clareza e um caminho possível. Meu trabalho é ajudar você a <strong>recuperar a presença</strong> na sua vida afetiva e a <strong>reconstruir a intimidade</strong> com quem você ama — e consigo mesmo.'
+    },
+    { type: 'heading', text: 'Você não é o problema — o padrão é que ficou maior do que você' },
+    {
+      type: 'paragraph',
+      text:
+        'Quando o hábito vira <em>saída rápida</em> para tédio, ansiedade, solidão ou estresse, ele começa a ocupar espaços que eram da sua vida: sono, energia, foco, desejo, conexão. Sem perceber, a atenção vai sendo “treinada” para roteiros de performance e comparação, enquanto a intimidade real — aquela de olhar, toque, carinho, tempo — fica para depois. Essa história é comum, e <strong>tem saída</strong>.'
+    },
+    { type: 'heading', text: 'Sinais de que está pesando (sem rótulos, com honestidade)' },
+    {
+      type: 'paragraph',
+      text:
+        '<ul>' +
+        '<li>Você promete que vai reduzir, mas na hora H não consegue.</li>' +
+        '<li>Começa “só um pouco” e vai além do que planejou.</li>' +
+        '<li>Percebe queda de desejo/responsividade com o(a) parceiro(a).</li>' +
+        '<li>Se sente culpado depois, e usa de novo para aliviar a culpa.</li>' +
+        '<li>Está guardando segredo, evitando conversas ou se afastando.</li>' +
+        '</ul>' +
+        'Se você se reconhece em alguns desses pontos, vale buscar ajuda. <strong>Não é fraqueza</strong>. É um padrão bem reforçado, que a gente aprende a desmontar com método.'
+    },
+    { type: 'heading', text: 'Meu jeito de trabalhar (ACT/IBCT): processo, não culpa' },
+    {
+      type: 'paragraph',
+      text:
+        'Eu uso uma abordagem baseada em processos. Traduzindo: em vez de rotular você, nós mapeamos o <strong>funcionamento do padrão</strong> (o que mantém, o que dispara, o que custa) e treinamos competências para você <strong>escolher</strong> de novo — mesmo quando a urgência aparece. Em casal, fazemos acordos transparentes e restauramos o repertório de intimidade (respeito, ternura, jogo erótico responsivo).'
+    },
+    { type: 'heading', text: 'O plano em 4 passos (simples, direto e humano)' },
+    {
+      type: 'paragraph',
+      text:
+        '<strong>1) Tirar da moral e colocar na função.</strong> Pergunta central: “O que esse hábito está fazendo com a minha atenção, meu desejo e meu vínculo?”. Identificamos gatilhos (hora, humor, dispositivo) e custos reais (sono, foco, disponibilidade).'
+    },
+    {
+      type: 'paragraph',
+      text:
+        '<strong>2) Contrato de valores.</strong> Definimos como você quer viver sua vida amorosa (3 valores práticos, ex.: presença, cuidado, curiosidade) e limites operacionais que <em>servem</em> a esses valores: dispositivos fora do quarto, horários de tela, regras de transparência.'
+    },
+    {
+      type: 'paragraph',
+      text:
+        '<strong>3) Treino processual.</strong> Desfusão (“minha mente pede descarga, mas eu posso esperar 60s”), aceitação da urgência (sensação ≠ ação), atenção aplicada ao encontro (micropráticas de 2–5 minutos) e exposição guiada por valores (substituir <em>gatilho → alívio privado</em> por <em>micro-gesto de vínculo</em>).'
+    },
+    {
+      type: 'paragraph',
+      text:
+        '<strong>4) Monitoramento gentil.</strong> Metas semanais pequenas, acompanhadas com honestidade e sem chicote. Se houver perda de controle com prejuízo, tratamos como compulsão: protocolo estruturado e, quando necessário, co-manejo com psiquiatria.'
+    },
+    { type: 'heading', text: 'Começar hoje: 3 exercícios simples' },
+    {
+      type: 'paragraph',
+      text:
+        '<strong>Roda de custo–benefício (5 min).</strong> O que eu ganho e perco com o hábito <em>hoje</em> e em <em>6 meses</em>? O que ganho e perco investindo na intimidade <em>hoje</em> e em <em>6 meses</em>? Escolha 1 ação mínima para esta semana.<br/><br/>' +
+        '<strong>Plano se/então.</strong> Se surgir vontade + oportunidade, <em>então</em>: 60s de respiração; 1 mensagem de carinho; partir para o ritual acordado (banho juntos, massagem, conversa de desejo).<br/><br/>' +
+        '<strong>Check-in 3×semana (10 min).</strong> 1) Como posso ser mais presente pra você? 2) O que estamos evitando conversar? 3) Qual micro-gesto de carinho/erotismo até sexta?'
+    },
+    { type: 'heading', text: 'Perguntas que eu escuto com frequência' },
+    {
+      type: 'paragraph',
+      text:
+        '<strong>“Isso me define?”</strong> Não. É um padrão comportamental — e padrões mudam com treino.<br/>' +
+        '<strong>“Uso em conjunto resolve?”</strong> Transparência ajuda, mas não apaga roteiros já cristalizados. Se há comparação e queda de responsividade, a gente ajusta.<br/>' +
+        '<strong>“Preciso acabar de vez?”</strong> A direção é <em>servir seus valores</em>. Às vezes, redução estruturada já devolve presença e vínculo; às vezes, é melhor abstinência. Decidimos juntos, caso a caso.'
+    },
+    { type: 'heading', text: 'Se você está cansado de prometer e não conseguir: eu posso te ajudar' },
+    {
+      type: 'paragraph',
+      text:
+        'Eu atendo <strong>online</strong>, com sigilo, método e respeito à sua história. A primeira sessão é um espaço seguro para entender sua realidade e traçar um plano. Não precisa chegar “perfeito”. Chegue como está — e a gente caminha daí.'
+    },
+    {
+      type: 'paragraph',
+      text:
+        '<em>Valores:</em> Atendimento particular. Sessões de 50 minutos. Emissão de nota fiscal. Leia como funciona (ACT ou IBCT) e, no fim da página, use o botão de agendamento pelo WhatsApp. Quando você estiver pronto, eu estarei aqui.'
+    }
   ]
 };
 
 // --- LISTA COMPLETA (novo artigo vai primeiro) ---
-const articles = [articleData4, articleData1, articleData2, articleData3];
+const articles = [articleData5, articleData4, articleData1, articleData2, articleData3];
 
 export default function App() {
   const [currentPage, setCurrentPage] = useState('HOME');
