@@ -50,6 +50,7 @@
   <script src="https://checkout.hotmart.com/lib/hotmart-checkout-elements.js"></script>
 </head>
 <body>
+  <script>window.LEAD_ENDPOINT="https://script.google.com/macros/s/AKfycbwHuDECXkY2SSMyr44qH5k_wVXVEP3UISD473gr89vvC_YF66MygF6L06GqYXU7Ne27Pg/exec";</script>
 
 <header class="hero">
   <div class="container">
@@ -153,9 +154,7 @@
 
   const clusterNames = {
   // === Lead capture helpers ===
- <script>
-    window.LEAD_ENDPOINT="https://script.google.com/macros/s/AKfycbwHuDECXkY2SSMyr44qH5k_wVXVEP3UISD473gr89vvC_YF66MygF6L06GqYXU7Ne27Pg/exec"
-  </script>
+  const LEAD_ENDPOINT = window.LEAD_ENDPOINT || "https://formspree.io/f/yourid"; // substitua pelo seu endpoint
   function getUTMs() {
     const p = new URLSearchParams(window.location.search);
     const utm = {};
