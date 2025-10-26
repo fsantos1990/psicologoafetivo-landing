@@ -6,120 +6,49 @@
   <title>Decodificando o Amor — Roteiros práticos para conversas difíceis sem briga</title>
   <meta name="description" content="Livro prático de ACT & IBCT para transformar conflito em proximidade. Roteiros de conversa, pedidos claros, reparos pós-briga e intimidade em 10 minutos.">
   <link rel="canonical" href="https://www.psicologoafetivo.com.br/decodificando" />
-
-  <!-- Open Graph / Twitter -->
   <meta property="og:type" content="product">
   <meta property="og:title" content="Decodificando o Amor — Roteiros práticos para conversas difíceis sem briga">
   <meta property="og:description" content="Transforme conflito em proximidade com protocolos objetivos. Leia um trecho grátis.">
   <meta property="og:url" content="https://www.psicologoafetivo.com.br/decodificando">
   <meta property="og:image" content="https://www.psicologoafetivo.com.br/decodificando/assets/capa.webp">
   <meta name="twitter:card" content="summary_large_image">
-
-  <!-- Schema.org Product (JSON-LD) -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org/",
-    "@type": "Product",
-    "name": "Decodificando o Amor",
-    "description": "Roteiros práticos de conversa baseados em ACT & IBCT para transformar conflitos em intimidade.",
-    "image": "https://www.psicologoafetivo.com.br/decodificando/assets/capa.webp",
-    "brand": {"@type":"Brand","name":"Psicólogo Afetivo"},
-    "author": {"@type":"Person","name":"Felipe Melo Souza Santos"},
-    "offers": {
-      "@type": "Offer",
-      "priceCurrency": "BRL",
-      "price": "39.00",
-      "availability": "https://schema.org/InStock",
-      "url": "https://www.psicologoafetivo.com.br/decodificando"
-    }
-  }
-  </script>
-
-  <!-- Core styles (Arial + paleta) -->
   <style>
-    :root{
-      --black:#000000; --blue:#235FAA; --white:#FFFFFF; --gray:#DDDDDD;
-      --text:#000000; --bg:#FFFFFF; --muted:#4a4a4a; --accent:#235FAA;
-    }
-    *{box-sizing:border-box}
-    html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:Arial,Helvetica,sans-serif;line-height:1.5}
+    :root{--accent:#235FAA;--muted:#4a4a4a}
+    *{box-sizing:border-box}body{margin:0;font-family:Arial,Helvetica,sans-serif;color:#000;line-height:1.5;background:#fff}
     a{color:var(--accent);text-decoration:none}
-    img{max-width:100%;height:auto;display:block}
     .container{max-width:1120px;margin:0 auto;padding:0 16px}
     .btn{display:inline-flex;align-items:center;justify-content:center;border:none;border-radius:12px;padding:14px 18px;font-weight:700;cursor:pointer}
     .btn-primary{background:var(--accent);color:#fff;box-shadow:0 8px 24px rgba(35,95,170,.25)}
-    .btn-primary:hover{filter:brightness(1.08)}
     .btn-ghost{background:#f6f7fb;color:var(--accent);border:1px solid #e6ebf5}
-    .badge{display:inline-flex;gap:8px;align-items:center;padding:8px 12px;border:1px solid #e8e8e8;border-radius:999px;font-size:.9rem;background:#fff}
-    .muted{color:var(--muted)}
-    header.site{border-bottom:1px solid #f0f0f0;background:#fff;position:sticky;top:0;z-index:50}
-    header .wrap{display:flex;align-items:center;justify-content:space-between;height:64px}
-    header .brand{font-weight:800;letter-spacing:.2px}
+    header.site{position:sticky;top:0;background:#fff;border-bottom:1px solid #f0f0f0;z-index:50}
+    header .wrap{display:flex;align-items:center;justify-content:space-between;height:68px}
+    header .brand img{height:38px;width:auto;display:block}
     header nav a{margin-left:20px;font-weight:700}
-    /* HERO */
     .hero{padding:48px 0 24px;background:linear-gradient(180deg,#ffffff 0%,#f7f9ff 100%)}
     .hero-wrap{display:grid;grid-template-columns:1.2fr .8fr;gap:32px;align-items:center}
     .hero h1{font-size:40px;line-height:1.1;margin:0 0 12px}
-    .hero p.lead{font-size:18px;color:#222;margin:0 0 20px}
-    .price-row{display:flex;align-items:center;gap:12px;margin:12px 0 8px}
     .price{font-size:28px;font-weight:900;color:var(--accent)}
+    .badge{display:inline-flex;gap:8px;align-items:center;padding:8px 12px;border:1px solid #e8e8e8;border-radius:999px;font-size:.9rem;background:#fff;margin-left:8px}
     .cta-row{display:flex;gap:12px;flex-wrap:wrap;margin:12px 0 8px}
-    .trust-row{display:flex;gap:12px;flex-wrap:wrap;margin-top:12px}
-    .micro-proof{border-left:4px solid var(--accent);padding-left:12px;margin-top:12px;color:#222}
     .hero-card{background:#fff;border:1px solid #eef1f6;border-radius:16px;padding:18px;box-shadow:0 8px 32px rgba(0,0,0,.04)}
-    /* Sections */
-    section{padding:48px 0}
-    section h2{font-size:28px;margin:0 0 16px}
-    .cols-2{display:grid;grid-template-columns:1fr 1fr;gap:24px}
-    .list{display:grid;gap:10px}
-    .list li{background:#fff;border:1px solid #eef1f6;border-radius:12px;padding:12px}
-    .check{color:var(--accent);font-weight:800;margin-right:8px}
-    /* What you learn */
+    .list{display:grid;gap:10px}.list li{background:#fff;border:1px solid #eef1f6;border-radius:12px;padding:12px}
     .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-    .card{background:#fff;border:1px solid #eef1f6;border-radius:16px;padding:18px;box-shadow:0 8px 24px rgba(0,0,0,.04)}
-    .card h3{margin:0 0 8px;font-size:18px}
-    /* Testimonials */
     .quotes-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
-    blockquote{margin:0;font-size:16px}
-    figcaption{margin-top:8px;color:#555;font-size:14px}
-    /* Author */
     .author{display:grid;grid-template-columns:.9fr 1.1fr;gap:24px;align-items:center}
-    /* FAQ */
-    .faq details{background:#fff;border:1px solid #eef1f6;border-radius:12px;padding:14px;margin-bottom:12px}
-    .faq summary{cursor:pointer;font-weight:700}
-    /* Sticky mobile bar */
-    .sticky-mobile{position:fixed;left:0;right:0;bottom:0;background:#ffffffd9;border-top:1px solid #eaeaea;backdrop-filter:blur(8px);padding:12px;display:none;z-index:60}
-    .sticky-mobile .inner{display:flex;align-items:center;justify-content:space-between;gap:10px}
-    .sticky-mobile .price{font-size:18px}
-    /* Modal */
-    .modal{position:fixed;inset:0;background:rgba(0,0,0,.5);display:none;align-items:center;justify-content:center;z-index:70;padding:16px}
-    .modal.open{display:flex}
-    .modal-box{background:#fff;max-width:720px;width:100%;border-radius:16px;padding:18px;box-shadow:0 10px 60px rgba(0,0,0,.25)}
-    .modal-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
-    .close{background:transparent;border:none;font-size:22px;cursor:pointer}
-    /* Footer */
-    footer{padding:32px 0;border-top:1px solid #f0f0f0;font-size:14px;color:#555}
-
-    /* Responsive */
-    @media (max-width:980px){
-      .hero-wrap{grid-template-columns:1fr}
-      .grid-3{grid-template-columns:1fr 1fr}
-      .quotes-grid{grid-template-columns:1fr 1fr}
-      .author{grid-template-columns:1fr}
-    }
-    @media (max-width:680px){
-      .grid-3{grid-template-columns:1fr}
-      .quotes-grid{grid-template-columns:1fr}
-      .sticky-mobile{display:block}
-      .hero h1{font-size:32px}
-    }
+    .muted{color:var(--muted)}
+    @media (max-width:980px){.hero-wrap{grid-template-columns:1fr}.grid-3{grid-template-columns:1fr 1fr}.quotes-grid{grid-template-columns:1fr 1fr}.author{grid-template-columns:1fr}}
+    @media (max-width:680px){.grid-3{grid-template-columns:1fr}.quotes-grid{grid-template-columns:1fr}.hero h1{font-size:32px}}
   </style>
 </head>
 <body>
-
   <header class="site">
     <div class="container wrap">
-      <div class="brand">Felipe Santos | Psicólogo Afetivo</div>
+      <a class="brand" href="https://www.psicologoafetivo.com.br/decodificando" aria-label="Psicólogo Afetivo — página inicial">
+        <picture>
+          <source srcset="assets/logo-480.webp 480w, assets/logo-240.webp 240w" sizes="(max-width:680px) 180px, 220px" type="image/webp">
+          <img src="assets/logo-240.webp" alt="Logo Psicólogo Afetivo">
+        </picture>
+      </a>
       <nav aria-label="Seções">
         <a href="#conteudo">Conteúdo</a>
         <a href="#como-funciona">Como funciona</a>
@@ -129,294 +58,143 @@
     </div>
   </header>
 
-  <!-- HERO -->
   <section class="hero">
     <div class="container hero-wrap">
       <div>
         <h1>Decodificando o Amor</h1>
-        <p class="lead"><strong>Roteiros práticos</strong> (ACT & IBCT) para <strong>conversas difíceis sem briga</strong>, pedidos claros e reparos que restauram a proximidade — aplicável em 20–30 minutos por dia.</p>
-
-        <div class="price-row">
-          <span class="price">R$ 39</span>
-          <span class="badge">Garantia incondicional de 7 dias</span>
-          <span class="badge">Acesso imediato</span>
-          <span class="badge">Pix • Cartão</span>
-        </div>
-
+        <p><strong>Roteiros práticos</strong> (ACT & IBCT) para <strong>conversas difíceis sem briga</strong>, pedidos claros e reparos que restauram a proximidade — aplicável em 20–30 minutos por dia.</p>
+        <div><span class="price">R$ 39</span><span class="badge">Garantia 7 dias</span><span class="badge">Acesso imediato</span><span class="badge">Pix • Cartão</span></div>
         <div class="cta-row">
           <button class="btn btn-primary" data-action="comprar">Comprar agora</button>
-          <a class="btn btn-ghost" href="/decodificando/trecho.pdf" target="_blank" rel="noopener">Ler um trecho grátis (PDF)</a>
+          <a class="btn btn-ghost" href="trecho.pdf" target="_blank" rel="noopener">Ler um trecho grátis (PDF)</a>
         </div>
-
-        <div class="micro-proof">
+        <div class="muted" style="margin-top:8px;border-left:4px solid var(--accent);padding-left:12px">
           “Já comprei e já li… super didático.” — <strong>Cristiane F.</strong>
         </div>
-
-        <div class="trust-row">
-          <span class="muted">Baseado em ACT (Acceptance & Commitment Therapy) e IBCT (Integrative Behavioral Couple Therapy).</span>
-        </div>
       </div>
-
       <aside>
         <div class="hero-card">
           <img src="https://www.psicologoafetivo.com.br/decodificando/assets/capa.webp" alt="Capa do livro Decodificando o Amor">
           <ul class="list" style="margin-top:12px">
-            <li><span class="check">✔</span>Protocolos <strong>Fato → Significado → Pedido</strong></li>
-            <li><span class="check">✔</span>Roteiro <strong>10/3/2/1</strong> para intimidade em 10 minutos</li>
-            <li><span class="check">✔</span>Contrato afetivo (inclui ciúme digital) e reparos pós-briga</li>
-            <li><span class="check">✔</span>Exercícios curtos, linguagem direta, zero jargão</li>
+            <li>Protocolos <strong>Fato → Significado → Pedido</strong></li>
+            <li>Roteiro <strong>10/3/2/1</strong> para intimidade em 10 minutos</li>
+            <li>Contrato afetivo (inclui ciúme digital) e reparos pós-briga</li>
+            <li>Exercícios curtos, linguagem direta, zero jargão</li>
           </ul>
-          <div class="cta-row" style="margin-top:12px">
-            <button class="btn btn-primary" data-action="comprar" aria-label="Comprar agora">Comprar agora</button>
-            <a class="btn btn-ghost" href="/decodificando/trecho.pdf" target="_blank" rel="noopener">Ler trecho grátis</a>
+          <div class="cta-row">
+            <button class="btn btn-primary" data-action="comprar">Comprar agora</button>
+            <a class="btn btn-ghost" href="trecho.pdf" target="_blank" rel="noopener">Ler trecho grátis</a>
           </div>
         </div>
       </aside>
     </div>
   </section>
 
-  <!-- PARA QUEM É / NÃO É -->
-  <section>
-    <div class="container cols-2">
-      <div>
-        <h2>É para você se…</h2>
-        <ul class="list">
-          <li><span class="check">✔</span>Quer <strong>conversas difíceis sem briga</strong> e sem se calar.</li>
-          <li><span class="check">✔</span>Prefere <strong>roteiros claros</strong> a teorias soltas.</li>
-          <li><span class="check">✔</span>Tem pouco tempo e busca <strong>passos práticos</strong> imediatos.</li>
-          <li><span class="check">✔</span>Topa <strong>se implicar</strong> (sem “técnicas” para mudar o outro).</li>
-        </ul>
-      </div>
-      <div>
-        <h2>Não é para você se…</h2>
-        <ul class="list">
-          <li><span class="check">✖</span>Procura um tratado acadêmico sem exercícios.</li>
-          <li><span class="check">✖</span>Quer atalhos para vencer discussões.</li>
-          <li><span class="check">✖</span>Não pretende aplicar nada nos próximos 7 dias.</li>
-        </ul>
+  <section id="como-funciona" class="container">
+    <h2>Como funciona (em 3 passos)</h2>
+    <div class="grid-3">
+      <div class="hero-card"><strong>1) Leia 1 capítulo curto</strong><p>Entenda o padrão do conflito e o propósito da conversa (sem jargão).</p></div>
+      <div class="hero-card"><strong>2) Aplique o protocolo</strong><p><strong>Fato → Significado → Pedido</strong>. Ex.: “Pia ficou cheia → me sinto sozinho → podemos alinhar 10 min hoje 20h?”</p></div>
+      <div class="hero-card"><strong>3) Revise com checklist</strong><p>Repare rupturas, registre avanços e mantenha 10 minutos de intimidade semanais.</p></div>
+    </div>
+  </section>
+
+  <section id="conteudo" class="container">
+    <h2>O que você vai aprender</h2>
+    <div class="grid-3">
+      <div class="hero-card"><strong>Conversa difícil sem briga</strong><p>Mapa de intenção, enunciado do fato em 1 linha e pedido com prazo.</p></div>
+      <div class="hero-card"><strong>Pedidos claros</strong><p>Do “você nunca” para <strong>tempo, ação, critério de feito</strong>.</p></div>
+      <div class="hero-card"><strong>Parar a escalada</strong><p>Frase-sinal combinada, espelhamento de 5 min e troca estruturada.</p></div>
+      <div class="hero-card"><strong>Contrato afetivo</strong><p>Cláusulas público/privado, acordo para ciúme digital e reparos.</p></div>
+      <div class="hero-card"><strong>Intimidade em 10 minutos</strong><p>Roteiro 10/3/2/1: curiosidade, futuro próximo, valores e 1 pedido.</p></div>
+      <div class="hero-card"><strong>Reparos pós-briga</strong><p>Reconhecer impacto, nomear valor ferido e oferecer ação reparadora.</p></div>
+    </div>
+    <div class="cta-row" style="margin-top:16px">
+      <button class="btn btn-primary" data-action="comprar">Quero aplicar hoje</button>
+      <a class="btn btn-ghost" href="trecho.pdf" target="_blank" rel="noopener">Ver um trecho do livro</a>
+    </div>
+  </section>
+
+  <section id="depoimentos" class="container">
+    <h2>O que leitoras estão dizendo</h2>
+    <div class="quotes-grid">
+      <figure class="hero-card"><blockquote>“Já comprei e já li… super didático.”</blockquote><figcaption>— <strong>Cristiane F.</strong></figcaption></figure>
+      <figure class="hero-card"><blockquote>“Eu comprei tem um tempinho, recomendo.”</blockquote><figcaption>— <strong>Fernanda R.</strong></figcaption></figure>
+      <figure class="hero-card"><blockquote>“Já adquiri e amei! Vou divulgar com certeza.”</blockquote><figcaption>— <strong>Renata M.</strong></figcaption></figure>
+      <figure class="hero-card"><blockquote>“Muito legal! Será útil.”</blockquote><figcaption>— <strong>Graça</strong></figcaption></figure>
+    </div>
+  </section>
+
+  <section class="container author">
+    <div>
+      <picture>
+        <source srcset="assets/autor-1200.webp 1200w, assets/autor-600.webp 600w" sizes="(max-width: 980px) 100vw, 48vw" type="image/webp">
+        <img src="assets/autor-600.webp" alt="Felipe Santos — Psicólogo Afetivo" loading="lazy" decoding="async" style="border-radius:16px; box-shadow:0 12px 40px rgba(0,0,0,.12);">
+      </picture>
+    </div>
+    <div>
+      <h2>Sobre o autor</h2>
+      <p><strong>Felipe Melo Souza Santos</strong> (CRP 03/15591) é psicólogo clínico, terapeuta de adultos e casais, professor e palestrante. Atua com <strong>ACT</strong> e <strong>IBCT</strong>, integrando protocolos práticos para transformar conflito em intimidade e compromisso.</p>
+      <p>Autor de <em>Decodificando o Amor</em> e criador de modelos aplicáveis no dia a dia — como o protocolo <strong>Fato → Significado → Pedido</strong> e o roteiro <strong>10/3/2/1</strong>.</p>
+      <div class="cta-row">
+        <button class="btn btn-primary" data-action="comprar">Quero o livro</button>
+        <a class="btn btn-ghost" href="trecho.pdf" target="_blank" rel="noopener">Ver trecho grátis</a>
       </div>
     </div>
   </section>
 
-  <!-- COMO FUNCIONA EM 3 PASSOS -->
-  <section id="como-funciona">
+  <section id="faq" class="container">
+    <h2>Perguntas frequentes</h2>
+    <details class="hero-card"><summary>Funciona mesmo se meu parceiro não quiser ler?</summary><div class="muted">Sim. O livro foi escrito para você começar a mudar <strong>a conversa</strong> que vocês têm hoje, com passos sob seu controle.</div></details>
+    <details class="hero-card"><summary>Preciso de muito tempo para aplicar?</summary><div class="muted">Não. Os roteiros cabem em dias corridos. Comece com 10 minutos e já veja sinais de melhora.</div></details>
+    <details class="hero-card"><summary>O livro serve para solteiras?</summary><div class="muted">Sim. Vários exercícios ajudam a interromper ciclos que doem, alinhar valores e preparar conversas honestas.</div></details>
+    <details class="hero-card"><summary>Qual é a garantia?</summary><div class="muted">Garantia incondicional de 7 dias.</div></details>
+  </section>
+
+  <section style="padding:32px 0;background:#0f1e3a;color:#fff">
     <div class="container">
-      <h2>Como funciona (em 3 passos)</h2>
-      <div class="grid-3">
-        <div class="card">
-          <h3>1) Leia 1 capítulo curto</h3>
-          <p>Entenda o padrão do conflito e o propósito da conversa (sem jargão).</p>
-        </div>
-        <div class="card">
-          <h3>2) Aplique o protocolo</h3>
-          <p><strong>Fato → Significado → Pedido</strong>. Ex.: “Pia ficou cheia → me sinto sozinho → podemos alinhar 10 min hoje 20h?”</p>
-        </div>
-        <div class="card">
-          <h3>3) Revise com checklist</h3>
-          <p>Repare rupturas, registre avanços e mantenha 10 minutos de intimidade semanais.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- O QUE VOCÊ VAI APRENDER -->
-  <section id="conteudo">
-    <div class="container">
-      <h2>O que você vai aprender</h2>
-      <div class="grid-3">
-        <div class="card">
-          <h3>Conversa difícil sem briga</h3>
-          <p>Mapa de intenção, enunciado do fato em 1 linha e pedido com prazo.</p>
-        </div>
-        <div class="card">
-          <h3>Pedidos claros</h3>
-          <p>Do “você nunca” para <strong>tempo, ação, critério de feito</strong>.</p>
-        </div>
-        <div class="card">
-          <h3>Parar a escalada</h3>
-          <p>Frase-sinal combinada, espelhamento de 5 min e troca estruturada.</p>
-        </div>
-        <div class="card">
-          <h3>Contrato afetivo</h3>
-          <p>Cláusulas público/privado, acordo para ciúme digital e reparos.</p>
-        </div>
-        <div class="card">
-          <h3>Intimidade em 10 minutos</h3>
-          <p>Roteiro 10/3/2/1: curiosidade, futuro próximo, valores e 1 pedido.</p>
-        </div>
-        <div class="card">
-          <h3>Reparos pós-briga</h3>
-          <p>Reconhecer impacto, nomear valor ferido e oferecer ação reparadora.</p>
-        </div>
-      </div>
-      <div class="cta-row" style="margin-top:16px">
-        <button class="btn btn-primary" data-action="comprar">Quero aplicar hoje</button>
-        <a class="btn btn-ghost" href="/decodificando/trecho.pdf" target="_blank" rel="noopener">Ver um trecho do livro</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- PROVAS SOCIAIS (sem “psicóloga”) -->
-  <section id="depoimentos" aria-label="Depoimentos de leitoras">
-    <div class="container">
-      <h2>O que leitoras estão dizendo</h2>
-      <p class="muted" style="margin-top:-6px">Depoimentos reais, publicados com autorização.</p>
-      <div class="quotes-grid" style="margin-top:12px">
-        <figure class="card">
-          <blockquote>“Já comprei e já li… super didático.”</blockquote>
-          <figcaption>— <strong>Cristiane F.</strong></figcaption>
-        </figure>
-        <figure class="card">
-          <blockquote>“Eu comprei tem um tempinho, recomendo.”</blockquote>
-          <figcaption>— <strong>Fernanda R.</strong></figcaption>
-        </figure>
-        <figure class="card">
-          <blockquote>“Já adquiri e amei! Vou divulgar com certeza.”</blockquote>
-          <figcaption>— <strong>Renata M.</strong></figcaption>
-        </figure>
-        <figure class="card">
-          <blockquote>“Muito legal! Será útil.”</blockquote>
-          <figcaption>— <strong>Graça</strong></figcaption>
-        </figure>
-      </div>
-      <div class="cta-row" style="margin-top:16px">
-        <button class="btn btn-primary" data-action="comprar">Comprar agora</button>
-      </div>
-    </div>
-  </section>
-
-  <!-- SOBRE O AUTOR -->
-  <section aria-label="Sobre o autor">
-    <div class="container author">
-      <div>
-        <img src="https://www.psicologoafetivo.com.br/assets/felipe-santos-autor.jpg" alt="Foto de Felipe Santos, Psicólogo Afetivo" onerror="this.style.display='none'">
-      </div>
-      <div>
-        <h2>Sobre o autor</h2>
-        <p><strong>Felipe Melo Souza Santos</strong> (CRP 03/15591) é psicólogo clínico, terapeuta de adultos e casais, professor e palestrante. Atua com <strong>ACT</strong> (Acceptance & Commitment Therapy) e <strong>IBCT</strong> (Integrative Behavioral Couple Therapy), integrando protocolos práticos para transformar conflito em intimidade e compromisso.</p>
-        <p>Autor de <em>Decodificando o Amor</em> e criador de modelos aplicáveis no dia a dia (como o protocolo <strong>Fato → Significado → Pedido</strong> e o roteiro <strong>10/3/2/1</strong>), Felipe ajuda casais a saírem do improviso e a construírem conversas que realmente aproximam.</p>
-        <div class="cta-row">
-          <button class="btn btn-primary" data-action="comprar">Quero o livro</button>
-          <a class="btn btn-ghost" href="/decodificando/trecho.pdf" target="_blank" rel="noopener">Ver trecho grátis</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- FAQ -->
-  <section id="faq" aria-label="Perguntas frequentes">
-    <div class="container faq">
-      <h2>Perguntas frequentes</h2>
-
-      <details>
-        <summary>Funciona mesmo se meu parceiro não quiser ler?</summary>
-        <div class="muted">Sim. O livro foi escrito para você começar a mudar <strong>a conversa</strong> que vocês têm hoje, com passos sob seu controle (como enunciar o fato em 1 linha e fazer pedidos claros). Naturalmente, isso tende a reduzir escalada e abrir espaço para colaboração.</div>
-      </details>
-
-      <details>
-        <summary>Preciso de muito tempo para aplicar?</summary>
-        <div class="muted">Não. Os roteiros foram pensados para caber em dias corridos. Você pode começar com 10 minutos e colher sinais de melhora rápida (menos escalada, mais clareza, pedidos que viram ações).</div>
-      </details>
-
-      <details>
-        <summary>O livro serve para solteiras?</summary>
-        <div class="muted">Sim. Muitos exercícios ajudam a interromper ciclos de escolha que doem, alinhar valores e preparar conversas mais honestas no início de vínculos.</div>
-      </details>
-
-      <details>
-        <summary>Qual é a garantia?</summary>
-        <div class="muted">Garantia incondicional de 7 dias. Se não for útil para você, basta solicitar o estorno dentro do prazo.</div>
-      </details>
-
-      <details>
-        <summary>Como recebo o acesso?</summary>
-        <div class="muted">O acesso é imediato após a confirmação do pagamento (Pix ou cartão). Você recebe o link no e-mail e pode baixar/ler no seu dispositivo.</div>
-      </details>
-    </div>
-  </section>
-
-  <!-- CTA FINAL -->
-  <section aria-label="Chamada final" style="padding:32px 0;background:#0f1e3a;">
-    <div class="container" style="color:#fff">
-      <h2 style="margin:0 0 8px">Pronto para ter a conversa que aproxima?</h2>
+      <h2 style="margin:0 0 8px">Pronta para ter a conversa que aproxima?</h2>
       <p class="muted" style="color:#dfe7ff;margin:0 0 12px">Roteiros práticos, exemplos reais e passos curtos. Comece hoje.</p>
       <div class="cta-row">
-        <button class="btn btn-primary" data-action="comprar" aria-label="Comprar agora">Comprar agora — R$ 39</button>
-        <a class="btn btn-ghost" href="/decodificando/trecho.pdf" target="_blank" rel="noopener" style="background:#12254a;border-color:#335fae;color:#dfe7ff">Ler um trecho grátis</a>
-      </div>
-      <div class="trust-row" style="margin-top:16px">
-        <span class="badge" style="background:#102347;color:#dfe7ff;border-color:#2b4d8f">Garantia de 7 dias</span>
-        <span class="badge" style="background:#102347;color:#dfe7ff;border-color:#2b4d8f">Acesso imediato</span>
-        <span class="badge" style="background:#102347;color:#dfe7ff;border-color:#2b4d8f">Pix • Cartão</span>
+        <button class="btn btn-primary" data-action="comprar">Comprar agora — R$ 39</button>
+        <a class="btn btn-ghost" href="trecho.pdf" target="_blank" rel="noopener" style="background:#12254a;border-color:#335fae;color:#dfe7ff">Ler um trecho grátis</a>
       </div>
     </div>
   </section>
 
-  <!-- FOOTER -->
-  <footer>
-    <div class="container">
-      <div style="display:flex;flex-wrap:wrap;gap:10px;justify-content:space-between;align-items:center">
-        <div>© <span id="y"></span> Felipe Santos | Psicólogo Afetivo. Todos os direitos reservados.</div>
-        <div class="muted">Ao comprar, você concorda com os Termos e a Política de Privacidade. Tratamento de dados conforme LGPD.</div>
-      </div>
-    </div>
+  <footer class="container" style="padding:24px 0;border-top:1px solid #f0f0f0;color:#555">
+    © <span id="y"></span> Felipe Santos | Psicólogo Afetivo. Todos os direitos reservados.
   </footer>
 
-  <!-- Sticky mobile bar -->
-  <div class="sticky-mobile" role="region" aria-label="Barra de ação rápida">
-    <div class="container inner">
-      <div><strong>Decodificando o Amor</strong><div class="price muted">R$ 39</div></div>
-      <div style="display:flex;gap:8px">
-        <a class="btn btn-ghost" href="/decodificando/trecho.pdf" target="_blank" rel="noopener">Trecho</a>
-        <button class="btn btn-primary" data-action="comprar">Comprar</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- Modal de Checkout (Hotmart Sales Funnel Widget) -->
-  <div class="modal" id="modal-checkout" aria-hidden="true" role="dialog" aria-modal="true">
-    <div class="modal-box">
-      <div class="modal-head">
+  <div class="modal" id="modal-checkout" aria-hidden="true" role="dialog" aria-modal="true" style="position:fixed;inset:0;background:rgba(0,0,0,.5);display:none;align-items:center;justify-content:center;z-index:70;padding:16px">
+    <div class="hero-card" style="max-width:720px;width:100%;background:#fff;border-radius:16px">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
         <strong>Finalizar compra</strong>
-        <button class="close" aria-label="Fechar" data-close>×</button>
+        <button class="btn btn-ghost" data-close style="padding:6px 10px">Fechar</button>
       </div>
-      <div id="hotmart-sales-funnel" style="min-height:420px">
-        <!-- O widget carregará aqui -->
-      </div>
+      <div id="hotmart-sales-funnel" style="min-height:420px"></div>
       <div class="muted" style="margin-top:8px;font-size:12px">Pagamento seguro • Pix e Cartão • Acesso imediato</div>
     </div>
   </div>
 
-  <!-- Scripts -->
   <script>
-    // Ano no footer
     document.getElementById('y').textContent = new Date().getFullYear();
-
-    // Comprar → abre modal com checkout Hotmart
     const modal = document.getElementById('modal-checkout');
-    const openModal = () => { modal.classList.add('open'); modal.setAttribute('aria-hidden','false'); }
-    const closeModal = () => { modal.classList.remove('open'); modal.setAttribute('aria-hidden','true'); }
-    document.querySelectorAll('[data-action="comprar"]').forEach(btn=>btn.addEventListener('click',openModal));
-    document.querySelectorAll('[data-close]').forEach(btn=>btn.addEventListener('click',closeModal));
+    const openModal = () => { modal.style.display='flex'; modal.setAttribute('aria-hidden','false'); loadHotmart(); }
+    const closeModal = () => { modal.style.display='none'; modal.setAttribute('aria-hidden','true'); }
+    document.querySelectorAll('[data-action="comprar"]').forEach(b=>b.addEventListener('click',openModal));
+    document.querySelectorAll('[data-close]').forEach(b=>b.addEventListener('click',closeModal));
     modal.addEventListener('click',e=>{ if(e.target===modal) closeModal(); });
-
-    // Lazy-load do widget Hotmart quando abrir o modal
-    let hotmartLoaded = false;
-    const loadHotmart = () => {
-      if(hotmartLoaded) return;
-      hotmartLoaded = true;
+    let hotmartLoaded=false;
+    function loadHotmart(){
+      if(hotmartLoaded) return; hotmartLoaded=true;
       const s=document.createElement('script');
       s.src='https://checkout.hotmart.com/lib/hotmart-checkout-elements.js';
       s.onload=function(){
-        if(window.checkoutElements){
-          checkoutElements.init('salesFunnel').mount('#hotmart-sales-funnel');
-        }
+        if(window.checkoutElements){ checkoutElements.init('salesFunnel').mount('#hotmart-sales-funnel'); }
       };
       document.body.appendChild(s);
-    };
-    const obs = new MutationObserver(()=>{ if(modal.classList.contains('open')) loadHotmart(); });
-    obs.observe(modal,{attributes:true,attributeFilter:['class']});
+    }
   </script>
-
 </body>
 </html>
