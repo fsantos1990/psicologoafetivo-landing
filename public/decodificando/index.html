@@ -177,24 +177,18 @@
     </div>
   </div>
 
-  <script>
-    document.getElementById('y').textContent = new Date().getFullYear();
-    const modal = document.getElementById('modal-checkout');
-    const openModal = () => { modal.style.display='flex'; modal.setAttribute('aria-hidden','false'); loadHotmart(); }
-    const closeModal = () => { modal.style.display='none'; modal.setAttribute('aria-hidden','true'); }
-    document.querySelectorAll('[data-action="comprar"]').forEach(b=>b.addEventListener('click',openModal));
-    document.querySelectorAll('[data-close]').forEach(b=>b.addEventListener('click',closeModal));
-    modal.addEventListener('click',e=>{ if(e.target===modal) closeModal(); });
-    let hotmartLoaded=false;
-    function loadHotmart(){
-      if(hotmartLoaded) return; hotmartLoaded=true;
-      const s=document.createElement('script');
-      s.src='https://checkout.hotmart.com/lib/hotmart-checkout-elements.js';
-      s.onload=function(){
-        if(window.checkoutElements){ checkoutElements.init('salesFunnel').mount('#hotmart-sales-funnel'); }
-      };
-      document.body.appendChild(s);
-    }
-  </script>
+<script type="text/javascript">
+	function importHotmart(){ 
+ 		var imported = document.createElement('script'); 
+ 		imported.src = 'https://static.hotmart.com/checkout/widget.min.js'; 
+ 		document.head.appendChild(imported); 
+		var link = document.createElement('link'); 
+		link.rel = 'stylesheet'; 
+		link.type = 'text/css'; 
+		link.href = 'https://static.hotmart.com/css/hotmart-fb.min.css'; 
+		document.head.appendChild(link);	} 
+ 	importHotmart(); 
+ </script> 
+ <a onclick="return false;" href="https://pay.hotmart.com/G96223351O?checkoutMode=2" class="hotmart-fb hotmart__button-checkout"><img src='https://static.hotmart.com/img/btn-buy-green.png'></a> 
 </body>
 </html>
