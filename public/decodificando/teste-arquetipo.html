@@ -1,0 +1,385 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Teste de Arquétipo Afetivo — @psicologoafetivo</title>
+  <meta name="description" content="Protótipo de teste didático para fins educativos. Não substitui psicoterapia nem é instrumento psicológico validado." />
+  <style>
+    :root { --pa-cinza:#DDDDDD; --pa-preto:#000000; --pa-azul:#235FAA; --pa-branco:#FFFFFF; }
+    html, body { height:100%; }
+    body { margin:0; font-family:Arial, Helvetica, sans-serif; color:var(--pa-preto); background:var(--pa-branco); line-height:1.45; -webkit-font-smoothing:antialiased; }
+    .container { max-width:880px; padding:24px; margin:0 auto; }
+    .banner { background:var(--pa-cinza); padding:12px 16px; border-left:6px solid var(--pa-azul); font-size:14px; }
+    h1 { font-size:28px; margin:16px 0 8px; }
+    .subtitle { color:#333; margin:0 0 16px; }
+    .card { border:1px solid #E6E6E6; border-radius:12px; padding:20px; box-shadow:0 1px 2px rgba(0,0,0,.05); background:var(--pa-branco); }
+    .btn { appearance:none; border:none; cursor:pointer; background:var(--pa-azul); color:var(--pa-branco); padding:12px 18px; border-radius:10px; font-weight:700; font-size:16px; }
+    .btn[disabled]{ opacity:.45; cursor:not-allowed; }
+    .btn-secondary { background:var(--pa-cinza); color:var(--pa-preto); font-weight:600; }
+    .muted { color:#666; font-size:14px; }
+    .footer { margin-top:28px; font-size:12px; color:#555; }
+    .stage { display:none; }
+    .stage.active { display:block; }
+    .progress { height:8px; background:#F2F2F2; border-radius:999px; overflow:hidden; margin:8px 0 18px; }
+    .bar { height:100%; width:0%; background:var(--pa-azul); transition:width .3s ease; }
+    .opt { display:block; margin:10px 0; }
+    .nav { display:flex; gap:12px; flex-wrap:wrap; margin-top:14px; }
+    .pill { display:inline-block; padding:6px 10px; border-radius:999px; background:#F2F6FC; color:var(--pa-azul); font-weight:700; font-size:12px; border:1px solid #E6EEF9; }
+    .list { padding-left:18px; }
+    .warn { color:#7a0000; font-weight:700; }
+    a.cta { text-decoration:none; }
+    .brand { display:flex; align-items:center; gap:14px; }
+    .brand img { width:160px; height:auto; }
+    .art { width:280px; height:180px; border:1px solid #E6E6E6; border-radius:16px; overflow:hidden; margin:8px 0 12px; }
+    .wrap-flex { display:flex; gap:24px; flex-wrap:wrap; align-items:flex-start; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="banner" role="note" aria-label="Aviso importante">
+        <strong>Aviso didático:</strong> este é um protótipo educativo. <span class="warn">Não é teste psicológico validado e não substitui psicoterapia.</span>
+      </div>
+      <div class="brand">
+        <img src="./logo-480.webp" alt="Logo Felipe Santos | Psicólogo Afetivo" />
+        <div>
+          <h1 style="margin:0">Teste de Arquétipo Afetivo — <span style="color:var(--pa-azul)">@psicologoafetivo</span></h1>
+          <p class="subtitle" style="margin-top:6px">Leva ~3 minutos. No final você recebe um arquétipo didático com próximos passos.</p>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="card" id="stage-intro" class="stage active">
+        <h2 style="margin-top:0">Como funciona</h2>
+        <ol class="list">
+          <li>Você responderá <strong>7 perguntas</strong>, uma por vez.</li>
+          <li>No final, verá um <strong>arquétipo didático</strong> com próximos passos.</li>
+          <li>Material para fins <strong>educativos</strong>. Em caso de sofrimento, procure psicoterapia.</li>
+        </ol>
+        <div class="nav">
+          <button id="btn-start" class="btn">Começar</button>
+          <button id="btn-skip-to-result" class="btn btn-secondary">Tenho um link de resultado</button>
+        </div>
+      </section>
+
+      <section id="stage-quiz" class="card stage" aria-live="polite">
+        <div class="muted" id="counter">Pergunta 1 de 7</div>
+        <div class="progress" aria-hidden="true"><div class="bar" id="bar" style="width:0%"></div></div>
+        <h2 id="q-title" style="margin-top:0">&nbsp;</h2>
+        <form id="q-form" novalidate>
+          <div id="q-options"></div>
+          <label class="opt" style="display:none" id="tos-wrap">
+            <input type="checkbox" id="tos"> Li e entendo que este é um material didático e não um instrumento psicológico validado.
+          </label>
+          <div class="nav">
+            <button type="button" id="btn-prev" class="btn btn-secondary">Voltar</button>
+            <button type="submit" id="btn-next" class="btn" disabled>Avançar</button>
+          </div>
+        </form>
+      </section>
+
+      <section id="stage-result" class="card stage" aria-live="polite">
+        <div class="wrap-flex">
+          <div class="art" id="res-art" aria-hidden="true"></div>
+          <div style="flex:1; min-width:260px;">
+            <div class="pill" id="pill-archetype"></div>
+            <h2 id="res-title" style="margin:10px 0 6px;"></h2>
+            <p id="res-desc" class="subtitle" style="margin:0 0 12px;"></p>
+            <h3 style="margin:16px 0 6px;">Próximos passos sugeridos</h3>
+            <ul class="list" id="res-list"></ul>
+            <div class="nav">
+              <a id="cta-link" class="cta"><button class="btn">Conheça o Decodificando o Amor</button></a>
+              <button id="copy-link" class="btn btn-secondary">Copiar link</button>
+              <a id="wa-share" class="btn btn-secondary" target="_blank" rel="noopener">Compartilhar no WhatsApp</a>
+              <button id="restart" class="btn btn-secondary">Refazer</button>
+            </div>
+            <p class="footer">Lembrete: material didático. Em caso de sofrimento, procure psicoterapia com profissional habilitado.</p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">© <span id="year"></span> Felipe Santos | Psicólogo Afetivo — Protótipo didático (v0.3).</footer>
+  </div>
+
+  <script>
+    // --- Arquétipos ---
+    const ARCH = [
+      { slug:'vigilante-de-valores', nome:'Vigilante de Valores', desc:'Busca clareza e compromisso explícito. Tem facilidade para conversas difíceis, mas precisa zelar pelos próprios limites sem rigidez.', passos:['Escreva seu contrato de valores afetivos (3 princípios + 3 limites não negociáveis).','Pratique pedidos claros sem justificativa longa.','Aja com microcompromissos semanais, não só com grandes decisões.'] },
+      { slug:'romantica-esperancosa', nome:'Romântica Esperançosa', desc:'Vive pelo ideal e “sente” o futuro antes de ele existir. Precisa diferenciar esperança de evidências de compromisso.', passos:['Troque previsões por perguntas objetivas sobre exclusividade e planos.','Aplique o “teste do mês”: se nada mudou em 30 dias, reavalie a rota.','Mapeie 3 sinais de compromisso real e 3 de enrolação.'] },
+      { slug:'pacificadora', nome:'Pacificadora', desc:'Evita conflito para manter harmonia, mas acumula incômodos. O corpo costuma cobrar essa conta.', passos:['Use o script FO-C-A-R para conversas difíceis (Falar, Ouvir, Contato visual, Atenção corporal, Respeitar a si).','Comece por um pedido pequeno por semana.','Anote ganhos de energia após cada limite colocado.'] },
+      { slug:'controladora-ansiosa', nome:'Controladora Ansiosa', desc:'Tenta prevenir riscos com controle. Funciona por um tempo, mas desgasta a conexão e a leveza.', passos:['Identifique 3 itens incontroláveis e pratique soltar deliberadamente.','Exposição guiada por valores: combine uma conversa sem checagens extras.','Reforce sinais de confiabilidade baseada em ações, não em vigilância.'] },
+      { slug:'aventureira-evitativa', nome:'Aventureira Evitativa', desc:'Valoriza liberdade e autonomia, mas pode confundir leveza com fuga da intimidade.', passos:['Defina “intimidade leve”: 1 encontro por semana com presença total (sem celular).','Pratique permanência após desconforto inicial (2 minutos a mais).','Escolha um valor relacional e faça um gesto concreto alinhado a ele.'] },
+      { slug:'cuidadora-exausta', nome:'Cuidadora Exausta', desc:'Assume tudo e se abandona. O vínculo vira trabalho invisível e ressentimento.', passos:['Redistribua 1 tarefa por semana (sem resgatar).','Agende cuidado próprio não negociável (30 min/semana).','Peça reconhecimento explícito por 1 contribuição sua.'] },
+      { slug:'analitica-cetica', nome:'Analítica Cética', desc:'Precisa entender para agir. O excesso de análise vira postergação da intimidade.', passos:['Regra 60/40: 60% entendimento, 40% ação intencional.','Primeiro passo “bom o bastante” em 48h (sem perfeccionismo).','Converse sobre medos de vulnerabilidade com linguagem direta.'] }
+    ];
+
+    // --- Artes abstratas SVG por arquétipo (cores da paleta) ---
+    const ART = [
+      // 0 Vigilante de Valores — linhas firmes + vértices
+      `<svg viewBox="0 0 280 180" xmlns='http://www.w3.org/2000/svg'>
+        <rect width='280' height='180' fill='#FFFFFF'/>
+        <path d='M30 140 L90 40 L150 120 L220 60' stroke='#235FAA' stroke-width='6' fill='none'/>
+        <circle cx='30' cy='140' r='6' fill='#000000'/>
+        <circle cx='90' cy='40' r='6' fill='#000000'/>
+        <circle cx='150' cy='120' r='6' fill='#000000'/>
+        <circle cx='220' cy='60' r='6' fill='#000000'/>
+      </svg>`,
+      // 1 Romântica Esperançosa — curvas ascendentes
+      `<svg viewBox="0 0 280 180" xmlns='http://www.w3.org/2000/svg'>
+        <defs><linearGradient id='g1' x1='0' x2='1'><stop offset='0' stop-color='#235FAA'/><stop offset='1' stop-color='#DDDDDD'/></linearGradient></defs>
+        <rect width='280' height='180' fill='#FFFFFF'/>
+        <path d='M20 140 C80 80, 120 120, 200 60' stroke='url(#g1)' stroke-width='8' fill='none'/>
+        <circle cx='210' cy='55' r='10' fill='#235FAA'/>
+      </svg>`,
+      // 2 Pacificadora — ondas suaves
+      `<svg viewBox="0 0 280 180" xmlns='http://www.w3.org/2000/svg'>
+        <rect width='280' height='180' fill='#FFFFFF'/>
+        <path d='M0 120 Q70 90 140 120 T280 120' stroke='#235FAA' stroke-width='6' fill='none'/>
+        <path d='M0 140 Q70 110 140 140 T280 140' stroke='#DDDDDD' stroke-width='6' fill='none'/>
+      </svg>`,
+      // 3 Controladora Ansiosa — grade e elipses
+      `<svg viewBox="0 0 280 180" xmlns='http://www.w3.org/2000/svg'>
+        <rect width='280' height='180' fill='#FFFFFF'/>
+        <g stroke='#DDDDDD'>
+          <path d='M40 20 V160'/><path d='M100 20 V160'/><path d='M160 20 V160'/><path d='M220 20 V160'/>
+          <path d='M20 50 H260'/><path d='M20 100 H260'/><path d='M20 150 H260'/>
+        </g>
+        <ellipse cx='140' cy='90' rx='90' ry='50' stroke='#235FAA' stroke-width='6' fill='none'/>
+      </svg>`,
+      // 4 Aventureira Evitativa — formas soltas
+      `<svg viewBox="0 0 280 180" xmlns='http://www.w3.org/2000/svg'>
+        <rect width='280' height='180' fill='#FFFFFF'/>
+        <circle cx='60' cy='60' r='18' fill='#235FAA'/>
+        <rect x='180' y='40' width='50' height='50' fill='#DDDDDD'/>
+        <path d='M20 150 L260 150' stroke='#000000' stroke-width='2'/>
+      </svg>`,
+      // 5 Cuidadora Exausta — camadas
+      `<svg viewBox="0 0 280 180" xmlns='http://www.w3.org/2000/svg'>
+        <rect width='280' height='180' fill='#FFFFFF'/>
+        <rect x='20' y='120' width='240' height='18' fill='#DDDDDD'/>
+        <rect x='20' y='95' width='200' height='18' fill='#DDDDDD'/>
+        <rect x='20' y='70' width='150' height='18' fill='#235FAA'/>
+      </svg>`,
+      // 6 Analítica Cética — barras e setas
+      `<svg viewBox="0 0 280 180" xmlns='http://www.w3.org/2000/svg'>
+        <rect width='280' height='180' fill='#FFFFFF'/>
+        <rect x='40' y='120' width='30' height='40' fill='#DDDDDD'/>
+        <rect x='100' y='90' width='30' height='70' fill='#DDDDDD'/>
+        <rect x='160' y='60' width='30' height='100' fill='#235FAA'/>
+        <path d='M210 130 L250 90' stroke='#000000' stroke-width='4' marker-end='url(#m)'/>
+        <defs><marker id='m' markerWidth='8' markerHeight='8' refX='4' refY='4' orient='auto'><path d='M0 0 L8 4 L0 8 Z' fill='#000000'/></marker></defs>
+      </svg>`
+    ];
+
+    const QUESTIONS = [
+      { title:'1) Quando penso em começar/ajustar um relacionamento, eu…', opts:[
+        {t:'busco sinais claros de comprometimento antes de mergulhar.', a:0},
+        {t:'idealizo o futuro e vou ajustando o presente para caber nele.', a:1},
+        {t:'evito conflitos para manter a paz, mesmo engolindo incômodos.', a:2},
+        {t:'tento controlar variáveis para não ser pega de surpresa.', a:3},
+        {t:'prefiro leveza e liberdade; vínculos muito intensos me cansam.', a:4},
+        {t:'cuido de tudo e de todos, e esqueço de mim.', a:5},
+        {t:'analiso demais, entro pouco em ação.', a:6}
+      ]},
+      { title:'2) Diante de sinais mistos (aproxima e afasta), eu costumo…', opts:[
+        {t:'perguntar sobre intenção e acordo; sem clareza, eu saio.', a:0},
+        {t:'interpretar como prova de que “no fim vai dar certo”.', a:1},
+        {t:'ceder para não perder a pessoa.', a:2},
+        {t:'intensificar a vigilância.', a:3},
+        {t:'manter distância até a poeira baixar.', a:4},
+        {t:'oferecer mais apoio e presença, mesmo exausta.', a:5},
+        {t:'listar prós e contras por semanas.', a:6}
+      ]},
+      { title:'3) No cotidiano de afeto, meu padrão dominante é…', opts:[
+        {t:'alinhamento a valores + conversas difíceis cedo.', a:0},
+        {t:'gestos românticos e grandes esperanças.', a:1},
+        {t:'evitar atritos para preservar o clima.', a:2},
+        {t:'planejar, checar, confirmar.', a:3},
+        {t:'priorizar autonomia e leveza.', a:4},
+        {t:'assumir funções emocionais e práticas do casal.', a:5},
+        {t:'racionalizar sentimentos.', a:6}
+      ]},
+      { title:'4) Quando a ansiedade aperta, eu…', opts:[
+        {t:'volto ao meu contrato de valores e ajo mesmo com medo.', a:0},
+        {t:'procuro sinais “do destino”.', a:1},
+        {t:'faço de tudo para acalmar o outro.', a:2},
+        {t:'aumento o controle.', a:3},
+        {t:'fujo do assunto ou desconecto.', a:4},
+        {t:'assumo mais tarefas e me sobrecarrego.', a:5},
+        {t:'busco mais informação antes de agir.', a:6}
+      ]},
+      { title:'5) Meu maior desafio recorrente é…', opts:[
+        {t:'dizer “não” ao que fere meus limites.', a:0},
+        {t:'confundir esperança com compromisso real.', a:1},
+        {t:'somatizar por engolir conflitos.', a:2},
+        {t:'controlar o incontrolável.', a:3},
+        {t:'romantizar o desapego.', a:4},
+        {t:'me abandonar enquanto cuido do outro.', a:5},
+        {t:'paralisar no excesso de análise.', a:6}
+      ]},
+      { title:'6) Sobre exclusividade e futuro, eu…', opts:[
+        {t:'alinho expectativas logo no início.', a:0},
+        {t:'acredito que o tempo fará a pessoa amadurecer.', a:1},
+        {t:'evito tocar no assunto para não pressionar.', a:2},
+        {t:'monitro sinais de risco.', a:3},
+        {t:'deixo em aberto enquanto vejo no que dá.', a:4},
+        {t:'priorizo as necessidades do outro.', a:5},
+        {t:'preciso de um plano perfeito antes de conversa.', a:6}
+      ]},
+      { title:'7) Quando algo dá errado, meu primeiro impulso é…', opts:[
+        {t:'revisitar meus valores e reparar com ações.', a:0},
+        {t:'encontrar sentido maior e insistir.', a:1},
+        {t:'pedir desculpas e ceder novamente.', a:2},
+        {t:'investigar, conferir, corrigir rumo.', a:3},
+        {t:'me afastar um pouco para “respirar”.', a:4},
+        {t:'cuidar para que o outro não sofra.', a:5},
+        {t:'entender tudo antes de mover um dedo.', a:6}
+      ]}
+    ];
+
+    const CTA_URL = 'https://www.psicologoafetivo.com.br/decodificando/?utm_source=quiz&utm_medium=organic&utm_campaign=decodificando_teste_didatico';
+
+    // --- Elements ---
+    const yearEl = document.getElementById('year');
+    const stageIntro = document.getElementById('stage-intro');
+    const stageQuiz = document.getElementById('stage-quiz');
+    const stageResult = document.getElementById('stage-result');
+    const btnStart = document.getElementById('btn-start');
+    const btnSkipToResult = document.getElementById('btn-skip-to-result');
+
+    const counter = document.getElementById('counter');
+    const bar = document.getElementById('bar');
+    const qTitle = document.getElementById('q-title');
+    const qForm = document.getElementById('q-form');
+    const qOptions = document.getElementById('q-options');
+    const btnPrev = document.getElementById('btn-prev');
+    const btnNext = document.getElementById('btn-next');
+    const tosWrap = document.getElementById('tos-wrap');
+    const tos = document.getElementById('tos');
+
+    const pill = document.getElementById('pill-archetype');
+    const resTitle = document.getElementById('res-title');
+    const resDesc = document.getElementById('res-desc');
+    const resList = document.getElementById('res-list');
+    const resArt = document.getElementById('res-art');
+    const ctaLink = document.getElementById('cta-link');
+    const copyBtn = document.getElementById('copy-link');
+    const waShare = document.getElementById('wa-share');
+    const restartBtn = document.getElementById('restart');
+
+    yearEl.textContent = new Date().getFullYear();
+
+    // state
+    let step = 0; // 0..6
+    const answers = new Array(7).fill(null); // guarda índices de arquétipo
+
+    function show(el){ el.classList.add('active'); }
+    function hide(el){ el.classList.remove('active'); }
+
+    function start(){
+      hide(stageIntro); show(stageQuiz); renderStep();
+      history.replaceState({}, '', withoutParam('r'));
+    }
+
+    function renderStep(){
+      const total = QUESTIONS.length;
+      counter.textContent = `Pergunta ${step+1} de ${total}`;
+      bar.style.width = `${Math.round(((step)/total)*100)}%`;
+      const q = QUESTIONS[step];
+      qTitle.textContent = q.title;
+      qOptions.innerHTML = '';
+      q.opts.forEach((opt, idx) => {
+        const id = `opt-${step}-${idx}`;
+        const wrap = document.createElement('label'); wrap.className = 'opt';
+        const input = document.createElement('input'); input.type='radio'; input.name='opt'; input.value = opt.a; input.id = id;
+        if (answers[step] === opt.a) input.checked = true;
+        const span = document.createElement('span'); span.textContent = ' ' + opt.t;
+        wrap.appendChild(input); wrap.appendChild(span);
+        qOptions.appendChild(wrap);
+      });
+      // Mostrar TOS apenas no último passo
+      tosWrap.style.display = (step === total-1) ? 'block' : 'none';
+      btnPrev.disabled = (step === 0);
+      validate();
+    }
+
+    function validate(){
+      const checked = qForm.querySelector('input[name="opt"]:checked');
+      let ok = !!checked;
+      if (ok && step === QUESTIONS.length-1 && !tos.checked) ok = false;
+      btnNext.disabled = !ok;
+    }
+
+    qForm.addEventListener('change', validate);
+    tos.addEventListener('change', validate);
+
+    qForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const checked = qForm.querySelector('input[name="opt"]:checked');
+      if (!checked) return;
+      answers[step] = parseInt(checked.value,10);
+      if (step < QUESTIONS.length-1) {
+        step++; renderStep();
+      } else {
+        const idx = computeResult(answers);
+        showResult(idx);
+      }
+    });
+
+    btnPrev.addEventListener('click', () => { if (step > 0) { step--; renderStep(); } });
+
+    function computeResult(ans){
+      const scores = new Array(ARCH.length).fill(0);
+      ans.forEach(a => { if (a!=null) scores[a]++; });
+      let best = 0, max = -1;
+      for (let i=0;i<scores.length;i++){ if (scores[i] > max){ max = i===best? scores[i]+0.0001 : scores[i]; best = i; } }
+      return best;
+    }
+
+    function showResult(idx){
+      hide(stageQuiz); show(stageResult);
+      const A = ARCH[idx];
+      pill.textContent = `Arquétipo didático: ${A.nome}`;
+      resTitle.textContent = A.nome;
+      resDesc.textContent = A.desc;
+      resList.innerHTML = '';
+      A.passos.forEach(p => { const li = document.createElement('li'); li.textContent = p; resList.appendChild(li); });
+      ctaLink.href = CTA_URL;
+      // Arte
+      resArt.innerHTML = ART[idx];
+      // URL com slug
+      const u = new URL(window.location.href); u.searchParams.set('r', A.slug); history.replaceState({}, '', u.toString());
+      // WhatsApp share
+      const shareText = `Meu arquétipo didático no Teste de Arquétipo Afetivo (@psicologoafetivo): ${A.nome}. Veja o seu: ${u.toString()}`;
+      waShare.href = `https://wa.me/?text=${encodeURIComponent(shareText)}`;
+    }
+
+    copyBtn.addEventListener('click', async () => {
+      try { await navigator.clipboard.writeText(window.location.href); copyBtn.textContent='Link copiado'; setTimeout(()=> copyBtn.textContent='Copiar link',1600);} catch(e){ alert('Não foi possível copiar.'); }
+    });
+
+    restartBtn.addEventListener('click', () => { hide(stageResult); show(stageIntro); step=0; answers.fill(null); tos.checked=false; btnNext.disabled=true; resArt.innerHTML=''; });
+
+    function loadFromParam(){
+      const r = new URLSearchParams(window.location.search).get('r');
+      if (!r) return false;
+      const idx = ARCH.findIndex(a => a.slug === r);
+      if (idx >= 0){ hide(stageIntro); hide(stageQuiz); show(stageResult); showResult(idx); return true; }
+      return false;
+    }
+
+    function withoutParam(key){ const u=new URL(window.location.href); u.searchParams.delete(key); return u.toString(); }
+
+    // Intro buttons
+    btnStart.addEventListener('click', start);
+    btnSkipToResult.addEventListener('click', () => { if (!loadFromParam()) alert('Adicione ?r=slug ao link para abrir um resultado direto.'); });
+
+    // Boot
+    document.addEventListener('DOMContentLoaded', () => { yearEl.textContent = new Date().getFullYear(); });
+    loadFromParam();
+  </script>
+</body>
+</html>
