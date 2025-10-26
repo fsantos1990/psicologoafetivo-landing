@@ -1,0 +1,9 @@
+# robots.txt for psicologoafetivo.com.br
+User-agent: *
+Allow: /
+# Evita indexar parâmetros comuns de tracking
+Disallow: /*?utm_*
+Disallow: /*&utm_*
+Sitemap: https://www.psicologoafetivo.com.br/sitemap-index.xml
+Sitemap: https://www.psicologoafetivo.com.br/sitemap.xml
+Sitemap: https://www.psicologoafetivo.com.br/image-sitemap.xml
