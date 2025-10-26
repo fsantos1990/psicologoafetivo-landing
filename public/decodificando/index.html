@@ -7,24 +7,22 @@
   <meta name="description" content="Livro prático de ACT & IBCT para transformar conflito em proximidade. Roteiros de conversa, pedidos claros, reparos pós-briga e intimidade em 10 minutos.">
   <link rel="canonical" href="https://www.psicologoafetivo.com.br/decodificando" />
 
-<!-- Facebook Pixel Code (corrigido) -->
-<script>
-!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
-n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
-t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
-document,'script','https://connect.facebook.net/en_US/fbevents.js');
+  <!-- Facebook Pixel Code (corrigido) -->
+  <script>
+  !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+  n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+  document,'script','https://connect.facebook.net/en_US/fbevents.js');
 
-fbq('init', '1638212310125907');  // Seu Pixel
-fbq('track', 'PageView');
-</script>
-<noscript>
-  <img height="1" width="1" style="display:none"
-       src="https://www.facebook.com/tr?id=1638212310125907&ev=PageView&noscript=1"/>
-</noscript>
-<!-- End Facebook Pixel Code -->
-
-
+  fbq('init', '1638212310125907');  // Seu Pixel
+  fbq('track', 'PageView');
+  </script>
+  <noscript>
+    <img height="1" width="1" style="display:none"
+         src="https://www.facebook.com/tr?id=1638212310125907&ev=PageView&noscript=1"/>
+  </noscript>
+  <!-- End Facebook Pixel Code -->
 
   <!-- Open Graph -->
   <meta property="og:type" content="product">
@@ -67,7 +65,7 @@ fbq('track', 'PageView');
     .author{display:grid;grid-template-columns:.9fr 1.1fr;gap:24px;align-items:center}
     .muted{color:var(--muted)}
 
-    /* Ticker (depoimentos reais) */
+    /* Ticker (depoimentos/estimativa) */
     .ticker{position:fixed;left:16px;bottom:16px;background:#fff;border:1px solid #eaeaea;border-radius:12px;padding:10px 12px;box-shadow:0 10px 30px rgba(0,0,0,.12);display:flex;align-items:center;gap:10px;z-index:60}
     .dot{width:10px;height:10px;border-radius:999px;background:#2ecc71;box-shadow:0 0 0 6px rgba(46,204,113,.2)}
     .ticker small{display:block;color:#6a6a6a;margin-top:2px}
@@ -123,7 +121,7 @@ fbq('track', 'PageView');
 
       <aside class="hero-aside">
         <div class="hero-card" style="text-align:center">
-          <img class="cover" src="https://www.psicologoafetivo.com.br/decodificando/assets/capa.webp" alt="Capa do livro Decodificando o Amor">
+          <img class="cover" src="/decodificando/assets/capa.webp" alt="Capa do livro Decodificando o Amor">
           <ul class="list" style="margin-top:12px;text-align:left">
             <li>Protocolos <strong>Fato → Significado → Pedido</strong></li>
             <li>Roteiro <strong>10/3/2/1</strong> para intimidade em 10 minutos</li>
@@ -284,48 +282,68 @@ fbq('track', 'PageView');
     }
     setTimeout(rotate, 2200);
   </script>
-  <!-- Eventos do funil (ViewContent + InitiateCheckout) -->
-<script>
-(function () {
-  // Segurança: só dispara se o fbq existir
-  function safeTrack(ev, data){
-    if (typeof fbq === 'function') { try { fbq('track', ev, data || {}); } catch(e){} }
-  }
 
-  // ViewContent: dispara ao carregar a página de produto
-  safeTrack('ViewContent', {
-    content_ids: ['decodificando'],
-    content_type: 'product',
-    value: 39.0,
-    currency: 'BRL'
-  });
+  <!-- Eventos do funil (ViewContent + AddToCart + InitiateCheckout com eventID) -->
+  <script>
+  (function () {
+    function safeTrack(ev, data, opts){
+      if (typeof fbq === 'function') {
+        try { fbq('track', ev, data || {}, opts || {}); } catch(e){}
+      }
+    }
+    function genEventId(prefix){
+      return prefix + '_' + Date.now() + '_' + Math.random().toString(36).slice(2);
+    }
 
-  // Debounce para evitar múltiplos disparos no mesmo clique
-  let icFiredOnce = false;
-  function fireIC(){
-    if (icFiredOnce) return;
-    icFiredOnce = true;
-    safeTrack('InitiateCheckout', {
+    // ViewContent ao carregar
+    safeTrack('ViewContent', {
       content_ids: ['decodificando'],
       content_type: 'product',
       value: 39.0,
       currency: 'BRL'
     });
-    // libera novamente após 3s (caso a pessoa volte sem concluir)
-    setTimeout(function(){ icFiredOnce = false; }, 3000);
-  }
 
-  // Botões com data-action="comprar"
-  document.querySelectorAll('[data-action="comprar"]').forEach(function(el){
-    el.addEventListener('click', fireIC, { passive: true });
-  });
+    // Intenção: clique em CTAs que rolam para a seção #comprar
+    document.querySelectorAll('a[href="#comprar"]').forEach(function(el){
+      el.addEventListener('click', function(){
+        safeTrack('AddToCart', {
+          content_ids: ['decodificando'],
+          content_type: 'product',
+          value: 39.0,
+          currency: 'BRL'
+        });
+      }, { passive: true });
+    });
 
-  // Qualquer link direto para a Hotmart
-  document.querySelectorAll('a[href*="pay.hotmart.com"]').forEach(function(el){
-    el.addEventListener('click', fireIC, { passive: true });
-  });
-})();
-</script>
+    // Debounce para não duplicar InitiateCheckout
+    let icFiredOnce = false;
+    function fireIC(){
+      if (icFiredOnce) return;
+      icFiredOnce = true;
+
+      // eventID para eventual deduplicação com CAPI
+      const eventId = genEventId('ic');
+      window.__lastICEventId = eventId; // debug opcional no console
+
+      safeTrack('InitiateCheckout', {
+        content_ids: ['decodificando'],
+        content_type: 'product',
+        value: 39.0,
+        currency: 'BRL'
+      }, { eventID: eventId });
+
+      setTimeout(function(){ icFiredOnce = false; }, 3000);
+    }
+
+    // Botões que disparam InitiateCheckout
+    document.querySelectorAll('[data-action="comprar"]').forEach(function(el){
+      el.addEventListener('click', fireIC, { passive: true });
+    });
+    document.querySelectorAll('a[href*="pay.hotmart.com"]').forEach(function(el){
+      el.addEventListener('click', fireIC, { passive: true });
+    });
+  })();
+  </script>
 
 </body>
 </html>
