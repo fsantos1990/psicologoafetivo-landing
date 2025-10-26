@@ -7,7 +7,7 @@
   <meta name="description" content="Livro prático de ACT & IBCT para transformar conflito em proximidade. Roteiros de conversa, pedidos claros, reparos pós-briga e intimidade em 10 minutos.">
   <link rel="canonical" href="https://www.psicologoafetivo.com.br/decodificando" />
 
-<!-- Facebook Pixel Code -->
+<!-- Facebook Pixel Code (corrigido) -->
 <script>
 !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
 n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
@@ -15,37 +15,15 @@ n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
 t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
 document,'script','https://connect.facebook.net/en_US/fbevents.js');
 
-fbq('init', '1638212310125907');  // seu Pixel
+fbq('init', '1638212310125907');  // Seu Pixel
 fbq('track', 'PageView');
 </script>
 <noscript>
-  <img height="1" width="1"
-       style="display:none"
+  <img height="1" width="1" style="display:none"
        src="https://www.facebook.com/tr?id=1638212310125907&ev=PageView&noscript=1"/>
 </noscript>
 <!-- End Facebook Pixel Code -->
 
-  <script>
-// ViewContent (produto)
-fbq('track', 'ViewContent', {
-  content_ids: ['decodificando'],
-  content_type: 'product',
-  value: 39.0,
-  currency: 'BRL'
-});
-
-// Clique em "Comprar" -> InitiateCheckout
-document.querySelectorAll('[data-action="comprar"], a[href*="pay.hotmart.com"]').forEach(function(el){
-  el.addEventListener('click', function(){
-    fbq('track', 'InitiateCheckout', {
-      content_ids: ['decodificando'],
-      content_type: 'product',
-      value: 39.0,
-      currency: 'BRL'
-    });
-  });
-});
-</script>
 
 
   <!-- Open Graph -->
@@ -306,5 +284,48 @@ document.querySelectorAll('[data-action="comprar"], a[href*="pay.hotmart.com"]')
     }
     setTimeout(rotate, 2200);
   </script>
+  <!-- Eventos do funil (ViewContent + InitiateCheckout) -->
+<script>
+(function () {
+  // Segurança: só dispara se o fbq existir
+  function safeTrack(ev, data){
+    if (typeof fbq === 'function') { try { fbq('track', ev, data || {}); } catch(e){} }
+  }
+
+  // ViewContent: dispara ao carregar a página de produto
+  safeTrack('ViewContent', {
+    content_ids: ['decodificando'],
+    content_type: 'product',
+    value: 39.0,
+    currency: 'BRL'
+  });
+
+  // Debounce para evitar múltiplos disparos no mesmo clique
+  let icFiredOnce = false;
+  function fireIC(){
+    if (icFiredOnce) return;
+    icFiredOnce = true;
+    safeTrack('InitiateCheckout', {
+      content_ids: ['decodificando'],
+      content_type: 'product',
+      value: 39.0,
+      currency: 'BRL'
+    });
+    // libera novamente após 3s (caso a pessoa volte sem concluir)
+    setTimeout(function(){ icFiredOnce = false; }, 3000);
+  }
+
+  // Botões com data-action="comprar"
+  document.querySelectorAll('[data-action="comprar"]').forEach(function(el){
+    el.addEventListener('click', fireIC, { passive: true });
+  });
+
+  // Qualquer link direto para a Hotmart
+  document.querySelectorAll('a[href*="pay.hotmart.com"]').forEach(function(el){
+    el.addEventListener('click', fireIC, { passive: true });
+  });
+})();
+</script>
+
 </body>
 </html>
