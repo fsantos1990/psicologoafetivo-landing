@@ -380,7 +380,7 @@ export default function App() {
                   Terapia com <span className="text-[#235FAA]">Psicólogo Online:</span> Casal (IBCT) e Individual (ACT) Focado em Afeto.
                 </h1>
                 <p className="mt-5 text-white/80 max-w-2xl">
-                  Sou **Felipe Melo Souza Santos** (CRP 03/15591), Mestre e **terapeuta de casais online**. Trabalho com ACT e IBCT, em intervenções focadas em **intimidade, compromisso e valores**.
+                  Sou <bold>Felipe Melo Souza Santos</bold> (CRP 03/15591), Mestre e <bold>terapeuta de casais online</bold>. Trabalho com ACT e IBCT, em intervenções focadas em <bold>intimidade, compromisso e valores</bold>.
                 </p>
 
                 {/* CTAs */}
@@ -436,7 +436,7 @@ export default function App() {
         <section id="atendimento" className="mx-auto max-w-6xl px-4 py-16">
           <h2 className="text-2xl md:text-3xl font-semibold">Serviços de Terapia Online e Abordagens Afetivas</h2>
           <p className="mt-3 text-white/80 max-w-3xl">
-            Intervenções focadas em metas claras e valores pessoais, com plano de cuidado adaptado à sua realidade. Sem promessas — trabalho ético e colaborativo, **100% online**.
+            Intervenções focadas em metas claras e valores pessoais, com plano de cuidado adaptado à sua realidade. Sem promessas — trabalho ético e colaborativo, <bold>100% online</bold>.
           </p>
           <div className="mt-8 grid gap-6 md:grid-cols-2">
             <ServiceCard
