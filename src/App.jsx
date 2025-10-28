@@ -87,7 +87,7 @@ const ArticleDisplay = ({ article }) => {
           src={article.featuredImage}
           alt={`Imagem de destaque para o artigo: ${article.title}`}
           className="w-full h-auto rounded-xl object-cover ring-1 ring-white/10"
-          onError={(e) => { e.target.onerror = null; e.target.src = "https://placehold.co/800x450/1c3d5e/ffffff?text=Imagem+do+Artigo"; }}
+          onError={(e) => { e.target.onerror = null; e.target.src = "http://www.psicologoafetivo.com.br/logo.png"; }}
         />
         <p className="text-xs text-white/50 mt-2">
           Fonte: Imagem de uso livre (URL: {article.featuredImage})
@@ -435,7 +435,7 @@ export default function App() {
               onError={(e) => {
                 e.target.onerror = null;
                 e.target.src =
-                  "https://placehold.co/180x36/235FAA/ffffff?text=LOGO";
+                  "http://www.psicologoafetivo.com.br/logo.png";
               }}
             />
             <span className="sr-only">@psicologoafetivo</span>
@@ -565,7 +565,7 @@ export default function App() {
                   onError={(e) => {
                     e.target.onerror = null;
                     e.target.src =
-                      "https://placehold.co/800x500/235FAA/ffffff?text=Felipe+Santos+Psicologo";
+                      "http://www.psicologoafetivo.com.br/maj-avatar.webp";
                   }}
                 />
               </div>
@@ -777,7 +777,7 @@ export default function App() {
                 onError={(e) => {
                   e.target.onerror = null;
                   e.target.src =
-                    "https://placehold.co/256x256/235FAA/ffffff?text=Felipe+Santos";
+                    "http://www.psicologoafetivo.com.br/maj-avatar.webp";
                 }}
               />
             </div>
