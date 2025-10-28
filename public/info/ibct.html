@@ -2,91 +2,358 @@
 <html lang="pt-br">
 <head>
   <meta charset="utf-8">
-  <title>Terapia de Casal (IBCT/TCIC) | Psicólogo Felipe Santos</title>
+  <title>Terapia de Casal Online (IBCT/TCIC) | Reconectar sem perder vocês mesmos</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Terapia de Casal com IBCT/TCIC — um espaço acolhedor para reconectar, compreender padrões e fortalecer o vínculo. Atendimento online com Felipe Santos (CRP/03 15591).">
+  <meta name="robots" content="index,follow">
+  <meta name="description" content="Terapia de casal online (IBCT/TCIC) com Felipe Santos, CRP/03 15591. Espaço seguro para casais que ainda se amam, mas estão exaustos de brigar, se afastar ou viver no automático. Reconstruir diálogo, cuidado e compromisso sem apagar quem cada um é.">
   <style>
-    :root{--preto:#000000;--azul:#235FAA;--cinza:#DDDDDD;--branco:#FFFFFF}
+    :root{
+      --preto:#000000;
+      --azul:#235FAA;
+      --cinza:#DDDDDD;
+      --cinzaTexto:#444;
+      --branco:#FFFFFF;
+      --bgCard:#FAFAFA;
+    }
     *{box-sizing:border-box}
-    body{margin:0;font-family:Arial,Helvetica,sans-serif;color:var(--preto);background:var(--branco);line-height:1.6}
-    header{padding:32px 20px;border-bottom:1px solid var(--cinza)}
-    h1{margin:0 0 8px 0;font-size:28px}
-    h2{font-size:18px;color:var(--azul);margin:0}
-    main{max-width:820px;margin:0 auto;padding:24px 20px}
+    body{
+      margin:0;
+      font-family:Arial,Helvetica,sans-serif;
+      color:var(--preto);
+      background:var(--branco);
+      line-height:1.6;
+      -webkit-font-smoothing:antialiased;
+    }
+    header{
+      padding:32px 20px;
+      border-bottom:1px solid var(--cinza);
+      background:var(--branco);
+    }
+    main{
+      max-width:820px;
+      margin:0 auto;
+      padding:24px 20px 64px;
+    }
+    footer{
+      border-top:1px solid var(--cinza);
+      padding:16px 20px;
+      font-size:14px;
+      color:var(--cinzaTexto);
+      background:#FCFCFC;
+    }
+
+    h1{
+      margin:0 0 12px 0;
+      font-size:28px;
+      line-height:1.25;
+      color:var(--preto);
+      font-weight:700;
+    }
+    @media (min-width:480px){
+      h1{font-size:32px;}
+    }
+
+    h2{
+      font-size:18px;
+      line-height:1.4;
+      color:var(--azul);
+      margin:0;
+      font-weight:600;
+    }
+
+    h3{
+      margin:0 0 8px 0;
+      font-size:16px;
+      font-weight:bold;
+      color:var(--preto);
+      line-height:1.4;
+    }
+
+    p{
+      margin:12px 0;
+      font-size:15px;
+      line-height:1.6;
+      color:var(--preto);
+    }
+    @media (min-width:480px){
+      p{font-size:16px;}
+    }
+
     section{margin:28px 0}
-    .card{background:#FAFAFA;border:1px solid var(--cinza);padding:16px;border-radius:12px}
-    ul{margin:12px 0 0 18px}
-    .policy-note{font-size:13px;color:#444;margin-top:6px}
-    .cta{display:block;text-align:center;margin:16px 0 28px;padding:16px;border-radius:10px;background:var(--azul);color:#FFF;text-decoration:none;font-weight:bold}
-    .cta:focus,.cta:hover{filter:brightness(0.95)}
-    .muted{color:#444}
-    footer{border-top:1px solid var(--cinza);padding:16px 20px;font-size:14px;color:#444}
-    a{color:var(--azul)}
+    .card{
+      background:var(--bgCard);
+      border:1px solid var(--cinza);
+      padding:16px 16px 20px;
+      border-radius:12px;
+    }
+
+    ul{
+      margin:12px 0 0 18px;
+      padding:0;
+      font-size:15px;
+      line-height:1.6;
+      color:var(--preto);
+    }
+    @media (min-width:480px){
+      ul{font-size:16px;}
+    }
+    ul li{
+      margin-bottom:8px;
+    }
+
+    .policy-note{
+      font-size:13px;
+      color:var(--cinzaTexto);
+      margin-top:6px;
+      line-height:1.5;
+    }
+
+    .cta{
+      display:block;
+      text-align:center;
+      margin:20px 0 28px;
+      padding:16px;
+      border-radius:10px;
+      background:var(--azul);
+      color:#FFF;
+      text-decoration:none;
+      font-weight:bold;
+      line-height:1.4;
+    }
+    .cta small{
+      display:block;
+      font-weight:normal;
+      font-size:13px;
+      opacity:0.9;
+      margin-top:4px;
+      line-height:1.4;
+    }
+    .cta:focus,
+    .cta:hover{
+      filter:brightness(0.95);
+    }
+
+    .muted{
+      color:var(--cinzaTexto);
+      font-size:14px;
+      line-height:1.5;
+    }
+
+    a{
+      color:var(--azul);
+    }
+
+    .disclaimer{
+      background:#FFF9E6;
+      border:1px solid #E5D89B;
+      color:#5A4C00;
+      border-radius:8px;
+      padding:12px 16px;
+      font-size:13px;
+      line-height:1.5;
+      margin-top:16px;
+    }
+
+    .badge{
+      display:inline-block;
+      background:var(--azul);
+      color:#fff;
+      font-size:12px;
+      line-height:1.4;
+      font-weight:bold;
+      border-radius:6px;
+      padding:4px 8px;
+      margin-bottom:12px;
+    }
+
+    .two-col {
+      display:block;
+    }
+    @media (min-width:640px){
+      .two-col{
+        display:flex;
+        gap:16px;
+      }
+      .two-col .col{
+        flex:1;
+      }
+    }
+
+    hr.div{
+      border:0;
+      border-top:1px solid var(--cinza);
+      margin:32px 0;
+    }
   </style>
+
+  <!-- Schema.org: Terapia de Casal Online -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "PsychologicalTreatment",
+    "name": "Terapia de Casal Online (IBCT/TCIC)",
+    "provider": {
+      "@type": "Psychologist",
+      "name": "Felipe Santos",
+      "medicalSpecialty": "Psicologia Clínica",
+      "identifier": "CRP/03 15591",
+      "areaServed": "Brasil (atendimento online)"
+    },
+    "serviceType": "Psicoterapia de casal online (IBCT/TCIC)",
+    "audience": {
+      "@type": "PeopleAudience",
+      "audienceType": "Casais adultos em sofrimento relacional"
+    },
+    "description": "Espaço clínico online e sigiloso para casais que ainda têm afeto, mas estão presos em ciclos de briga, afastamento ou silêncio. Foco em aceitação, conexão emocional e mudança concreta de padrões.",
+    "availableChannel": {
+      "@type": "ServiceChannel",
+      "serviceLocation": {
+        "@type": "VirtualLocation",
+        "url": "https://www.psicologoafetivo.com.br/info/ibct.html"
+      }
+    }
+  }
+  </script>
 </head>
 <body>
   <header>
-    <h1>Terapia de Casal com IBCT/TCIC — reconectar sem perder quem vocês são</h1>
-    <h2>Um espaço acolhedor para compreender padrões, flexibilizar defesas e fortalecer o vínculo.</h2>
+    <h1>“A gente se ama, mas a gente não consegue mais conversar sem virar guerra.”</h1>
+    <h2>Terapia de casal online (IBCT/TCIC) com Felipe Santos (CRP/03 15591) — um espaço seguro para desacelerar o ataque/defesa, entender o que dói em cada um e reconstruir o vínculo sem precisar apagar quem vocês são.</h2>
+    <p class="muted" style="margin-top:12px;font-size:14px;max-width:680px;">
+      Sessões conjuntas em vídeo, com escuta respeitosa e estrutura clara. O foco é sair do modo “sobrevivência do relacionamento” e voltar a ter espaço pra cuidado, proximidade e escolha adulta.
+    </p>
   </header>
 
   <main>
+
+    <!-- Pra quem é -->
     <section class="card">
-      <strong>Pra quem é</strong>
+      <h3>Pra quem é</h3>
       <ul>
-        <li>Casais heterossexuais monogâmicos vivendo ciclos de briga, distância emocional ou “convivência morna”.</li>
-        <li>Quem topa explorar novas formas de conversa e cuidado mútuo entre os encontros.</li>
+        <li>Casais que ainda têm afeto, mas estão exaustos de repetir o mesmo ciclo: briga ↔ afastamento ↔ culpa ↔ silêncio.</li>
+        <li>Casais que sentem que o amor não acabou, mas a paciência sim.</li>
+        <li>Quando um dos dois (ou os dois) sente “eu não consigo mais me sentir seguro(a) aqui”.</li>
+        <li>Quem topa tentar novas formas de conversa e cuidado mútuo entre as sessões, não só “desabafar e ir embora”.</li>
       </ul>
+      <div class="disclaimer">
+        Não é preciso chegar com “quem está errado”. A primeira sessão não é um tribunal. É pra entender o padrão que prende vocês, não pra decidir quem “estragou tudo”.
+      </div>
     </section>
 
+    <!-- Pra quem não é -->
     <section class="card">
-      <strong>Pra quem não é</strong>
+      <h3>Pra quem não é</h3>
       <ul>
-        <li>Quem busca “mudar o outro” sem olhar para seus próprios padrões.</li>
-        <li>Situações com violência atual sem rede de proteção.</li>
+        <li>Quando a intenção é “consertar meu parceiro(a)” sem olhar pro próprio lado do ciclo.</li>
+        <li>Quando há violência física, ameaça ou controle que coloque alguém em risco agora, e ainda não existe rede de proteção mínima. Nesses casos, prioridade é segurança imediata — não é ético forçar “terapia de casal”.</li>
+        <li>Quando o objetivo é conseguir laudo/relatório para processo ou documento legal (não realizo esse tipo de emissão).</li>
       </ul>
+      <p class="muted" style="font-size:13px;margin-top:12px;">
+        Se existe medo físico ou emocional intenso (por exemplo, você teme represália se falar algo na sessão), busque primeiro segurança e acolhimento individual. A gente pode conversar sobre isso em privado.
+      </p>
     </section>
 
+    <!-- Como IBCT/TCIC ajuda -->
     <section class="card">
-      <strong>Como a IBCT/TCIC pode ajudar (visão geral acolhedora)</strong>
-      <p>A Terapia Comportamental Integrativa de Casais (IBCT/TCIC) integra duas forças: <b>aceitação</b> e <b>mudança</b>. Em linguagem direta, olhamos para:</p>
+      <h3>Como a IBCT/TCIC pode ajudar vocês (em linguagem direta)</h3>
+      <p>A Terapia Comportamental Integrativa de Casais (IBCT/TCIC) trabalha com duas forças que caminham juntas: <b>aceitação</b> e <b>mudança</b>. Traduzindo isso pra prática do casal:</p>
       <ul>
-        <li><b>Padrões de interação</b>: entender como as conversas escalam e onde a conexão se perde.</li>
-        <li><b>Regulação emocional</b>: reconhecer respostas emocionais e criar condições para diálogos que avançam.</li>
-        <li><b>Vínculo e apego</b>: compreender necessidades e inseguranças que aparecem na relação, fortalecendo a base do nós.</li>
-        <li><b>Mudanças possíveis</b>: ensaiar hábitos de cuidado e comunicação que caibam na vida real do casal.</li>
-        <li><b>Prevenção de recaídas</b>: identificar gatilhos e combinar estratégias para sustentar avanços ao longo do tempo.</li>
+        <li><b>Mapear o padrão</b>: entender por que sempre vira o mesmo tipo de briga (mesmo quando o tema muda).</li>
+        <li><b>Segurança emocional</b>: ajudar cada um a conseguir falar dor, medo e necessidade sem soar como ataque.</li>
+        <li><b>Reconstruir o “nós”</b>: sair da lógica “eu contra você” e voltar a ter a sensação de equipe.</li>
+        <li><b>Acordos reais</b>: combinar micro mudancinhas que caibam na vida de vocês, não soluções de filme.</li>
+        <li><b>Prevenção de recaída</b>: entender antecipadamente os gatilhos que reativam o ciclo e ter alternativas quando ele começar.</li>
       </ul>
-      <p>O processo é colaborativo e humano: ajustamos o caminho às particularidades de vocês, com respeito às histórias e limites de cada um.</p>
+      <p>O processo é colaborativo, respeitoso e ético. A ideia não é transformar vocês em outra coisa — é permitir que o vínculo de vocês volte a ser um lugar minimamente seguro, adulto e escolhido.</p>
     </section>
 
+    <!-- O que esperar do processo / passo a passo -->
     <section class="card">
-      <strong>O que vocês podem esperar do processo</strong>
+      <h3>O que vocês podem esperar do processo</h3>
       <ul>
-        <li>Um espaço seguro e respeitoso para falar e ser escutado(a).</li>
-        <li>Mapeamento cuidadoso dos temas que mais doem e das exceções que já funcionam.</li>
-        <li>Ensaios práticos que buscam reconexão, sem perfeccionismo e no ritmo possível do casal.</li>
+        <li>Um espaço estruturado onde cada um fala e cada um escuta, sem ser interrompido a cada 5 segundos.</li>
+        <li>Mapeamento do que mais dói hoje e também do que <i>ainda funciona</i> entre vocês (isso é muito importante).</li>
+        <li>Ensaios práticos pra retomar contato emocional de um jeito que não pareça cobrança nem desistência.</li>
       </ul>
+
+      <hr class="div">
+
+      <div class="two-col">
+        <div class="col">
+          <div class="badge">Passo 1</div>
+          <p style="margin-top:0;">
+            Vocês me enviam uma mensagem no WhatsApp dizendo que leram esta página e querem agendar terapia de casal.
+          </p>
+        </div>
+        <div className="col">
+          <div class="badge">Passo 2</div>
+          <p style="margin-top:0;">
+            Eu respondo com horários disponíveis e confirmo se a demanda é de casal (vínculo, diálogo, conexão) e não algo como laudo, parecer jurídico etc.
+          </p>
+        </div>
+      </div>
+
+      <div class="two-col" style="margin-top:16px;">
+        <div class="col">
+          <div class="badge">Primeira sessão</div>
+          <p style="margin-top:0;">
+            A primeira sessão serve pra entender o ciclo que prende vocês hoje. Não é para “decidir se vocês terminam ou continuam” em 50 minutos.
+          </p>
+        </div>
+        <div class="col">
+          <div class="badge">Sigilo e respeito</div>
+          <p style="margin-top:0;">
+            A conversa acontece por videochamada, em ambiente privado e sigiloso, dentro do Código de Ética Profissional e da LGPD. Cada um é tratado com dignidade — ninguém é ridicularizado.
+          </p>
+        </div>
+      </div>
     </section>
 
+    <!-- Honorários -->
     <section class="card">
-      <strong>Frequência, valor e nota fiscal</strong>
-      <p>Sessões online de <b>50 minutos</b>. <b>R$ 500</b> por sessão (emito <b>nota fiscal</b>). Opcional: <i>plano por assinatura</i> mensal para quem deseja regularidade.</p>
+      <h3>Frequência, valor e nota fiscal</h3>
+      <p>
+        Sessões online de <b>50 minutos</b>. <b>R$ 500</b> por sessão
+        (emito <b>nota fiscal</b>).
+      </p>
+      <p>
+        Também existe a possibilidade de um <i>plano mensal contínuo</i> para casais que preferem regularidade e previsibilidade de agenda. Isso pode ser conversado no primeiro contato.
+      </p>
     </section>
 
+    <!-- Reagendamento -->
     <section class="card">
-      <strong>Reagendamento e cancelamento</strong>
-      <p>Reagendamentos com <b>24h</b> de antecedência sem custo. Cancelamentos com menos de 24h são cobrados. <a href="/info/politica.html">Ver política completa</a>.</p>
+      <h3>Reagendamento e cancelamento</h3>
+      <p>
+        Reagendamentos com <b>24h</b> de antecedência não geram cobrança.
+        Cancelamentos com menos de 24h são cobrados.
+        <a href="/info/politica.html">Ver política completa</a>.
+      </p>
     </section>
 
-    <p class="policy-note">Ao prosseguir, vocês confirmam que leram e concordam com a nossa <a href="/info/politica.html">Política</a>.</p>
-    <a class="cta" href="https://wa.me/5571987865549?text=Ol%C3%A1%2C%20lemos%20a%20p%C3%A1gina%20IBCT%2FTCIC%20e%20estamos%20cientes%20das%20condi%C3%A7%C3%B5es%20e%20da%20Pol%C3%ADtica.%20Queremos%20agendar%20Terapia%20de%20Casal.%20Prefer%C3%AAncia%20de%20hor%C3%A1rio%3A%20%5Bmanh%C3%A3%7Ctarde%7Cnoite%5D%2C%20%5Bseg%E2%80%93sex%5D.">Agendar no WhatsApp — IBCT/TCIC (Casal)</a>
+    <!-- CTA / Consentimento prévio -->
+    <p class="policy-note">
+      Ao prosseguir, vocês confirmam que leram e concordam com a nossa
+      <a href="/info/politica.html">Política de Agendamento e Cancelamento</a>.
+    </p>
 
-    <p class="muted">Atendimento online | Psicólogo Felipe Santos — CRP/03 15591</p>
+    <a
+      class="cta"
+      href="https://wa.me/5571987865549?text=Ol%C3%A1%2C%20lemos%20a%20p%C3%A1gina%20IBCT%2FTCIC%20e%20estamos%20cientes%20das%20condi%C3%A7%C3%B5es%20e%20da%20Pol%C3%ADtica.%20Queremos%20agendar%20Terapia%20de%20Casal.%20Prefer%C3%AAncia%20de%20hor%C3%A1rio%3A%20%5Bmanh%C3%A3%7Ctarde%7Cnoite%5D%2C%20%5Bseg%E2%80%93sex%5D."
+    >
+      Agendar no WhatsApp — Terapia de Casal (IBCT/TCIC)
+      <small>Primeiro contato sem compromisso financeiro</small>
+    </a>
+
+    <p class="muted">
+      Atendimento online | Psicólogo Felipe Santos — CRP/03 15591
+    </p>
   </main>
 
   <footer>
-    Dúvidas pontuais? Vocês podem me escrever no WhatsApp após ler a página!
+    Dúvidas pontuais? Vocês podem me escrever no WhatsApp após ler a página.
+    O primeiro contato serve pra combinar horário e alinhar expectativa —
+    não é uma sessão de terapia completa por mensagem.
   </footer>
 </body>
 </html>
