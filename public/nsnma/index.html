@@ -8,14 +8,14 @@
   <meta name="description" content="Em 7 dias você mede consistência com critérios observáveis e decide com serenidade se continua… ou corta. Método clínico baseado em ACT & IBCT." />
   <meta name="author" content="Felipe Melo Souza Santos" />
   <meta name="keywords" content="autonomia afetiva, relacionamento sério, homens indisponíveis, dependência emocional, limites, comunicação assertiva, ACT, IBCT, psicólogo afetivo, curso online para mulheres" />
-  <link rel="canonical" href="https://www.psicologoafetivo.com.br/nsnma-premium" />
+  <link rel="canonical" href="https://www.psicologoafetivo.com.br/nsnma" />
   <meta name="robots" content="index,follow,max-image-preview:large" />
 
   <!-- Open Graph / Twitter -->
   <meta property="og:type" content="product" />
-  <meta property="og:title" content="Nem Só, Nem Mal Acompanhada — Curso Premium para Mulheres " />
+  <meta property="og:title" content="Nem Só, Nem Mal Acompanhada — Decida com critérios em 7 dias" />
   <meta property="og:description" content="Critérios observáveis, fronteiras e microacordos semanais. Em 7 dias você já sabe se continua… ou corta. Baseado em ACT & IBCT." />
-  <meta property="og:url" content="https://www.psicologoafetivo.com.br/nsnma-premium" />
+  <meta property="og:url" content="https://www.psicologoafetivo.com.br/nsnma" />
   <meta property="og:image" content="https://www.psicologoafetivo.com.br/nsnma/cover-og.jpg" />
   <meta name="twitter:card" content="summary_large_image" />
 
@@ -69,6 +69,12 @@
       .cta-full { width:100%; }
     }
     #quiz:target{display:block}
+  /* Sticky e-mail (mobile) */
+  .sticky-email{position:fixed;left:0;right:0;bottom:0;z-index:999;background:#fff;border-top:1px solid #e6e6e6;box-shadow:0 -6px 24px rgba(0,0,0,.06);padding:10px env(safe-area-inset-right) calc(10px + env(safe-area-inset-bottom)) env(safe-area-inset-left);} 
+  .sticky-email .wrap{max-width:1060px;margin:0 auto;display:flex;gap:8px;align-items:center;padding:0 12px;} 
+  .sticky-email input{flex:1;min-width:0;padding:10px 12px;border:1px solid #E0E0E0;border-radius:10px;} 
+  .sticky-email .cta{white-space:nowrap;padding:12px 16px;border-radius:10px;} 
+  @media (min-width: 861px){ .sticky-email{display:none;} }
 </style>
 
   <!-- JSON-LD: Product + FAQ -->
@@ -77,7 +83,7 @@
     "@context":"https://schema.org",
     "@type":"Product",
     "name":"Nem Só, Nem Mal Acompanhada",
-    "description":"Curso premium baseado em ACT & IBCT para mulheres  decidirem com critérios observáveis se continuam ou encerram um relacionamento.",
+    $1Curso$2",
     "brand": {"@type":"Brand","name":"Psicólogo Afetivo"},
     "category":"Course",
     "offers": {"@type":"Offer","priceCurrency":"BRL","price":"297.00","url":"https://pay.hotmart.com/H71326438T","availability":"https://schema.org/InStock"}
@@ -322,7 +328,7 @@
 <!-- STICKY CTA (mobile/desktop) -->
 <div class="sticky-cta" role="complementary" aria-label="Acesso rápido à compra">
   <div class="container wrap">
-    <span>Curso premium NSNMA • <b>R$ 297</b></span>
+    <span>NSNMA • <b>R$ 297</b></span>
     <a href="https://pay.hotmart.com/H71326438T" target="_blank" rel="noopener" class="cta cta-primary">Entrar agora</a>
   </div>
 </div>
@@ -343,126 +349,38 @@
   </div>
 </footer>
 
-<!-- QUIZ (opcional / mantido oculto) -->
-<section id="quiz" class="section" style="display:none">
-  <div class="container">
-    <h2 class="h2">Diagnóstico Rápido — Cluster dominante</h2>
-    <form id="cluster-quiz"></form>
-    <div id="quiz-actions" style="margin-top:12px; display:flex; gap:10px;">
-      <button id="quiz-submit" type="button" class="cta cta-primary">Enviar e ver meu resultado</button>
-      <button id="quiz-reset" type="button" class="cta cta-ghost">Limpar</button>
-    </div>
-    <div id="lead" style="margin-top:12px; max-width:460px;">
-      <input id="lead-email" type="email" placeholder="Seu e-mail (opcional)" style="width:100%; padding:10px 12px; border:1px solid var(--line); border-radius:10px;" aria-label="E-mail para receber seu resultado" />
-      <label style="display:flex; gap:8px; align-items:center; margin-top:8px; font-size:12px;">
-        <input id="lead-consent" type="checkbox" /> Concordo em receber o resultado do quiz e conteúdos do Psicólogo Afetivo.
-      </label>
-      <div id="lead-error" class="muted" style="display:none; font-size:12px; color:#C62828">Insira um e-mail válido e aceite o consentimento para receber o resultado por e-mail.</div>
-    </div>
-    <p id="lead-status" class="muted" style="display:none;font-size:12px;margin-top:10px;">Preencha o e-mail e marque o consentimento para receber por e-mail. Se não quiser, eu mostro o resultado aqui mesmo.</p>
-    <div id="quiz-result" class="card" style="margin-top:16px; display:none"></div>
+<!-- Sticky e-mail (mobile) -->
+<div id="sticky-email" class="sticky-email" role="region" aria-label="Ver resultado do diagnóstico">
+  <div class="wrap">
+    <input id="sticky-email-input" type="email" placeholder="Seu e-mail" aria-label="Seu e-mail" />
+    <button id="sticky-email-cta" type="button" class="cta cta-primary">Ver meu resultado</button>
   </div>
-</section>
-
-<!-- SCRIPT QUIZ / LEAD CAPTURE -->
-<script>
-(function() {
-  const questions = [
-    { id:1, text:"Ele fala que quer algo comigo, mas raramente combina algo com antecedência.", clusters:[1,3] },
-    { id:2, text:"Depois de momentos ótimos, ele some por dias.", clusters:[3] },
-    { id:3, text:"Evito dizer NÃO para não gerar briga ou afastamento.", clusters:[2] },
-    { id:4, text:"Discussões escalam rápido e terminam sem reparo.", clusters:[6] },
-    { id:5, text:"Penso nele o tempo todo e checo mensagens/redes.", clusters:[7] },
-    { id:6, text:"Falo sobre valores e planos, mas a relação não sai do lugar.", clusters:[1] },
-    { id:7, text:"Sinto culpa ou medo depois de colocar um limite.", clusters:[2] },
-    { id:8, text:"Ele evita microacordos (tipo marcar algo com antecedência).", clusters:[1,3] },
-    { id:9, text:"Depois de brigas, cada um se afasta sem reparar.", clusters:[6] },
-    { id:10, text:"Tenho filhos e me sinto sobrecarregada na rotina doméstica.", clusters:[5] },
-    { id:11, text:"Tenho me perdido de mim (rotinas básicas/auto-cuidado).", clusters:[4] },
-    { id:12, text:"Sinto ansiedade se não confiro o celular por muito tempo.", clusters:[7] }
-  ];
-
-  const options = ["Nunca","Às vezes","Frequentemente","Quase sempre"]; const weights = [0,1,2,3];
-  const clusterNames = {1:"Compromisso invisível",2:"Fronteiras esburacadas",3:"Indisponibilidade",4:"Autonegligência",5:"Sobrecarga materna",6:"Comunicação reativa",7:"Atenção sequestrada"};
-  const clusterCTAs = {
-    1:{title:"Comece pela Trilha A — Critério Observável (7 dias)", bullets:["Intensidade ≠ compromisso","Microacordos observáveis","Planilha de consistência"], link:"https://pay.hotmart.com/H71326438T"},
-    3:{title:"Comece pela Trilha A — Critério Observável (7 dias)", bullets:["Extinção de picos (cassino do amor)","Evidência semanal","Microacordos"], link:"https://pay.hotmart.com/H71326438T"},
-    2:{title:"Comece pela Trilha B — FOCAR & Limites", bullets:["FOCAR em 30s","Limite com convite","Roteiro de reparo"], link:"https://pay.hotmart.com/H71326438T"},
-    6:{title:"Comece pela Trilha B — FOCAR & Limites", bullets:["Scripts ao vivo/WhatsApp","Time-out com retorno","Microacordo pós-conflito"], link:"https://pay.hotmart.com/H71326438T"},
-    7:{title:"Comece pela Trilha C — Higiene da Atenção", bullets:["Agenda 3×3 min/dia","Desfusão simples","STOP de checagem"], link:"https://pay.hotmart.com/H71326438T"},
-    4:{title:"Reaproxime-se dos seus valores", bullets:["1 valor → 1 ação/dia","Rotina mínima de autocuidado","Cartões de bolso"], link:"https://pay.hotmart.com/H71326438T"},
-    5:{title:"Parceria na rotina (mães)", bullets:["Contratos de microtarefas","Horários críticos","Checklist turno invisível"], link:"https://pay.hotmart.com/H71326438T"}
-  };
-
-  const LEAD_ENDPOINT = window.LEAD_ENDPOINT;
-  function getUTMs(){ const p=new URLSearchParams(window.location.search); const utm={}; ["utm_source","utm_medium","utm_campaign","utm_content","utm_term"].forEach(k=>{ if(p.get(k)) utm[k]=p.get(k); }); return utm; }
-  function validEmail(e){ return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e); }
-  async function sendLeadSafe(payload){ try{ const res = await fetch(LEAD_ENDPOINT,{method:"POST", headers:{"Content-Type":"application/json"}, body:JSON.stringify(payload)}); if(!res.ok) throw new Error("HTTP "+res.status); return true; } catch(err){ console.warn("Lead fallback", err); return false; } }
-
-  const form = document.getElementById('cluster-quiz');
-  if(form){
-    questions.forEach(q=>{
-      const field=document.createElement('div'); field.className='card'; field.style.marginTop='10px';
-      const h=document.createElement('div'); h.className='h3'; h.textContent=q.id+". "+q.text; field.appendChild(h);
-      options.forEach((opt,idx)=>{ const id=`q${q.id}_${idx}`; const label=document.createElement('label'); label.style.display='inline-block'; label.style.marginRight='14px'; const input=document.createElement('input'); input.type='radio'; input.name=`q${q.id}`; input.value=weights[idx]; input.id=id; label.appendChild(input); const span=document.createElement('span'); span.textContent=" "+opt; label.appendChild(span); field.appendChild(label); });
-      form.appendChild(field);
-    });
-
-    function calcResult(){ const clusterScores={1:0,2:0,3:0,4:0,5:0,6:0,7:0}; for(const q of questions){ const radios=document.getElementsByName('q'+q.id); let val=0; for(const r of radios){ if(r.checked) val=parseInt(r.value||0); } q.clusters.forEach(c=>clusterScores[c]+=val); } const sorted=Object.entries(clusterScores).sort((a,b)=>b[1]-a[1]); return {scores:clusterScores, top:sorted[0], second:sorted[1]}; }
-
-    function renderResult(res){ const box=document.getElementById('quiz-result'); const topCluster=parseInt(res.top[0]); const topName=clusterNames[topCluster]; const secCluster=parseInt(res.second[0]); const secName=clusterNames[secCluster]; const cta=clusterCTAs[topCluster]||{title:"Próximo passo recomendado", bullets:["Prática semanal"], link:"https://pay.hotmart.com/H71326438T"}; let html=`<div class="h3">Seu resultado: <b>${topCluster} — ${topName}</b></div>`; html+=`<p class="muted">Secundário: ${secCluster} — ${secName}</p>`; html+=`<div class="card" style="margin-top:8px;"><b>${cta.title}</b><ul class="list">${cta.bullets.map(b=>`<li>${b}</li>`).join('')}</ul><p style="margin-top:8px;"><a class="cta cta-primary" target="_blank" rel="noopener" href="${cta.link}">Entrar agora — R$ 297</a> <a class="cta cta-ghost" href="#diagnostico">Voltar</a></p></div>`; html+=`<p class="muted" style="margin-top:8px; font-size:12px;">Pontuações: ${Object.entries(res.scores).map(([k,v])=>`${k}:${v}`).join(' · ')}</p>`; box.innerHTML=html; box.style.display='block';
-      const email=document.getElementById('lead-email')?.value?.trim(); const consent=document.getElementById('lead-consent')?.checked; const err=document.getElementById('lead-error');
-      const status=document.getElementById('lead-status');
-      const btn=document.getElementById('quiz-submit');
-      if(email){
-        if(!validEmail(email)||!consent){
-          if(err) err.style.display='block';
-          if(status){ status.style.display='block'; status.textContent='Mostrando o resultado aqui. Para receber por e-mail, insira um e-mail válido e marque o consentimento.'; }
-        } else {
-          if(err) err.style.display='none';
-          if(status){ status.style.display='block'; status.textContent='Enviando…'; }
-          if(btn){ btn.disabled=true; btn.textContent='Enviando…'; }
-          const payload={ email, consent, timestamp:new Date().toISOString(), topCluster:topCluster, secondCluster:secCluster, scores:res.scores, utm:getUTMs(), page:window.location.href };
-          sendLeadSafe(payload).then(function(ok){
-            if(status){ status.style.display='block'; status.textContent = ok ? 'Recebido. Veja seu resultado abaixo.' : 'Não deu para salvar agora, mas o resultado está aqui na página.'; }
-          }).catch(function(){
-            if(status){ status.style.display='block'; status.textContent='Não deu para salvar agora, mas o resultado está aqui na página.'; }
-          }).finally(function(){ if(btn){ btn.disabled=false; btn.textContent='Enviar e ver meu resultado'; } });
-        }
-      } else {
-        if(status){ status.style.display='block'; status.textContent='Resultado exibido abaixo. Se quiser receber por e-mail, preencha o campo e marque o consentimento.'; }
-      }
-
-      box.scrollIntoView({behavior:'smooth'});
-    }
-
-    document.getElementById('quiz-submit')?.addEventListener('click', ()=>{ const res=calcResult(); renderResult(res); });
-    document.getElementById('quiz-reset')?.addEventListener('click', ()=>{ document.querySelectorAll('#cluster-quiz input[type=radio]').forEach(i=>i.checked=false); const box=document.getElementById('quiz-result'); box.style.display='none'; box.innerHTML=''; window.scrollTo({top: document.getElementById('quiz').offsetTop-40, behavior:'smooth'}); });
-  }
-
-  // Hotmart widget (opcional)
-  try { if(window.checkoutElements) checkoutElements.init('salesFunnel').mount('#hotmart-sales-funnel'); } catch(e){ console.warn('Hotmart widget: verifique o snippet oficial.', e); }
-})();
-// Envio de lead robusto a CORS/preflight
-function sendLeadSafe(payload){
-  return fetch(LEAD_ENDPOINT, {
-    method: 'POST',
-    mode: 'no-cors',
-    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-    body: JSON.stringify(payload)
-  }).then(function(){ return true; }).catch(function(){ return false; });
-}
-</script>
+</div>
 
 <script>
-// Fallback robusto para revelar o quiz mesmo sem o listener original
 (function(){
   function showQuiz(){ var q=document.getElementById('quiz'); if(q){ q.style.display='block'; q.scrollIntoView({behavior:'smooth'});} }
-  if (window.location.hash === '#quiz') showQuiz();
-  document.addEventListener('click', function(e){
-    var a=e.target.closest && e.target.closest('a[data-show-quiz], a[href="#quiz"]');
-    if(a){ e.preventDefault(); showQuiz(); }
-  });
+  function syncEmailAndOpen(){
+    var v = document.getElementById('sticky-email-input').value.trim();
+    var lead = document.getElementById('lead-email');
+    if(lead){ lead.value = v; }
+    location.hash = '#quiz';
+    showQuiz();
+    setTimeout(function(){ document.getElementById('lead-email')?.focus(); }, 200);
+    // esconde a barra após abrir o quiz
+    document.getElementById('sticky-email').style.display='none';
+  }
+  document.getElementById('sticky-email-cta').addEventListener('click', syncEmailAndOpen);
+  document.getElementById('sticky-email-input').addEventListener('keydown', function(e){ if(e.key==='Enter'){ e.preventDefault(); syncEmailAndOpen(); }});
+
+  // Oculta a barra quando o quiz entra em viewport
+  var q = document.getElementById('quiz');
+  if('IntersectionObserver' in window && q){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){ document.getElementById('sticky-email').style.display = en.isIntersecting ? 'none' : 'block'; });
+    }, {threshold: 0.1});
+    io.observe(q);
+  }
 })();
 </script>
 </body>
