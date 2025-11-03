@@ -102,7 +102,7 @@
 </head>
 <body>
 <script>
-  window.LEAD_ENDPOINT = "https://script.google.com/macros/s/AKfycbwHuDECXkY2SSMyr44qH5k_wVXVEP3UISD473gr89vvC_YF66MygF6L06GqYXU7Ne27Pg/exec";
+  window.LEAD_ENDPOINT = "https://script.google.com/macros/s/AKfycbyAXFmSBpb3Sj2xE7tzcfsbJRcpw5z45v_tK795Z4LhBzFLa3sVx75g04NPOC6A3IY/exec";
 </script>
 
 <!-- HERO 2 COLUNAS (com retrato) -->
@@ -397,7 +397,7 @@
   const LEAD_ENDPOINT = window.LEAD_ENDPOINT;
   function getUTMs(){ const p=new URLSearchParams(window.location.search); const utm={}; ["utm_source","utm_medium","utm_campaign","utm_content","utm_term"].forEach(k=>{ if(p.get(k)) utm[k]=p.get(k); }); return utm; }
   function validEmail(e){ return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e); }
-  async function sendLead(payload){ try{ const res = await fetch(LEAD_ENDPOINT,{method:"POST", headers:{"Content-Type":"application/json"}, body:JSON.stringify(payload)}); if(!res.ok) throw new Error("HTTP "+res.status); return true; } catch(err){ console.warn("Lead fallback", err); return false; } }
+  async function sendLeadSafe(payload){ try{ const res = await fetch(LEAD_ENDPOINT,{method:"POST", headers:{"Content-Type":"application/json"}, body:JSON.stringify(payload)}); if(!res.ok) throw new Error("HTTP "+res.status); return true; } catch(err){ console.warn("Lead fallback", err); return false; } }
 
   const form = document.getElementById('cluster-quiz');
   if(form){
@@ -423,7 +423,7 @@
           if(status){ status.style.display='block'; status.textContent='Enviando…'; }
           if(btn){ btn.disabled=true; btn.textContent='Enviando…'; }
           const payload={ email, consent, timestamp:new Date().toISOString(), topCluster:topCluster, secondCluster:secCluster, scores:res.scores, utm:getUTMs(), page:window.location.href };
-          sendLead(payload).then(function(ok){
+          sendLeadSafe(payload).then(function(ok){
             if(status){ status.style.display='block'; status.textContent = ok ? 'Recebido. Veja seu resultado abaixo.' : 'Não deu para salvar agora, mas o resultado está aqui na página.'; }
           }).catch(function(){
             if(status){ status.style.display='block'; status.textContent='Não deu para salvar agora, mas o resultado está aqui na página.'; }
@@ -443,6 +443,15 @@
   // Hotmart widget (opcional)
   try { if(window.checkoutElements) checkoutElements.init('salesFunnel').mount('#hotmart-sales-funnel'); } catch(e){ console.warn('Hotmart widget: verifique o snippet oficial.', e); }
 })();
+// Envio de lead robusto a CORS/preflight
+function sendLeadSafe(payload){
+  return fetch(LEAD_ENDPOINT, {
+    method: 'POST',
+    mode: 'no-cors',
+    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+    body: JSON.stringify(payload)
+  }).then(function(){ return true; }).catch(function(){ return false; });
+}
 </script>
 
 <script>
