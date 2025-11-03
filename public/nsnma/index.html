@@ -102,7 +102,7 @@
 </head>
 <body>
 <script>
-  window.LEAD_ENDPOINT = "https://script.google.com/macros/s/AKfycbyAXFmSBpb3Sj2xE7tzcfsbJRcpw5z45v_tK795Z4LhBzFLa3sVx75g04NPOC6A3IY/exec";
+  window.LEAD_ENDPOINT = "https://script.google.com/macros/s/AKfycbwHuDECXkY2SSMyr44qH5k_wVXVEP3UISD473gr89vvC_YF66MygF6L06GqYXU7Ne27Pg/exec";
 </script>
 
 <!-- HERO 2 COLUNAS (com retrato) -->
@@ -154,7 +154,7 @@
       <p class="muted" style="margin-top:6px;">Material enxuto, ação rápida, zero truques de manipulação.</p>
     </div>
 
-    <!-- Foto ambiente de trabalho (enviar para /nsnma/portrait-action.jpg) -->
+    <!-- Foto ambiente de trabalho (enviar para /nsnma/portrait-cafe.jpg) -->
     <figure class="card" style="padding:0; overflow:hidden;">
       <img src="/nsnma/portrait-cafe.jpg" alt="Felipe trabalhando no laptop em ambiente claro" style="width:100%; display:block; aspect-ratio:4/5; object-fit:cover; background:#ddd;" loading="lazy" decoding="async" />
       
@@ -349,7 +349,7 @@
     <h2 class="h2">Diagnóstico Rápido — Cluster dominante</h2>
     <form id="cluster-quiz"></form>
     <div id="quiz-actions" style="margin-top:12px; display:flex; gap:10px;">
-      <button id="quiz-submit" type="button" class="cta cta-primary">Ver meu resultado</button>
+      <button id="quiz-submit" type="button" class="cta cta-primary">Enviar e ver meu resultado</button>
       <button id="quiz-reset" type="button" class="cta cta-ghost">Limpar</button>
     </div>
     <div id="lead" style="margin-top:12px; max-width:460px;">
@@ -359,6 +359,7 @@
       </label>
       <div id="lead-error" class="muted" style="display:none; font-size:12px; color:#C62828">Insira um e-mail válido e aceite o consentimento para receber o resultado por e-mail.</div>
     </div>
+    <p id="lead-status" class="muted" style="display:none;font-size:12px;margin-top:10px;">Preencha o e-mail e marque o consentimento para receber por e-mail. Se não quiser, eu mostro o resultado aqui mesmo.</p>
     <div id="quiz-result" class="card" style="margin-top:16px; display:none"></div>
   </div>
 </section>
@@ -410,7 +411,28 @@
     function calcResult(){ const clusterScores={1:0,2:0,3:0,4:0,5:0,6:0,7:0}; for(const q of questions){ const radios=document.getElementsByName('q'+q.id); let val=0; for(const r of radios){ if(r.checked) val=parseInt(r.value||0); } q.clusters.forEach(c=>clusterScores[c]+=val); } const sorted=Object.entries(clusterScores).sort((a,b)=>b[1]-a[1]); return {scores:clusterScores, top:sorted[0], second:sorted[1]}; }
 
     function renderResult(res){ const box=document.getElementById('quiz-result'); const topCluster=parseInt(res.top[0]); const topName=clusterNames[topCluster]; const secCluster=parseInt(res.second[0]); const secName=clusterNames[secCluster]; const cta=clusterCTAs[topCluster]||{title:"Próximo passo recomendado", bullets:["Prática semanal"], link:"https://pay.hotmart.com/H71326438T"}; let html=`<div class="h3">Seu resultado: <b>${topCluster} — ${topName}</b></div>`; html+=`<p class="muted">Secundário: ${secCluster} — ${secName}</p>`; html+=`<div class="card" style="margin-top:8px;"><b>${cta.title}</b><ul class="list">${cta.bullets.map(b=>`<li>${b}</li>`).join('')}</ul><p style="margin-top:8px;"><a class="cta cta-primary" target="_blank" rel="noopener" href="${cta.link}">Entrar agora — R$ 297</a> <a class="cta cta-ghost" href="#diagnostico">Voltar</a></p></div>`; html+=`<p class="muted" style="margin-top:8px; font-size:12px;">Pontuações: ${Object.entries(res.scores).map(([k,v])=>`${k}:${v}`).join(' · ')}</p>`; box.innerHTML=html; box.style.display='block';
-      const email=document.getElementById('lead-email')?.value?.trim(); const consent=document.getElementById('lead-consent')?.checked; const err=document.getElementById('lead-error'); if(email){ if(!validEmail(email)||!consent){ if(err) err.style.display='block'; } else { if(err) err.style.display='none'; const payload={email,consent,timestamp:new Date().toISOString(),topCluster:topCluster,secondCluster:secCluster,scores:res.scores,utm:getUTMs(),page:window.location.href}; sendLead(payload); } }
+      const email=document.getElementById('lead-email')?.value?.trim(); const consent=document.getElementById('lead-consent')?.checked; const err=document.getElementById('lead-error');
+      const status=document.getElementById('lead-status');
+      const btn=document.getElementById('quiz-submit');
+      if(email){
+        if(!validEmail(email)||!consent){
+          if(err) err.style.display='block';
+          if(status){ status.style.display='block'; status.textContent='Mostrando o resultado aqui. Para receber por e-mail, insira um e-mail válido e marque o consentimento.'; }
+        } else {
+          if(err) err.style.display='none';
+          if(status){ status.style.display='block'; status.textContent='Enviando…'; }
+          if(btn){ btn.disabled=true; btn.textContent='Enviando…'; }
+          const payload={ email, consent, timestamp:new Date().toISOString(), topCluster:topCluster, secondCluster:secCluster, scores:res.scores, utm:getUTMs(), page:window.location.href };
+          sendLead(payload).then(function(ok){
+            if(status){ status.style.display='block'; status.textContent = ok ? 'Recebido. Veja seu resultado abaixo.' : 'Não deu para salvar agora, mas o resultado está aqui na página.'; }
+          }).catch(function(){
+            if(status){ status.style.display='block'; status.textContent='Não deu para salvar agora, mas o resultado está aqui na página.'; }
+          }).finally(function(){ if(btn){ btn.disabled=false; btn.textContent='Enviar e ver meu resultado'; } });
+        }
+      } else {
+        if(status){ status.style.display='block'; status.textContent='Resultado exibido abaixo. Se quiser receber por e-mail, preencha o campo e marque o consentimento.'; }
+      }
+
       box.scrollIntoView({behavior:'smooth'});
     }
 
