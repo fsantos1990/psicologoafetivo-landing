@@ -1,26 +1,53 @@
-# psicologoafetivo-landing
 
-Landing page em React + Vite + Tailwind.
+# Blog estático automático (Markdown → HTML)
 
-## Rodar localmente
-```bash
-npm install
-npm run dev
+## Como usar
+1. Instale as dependências:
+   ```bash
+   npm i gray-matter marked fs-extra slugify date-fns
+   ```
+
+2. Adicione ao seu `package.json`:
+   ```json
+   {
+     "scripts": {
+       "build:blog": "node scripts/build-blog.mjs",
+       "build": "vite build"
+     }
+   }
+   ```
+
+3. No Vercel, use o comando de build:
+   ```bash
+   npm run build:blog && npm run build
+   ```
+
+4. Escreva artigos em **Markdown** dentro de `content/blog/`:
+   ```md
+   ---
+   title: "Título do Post"
+   date: "2025-10-20"
+   featuredImage: "/og.jpg"
+   description: "Resumo curto (até 160 caracteres)."
+   category: "Categoria"
+   ---
+
+   Seu conteúdo em **Markdown** aqui.
+   ```
+
+5. O script vai gerar:
+   - `public/blog/<slug>/index.html` (cada artigo)
+   - `public/blog/index.html` (listagem)
+   - Os artigos usam header/footer e **/blog/blog.css** (tema claro)
+
+## Estrutura incluida
+```
+blog_starter/
+  content/blog/
+  public/blog/blog.css
+  scripts/build-blog.mjs
+  templates/article.html
+  templates/blog-index.html
+  README.md
 ```
 
-## Build de produção
-```bash
-npm run build
-npm run preview
-```
-
-## Deploy na Vercel (recomendado)
-1. Crie um repositório no GitHub e envie estes arquivos.
-2. Na Vercel, clique em **New Project** > **Import Git Repository** e selecione seu repo.
-3. Configure o **Framework Preset** como **Vite** (auto) e deploy.
-4. Em **Settings > Domains**, adicione `psicologoafetivo.com.br` e siga as instruções de DNS.
-
-## Ajustes rápidos
-- Atualize o link do WhatsApp em `src/App.jsx` (procure por `https://api.whatsapp.com/send?phone=`).
-- Política de Privacidade/Termos: ajuste os links no rodapé.
-- Cores e tipografia: utilize classes Tailwind (ex.: `text-[#235FAA]`).
