@@ -1,6 +1,0 @@
-{
-  "rewrites": [
-    { "source": "/decodificando", "destination": "/decodificando/index.html" },
-    { "source": "/decodificando/", "destination": "/decodificando/index.html" }
-  ]
-}
