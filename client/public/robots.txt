@@ -33,5 +33,4 @@ Disallow: /
 User-agent: MJ12bot
 Disallow: /
 
-# Sitemap
-Sitemap: https://www.psicologoafetivo.com.br/sitemap.xml
+
