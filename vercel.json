@@ -1,3 +1,3 @@
 git add vercel.json
-git commit -m "Add Vercel configuration"
+git commit -m "Fix: Correct Vercel configuration"
 git push
