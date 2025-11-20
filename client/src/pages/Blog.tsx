@@ -6,23 +6,26 @@ const blogPosts = [
   {
     id: "terapia-casal-online-ibct",
     title: "Terapia de Casal Online: IBCT",
-    excerpt: "Entenda como a Terapia Comportamental Integrada para Casais funciona e como pode ajudar seu relacionamento.",
+    excerpt: "Como a Terapia Comportamental Integrada para Casais pode ajudar vocês a sair do ciclo de brigas e construir um vínculo mais flexível e compassivo.",
     image: "/blog-1.jpg",
-    date: "01 de outubro de 2025",
   },
   {
     id: "ansiedade-autoestima-terapia-act",
     title: "Ansiedade, Autoestima e Terapia ACT",
-    excerpt: "Descubra como a Terapia de Aceitação e Compromisso pode ajudar você a lidar com ansiedade e fortalecer sua autoestima.",
+    excerpt: "Por que lutar contra os próprios pensamentos costuma piorar a ansiedade e como a ACT propõe uma relação mais gentil consigo mesmo.",
     image: "/blog-2.jpg",
-    date: "15 de setembro de 2025",
   },
   {
     id: "relacionamentos-espelhos-amor-consciente",
     title: "Relacionamentos como Espelhos do Amor Consciente",
-    excerpt: "Explore como nossos relacionamentos refletem nossas crenças sobre nós mesmos e como transformar isso.",
+    excerpt: "De que maneira as relações revelam crenças profundas sobre quem somos e o que merecemos, e como transformar esse espelho em crescimento.",
     image: "/blog-3.jpg",
-    date: "20 de agosto de 2025",
+  },
+  {
+    id: "quando-procurar-terapia-de-casal",
+    title: "Quando procurar terapia de casal: antes, durante ou depois da crise?",
+    excerpt: "Sinais de que está na hora de pedir ajuda, mitos comuns sobre terapia de casal e como se preparar para o primeiro encontro.",
+    image: "/blog-1.jpg",
   },
 ];
 
@@ -57,7 +60,6 @@ export default function Blog() {
 
                   {/* Content */}
                   <div className="p-6 flex flex-col flex-grow">
-                    <p className="text-sm text-muted-foreground mb-2">{post.date}</p>
                     <h2 className="text-xl font-semibold mb-3 group-hover:text-primary transition-colors">
                       {post.title}
                     </h2>

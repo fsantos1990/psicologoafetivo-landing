@@ -11,7 +11,7 @@ export default function Home() {
   // Detectar seção ativa ao rolar
   useEffect(() => {
     const handleScroll = () => {
-      const sections = ["hero", "sobre", "servicos", "conteudo", "depoimentos", "faq", "contato"];
+      const sections = ["hero", "sobre", "servicos", "conteudo", "faq", "contato"];
       const scrollPosition = window.scrollY + 100;
 
       for (const section of sections) {
@@ -288,12 +288,13 @@ export default function Home() {
               </CardHeader>
               <CardContent>
                 <p className="text-sm text-muted-foreground">
-                  Para quem está em um relacionamento ou em processo de separação e precisa organizar
-                  emoções, decisões e padrões afetivos à luz dos próprios valores.
+                  Para quem está em um relacionamento ou em processo de separação e também para quem vive
+                  ansiedade, depressão, problemas no trabalho ou outros impasses na vida e precisa organizar
+                  emoções, decisões e padrões à luz dos próprios valores.
                 </p>
               </CardContent>
               <CardFooter>
-                <p className="text-xs text-primary">ACT para relacionamentos e vida afetiva</p>
+                <p className="text-xs text-primary">ACT para relacionamentos, ansiedade, depressão, trabalho e vida</p>
               </CardFooter>
             </Card>
 
@@ -375,43 +376,6 @@ export default function Home() {
               Ver todos os artigos
               <ChevronDown className="h-4 w-4 rotate-[-90deg]" />
             </a>
-          </div>
-        </div>
-      </section>
-
-      {/* DEPOIMENTOS SECTION */}
-      <section id="depoimentos" className="py-16 md:py-20 bg-muted/30">
-        <div className="container">
-          <div className="max-w-2xl mb-12 mx-auto text-center">
-            <div className="text-xs tracking-widest uppercase text-primary mb-2">Depoimentos</div>
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              O que dizem casais que passaram por aqui
-            </h2>
-          </div>
-
-          <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
-            {[
-              {
-                text: "A terapia com o Felipe nos ajudou a entender que não precisávamos mudar quem somos, mas sim como nos relacionamos. Hoje conseguimos conversar sobre o que dói sem virar uma guerra.",
-                author: "Ana e Carlos",
-                context: "Casal em terapia há 6 meses",
-              },
-              {
-                text: "Eu achava que a gente ia terminar. A IBCT nos mostrou que nossos conflitos tinham sentido e que dava pra construir intimidade mesmo com nossas diferenças.",
-                author: "Mariana e Pedro",
-                context: "Casal em terapia há 1 ano",
-              },
-            ].map((testimonial, index) => (
-              <Card key={index} className="hover:shadow-lg transition-shadow">
-                <CardContent className="pt-6">
-                  <p className="text-muted-foreground mb-4 italic">"{testimonial.text}"</p>
-                  <div className="border-t pt-4">
-                    <p className="font-semibold">{testimonial.author}</p>
-                    <p className="text-sm text-muted-foreground">{testimonial.context}</p>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
           </div>
         </div>
       </section>
