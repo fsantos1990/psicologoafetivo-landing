@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Nem Só Nem Mal Acompanhada – Curso Real, Sem Milagre Nem Enrolação</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Nem Só Nem Mal Acompanhada - um curso direto, humano e honesto sobre escolhas afetivas, sem promessa milagrosa, sem fórmula mágica e sem IA escrevendo por mim.">
+  <style>
+    :root {
+      --bg: #0b0b0d;
+      --card: #16161a;
+      --accent: #f5b544;
+      --accent-soft: #f5d48b33;
+      --text: #f7f7f7;
+      --muted: #a5a5a5;
+      --danger-soft: #ff4b6a22;
+      --radius: 12px;
+      --max-width: 960px;
+      --shadow: 0 18px 45px rgba(0, 0, 0, 0.55);
+      --font-main: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: var(--font-main);
+      background: radial-gradient(circle at top, #1e1b2f 0, #050508 55%, #020203 100%);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .page {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+      background: linear-gradient(to bottom, rgba(0, 0, 0, 0.7), transparent);
+      backdrop-filter: blur(8px);
+      position: sticky;
+      top: 0;
+      z-index: 20;
+    }
+
+    .topbar {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0.55rem 1.25rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.82rem;
+      color: var(--muted);
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 0.2rem 0.7rem;
+      border-radius: 999px;
+      border: 1px solid rgba(245, 181, 68, 0.4);
+      background: rgba(6, 6, 7, 0.85);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-size: 0.7rem;
+    }
+
+    .badge-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #46e08c;
+      box-shadow: 0 0 12px #46e08c;
+    }
+
+    .header-cta a {
+      font-size: 0.78rem;
+      opacity: 0.9;
+    }
+
+    .main {
+      flex: 1;
+    }
+
+    .container {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 1.5rem 1.25rem 4rem;
+    }
+
+    /* HERO */
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.6fr) minmax(0, 1.1fr);
+      gap: 2.3rem;
+      align-items: center;
+      padding-top: 1.5rem;
+      padding-bottom: 2.5rem;
+    }
+
+    .hero-kicker {
+      font-size: 0.9rem;
+      color: var(--muted);
+      margin-bottom: 0.4rem;
+    }
+
+    h1 {
+      font-size: clamp(2.1rem, 4vw, 2.7rem);
+      line-height: 1.15;
+      margin-bottom: 0.8rem;
+    }
+
+    h1 span.highlight {
+      color: var(--accent);
+    }
+
+    .hero-sub {
+      color: var(--muted);
+      font-size: 0.97rem;
+      margin-bottom: 1.2rem;
+    }
+
+    .hero-sub strong {
+      color: #f9f9f9;
+    }
+
+    .hero-list {
+      list-style: none;
+      margin-bottom: 1.7rem;
+    }
+
+    .hero-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.55rem;
+      margin-bottom: 0.35rem;
+      font-size: 0.95rem;
+    }
+
+    .hero-list span.bullet {
+      font-size: 1rem;
+      margin-top: 0.1rem;
+    }
+
+    .cta-group {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.9rem;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.85rem 1.4rem;
+      border-radius: 999px;
+      border: none;
+      cursor: pointer;
+      background: linear-gradient(135deg, #f5b544, #f58f3b);
+      color: #221400;
+      font-weight: 600;
+      font-size: 0.96rem;
+      box-shadow: 0 14px 30px rgba(0, 0, 0, 0.7);
+      text-decoration: none;
+      transition: transform 0.12s ease, box-shadow 0.12s ease, filter 0.12s ease;
+      white-space: nowrap;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      filter: brightness(1.04);
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.9);
+    }
+
+    .btn-secondary {
+      font-size: 0.85rem;
+      color: var(--muted);
+      text-decoration: underline;
+      text-decoration-style: dotted;
+      cursor: pointer;
+    }
+
+    .guarantee-text {
+      font-size: 0.78rem;
+      color: var(--muted);
+      margin-top: 0.4rem;
+    }
+
+    .hero-card {
+      background: radial-gradient(circle at top left, #27223b 0, #14141b 40%, #101016 100%);
+      border-radius: var(--radius);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      padding: 1.2rem 1.2rem 1.3rem;
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-card-tag {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      margin-bottom: 0.4rem;
+    }
+
+    .hero-card-title {
+      font-size: 1.1rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .hero-card-sub {
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-bottom: 0.7rem;
+    }
+
+    .hero-price-row {
+      display: flex;
+      align-items: baseline;
+      gap: 0.7rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .hero-price-label {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.09em;
+      color: var(--muted);
+    }
+
+    .hero-price {
+      font-size: 1.5rem;
+      font-weight: 700;
+    }
+
+    .hero-price small {
+      font-size: 0.8rem;
+      font-weight: 400;
+      color: var(--muted);
+      margin-left: 0.2rem;
+    }
+
+    .hero-price-note {
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-bottom: 0.9rem;
+    }
+
+    .hero-card-footer {
+      border-top: 1px solid rgba(255, 255, 255, 0.07);
+      padding-top: 0.75rem;
+      margin-top: 0.75rem;
+      display: flex;
+      justify-content: space-between;
+      gap: 0.6rem;
+      font-size: 0.75rem;
+      color: var(--muted);
+      flex-wrap: wrap;
+    }
+
+    .hero-chip {
+      padding: 0.25rem 0.7rem;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      font-size: 0.72rem;
+    }
+
+    .hero-floating-label {
+      position: absolute;
+      top: 0.85rem;
+      right: 0.9rem;
+      padding: 0.25rem 0.65rem;
+      border-radius: 999px;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      background: rgba(5, 5, 6, 0.9);
+      border: 1px solid rgba(245, 181, 68, 0.45);
+      color: var(--accent);
+    }
+
+    /* SECTIONS */
+
+    section {
+      margin-top: 2.8rem;
+    }
+
+    section h2 {
+      font-size: 1.35rem;
+      margin-bottom: 0.6rem;
+    }
+
+    section p {
+      font-size: 0.95rem;
+      color: var(--muted);
+    }
+
+    .tagline {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--accent);
+      margin-bottom: 0.3rem;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.1fr);
+      gap: 2rem;
+      align-items: flex-start;
+    }
+
+    .card {
+      background: var(--card);
+      border-radius: var(--radius);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      padding: 1.1rem 1.15rem;
+      box-shadow: 0 10px 32px rgba(0, 0, 0, 0.5);
+    }
+
+    .card h3 {
+      font-size: 1.02rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .card p {
+      font-size: 0.9rem;
+    }
+
+    ul.checklist {
+      list-style: none;
+      margin-top: 0.6rem;
+    }
+
+    ul.checklist li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.5rem;
+      margin-bottom: 0.3rem;
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    ul.checklist span.icon {
+      font-size: 1rem;
+      margin-top: 0.1rem;
+    }
+
+    .list-two-cols {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: 0.4rem 1.6rem;
+      margin-top: 0.6rem;
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      padding: 0.22rem 0.65rem;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      font-size: 0.74rem;
+      color: var(--muted);
+    }
+
+    .pill-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #f5b544;
+    }
+
+    .meta-note {
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-top: 0.5rem;
+    }
+
+    .section-soft {
+      background: linear-gradient(to right, rgba(245, 181, 68, 0.04), transparent);
+      border-radius: var(--radius);
+      border: 1px solid rgba(245, 181, 68, 0.12);
+      padding: 1rem 1rem 1.15rem;
+    }
+
+    .section-soft p {
+      color: #d6d6d6;
+    }
+
+    .section-soft strong {
+      color: var(--accent);
+    }
+
+    .no-bullshit {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.1fr);
+      gap: 1.4rem;
+    }
+
+    .no-bullshit-box {
+      border-radius: var(--radius);
+      padding: 1rem 1rem 1.1rem;
+      border: 1px dashed rgba(255, 255, 255, 0.1);
+      font-size: 0.9rem;
+    }
+
+    .no-bullshit-box.bad {
+      background: var(--danger-soft);
+    }
+
+    .no-bullshit-box.good {
+      background: var(--accent-soft);
+    }
+
+    .no-bullshit-box h3 {
+      font-size: 0.95rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .no-bullshit-box ul {
+      list-style: none;
+      padding-left: 0.3rem;
+    }
+
+    .no-bullshit-box li {
+      margin-bottom: 0.25rem;
+    }
+
+    /* FAQ */
+
+    .faq {
+      margin-top: 2.6rem;
+    }
+
+    .faq-item {
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 0.85rem 0;
+    }
+
+    .faq-item:last-child {
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .faq-question {
+      font-size: 0.95rem;
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+    }
+
+    .faq-answer {
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    /* FOOTER */
+
+    footer {
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      padding: 1.5rem 1.25rem 2.5rem;
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    footer .footer-inner {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .footer-inner a {
+      text-decoration: underline;
+      text-decoration-style: dotted;
+    }
+
+    /* RESPONSIVE */
+
+    @media (max-width: 840px) {
+      .hero {
+        grid-template-columns: minmax(0, 1fr);
+      }
+      .hero-card {
+        order: -1;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .grid-2 {
+        grid-template-columns: minmax(0, 1fr);
+      }
+      .no-bullshit {
+        grid-template-columns: minmax(0, 1fr);
+      }
+      .list-two-cols {
+        grid-template-columns: minmax(0, 1fr);
+      }
+      .cta-group {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .btn-primary {
+        width: 100%;
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <header>
+    <div class="topbar">
+      <div class="badge">
+        <span class="badge-dot"></span>
+        Curso 100% humano, 0% IA
+      </div>
+      <div class="header-cta">
+        <a href="https://pay.hotmart.com/H71326438T?bid=1764334253700" target="_blank" rel="noopener noreferrer">
+          Ir direto para a inscrição →
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main class="main">
+    <div class="container">
+
+      <!-- HERO -->
+      <section class="hero">
+        <div>
+          <p class="hero-kicker">Relacionamentos, escolhas e sanidade mental</p>
+          <h1><span class="highlight">Nem Só Nem Mal Acompanhada</span>: um curso real sobre vida afetiva, sem milagre e sem drama extra</h1>
+          <p class="hero-sub">
+            Criado por um cara real, que vive vida real, que se ferrou, aprendeu, estudou e resolveu organizar tudo
+            num curso pra quem está cansado de ficar entre dois extremos: <strong>sozinho demais ou mal acompanhado demais</strong>.
+          </p>
+
+          <ul class="hero-list">
+            <li>
+              <span class="bullet">•</span>
+              <span>Conteúdo direto, humano e aplicável. Nada de “fórmula secreta” ou papo de alma gêmea em 7 dias.</span>
+            </li>
+            <li>
+              <span class="bullet">•</span>
+              <span>Gravado do jeito que dava, com o tempo que dava, mas com pesquisa séria e visão de especialista.</span>
+            </li>
+            <li>
+              <span class="bullet">•</span>
+              <span>Você não vai ouvir “se não comprar agora, nunca mais”. Compra quando fizer sentido.</span>
+            </li>
+          </ul>
+
+          <div class="cta-group">
+            <a class="btn-primary" href="https://pay.hotmart.com/H71326438T?bid=1764334253700" target="_blank" rel="noopener noreferrer">
+              Quero entrar no Nem Só Nem Mal Acompanhada
+            </a>
+            <button class="btn-secondary" onclick="document.getElementById('sobre').scrollIntoView({behavior: 'smooth'});">
+              Antes me convence melhor ↓
+            </button>
+          </div>
+          <p class="guarantee-text">
+            Sem contagem regressiva fake, sem bônus de última hora inventado e sem promessas que eu não posso cumprir.
+          </p>
+        </div>
+
+        <aside class="hero-card">
+          <div class="hero-floating-label">feito na raça</div>
+          <p class="hero-card-tag">Informação séria, forma leve</p>
+          <h2 class="hero-card-title">Um curso pra quem não quer mais se perder em relacionamentos</h2>
+          <p class="hero-card-sub">
+            Se você está cansado de sentir que ou está sozinha demais, ou se enfiando em cada cilada emocional… esse curso foi pensado pra você.
+          </p>
+
+          <div class="hero-price-row">
+            <div>
+              <div class="hero-price-label">Investimento</div>
+              <div class="hero-price">
+                Preço justo
+                <small>(calculado com base em mercado e especialização)</small>
+              </div>
+            </div>
+          </div>
+
+          <p class="hero-price-note">
+            Não vou bancar o teatrinho de “de 2.000 por 97 só hoje”. O valor é honesto, compatível com o que você recebe, 
+            e pode ser pago em condições acessíveis dentro da Hotmart.
+          </p>
+
+          <a class="btn-primary" href="https://pay.hotmart.com/H71326438T?bid=1764334253700" target="_blank" rel="noopener noreferrer">
+            Ver valor e formas de pagamento na Hotmart
+          </a>
+
+          <div class="hero-card-footer">
+            <span class="hero-chip">Acesso online</span>
+            <span class="hero-chip">Conteúdo gravado por humano, não IA</span>
+          </div>
+        </aside>
+      </section>
+
+      <!-- SOBRE -->
+      <section id="sobre">
+        <p class="tagline">Primeiro, a real</p>
+        <h2>Esse curso não foi gravado num estúdio milionário. Foi feito como a vida é: do jeito possível.</h2>
+        <p>
+          O <strong>Nem Só Nem Mal Acompanhada</strong> não nasceu de um “projeto de marketing perfeito”. Nasceu de
+          experiências reais, estudo sério e da necessidade de falar de relacionamento sem aquela frescura e sem
+          empurrar ilusão.
+        </p>
+        <br />
+        <div class="section-soft">
+          <p>
+            Meu nome é Felipe Santos, sou psicólogo clínico (CRP/03 15591), pesquisador de relacionamentos e terapeuta de adultos e casais. Ddecidi organizar anos de erros, acertos, reflexões e conhecimento em algo
+            que pudesse <strong>ajudar outras pessoas a escolherem melhor</strong> – tanto a própria companhia quanto a companhia dos outros.
+          </p>
+          <p class="meta-note">
+            O curso foi pensado para ser prático, direto e possível de aplicar na vida real – inclusive pra quem tem
+            rotina corrida, pouca paciência pra enrolação e zero vontade de assistir conteúdo que parece propaganda de carro.
+          </p>
+        </div>
+      </section>
+
+      <!-- PRA QUEM É / NÃO É -->
+      <section>
+        <div class="grid-2">
+          <div class="card">
+            <h3>Pra quem é o Nem Só Nem Mal Acompanhada</h3>
+            <ul class="checklist">
+              <li>
+                <span class="icon">✔</span>
+                <span>Pra quem se sente preso entre a solidão e relacionamentos errados.</span>
+              </li>
+              <li>
+                <span class="icon">✔</span>
+                <span>Pra quem quer entender seus padrões afetivos e parar de repetir história.</span>
+              </li>
+              <li>
+                <span class="icon">✔</span>
+                <span>Pra quem busca clareza emocional, sem papo de “romance mágico instantâneo”.</span>
+              </li>
+              <li>
+                <span class="icon">✔</span>
+                <span>Pra quem valoriza sinceridade, ironia leve e um olhar pé no chão.</span>
+              </li>
+              <li>
+                <span class="icon">✔</span>
+                <span>Pra quem quer aprender a se escolher melhor e a escolher melhor com quem se relaciona.</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <h3>Pra quem <u>não</u> é esse curso</h3>
+            <ul class="checklist">
+              <li>
+                <span class="icon">✖</span>
+                <span>Pra quem quer fórmula mágica pra achar “a pessoa certa” em 7 dias.</span>
+              </li>
+              <li>
+                <span class="icon">✖</span>
+                <span>Pra quem acredita que alguém de fora pode decidir 100% da sua vida afetiva.</span>
+              </li>
+              <li>
+                <span class="icon">✖</span>
+                <span>Pra quem só quer confirmar o que já pensa, sem se questionar.</span>
+              </li>
+              <li>
+                <span class="icon">✖</span>
+                <span>Pra quem tá atrás de discursos exagerados, gritaria ou manipulação emocional.</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- O QUE TEM DENTRO -->
+      <section>
+        <p class="tagline">Conteúdo na prática</p>
+        <h2>O que você vai encontrar dentro do Nem Só Nem Mal Acompanhada</h2>
+        <p>
+          Sem spoiler de módulo inventado, sem enrolar nomes em inglês pra parecer mais sofisticado.
+          Você encontra dentro do curso exatamente aquilo que eu gostaria de ter ouvido lá atrás, quando me lasquei bonito com umas embustes que não vou citar.
+        </p>
+        <br />
+        <div class="grid-2">
+          <div>
+            <h3>Módulos em vídeo, diretos ao ponto</h3>
+            <div class="list-two-cols">
+              <span>• Entendendo seus padrões afetivos</span>
+              <span>• Por que a solidão assusta tanto</span>
+              <span>• Como você escolhe (e por que escolhe assim)</span>
+              <span>• Diferença entre companhia e bagunça emocional</span>
+              <span>• Limites, respeito próprio e “não” sem culpa</span>
+              <span>• Construindo relações possíveis, não perfeitas</span>
+            </div>
+            <p class="meta-note">
+              Os títulos exatos dos módulos podem mudar ao longo do tempo, conforme eu atualize e deixe tudo ainda mais claro. 
+              A ideia é simples: conteúdo que você entende, lembra e consegue aplicar.
+            </p>
+          </div>
+          <div>
+            <h3>Material pra pensar e agir</h3>
+            <ul class="checklist">
+              <li>
+                <span class="icon">•</span>
+                <span>Exercícios práticos para você observar como se relaciona hoje.</span>
+              </li>
+              <li>
+                <span class="icon">•</span>
+                <span>Perguntas incômodas (do jeito bom) pra sair do piloto automático.</span>
+              </li>
+              <li>
+                <span class="icon">•</span>
+                <span>Ferramentas simples para escolher melhor onde você coloca sua energia.</span>
+              </li>
+              <li>
+                <span class="icon">•</span>
+                <span>Exemplos reais, linguagem simples e zero academicês desnecessário.</span>
+              </li>
+            </ul>
+            <p class="meta-note">
+              O objetivo não é te encher de teoria, é te dar clareza pra viver melhor sua vida afetiva.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SINCERIDADE COMERCIAL -->
+      <section>
+        <p class="tagline">Sem truque de escassez</p>
+        <h2>Sobre preço, “última chance” e tudo aquilo que cansou todo mundo</h2>
+        <div class="no-bullshit">
+          <div class="no-bullshit-box bad">
+            <h3>O que você <u>não</u> vai ver aqui</h3>
+            <ul>
+              <li>✖ Timer falso fingindo que o curso vai sumir em 15 minutos.</li>
+              <li>✖ Print de faturamento aleatório que não prova nada.</li>
+              <li>✖ “De R$ 2.997 por 12x de 9,70 só hoje pra você”.</li>
+              <li>✖ Frase passivo-agressiva do tipo “se você não investir em você, você não se ama”.</li>
+            </ul>
+          </div>
+          <div class="no-bullshit-box good">
+            <h3>O que você encontra de verdade</h3>
+            <ul>
+              <li>✔ Um preço calculado com base no mercado e na profundidade do conteúdo(levando em consideração que a hotmart ainda come uma parte).</li>
+              <li>✔ Explicação honesta do que o curso é e do que ele não é.</li>
+              <li>✔ Atualizações possíveis, conforme eu acrescento novos aprendizados.</li>
+              <li>✔ Liberdade total pra você decidir quando (e se) quer entrar.</li>
+            </ul>
+          </div>
+        </div>
+        <p class="meta-note">
+          Se quiser comparar, pesquise outros cursos de relacionamentos e inteligência emocional. É saudável saber onde você está investindo seu dinheiro.
+          Só recomendo que evite os especialistas que não dizem de onde eles tiram essas informações. Ou nem falam sua formação. De boa opinião o inferno tá cheio.
+        </p>
+      </section>
+
+      <!-- CTA PRINCIPAL -->
+      <section>
+        <div class="card">
+          <h2>Se fizer sentido pra você agora, o próximo passo é simples</h2>
+          <p>
+            Se o que você leu até aqui conversou com a sua realidade, você não precisa de mais um empurrão teatral.
+            Você precisa só de um link funcionando.
+          </p>
+          <br />
+          <a class="btn-primary" href="https://pay.hotmart.com/H71326438T?bid=1764334253700" target="_blank" rel="noopener noreferrer">
+            Ver valor e garantir acesso ao Nem Só Nem Mal Acompanhada
+          </a>
+          <p class="meta-note">
+            Se não fizer sentido agora, tudo certo também. Essa página não vai te ameaçar, nem tentar te envergonhar por isso.
+          </p>
+        </div>
+      </section>
+
+      <!-- FAQ -->
+      <section class="faq">
+        <p class="tagline">Perguntas honestas</p>
+        <h2>Perguntas frequentes (as que eu responderia num café, não num anúncio)</h2>
+
+        <div class="faq-item">
+          <div class="faq-question">O curso é só pra mulher?</div>
+          <div class="faq-answer">
+            Não. O nome <strong>Nem Só Nem Mal Acompanhada</strong> é uma provocação, mas o conteúdo serve pra qualquer pessoa
+            que queira olhar pra vida afetiva com mais lucidez – independente de gênero. É que geralmente mulher tá mais disposta a buscar ajuda do que homem. Experiência própria.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">Você usa IA no conteúdo?</div>
+          <div class="faq-answer">
+            O conteúdo do curso foi pensado, estruturado e gravado por mim, pessoa de carne e osso. 
+            As reflexões, exemplos, exercícios e vivências são humanos. Tecnologia pode até ajudar em coisas técnicas,
+            mas a experiência e a visão crítica são minhas. Depois dois amigos queridos editaram tudo pra mim porque eu sou só um psicólogo.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">Quanto tempo eu tenho de acesso?</div>
+          <div class="faq-answer">
+            O acesso é online, pela Hotmart. Dentro da plataforma você vê as condições exatas de acesso
+            e por quanto tempo o conteúdo fica disponível – sempre apresentadas de forma clara.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">E se eu não gostar?</div>
+          <div class="faq-answer">
+            Você pode contar com as políticas de garantia que a própria Hotmart oferece. 
+            Eu faço a minha parte entregando conteúdo honesto, e você faz a sua avaliando se faz sentido continuar.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">Preciso estar passando por um relacionamento agora?</div>
+          <div class="faq-answer">
+            Não. Na verdade, pode ser até melhor fazer o curso num momento mais “calmo”. Tanto faz.
+            A ideia é te preparar pra escolher melhor – seja continuar sozinho, seja se abrir para um relacionamento mais saudável.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">Esse curso substitui terapia?</div>
+          <div class="faq-answer">
+            Não substitui. O curso é um espaço de reflexão, clareza e ferramentas práticas,
+            mas não é atendimento clínico. Se você sente que precisa de ajuda mais profunda,
+            terapia é sempre um caminho muito bem-vindo.
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <span>
+        Felipe Santos. Criador do curso Nem Só Nem Mal Acompanhada – conteúdo humano, direto e sem promessas milagrosas.
+      </span>
+      <span>
+        Compra processada com segurança pela <a href="https://www.hotmart.com" target="_blank" rel="noopener noreferrer">Hotmart</a>.
+      </span>
+    </div>
+  </footer>
+
+</div>
+
+</body>
+</html>
