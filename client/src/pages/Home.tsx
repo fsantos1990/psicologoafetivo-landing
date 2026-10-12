@@ -171,6 +171,11 @@ export default function Home() {
                   </Button>
                 </a>
               </div>
+              <div className="text-sm">
+                <a href="/agendamento/" className="text-primary hover:underline">
+                  Couples therapy in English / Terapia de casal em inglês e português para casais interculturais
+                </a>
+              </div>
               <div className="text-sm text-gray-400">
                 Atendimento 100% online · CRP 03/15591 · Casais heterossexuais monogâmicos
               </div>
