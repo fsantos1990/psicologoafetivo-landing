@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#F7F2EC">
+<link rel="manifest" href="/app/manifest.webmanifest">
+<link rel="apple-touch-icon" href="/logo.png">
+<title>Mapa Afetivo · Plano de 30 Dias</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;700;900&display=swap">
+<style>
+/* Layout: cabeçalho com grade de 30 dias como navegação, abaixo um dia por vez com os campos do exercício daquele dia */
+:root{
+  --bg:#F7F2EC; --surface:#FFFDF9; --fg:#1F2430; --muted:#5E6472; --line:#E3DCD2;
+  --accent:#235FAA; --accent-soft:#DCE6F4; --on-accent:#FFFFFF; --warn:#B5562B; --warn-soft:#F6E3D8; --ok:#2F7D5B; --ok-soft:#DDEFE5;
+  --font:'Outfit','Segoe UI',system-ui,-apple-system,sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#14171D; --surface:#1C2029; --fg:#ECE7DF; --muted:#A3A9B5; --line:#2E333D;
+  --accent:#86ADE6; --accent-soft:#22314B; --on-accent:#0E1420; --warn:#E39068; --warn-soft:#3A271E; --ok:#6FC49C; --ok-soft:#1E3529; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#14171D; --surface:#1C2029; --fg:#ECE7DF; --muted:#A3A9B5; --line:#2E333D;
+  --accent:#86ADE6; --accent-soft:#22314B; --on-accent:#0E1420; --warn:#E39068; --warn-soft:#3A271E; --ok:#6FC49C; --ok-soft:#1E3529; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--font);font-size:17px;line-height:1.55;
+  padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px));padding-block:0 48px}
+.wrap{max-width:680px;margin:0 auto}
+.proto{font-size:13px;color:var(--muted);text-align:center;padding-block:10px;border-bottom:1px dashed var(--line)}
+h1{font-weight:900;font-size:clamp(32px,7.5vw,46px);line-height:1.05;margin:26px 0 10px;letter-spacing:-.01em;text-wrap:balance}
+h2{font-weight:900;font-size:26px;line-height:1.15;margin:0 0 6px;text-wrap:balance}
+h3{font-weight:700;font-size:18px;margin:0 0 6px}
+p{margin:0 0 12px;max-width:62ch}
+.muted{color:var(--muted)} .small{font-size:14px}
+.eyebrow{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:20px;margin-top:16px}
+.weeks{display:grid;gap:12px;margin-top:18px}
+.week h3{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.week h3 span{font-size:13px;font-weight:500;color:var(--muted)}
+.grid{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;margin-top:8px}
+.grid button{aspect-ratio:1;max-width:100%;border-radius:10px;border:1.5px solid var(--line);background:var(--surface);color:var(--fg);
+  font-family:var(--font);font-weight:700;font-size:15px;cursor:pointer;font-variant-numeric:tabular-nums;padding:0;position:relative}
+.grid button.done{background:var(--ok-soft);border-color:var(--ok);color:var(--ok)}
+.grid button.today{box-shadow:inset 0 0 0 2px var(--accent)}
+.grid button.sel{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
+.grid button:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;flex-wrap:wrap}
+.pill{font-size:12px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;padding:4px 10px;border-radius:999px;background:var(--accent-soft);color:var(--accent);white-space:nowrap}
+.pill.ok{background:var(--ok-soft);color:var(--ok)}
+.task{border-top:1px solid var(--line);padding-block:16px;display:grid;gap:8px}
+.task:first-of-type{border-top:0;padding-top:4px}
+label.lbl{font-weight:500;font-size:15px}
+input[type=text],input[type=date],textarea,select{width:100%;font-family:var(--font);font-size:16px;padding:11px 13px;border-radius:12px;border:1.5px solid var(--line);background:var(--bg);color:var(--fg)}
+textarea{min-height:84px;resize:vertical}
+input:focus-visible,textarea:focus-visible,select:focus-visible,button:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.check{display:flex;gap:10px;align-items:flex-start;font-weight:500;cursor:pointer}
+.check input{width:22px;height:22px;accent-color:var(--accent);margin-top:2px;flex:none}
+button.btn{font-family:var(--font);font-size:16px;font-weight:700;border-radius:12px;padding:12px 20px;cursor:pointer;border:1.5px solid var(--accent)}
+.primary{background:var(--accent);color:var(--on-accent)} .ghost{background:transparent;color:var(--accent)}
+.nav{display:flex;justify-content:space-between;gap:10px;margin-top:18px;flex-wrap:wrap}
+.seg{display:inline-flex;border:1.5px solid var(--line);border-radius:12px;overflow:hidden}
+.seg button{font-family:var(--font);font-size:15px;font-weight:700;padding:9px 16px;border:0;background:var(--surface);color:var(--muted);cursor:pointer}
+.seg button.on{background:var(--accent);color:var(--on-accent)}
+.rate{display:grid;gap:6px;padding-block:12px;border-top:1px solid var(--line)}
+.rate:first-of-type{border-top:0}
+.rate .top{display:flex;justify-content:space-between;gap:10px;font-weight:500;font-size:15px}
+.rate .val{font-weight:900;color:var(--accent);font-variant-numeric:tabular-nums;min-width:2ch;text-align:right}
+.rate .val.unset{color:var(--muted);font-weight:500}
+input[type=range]{width:100%;accent-color:var(--accent)}
+.ends{display:flex;justify-content:space-between;font-size:12px;color:var(--muted)}
+.tbl{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:14px;font-variant-numeric:tabular-nums}
+th,td{text-align:left;padding:9px 6px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:12px;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);font-weight:700}
+td.n{text-align:center;width:64px} th.n{text-align:center}
+.diff{display:inline-block;min-width:28px;padding:2px 6px;border-radius:6px;font-weight:700}
+.diff.hi{background:var(--warn-soft);color:var(--warn)}
+.note{background:var(--accent-soft);color:var(--fg);border-radius:12px;padding:12px 14px;font-size:14px}
+.note.warn{background:var(--warn-soft)}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+@media (max-width:460px){.row2{grid-template-columns:1fr}}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chips button{font-family:var(--font);font-size:14px;font-weight:500;padding:7px 12px;border-radius:999px;border:1.5px solid var(--line);background:var(--surface);color:var(--fg);cursor:pointer}
+.chips button.on{border-color:var(--accent);background:var(--accent-soft);color:var(--accent);font-weight:700}
+.logrow{display:grid;gap:6px;padding-block:10px;border-top:1px solid var(--line)}
+.logrow:first-child{border-top:0}
+.bars{display:grid;gap:12px}
+.bname{font-weight:500;font-size:14px;display:flex;justify-content:space-between;gap:8px}
+.bline{display:grid;grid-template-columns:70px 1fr 28px;gap:8px;align-items:center;font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums}
+.btrack{height:9px;background:var(--line);border-radius:5px;overflow:hidden}
+.b1{height:100%;background:var(--muted)} .b2{height:100%;background:var(--accent)}
+.legend{display:flex;gap:14px;font-size:13px;color:var(--muted);flex-wrap:wrap;margin-bottom:10px}
+.dot{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:6px;vertical-align:middle}
+.foot{margin-top:32px;font-size:13px;color:var(--muted);border-top:1px solid var(--line);padding-top:14px}
+@media (prefers-reduced-motion: reduce){*{transition:none!important}}
+</style>
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}</style>
+</head>
+<body>
+<div class="wrap" id="app"><p class="muted" style="margin-top:40px">Carregando…</p></div>
+<div class="wrap foot">
+  Material educativo baseado no Capítulo 12 de <em>Decodificando o Amor</em>, 2ª edição. Ele não substitui terapia.
+  Se há agressão física, ameaça ou controle na relação, os exercícios em casal não são indicados: procure o Ligue 180 ou, em emergência, o 190.<br>
+  Felipe Santos · Psicólogo · CRP 03/15591 · @psicologoafetivo
+</div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
+<script>
+/* ---------- dados do livro ---------- */
+const ITEMS = [
+  {k:'int', t:'Intimidade', ends:['Baixa','Alta']},
+  {k:'pai', t:'Paixão', ends:['Baixa','Alta']},
+  {k:'com', t:'Compromisso', ends:['Baixo','Alto']},
+  {k:'pcom', t:'Quanto percebo que meu parceiro(a) está comprometido(a)', ends:['Pouco','Muito']},
+  {k:'apr', t:'Quanto me sinto apreciado(a) por ele(a)', ends:['Pouco','Muito']},
+  {k:'sex', t:'Satisfação com a vida sexual de vocês', ends:['Baixa','Alta']},
+  {k:'psat', t:'Na minha leitura, quanto ele(a) está satisfeito(a) com a relação', ends:['Pouco','Muito']},
+  {k:'conf', t:'Nível de conflito', ends:['Frequente e corrosivo','Raro e bem resolvido']},
+  {k:'sat', t:'Quanto eu estou satisfeito(a) com a relação', ends:['Pouco','Muito']}
+];
+const PRIOR = ['int','pai','com','pcom','apr','sex','conf'];
+const LABEL = Object.fromEntries(ITEMS.map(i=>[i.k,i.t]));
+const SHORT = {int:'Intimidade',pai:'Paixão',com:'Compromisso',pcom:'Compromisso percebido',apr:'Apreciação',sex:'Satisfação sexual',psat:'Leitura da satisfação do outro',conf:'Conflito',sat:'Satisfação própria'};
+const WEEKS = [
+  {n:1, t:'Responsividade e apreciação', cap:'Capítulos 1 e 6', days:[1,7]},
+  {n:2, t:'Diagnóstico e leitura de mente', cap:'Capítulos 4 e 6', days:[8,14]},
+  {n:3, t:'Conflito e reparo', cap:'Capítulos 5 e 8', days:[15,21]},
+  {n:4, t:'Intimidade, contexto e futuro', cap:'Capítulos 4, 9 e 10', days:[22,28]},
+  {n:5, t:'Fechamento', cap:'Capítulos 11 e 12', days:[29,30]}
+];
+const HELP = [
+  'Os exercícios travam sempre no mesmo ponto',
+  'Crítica, desprezo, defensividade ou obstrução viraram o jeito padrão de conversar',
+  'Existe um tema que os dois evitam há meses porque toda tentativa explode',
+  'Um dos dois já pensa em sair e o outro não sabe'
+];
+
+function dayInfo(d){
+  if(d<=6) return {t:'Resposta responsiva e apreciação', kind:'w1'};
+  if(d===7) return {t:'Verificação da semana', kind:'w1check'};
+  if(d===8) return {t:'Notas: cada um em separado', kind:'notes', set:'w2'};
+  if(d===9) return {t:'Notas: quem ainda não preencheu', kind:'notes', set:'w2'};
+  if(d===10) return {t:'Conversa de comparação', kind:'compare'};
+  if(d<=14) return {t:'Aplicar os dois comportamentos', kind:'behav'};
+  if(d===15) return {t:'Reclassificar conflitos e escolher o sinal de reparo', kind:'reclass'};
+  if(d===18) return {t:'Sinal de reparo e exercício de história', kind:'repair', story:true};
+  if(d<=21) return {t:'Sinal de reparo em uso', kind:'repair'};
+  if(d===23||d===26) return {t:'Tempo de casal protegido', kind:'couple'};
+  if(d===25) return {t:'Mapa de contexto do desejo', kind:'desire'};
+  if(d===28) return {t:'Reavaliação e decisão', kind:'notes28'};
+  if(d<=27) return {t:'Dia de manutenção', kind:'keep'};
+  if(d===29) return {t:'Critério de decisão', kind:'criterion'};
+  return {t:'Contrato de manutenção', kind:'contract'};
+}
+const weekOf = d => WEEKS.find(w=>d>=w.days[0]&&d<=w.days[1]);
+
+
+const todayISO = ()=>{ const d=new Date(); d.setMinutes(d.getMinutes()-d.getTimezoneOffset()); return d.toISOString().slice(0,10); };
+function dayNumToday(){ if(!S.start) return 1; const ms = new Date(todayISO()) - new Date(S.start); return Math.min(30, Math.max(1, Math.floor(ms/864e5)+1)); }
+function dateOf(d){ const x = new Date(S.start+'T12:00:00'); x.setDate(x.getDate()+d-1); return x; }
+const fmt = x => x.toLocaleDateString('pt-BR',{day:'2-digit',month:'short'});
+function addDays(iso,n){ const x=new Date(iso+'T12:00:00'); x.setDate(x.getDate()+n); return x; }
+const esc = s => String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+
+/* ---------- Supabase ---------- */
+const SB = window.supabase.createClient(
+  'https://bzkzfculngbydrigulnf.supabase.co',
+  'sb_publishable_xASm0mMN9Vt3uP_Wx9BHeg_xWwwYtkf'
+);
+const isPrivate = k => /^d25_/.test(k);   // mapa de contexto do desejo: só a própria pessoa vê
+
+/* ---------- estado ---------- */
+let S = {screen:'loading', start:null, view:1, done:{}, f:{}, n:{w2:{me:{},pa:{}}, d28:{me:{},pa:{}}},
+         user:null, couple:null, partner:null, access:false, msg:'', sent:''};
+try{ const v = +localStorage.getItem('mapa-view'); if(v) S.view = v; }catch(e){}
+function saveView(){ try{ localStorage.setItem('mapa-view', String(S.view)); }catch(e){} }
+
+/* fila de gravação: agrupa as mudanças e grava a cada 600 ms */
+const pend = new Map(); let flushT = null; let saving = false;
+function setStatus(t, bad){ const el = document.getElementById('sync'); if(el){ el.textContent = t; el.style.color = bad ? 'var(--warn)' : 'var(--muted)'; } }
+function queue(table, row, id){ pend.set(table+'|'+id, {table,row,id}); setStatus('Salvando…'); clearTimeout(flushT); flushT = setTimeout(flush, 600); }
+async function flush(){
+  if(saving){ flushT = setTimeout(flush, 400); return; }
+  saving = true;
+  const items = [...pend.values()]; pend.clear();
+  const groups = {};
+  items.forEach(i => (groups[i.table] ||= []).push(i.row));
+  const conflict = {plan_entries:'couple_id,key', private_entries:'user_id,key', ratings:'user_id,round,item'};
+  let bad = false;
+  for(const t in groups){
+    const { error } = await SB.from(t).upsert(groups[t], { onConflict: conflict[t] });
+    if(error){ bad = true; console.warn(t, error.message); items.filter(i=>i.table===t).forEach(i=>{ const key=t+'|'+i.id; if(!pend.has(key)) pend.set(key, i); }); }
+  }
+  saving = false;
+  if(bad){ setStatus('Não foi possível salvar. Verifique a conexão; tentamos de novo em 10 s.', true); flushT = setTimeout(flush, 10000); return; }
+  setStatus('Salvo');
+  if(groups.ratings){ for(const set of ['w2','d28']) if(complete(set,'me') && !complete(set,'pa')) { await loadRatings(); render(true); break; } }
+}
+function queueF(k){
+  const v = S.f[k];
+  if(isPrivate(k)) queue('private_entries', {user_id:S.user.id, key:k, value:v, updated_at:new Date().toISOString()}, k);
+  else queue('plan_entries', {couple_id:S.couple.id, key:k, value:v, updated_by:S.user.id, updated_at:new Date().toISOString()}, k);
+}
+function queueDone(d){ queue('plan_entries', {couple_id:S.couple.id, key:'done_'+d, value:!!S.done[d], updated_by:S.user.id, updated_at:new Date().toISOString()}, 'done_'+d); }
+function queueR(set,k){ queue('ratings', {user_id:S.user.id, couple_id:S.couple.id, round:set, item:k, value:S.n[set].me[k], updated_at:new Date().toISOString()}, set+k); }
+
+/* ---------- carregamento ---------- */
+async function loadRatings(){
+  const { data } = await SB.from('ratings').select('user_id,round,item,value');
+  S.n = {w2:{me:{},pa:{}}, d28:{me:{},pa:{}}};
+  (data||[]).forEach(r => { const who = r.user_id === S.user.id ? 'me' : 'pa'; S.n[r.round][who][r.item] = r.value; });
+}
+async function loadAll(){
+  const [plan, priv] = await Promise.all([
+    SB.from('plan_entries').select('key,value'),
+    SB.from('private_entries').select('key,value')
+  ]);
+  S.f = {}; S.done = {};
+  (plan.data||[]).forEach(r => { if(r.key.startsWith('done_')) S.done[+r.key.slice(5)] = r.value; else S.f[r.key] = r.value; });
+  (priv.data||[]).forEach(r => { S.f[r.key] = r.value; });
+  await loadRatings();
+}
+async function boot(){
+  S.msg = '';
+  const { data:{ session } } = await SB.auth.getSession();
+  if(!session){ S.screen = 'login'; return render(); }
+  S.user = session.user;
+  const { data:members, error } = await SB.from('couple_members').select('couple_id,user_id');
+  if(error){ S.screen = 'error'; S.msg = error.message; return render(); }
+  if(!members || !members.length){
+    const { data:acc } = await SB.rpc('has_access');
+    S.access = !!acc; S.screen = 'couple'; return render();
+  }
+  const { data:c } = await SB.from('couples').select('id,invite_code,start_date').single();
+  S.couple = c; S.start = c.start_date;
+  S.partner = (members.find(m => m.user_id !== S.user.id) || {}).user_id || null;
+  await loadAll();
+  S.screen = S.start ? 'main' : 'start';
+  if(S.view > 30 || S.view < 1) S.view = dayNumToday();
+  render();
+}
+document.addEventListener('visibilitychange', async () => {
+  if(document.visibilityState === 'visible' && S.screen === 'main' && !pend.size){ await loadAll(); render(true); }
+});
+SB.auth.onAuthStateChange((ev) => { if(ev === 'SIGNED_IN' || ev === 'SIGNED_OUT') boot(); });
+
+/* ---------- componentes ---------- */
+const txt = (k,ph='')=>`<input type="text" id="f-${k}" data-f="${k}" value="${esc(S.f[k])}" placeholder="${esc(ph)}">`;
+const area = (k,ph='')=>`<textarea id="f-${k}" data-f="${k}" placeholder="${esc(ph)}">${esc(S.f[k])}</textarea>`;
+const chk = (k,t)=>`<label class="check"><input type="checkbox" id="f-${k}" data-c="${k}" ${S.f[k]?'checked':''}><span>${t}</span></label>`;
+function chips(k, opts){ return `<div class="chips" role="group">${opts.map(o=>`<button type="button" data-chip="${k}" data-v="${o}" class="${S.f[k]===o?'on':''}" aria-pressed="${S.f[k]===o}">${o}</button>`).join('')}</div>`; }
+
+
+/* ---------- notas: cada pessoa no próprio aparelho ---------- */
+function ratings(set){
+  const vals = S.n[set].me;
+  const filled = ITEMS.filter(i=>vals[i.k]).length;
+  let partner;
+  if(!S.partner) partner = 'Seu parceiro(a) ainda não entrou no casal. As notas dele(a) aparecem depois que ele(a) entrar com o código.';
+  else if(complete(set,'me') && complete(set,'pa')) partner = 'As notas do parceiro(a) já chegaram. A comparação está liberada.';
+  else if(complete(set,'me')) partner = 'Suas notas estão completas. Falta o parceiro(a) completar as dele(a) no aparelho dele(a).';
+  else partner = 'As notas do parceiro(a) só aparecem para você depois que você completar as suas.';
+  return `<div class="head" style="margin-bottom:6px"><h3 style="margin:0">Minhas notas</h3>
+    <span class="pill ${filled===ITEMS.length?'ok':''}">${filled} de ${ITEMS.length}</span></div>
+  <p class="muted small">De 1 a 10, pensando nas últimas semanas. ${partner}</p>
+  ${ITEMS.map(i=>{ const v = vals[i.k]; return `<div class="rate">
+    <div class="top"><label for="r-${set}-${i.k}">${i.t}</label><span class="val ${v?'':'unset'}">${v||'–'}</span></div>
+    <input type="range" min="1" max="10" step="1" id="r-${set}-${i.k}" data-r="${set}.me.${i.k}" value="${v||5}" style="${v?'':'opacity:.45'}">
+    <div class="ends"><span>${i.ends[0]}</span><span>${i.ends[1]}</span></div></div>`; }).join('')}`;
+}
+
+/* ---------- telas de entrada ---------- */
+function loginScreen(){
+  return `<div class="eyebrow" style="margin-top:26px">Mapa Afetivo, por Psicólogo Afetivo</div>
+  <h1 style="margin-top:6px">Entrar no programa</h1>
+  ${S.sent ? `<div class="card"><h3>Confira seu e-mail</h3><p class="small">Enviamos um link de acesso para <b>${esc(S.sent)}</b>. Abra o link neste mesmo aparelho. Se não chegar em 2 minutos, olhe a caixa de spam.</p>
+    <button type="button" class="btn ghost" id="again">Usar outro e-mail</button></div>`
+  : `<div class="card"><label class="lbl" for="email">Seu e-mail</label>
+    <input type="text" inputmode="email" autocomplete="email" id="email" placeholder="seu@email.com" style="margin-top:6px">
+    <p class="muted small" style="margin:8px 0 0">Use o e-mail da compra. Se o seu parceiro(a) comprou, use o seu próprio e-mail e entre depois com o código do casal.</p>
+    ${S.msg?`<div class="note warn" style="margin-top:10px">${esc(S.msg)}</div>`:''}
+    <div class="nav"><span></span><button type="button" class="btn primary" id="sendLink">Receber link de acesso</button></div></div>`}`;
+}
+function coupleScreen(){
+  return `<div class="eyebrow" style="margin-top:26px">Mapa Afetivo · ${esc(S.user.email)}</div>
+  <h1 style="margin-top:6px">Montar o casal</h1>
+  <p>O plano é feito pelos dois, cada um no próprio celular. Uma pessoa cria o casal e envia o código para a outra.</p>
+  ${S.access ? `<div class="card"><h3>Criar o casal</h3><p class="small">Você recebe um código de 8 caracteres para enviar ao seu parceiro(a).</p>
+    <button type="button" class="btn primary" id="create">Criar o casal</button></div>` : ''}
+  <div class="card"><h3>Entrar com um código</h3><p class="small">Se o seu parceiro(a) já criou o casal, digite o código que ele(a) enviou.</p>
+    <div class="row2"><input type="text" id="code" placeholder="Ex.: 4F9A2C1B" autocapitalize="characters" aria-label="Código do casal"><button type="button" class="btn primary" id="join">Entrar</button></div></div>
+  ${!S.access ? `<div class="note" style="margin-top:16px">Este e-mail ainda não tem compra registrada. Se você comprou com outro e-mail, saia e entre com ele. Se ainda não comprou, conheça o programa em <a href="/mapa/" style="color:var(--accent)">psicologoafetivo.com.br/mapa</a>.</div>` : ''}
+  ${S.msg?`<div class="note warn" style="margin-top:12px">${esc(S.msg)}</div>`:''}
+  <div class="nav"><span></span><button type="button" class="btn ghost" id="logout" style="padding:8px 14px;font-size:14px">Sair</button></div>`;
+}
+function inviteBanner(){
+  if(S.partner) return '';
+  return `<div class="note" style="margin-top:16px"><b>Código do casal: <span style="font-variant-numeric:tabular-nums;letter-spacing:.08em">${esc(S.couple.invite_code)}</span></b><br>
+    Envie para o seu parceiro(a). Ele(a) entra em psicologoafetivo.com.br/app com o próprio e-mail e digita o código.
+    <div style="margin-top:8px"><button type="button" class="btn ghost" id="copyCode" style="padding:6px 12px;font-size:14px">Copiar código</button> <span id="codeMsg" class="small" aria-live="polite"></span></div></div>`;
+}
+
+/* ---------- ações ---------- */
+function bindAuth(){
+  const $ = id=>document.getElementById(id);
+  if($('sendLink')) $('sendLink').onclick = async ()=>{
+    const email = $('email').value.trim().toLowerCase();
+    if(!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)){ S.msg='Digite um e-mail válido, como nome@gmail.com.'; return render(); }
+    $('sendLink').disabled = true;
+    const { error } = await SB.auth.signInWithOtp({ email, options:{ emailRedirectTo: location.origin + '/app/' } });
+    if(error){ S.msg = 'Não foi possível enviar o link: ' + error.message; $('sendLink').disabled=false; return render(); }
+    S.sent = email; S.msg=''; render();
+  };
+  if($('again')) $('again').onclick = ()=>{ S.sent=''; render(); };
+  if($('create')) $('create').onclick = async ()=>{
+    const { error } = await SB.rpc('create_couple');
+    if(error){ S.msg = error.message; return render(); }
+    boot();
+  };
+  if($('join')) $('join').onclick = async ()=>{
+    const code = $('code').value.trim();
+    if(code.length < 6){ S.msg='O código tem 8 caracteres.'; return render(); }
+    const { error } = await SB.rpc('join_couple', { code });
+    if(error){ S.msg = error.message; return render(); }
+    boot();
+  };
+  if($('logout')) $('logout').onclick = async ()=>{ await SB.auth.signOut(); };
+  if($('copyCode')) $('copyCode').onclick = ()=>{
+    try{ navigator.clipboard.writeText(S.couple.invite_code).then(()=>{ $('codeMsg').textContent='Copiado'; }).catch(()=>{ $('codeMsg').textContent='Selecione o código e copie'; }); }
+    catch(e){ $('codeMsg').textContent='Selecione o código e copie'; }
+  };
+}
+
+function complete(set,who){ return ITEMS.every(i=>S.n[set][who][i.k]); }
+function mean(set,k){ const a=S.n[set].me[k], b=S.n[set].pa[k]; if(!a||!b) return null; return (a+b)/2; }
+function lowest(set){ return PRIOR.filter(k=>mean(set,k)!==null).sort((a,b)=>mean(set,a)-mean(set,b))[0]; }
+
+function compareTable(set){
+  if(!complete(set,'me')||!complete(set,'pa')) return `<div class="note warn">As duas pessoas precisam completar as notas para a comparação aparecer.</div>`;
+  const m=S.n[set].me, p=S.n[set].pa;
+  const rows = ITEMS.filter(i=>i.k!=='psat'&&i.k!=='sat').map(i=>{ const d=Math.abs(m[i.k]-p[i.k]); return `<tr><td>${SHORT[i.k]}</td><td class="n">${m[i.k]}</td><td class="n">${p[i.k]}</td><td class="n"><span class="diff ${d>=3?'hi':''}">${d}</span></td></tr>`; }).join('');
+  const e1 = Math.abs(m.psat-p.sat), e2 = Math.abs(p.psat-m.sat);
+  return `<div class="tbl"><table><thead><tr><th>Item</th><th class="n">Você</th><th class="n">Parceiro(a)</th><th class="n">Diferença</th></tr></thead><tbody>${rows}</tbody></table></div>
+  <h3 style="margin-top:16px">Erro de leitura de mente</h3>
+  <div class="tbl"><table><tbody>
+   <tr><td>Você achou que a satisfação dele(a) era <b>${m.psat}</b>. Ele(a) declarou <b>${p.sat}</b>.</td><td class="n"><span class="diff ${e1>=3?'hi':''}">${e1}</span></td></tr>
+   <tr><td>Ele(a) achou que a sua satisfação era <b>${p.psat}</b>. Você declarou <b>${m.sat}</b>.</td><td class="n"><span class="diff ${e2>=3?'hi':''}">${e2}</span></td></tr>
+  </tbody></table></div>
+  <p class="muted small" style="margin-top:8px">Diferenças de 3 pontos ou mais aparecem destacadas: indicam sinais que um emite e o outro não recebe.</p>`;
+}
+
+function beforeAfter(){
+  const ok = ['me','pa'].every(w=>complete('w2',w)&&complete('d28',w));
+  if(!ok) return `<div class="note warn">A comparação aparece quando as duas pessoas tiverem preenchido as notas da Semana 2 e do Dia 28.</div>`;
+  const bars = ITEMS.filter(i=>i.k!=='psat').map(i=>{ const a=mean('w2',i.k), b=mean('d28',i.k), d=b-a;
+    return `<div><div class="bname"><span>${SHORT[i.k]}</span><span class="${d>0?'':'muted'}" style="${d>0?'color:var(--ok);font-weight:700':''}">${d>0?'+':''}${d.toFixed(1).replace('.',',')}</span></div>
+    <div class="bline"><span>Semana 2</span><div class="btrack"><div class="b1" style="width:${a*10}%"></div></div><span>${a.toFixed(1).replace('.',',')}</span></div>
+    <div class="bline"><span>Dia 28</span><div class="btrack"><div class="b2" style="width:${b*10}%"></div></div><span>${b.toFixed(1).replace('.',',')}</span></div></div>`; }).join('');
+  return `<div class="legend"><span><span class="dot" style="background:var(--muted)"></span>Média do casal na Semana 2</span><span><span class="dot" style="background:var(--accent)"></span>Média no Dia 28</span></div><div class="bars">${bars}</div>`;
+}
+
+/* ---------- conteúdo de cada dia ---------- */
+function body(d){
+  const info = dayInfo(d), k = 'd'+d+'_';
+  switch(info.kind){
+    case 'w1': return `
+      <p>Nesta semana, cada dia tem duas práticas curtas. Anote uma linha para cada uma.</p>
+      <div class="task"><label class="lbl" for="f-${k}resp">Resposta responsiva: quando ele(a) contou algo, como você mostrou compreensão, validação e cuidado?</label>${txt(k+'resp','Ex.: ela falou da reunião e eu perguntei como ela se sentiu antes de dar opinião')}</div>
+      <div class="task"><label class="lbl" for="f-${k}apr">Apreciação no formato ação mais efeito</label>${txt(k+'apr','Ex.: obrigado por buscar as crianças, isso me deu uma hora livre')}</div>`;
+    case 'w1check': {
+      const filled = [1,2,3,4,5,6].filter(x=>S.f['d'+x+'_resp']||S.f['d'+x+'_apr']).length;
+      return `<p>Releiam os registros dos dias 1 a 6. Vocês têm registros em <b>${filled} de 6 dias</b>.</p>
+      <div class="task"><label class="lbl" for="f-${k}temp">A temperatura das conversas mudou nesta semana? O que vocês notaram?</label>${area(k+'temp')}</div>
+      <div class="task">${chk(k+'resp',' Fiz a resposta responsiva e a apreciação de hoje')}</div>`; }
+    case 'notes': return `
+      <p>Os dois preenchem as notas dos três componentes e dos cinco preditores do Capítulo 6, mais duas perguntas de satisfação. O Dia 9 existe para quem não conseguiu no Dia 8.</p>
+      ${ratings('w2')}`;
+    case 'compare': {
+      const low = lowest('w2');
+      if(low && !S.f.prio){ S.f.prio = low; queueF('prio'); }
+      return `<p>Comecem pela pergunta: <b>o que eu faço que você não registra, e o que você faz que eu não registro?</b> Depois olhem a tabela.</p>
+      ${compareTable('w2')}
+      <div class="task" style="margin-top:12px"><label class="lbl" for="f-prio">Item prioritário do casal${low?` (sugestão pela menor média: ${SHORT[low]})`:''}</label>
+        <select id="f-prio" data-f="prio"><option value="">Escolher</option>${PRIOR.map(p=>`<option value="${p}" ${S.f.prio===p?'selected':''}>${SHORT[p]}</option>`).join('')}</select></div>
+      <div class="task"><label class="lbl" for="f-beh1">Comportamento 1, concreto e com data</label>${txt('beh1','Ex.: caminhada sem celular na quinta, 19h')}
+        <label class="lbl" for="f-beh2">Comportamento 2, concreto e com data</label>${txt('beh2','Ex.: perguntar "como você está na nossa relação esse mês?" no domingo')}
+        <p class="muted small" style="margin:0">"Melhorar a intimidade" não tem data. "Duas caminhadas sem celular na semana" tem.</p></div>`; }
+    case 'behav': return `
+      <p>Prioridade do casal: <b>${S.f.prio?SHORT[S.f.prio]:'definam no Dia 10'}</b>.</p>
+      <div class="task">${chk(k+'b1', esc(S.f.beh1||'Comportamento 1 (definam no Dia 10)'))}${chk(k+'b2', esc(S.f.beh2||'Comportamento 2 (definam no Dia 10)'))}</div>
+      <div class="task"><label class="lbl" for="f-${k}obs">O que aconteceu?</label>${txt(k+'obs')}</div>`;
+    case 'reclass': return `
+      <p>Cada um lista em separado os temas de conflito que mais voltam. Juntem as listas e classifiquem cada tema.</p>
+      <div class="task">${[1,2,3,4,5].map(i=>`<div class="row2"><input type="text" id="f-tema${i}" data-f="tema${i}" value="${esc(S.f['tema'+i])}" placeholder="Tema ${i}" aria-label="Tema ${i}">
+        <select id="f-tipo${i}" data-f="tipo${i}" aria-label="Tipo do tema ${i}"><option value="">Classificar</option><option ${S.f['tipo'+i]==='Solucionável'?'selected':''}>Solucionável</option><option ${S.f['tipo'+i]==='Perpétuo'?'selected':''}>Perpétuo</option></select></div>`).join('')}
+        <p class="muted small" style="margin:0">Solucionável depende de um acordo prático possível. Perpétuo vem de uma diferença estável de personalidade, valor ou necessidade.</p></div>
+      <div class="task"><label class="lbl" for="f-acordo">Acordo para um tema solucionável: pedido específico, prazo e como vão verificar</label>${area('acordo','Ex.: quem cozinha não lava a louça; começa segunda; revisamos no domingo')}</div>
+      <div class="task"><label class="lbl" for="f-sinal">Sinal de reparo do casal</label>${txt('sinal','Uma palavra ou gesto para pedir pausa')}
+        <p class="muted small" style="margin:0">Quem usa o sinal volta ao assunto em até 24 horas. Pausa sem hora de retorno vira obstrução.</p></div>`;
+    case 'repair': return `
+      <p>Sinal de reparo: <b>${esc(S.f.sinal||'definam no Dia 15')}</b>. Usem em qualquer começo de escalada.</p>
+      <div class="task"><div class="logrow"><span class="lbl">Houve começo de escalada hoje?</span>${chips(k+'esc',['Sim','Não'])}</div>
+      ${S.f[k+'esc']==='Sim'?`<div class="logrow"><span class="lbl">O sinal foi usado?</span>${chips(k+'uso',['Sim','Não'])}</div>
+      <div class="logrow"><span class="lbl">Foi aceito?</span>${chips(k+'ace',['Sim','Não'])}</div>
+      <div class="logrow"><span class="lbl">Voltaram ao tema em até 24 horas?</span>${chips(k+'vol',['Sim','Não','Ainda no prazo'])}</div>`:''}</div>
+      ${info.story?`<div class="task"><h3>Exercício de história</h3><p class="small" style="margin:0">Escolham o tema perpétuo mais quente. Um conta de onde vem o próprio jeito nesse tema, o que a família ensinou e o que relações anteriores marcaram. O outro só ouve. Na semana seguinte, invertam.</p>${chk(k+'hist','Fizemos o exercício de história')}</div>`:''}`;
+    case 'couple': return `
+      <p>No mínimo 40 minutos, sem telas e sem assunto de logística, com uma pergunta de abertura que não seja sobre tarefas.</p>
+      <div class="task"><label class="lbl" for="f-${k}perg">Pergunta de abertura</label>${txt(k+'perg','Ex.: o que ocupou sua cabeça essa semana?')}</div>
+      <div class="task">${chk(k+'ok','Fizemos o tempo de casal')}</div>`;
+    case 'desire': return `
+      <div class="note">Este exercício é individual. Só você vê o que escrever aqui; compartilhar com o parceiro(a) é decisão sua, depois.</div>
+      <div class="task"><label class="lbl" for="f-${k}com">As três últimas vezes em que senti desejo: hora, cansaço, o que tinha acontecido entre nós, ambiente</label>${area(k+'com')}</div>
+      <div class="task"><label class="lbl" for="f-${k}sem">Três situações recentes em que o desejo seria possível e não apareceu, descritas do mesmo jeito</label>${area(k+'sem')}</div>
+      <div class="task"><label class="lbl" for="f-${k}cond">Condições que aparecem nos episódios com desejo e faltam nos outros</label>${txt(k+'cond','Ex.: conversa boa antes, sem telas, fora de dia exaustivo')}</div>`;
+    case 'keep': return `
+      <p>Sem exercício novo hoje. Mantenham a apreciação diária da Semana 1 e os dois comportamentos do Dia 10.</p>
+      <div class="task"><label class="lbl" for="f-${k}apr">Apreciação de hoje</label>${txt(k+'apr','Ação mais efeito')}</div>`;
+    case 'notes28': return `
+      <p>As mesmas notas da Semana 2, de novo cada um em separado. Em seguida, comparem com o ponto de partida.</p>
+      ${ratings('d28')}
+      <div class="task" style="margin-top:8px"><h3>Semana 2 e Dia 28</h3>${beforeAfter()}</div>
+      <div class="task"><h3>Sinais para buscar terapia de casal</h3>
+        ${HELP.map((h,i)=>chk('help'+i,h)).join('')}
+        ${HELP.some((h,i)=>S.f['help'+i])?`<div class="note warn">Vocês marcaram pelo menos um sinal. Casais chegam à terapia, em média, anos depois do início do problema, e essa demora é o maior preditor isolado de trabalho difícil. O Dia 29 ajuda a escrever o critério.</div>`:`<p class="muted small" style="margin:0">Se nenhum sinal se aplica, a decisão pelo livro é seguir com o protocolo por conta própria.</p>`}</div>`;
+    case 'criterion': return `
+      <p>Revisem os exercícios do mês e marquem quais produziram movimento e quais travaram.</p>
+      <div class="task"><label class="lbl" for="f-mov">Produziram movimento</label>${txt('mov')}<label class="lbl" for="f-trav">Travaram</label>${txt('trav')}</div>
+      <div class="task"><label class="lbl" for="f-padrao">O padrão travado em duas frases: quem faz o quê, o que o outro faz em resposta, como termina</label>${area('padrao','Ex.: eu cobro a divisão das tarefas no jantar; ele responde com o celular e sai da mesa; terminamos sem falar até o dia seguinte.')}</div>
+      <div class="task"><label class="lbl" for="f-prazo">Se o padrão continuar dominando até esta data, buscamos ajuda</label>
+        <input type="date" id="f-prazo" data-f="prazo" value="${esc(S.f.prazo|| (()=>{const x=addDays(todayISO(),60);return x.toISOString().slice(0,10)})())}">
+        <p class="muted small" style="margin:0">O livro sugere 60 dias. Escrever o critério antes protege a decisão de uma semana que foi boa.</p></div>`;
+    case 'contract': {
+      const base = S.start ? dateOf(30).toISOString().slice(0,10) : todayISO();
+      const revs = [90,180,270,360].map(n=>fmt(addDays(base,n))).join(', ');
+      return `<p>Um documento de uma página com três partes.</p>
+      <div class="task"><label class="lbl" for="f-c1">1. O que funcionou: práticas que entram na rotina, com frequência definida</label>${area('c1','Ex.: apreciação diária; caminhada sem celular às quintas')}</div>
+      <div class="task"><label class="lbl" for="f-c2">2. O que trava: padrões que resistiram, em duas frases cada</label>${area('c2', S.f.padrao||'')}</div>
+      <div class="task"><span class="lbl">3. Revisão trimestral com as notas da Semana 2</span><p class="small" style="margin:0">Próximas datas: <b>${revs}</b>.</p></div>
+      <div class="nav" style="margin-top:4px"><button type="button" class="btn ghost" id="copy">Copiar contrato</button><span class="muted small" id="copied" aria-live="polite"></span></div>`; }
+  }
+}
+
+
+function startScreen(){
+  return `<div class="eyebrow" style="margin-top:26px">Mapa Afetivo, por Psicólogo Afetivo</div><h1 style="margin-top:6px">Plano de 30 Dias</h1>
+  <p>O protocolo do Capítulo 12 de <em>Decodificando o Amor</em>, 2ª edição: uma frente por semana, para o casal fazer junto. Cada dia leva de 5 a 40 minutos e fica registrado aqui.</p>
+  <div class="weeks">${WEEKS.map(w=>`<div class="card week" style="margin:0"><h3>Semana ${w.n<5?w.n:'final'} · ${w.t} <span>Dias ${w.days[0]} a ${w.days[1]}</span></h3><p class="muted small" style="margin:0">${w.cap}</p></div>`).join('')}</div>
+  <div class="card"><label class="lbl" for="startDate">Data do Dia 1</label>
+    <input type="date" id="startDate" value="${todayISO()}" style="margin-top:6px">
+    <div class="nav"><span class="muted small">Vale para os dois parceiros.</span><button type="button" class="btn primary" id="begin">Começar o plano</button></div></div>
+  ${inviteBanner()}`;
+}
+
+function mainScreen(){
+  const d = S.view, today = dayNumToday(), w = weekOf(d), info = dayInfo(d);
+  const doneN = Object.values(S.done).filter(Boolean).length;
+  const grid = WEEKS.slice(0,4).map(wk=>{
+    const ds=[]; for(let i=wk.days[0];i<=wk.days[1];i++) ds.push(i); if(wk.n===4) ds.push(29,30);
+    return `<div><div class="eyebrow" style="margin-top:12px">Semana ${wk.n}${wk.n===4?' e fechamento':''}</div><div class="grid">${ds.map(i=>`<button type="button" data-day="${i}" class="${S.done[i]?'done':''} ${i===today?'today':''} ${i===d?'sel':''}" aria-label="Dia ${i}${S.done[i]?', concluído':''}">${i}</button>`).join('')}</div></div>`;
+  }).join('');
+  return `<div class="head" style="margin-top:22px"><div><div class="eyebrow">Mapa Afetivo · Plano de 30 Dias</div><div class="muted small">Hoje é o Dia ${today} · ${doneN} de 30 concluídos</div></div>
+    <button type="button" class="btn ghost" id="toToday" style="padding:8px 14px;font-size:14px">Ir para hoje</button></div>
+  ${inviteBanner()}
+  ${grid}
+  <div class="card">
+    <div class="head"><div><div class="eyebrow">Dia ${d} · ${fmt(dateOf(d))} · Semana ${w.n<5?w.n:'final'}</div><h2 style="margin-top:4px">${info.t}</h2></div>
+      ${S.done[d]?'<span class="pill ok">Concluído</span>':''}</div>
+    <p class="muted small">${w.t} · ${w.cap}</p>
+    ${body(d)}
+    <div class="nav"><button type="button" class="btn ghost" data-step="-1" ${d===1?'disabled style="opacity:.4"':''}>Dia anterior</button>
+      <button type="button" class="btn primary" id="markDone">${S.done[d]?'Desmarcar':'Concluir o dia'}</button></div>
+  </div>
+  <div class="nav" style="margin-top:22px"><span class="muted small">Dia 1 em ${fmt(dateOf(1))} · <span id="sync">Salvo</span></span><button type="button" class="btn ghost" id="logout" style="padding:8px 14px;font-size:14px">Sair</button></div>`;
+}
+
+
+
+const app = document.getElementById('app');
+function render(keepScroll){
+  const y = window.scrollY;
+  const scr = {loading:()=>'<p class="muted" style="margin-top:40px">Carregando…</p>',
+    error:()=>`<div class="note warn" style="margin-top:30px">Erro ao carregar: ${esc(S.msg)}</div>`,
+    login:loginScreen, couple:coupleScreen, start:startScreen, main:mainScreen}[S.screen];
+  app.innerHTML = scr();
+  bindAuth(); if(S.screen==='start'||S.screen==='main') bind();
+  if(keepScroll) window.scrollTo({top:y});
+}
+
+function bind(){
+  const $ = id=>document.getElementById(id);
+  if($('begin')) $('begin').onclick = async ()=>{
+    const d = $('startDate').value || todayISO();
+    const { error } = await SB.from('couples').update({ start_date:d }).eq('id', S.couple.id);
+    if(error){ alertNote(error.message); return; }
+    S.start = d; S.couple.start_date = d; S.view = dayNumToday(); saveView(); S.screen='main'; render();
+  };
+  app.querySelectorAll('[data-day]').forEach(b=>b.onclick=()=>{ S.view=+b.dataset.day; saveView(); render(true); });
+  app.querySelectorAll('[data-step]').forEach(b=>b.onclick=()=>{ S.view=Math.max(1,Math.min(30,S.view+(+b.dataset.step))); saveView(); render(true); });
+  if($('toToday')) $('toToday').onclick=()=>{ S.view=dayNumToday(); saveView(); render(true); };
+  if($('markDone')) $('markDone').onclick=()=>{ const d=S.view; S.done[d]=!S.done[d]; queueDone(d); if(S.done[d]&&d<30) S.view++; saveView(); render(); };
+  app.querySelectorAll('[data-f]').forEach(el=>el.addEventListener(el.tagName==='SELECT'||el.type==='date'?'change':'input',()=>{ S.f[el.dataset.f]=el.value; queueF(el.dataset.f); }));
+  app.querySelectorAll('[data-c]').forEach(el=>el.onchange=()=>{ S.f[el.dataset.c]=el.checked; queueF(el.dataset.c); if(el.dataset.c.startsWith('help')) render(true); });
+  app.querySelectorAll('[data-chip]').forEach(b=>b.onclick=()=>{ const k=b.dataset.chip; S.f[k]= S.f[k]===b.dataset.v?'':b.dataset.v; queueF(k); render(true); });
+  app.querySelectorAll('[data-r]').forEach(el=>el.addEventListener('input',()=>{
+    const [set,,k]=el.dataset.r.split('.'); S.n[set].me[k]=+el.value; el.style.opacity=1;
+    const v=el.closest('.rate').querySelector('.val'); v.textContent=el.value; v.classList.remove('unset'); queueR(set,k);
+  }));
+  app.querySelectorAll('[data-r]').forEach(el=>el.addEventListener('change',()=>render(true)));
+  if($('copy')) $('copy').onclick=()=>{
+    const base = dateOf(30).toISOString().slice(0,10);
+    const t = `CONTRATO DE MANUTENÇÃO\n\n1. O que funcionou\n${S.f.c1||''}\n\n2. O que trava\n${S.f.c2||S.f.padrao||''}\n\n3. Revisões trimestrais\n${[90,180,270,360].map(n=>fmt(addDays(base,n))).join(', ')}`;
+    try{ navigator.clipboard.writeText(t).then(()=>{ $('copied').textContent='Copiado'; }).catch(()=>{ $('copied').textContent='Selecione o texto dos campos e copie manualmente'; }); }catch(e){ $('copied').textContent='Selecione o texto dos campos e copie manualmente'; }
+  };
+}
+function alertNote(m){ setStatus('Erro: '+m, true); }
+boot();
+
+</script>
+</body>
+</html>

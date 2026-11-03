@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="description" content="Mapa Afetivo: diagnóstico gratuito para casais em 23 perguntas, com base em pesquisa. Por Felipe Santos, psicólogo (CRP 03/15591).">
+<meta property="og:title" content="Mapa Afetivo · Psicólogo Afetivo">
+<meta property="og:description" content="Os três pilares da relação, a distância entre o parceiro ideal e o real, e o padrão de conflito do casal.">
+<title>Mapa Afetivo · Psicólogo Afetivo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;700;900&display=swap">
+<style>
+/* Layout: coluna única de leitura, uma etapa por tela, barra de progresso no topo; identidade @psicologoafetivo */
+:root{
+  --bg:#F7F2EC; --surface:#FFFDF9; --fg:#1F2430; --muted:#5E6472; --line:#E3DCD2;
+  --accent:#235FAA; --accent-soft:#DCE6F4; --on-accent:#FFFFFF; --warn:#B5562B; --warn-soft:#F6E3D8;
+  --font:'Outfit', 'Segoe UI', system-ui, -apple-system, sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#14171D; --surface:#1C2029; --fg:#ECE7DF; --muted:#A3A9B5; --line:#2E333D;
+  --accent:#86ADE6; --accent-soft:#22314B; --on-accent:#0E1420; --warn:#E39068; --warn-soft:#3A271E; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#14171D; --surface:#1C2029; --fg:#ECE7DF; --muted:#A3A9B5; --line:#2E333D;
+  --accent:#86ADE6; --accent-soft:#22314B; --on-accent:#0E1420; --warn:#E39068; --warn-soft:#3A271E; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--font);font-size:17px;line-height:1.55;
+  padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px));padding-block:0 48px}
+.wrap{max-width:640px;margin:0 auto}
+.proto{font-size:13px;color:var(--muted);text-align:center;padding-block:10px;border-bottom:1px dashed var(--line)}
+.bar{position:sticky;top:env(safe-area-inset-top,0px);background:var(--bg);padding-block:14px 10px;z-index:5}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--bg);z-index:10}
+.track{height:6px;background:var(--line);border-radius:3px;overflow:hidden}
+.fill{height:100%;background:var(--accent);transition:width .3s}
+.step-label{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-top:8px;font-weight:500}
+h1{font-weight:900;font-size:clamp(34px,8vw,48px);line-height:1.05;margin:28px 0 14px;text-wrap:balance;letter-spacing:-.01em}
+h2{font-weight:900;font-size:28px;line-height:1.15;margin:20px 0 8px;text-wrap:balance}
+h3{font-weight:700;font-size:19px;margin:0 0 6px}
+p{margin:0 0 12px;max-width:62ch}
+.muted{color:var(--muted)}
+.small{font-size:14px}
+.q{padding-block:18px;border-top:1px solid var(--line);display:grid;gap:10px}
+.q:first-of-type{border-top:0}
+.q-text{font-weight:500}
+.scale{display:grid;grid-template-columns:repeat(5,1fr);gap:6px}
+.scale input{position:absolute;opacity:0;pointer-events:none}
+.scale label{display:flex;align-items:center;justify-content:center;height:44px;border:1.5px solid var(--line);border-radius:10px;
+  background:var(--surface);font-weight:700;cursor:pointer;font-variant-numeric:tabular-nums;transition:border-color .15s, background .15s}
+.scale label:hover{border-color:var(--accent)}
+.scale input:checked + label{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
+.scale input:focus-visible + label{outline:3px solid var(--accent);outline-offset:2px}
+.ends{display:flex;justify-content:space-between;font-size:13px;color:var(--muted)}
+.sub{font-size:13px;color:var(--muted);font-weight:500;letter-spacing:.04em;text-transform:uppercase}
+.nav{display:flex;gap:10px;justify-content:space-between;margin-top:24px;flex-wrap:wrap}
+button,.btn{font-family:var(--font);font-size:16px;font-weight:700;border-radius:12px;padding:13px 22px;cursor:pointer;border:1.5px solid var(--accent)}
+.primary{background:var(--accent);color:var(--on-accent)}
+.primary:disabled{opacity:.4;cursor:not-allowed}
+.ghost{background:transparent;color:var(--accent)}
+button:focus-visible,input:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:20px;margin-top:16px}
+.tag{display:inline-block;font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
+  background:var(--accent-soft);color:var(--accent);padding:4px 10px;border-radius:999px;margin-bottom:10px}
+.tag.warn{background:var(--warn-soft);color:var(--warn)}
+.tri{width:100%;max-width:340px;display:block;margin:6px auto 0}
+.bars{display:grid;gap:14px;margin-top:8px}
+.brow{display:grid;gap:4px}
+.brow .name{font-weight:500;display:flex;justify-content:space-between;gap:8px}
+.bline{display:grid;grid-template-columns:96px 1fr;align-items:center;gap:8px;font-size:13px;color:var(--muted)}
+.btrack{height:10px;background:var(--line);border-radius:5px;overflow:hidden}
+.b1{height:100%;background:var(--muted)}
+.b2{height:100%;background:var(--accent)}
+.legend{display:flex;gap:16px;font-size:13px;color:var(--muted);flex-wrap:wrap}
+.dot{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:6px;vertical-align:middle}
+.cycle{display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;margin:10px 0 14px;font-weight:700}
+.cycle span{background:var(--accent-soft);color:var(--accent);padding:8px 12px;border-radius:10px}
+.cycle i{font-style:normal;color:var(--muted)}
+form.gate{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+form.gate input{flex:1 1 220px;min-width:0;font-family:var(--font);font-size:16px;padding:13px 14px;border-radius:12px;border:1.5px solid var(--line);background:var(--bg);color:var(--fg)}
+.err{color:var(--warn);font-size:14px;margin-top:6px}
+ol.plan{margin:8px 0 0;padding-left:22px;display:grid;gap:10px}
+ol.plan li::marker{font-weight:700;color:var(--accent)}
+.foot{margin-top:32px;font-size:13px;color:var(--muted);border-top:1px solid var(--line);padding-top:14px}
+@media (prefers-reduced-motion: reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <div class="bar" id="bar" hidden>
+    <div class="track"><div class="fill" id="fill" style="width:0"></div></div>
+    <div class="step-label" id="stepLabel"></div>
+  </div>
+  <main id="app"></main>
+  <div class="foot">
+    Esta autoavaliação é educativa. Ela não é um teste psicológico e não substitui avaliação profissional.
+    Se há agressão física, ameaça ou medo na relação, procure ajuda: Ligue 180 (Central de Atendimento à Mulher) ou 190 em emergência.<br>
+    Felipe Santos · Psicólogo · CRP 03/15591 · @psicologoafetivo
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
+<script>
+const SB = window.supabase ? window.supabase.createClient("https://bzkzfculngbydrigulnf.supabase.co","sb_publishable_xASm0mMN9Vt3uP_Wx9BHeg_xWwwYtkf") : null;
+const AGREE = ['Discordo totalmente','Concordo totalmente'];
+const FREQ = ['Nunca','Quase sempre'];
+const TRI = [
+  {k:'i1',d:'int',t:'Consigo contar ao meu parceiro(a) algo que me preocupa sem medo da reação.'},
+  {k:'i2',d:'int',t:'Quando tenho um dia ruim, sei que posso contar com ele(a).'},
+  {k:'i3',d:'int',t:'Sinto que ele(a) entende o que é importante para mim.'},
+  {k:'p1',d:'pai',t:'Sinto desejo físico pelo meu parceiro(a).'},
+  {k:'p2',d:'pai',t:'Ainda criamos momentos só nossos, fora da rotina da casa.'},
+  {k:'p3',d:'pai',t:'Ao longo do dia, penso nele(a) com vontade de estar junto.'},
+  {k:'c1',d:'com',t:'Faço planos para os próximos anos contando com essa relação.'},
+  {k:'c2',d:'com',t:'Depois de uma briga, sigo decidido(a) a continuar a relação.'},
+  {k:'c3',d:'com',t:'Essa relação pesa nas minhas escolhas de tempo e dinheiro.'}
+];
+const TRAITS = [
+  {k:'carinho',t:'Carinho e atenção'},
+  {k:'confia',t:'Confiabilidade'},
+  {k:'humor',t:'Senso de humor'},
+  {k:'atracao',t:'Atração física'},
+  {k:'projetos',t:'Ambição e projetos'}
+];
+const CONF = [
+  {k:'dm',t:'Quando um assunto me incomoda, eu insisto até ele ser resolvido.'},
+  {k:'wm',t:'Quando a conversa esquenta, eu me calo, mudo de assunto ou saio de perto.'},
+  {k:'dp',t:'Meu parceiro(a) insiste em retomar o assunto até ele ser resolvido.'},
+  {k:'wp',t:'Meu parceiro(a) se cala, muda de assunto ou sai de perto.'}
+];
+const STEPS = ['Início','Os três pilares','Ideal e real','Padrão de conflito','Resultado'];
+const DIM = {int:'Intimidade',pai:'Paixão',com:'Compromisso'};
+
+let S = {step:0, a:{}, email:'', unlocked:false};
+try{ const s = JSON.parse(localStorage.getItem('mapa-casal')||'null'); if(s && s.a) S = s; }catch(e){}
+function save(){ try{ localStorage.setItem('mapa-casal', JSON.stringify(S)); }catch(e){} }
+
+const app = document.getElementById('app');
+
+function scale(name, ends){
+  let h = '<div class="scale" role="radiogroup">';
+  for(let v=1; v<=5; v++){
+    const id = name+'-'+v;
+    h += `<input type="radio" id="${id}" name="${name}" value="${v}" ${S.a[name]==v?'checked':''}><label for="${id}">${v}</label>`;
+  }
+  return h + `</div><div class="ends"><span>${ends[0]}</span><span>${ends[1]}</span></div>`;
+}
+function keysFor(step){
+  if(step===1) return TRI.map(x=>x.k);
+  if(step===2) return TRAITS.flatMap(x=>['imp_'+x.k,'real_'+x.k]);
+  if(step===3) return CONF.map(x=>x.k);
+  return [];
+}
+function complete(step){ return keysFor(step).every(k=>S.a[k]); }
+
+function render(){
+  const bar = document.getElementById('bar');
+  bar.hidden = S.step===0;
+  document.getElementById('fill').style.width = (S.step/4*100)+'%';
+  document.getElementById('stepLabel').textContent = S.step<4 ? `Etapa ${S.step} de 3 · ${STEPS[S.step]}` : 'Resultado';
+  app.innerHTML = [intro, s1, s2, s3, result][S.step]();
+  bind();
+  window.scrollTo({top:0});
+}
+
+function nav(){
+  return `<div class="nav"><button class="ghost" data-go="-1">Voltar</button>
+  <button class="primary" id="next" data-go="1" ${complete(S.step)?'':'disabled'}>${S.step===3?'Ver resultado':'Continuar'}</button></div>`;
+}
+
+function intro(){
+  return `<div class="step-label" style="margin-top:28px">Por Psicólogo Afetivo</div><h1 style="margin-top:6px">Mapa Afetivo</h1>
+  <p class="muted" style="font-weight:500">Programa de 30 dias para casais, baseado em pesquisa</p>
+  <p>Em 5 minutos você responde 23 perguntas sobre a sua relação e recebe três leituras: como estão os três pilares do amor, a distância entre o parceiro que você imagina e o que você tem, e o padrão que vocês repetem quando brigam.</p>
+  <p class="muted small">Responda pensando nos últimos 3 meses. Se estiver solteiro(a), use o seu último relacionamento. As respostas ficam só neste aparelho.</p>
+  <div class="nav"><span></span><button class="primary" data-go="1">Começar</button></div>`;
+}
+function s1(){
+  return `<h2>Os três pilares</h2>
+  <p class="muted">Marque de 1 a 5 o quanto cada frase descreve você hoje.</p>
+  ${TRI.map(x=>`<div class="q"><div class="q-text">${x.t}</div>${scale(x.k,AGREE)}</div>`).join('')}
+  ${nav()}`;
+}
+function s2(){
+  return `<h2>Ideal e real</h2>
+  <p class="muted">Para cada característica, marque quanto ela importa para você num parceiro e quanto o seu parceiro(a) tem dela hoje.</p>
+  ${TRAITS.map(x=>`<div class="q"><h3>${x.t}</h3>
+    <div class="sub">Quanto isso importa para mim</div>${scale('imp_'+x.k,['Pouco','Muito'])}
+    <div class="sub" style="margin-top:6px">Quanto meu parceiro(a) tem isso</div>${scale('real_'+x.k,['Pouco','Muito'])}</div>`).join('')}
+  ${nav()}`;
+}
+function s3(){
+  return `<h2>Padrão de conflito</h2>
+  <p class="muted">Pense nas últimas discussões. Com que frequência isto acontece?</p>
+  ${CONF.map(x=>`<div class="q"><div class="q-text">${x.t}</div>${scale(x.k,FREQ)}</div>`).join('')}
+  ${nav()}`;
+}
+
+/* ---------- pontuação ---------- */
+function scores(){
+  const sum = {int:0,pai:0,com:0};
+  TRI.forEach(x=>sum[x.d]+= +S.a[x.k]);
+  const norm = {}; for(const d in sum) norm[d] = (sum[d]-3)/12;
+  const order = Object.keys(norm).sort((a,b)=>norm[a]-norm[b]);
+  const gaps = TRAITS.map(x=>({...x, imp:+S.a['imp_'+x.k], real:+S.a['real_'+x.k], gap:Math.max(0, S.a['imp_'+x.k]-S.a['real_'+x.k])}))
+               .sort((a,b)=>b.gap-a.gap || b.imp-a.imp);
+  const hi = k => +S.a[k]>=4;
+  let pat = 'neutro';
+  if(hi('dm') && hi('wp')) pat='persegue';
+  else if(hi('dp') && hi('wm')) pat='afasta';
+  else if(hi('dm') && hi('dp')) pat='escalada';
+  else if(hi('wm') && hi('wp')) pat='engaveta';
+  return {sum, norm, low:order[0], gaps, pat};
+}
+
+const PILLAR_TXT = {
+  int:{h:'A intimidade é o pilar mais baixo',p:'Intimidade se constrói por ciclos curtos: um conta algo que o preocupa ou que deseja, e o outro responde com compreensão, validação e cuidado. Quando a resposta vem como crítica, distração ou conselho apressado, o ciclo fica incompleto. Na pesquisa do autor com 192 participantes, a intimidade funcionou como uma das vias pelas quais a saúde da relação se produz.',ex:'Duas caminhadas sem celular nesta semana, com a pergunta de abertura: o que ocupou sua cabeça essa semana? Quem ouve responde com compreensão antes de qualquer conselho.',cap:'Capítulos 1 e 4'},
+  pai:{h:'A paixão é o pilar mais baixo',p:'Dos três componentes, a paixão é o que tem a queda natural mais acentuada depois do início da relação. Ela também é o que responde a intervenções específicas. Se a intimidade e o compromisso estão preservados, o quadro é de amor companheiro, a configuração associada aos melhores desfechos de longo prazo.',ex:'Duas vezes nesta semana, reservem 40 minutos de tempo de casal sem telas e sem assunto de logística, abrindo com uma pergunta que não seja sobre tarefas.',cap:'Capítulos 4 e 9'},
+  com:{h:'O compromisso é o pilar mais baixo',p:'O compromisso que prevê satisfação é o que o parceiro percebe, e ele se transmite por sinais verificáveis: planejar o futuro juntos, decidir pensando no casal, continuar na conversa durante o conflito. Ameaçar terminar numa discussão, mesmo sem intenção real, corrói essa percepção por meses. Na pesquisa do autor, o compromisso foi a segunda via da saúde relacional.',ex:'Escolham juntos um plano com data, de uma viagem curta a um projeto da casa, e combinem que ameaças de término ficam fora das discussões a partir de hoje.',cap:'Capítulos 4 e 6'},
+  ok:{h:'Os três pilares estão em nível alto',p:'Suas respostas indicam intimidade, paixão e compromisso acima de 75% da escala. O cuidado aqui é perceber cedo se algum deles começar a cair, e comparar a sua leitura com a do seu parceiro.',ex:'Peça ao seu parceiro(a) para fazer este mapa sem ver suas respostas e comparem os triângulos. Uma divergência grande indica sinais que um emite e o outro não recebe.',cap:'Capítulo 4'}
+};
+const PERP = 'Nas pesquisas de John Gottman, cerca de 69% dos conflitos de casal são perpétuos: vêm de diferenças estáveis e aparecem em proporção parecida nos casais satisfeitos e nos insatisfeitos. O que separa os dois grupos é a forma da conversa e a rapidez do reparo.';
+const PAT_TXT = {
+  persegue:{tag:'Persegue e afasta',c:['Você persegue','Ele(a) se afasta'],p:'Quanto mais você insiste, mais ele(a) se afasta, e cada afastamento faz você insistir mais. Na Terapia Comportamental Integrativa de Casal (IBCT), esse ciclo é tratado como um padrão do casal, e o trabalho é os dois se unirem contra o padrão em vez de um contra o outro. '+PERP},
+  afasta:{tag:'Persegue e afasta',c:['Ele(a) persegue','Você se afasta'],p:'Quanto mais ele(a) insiste, mais você se afasta, e cada afastamento seu faz ele(a) insistir mais. Na Terapia Comportamental Integrativa de Casal (IBCT), esse ciclo é tratado como um padrão do casal, e o trabalho é os dois se unirem contra o padrão em vez de um contra o outro. '+PERP},
+  escalada:{tag:'Escalada',c:['Você insiste','Ele(a) insiste'],p:'Os dois insistem ao mesmo tempo, e a discussão sobe de tom até alguém explodir ou desistir. Nesse ponto aparecem com facilidade a crítica ao caráter e a defensividade, dois dos quatro comportamentos que Gottman associou à deterioração das relações. '+PERP},
+  engaveta:{tag:'Assuntos engavetados',c:['Você se cala','Ele(a) se cala'],p:'Os dois evitam o confronto. A casa fica calma, mas os temas difíceis não entram em diálogo e voltam acumulados. Silenciar por horas e sair da conversa sem hora de retorno é o que Gottman chama de obstrução. '+PERP},
+  neutro:{tag:'Sem polarização marcada',c:[],p:'Suas respostas não mostram um lado que insiste de forma constante nem um lado que se retira de forma constante. Vocês alternam papéis ou discutem sem que um padrão rígido domine. '+PERP}
+};
+const REPARO = 'Combinem um sinal de reparo, uma palavra ou gesto que qualquer um pode usar para pedir pausa, com retorno obrigatório ao assunto em até 24 horas. Pausa sem hora de retorno vira obstrução.';
+const PAT_EX = {
+  persegue:'Escolham o tema que mais dispara o ciclo. Cada um conta de onde vem o próprio jeito nesse tema, o que a família ensinou e o que relações anteriores marcaram, enquanto o outro só ouve.',
+  afasta:'Escolham o tema que mais dispara o ciclo. Cada um conta de onde vem o próprio jeito nesse tema, o que a família ensinou e o que relações anteriores marcaram, enquanto o outro só ouve.',
+  escalada:REPARO,
+  engaveta:'Listem, cada um em separado, os cinco temas que mais voltam. Juntem as listas e escolham um tema solucionável para fechar um acordo com pedido específico, prazo e critério de verificação.',
+  neutro:'Listem, cada um em separado, os cinco temas que mais voltam e classifiquem cada um como solucionável ou perpétuo.'
+};
+
+function triangle(n){
+  const cx=160, cy=150, R=105;
+  const ang = {int:-90, com:30, pai:150};
+  const pt = (d,r)=>{const a=ang[d]*Math.PI/180; return [cx+r*Math.cos(a), cy+r*Math.sin(a)];};
+  const poly = r=>['int','com','pai'].map(d=>pt(d,r).map(v=>v.toFixed(1)).join(',')).join(' ');
+  const data = ['int','com','pai'].map(d=>pt(d,R*Math.max(.06,n[d])).map(v=>v.toFixed(1)).join(',')).join(' ');
+  const lab = {int:[cx,cy-R-16,'middle'], com:[pt('com',R)[0]+4,pt('com',R)[1]+30,'end'], pai:[pt('pai',R)[0]-4,pt('pai',R)[1]+30,'start']};
+  let s = `<svg class="tri" viewBox="0 0 320 300" role="img" aria-label="Triângulo dos três pilares">
+    <polygon points="${poly(R)}" fill="none" stroke="var(--line)" stroke-width="1.5"/>
+    <polygon points="${poly(R/2)}" fill="none" stroke="var(--line)" stroke-dasharray="3 4"/>
+    ${['int','com','pai'].map(d=>{const p=pt(d,R);return `<line x1="${cx}" y1="${cy}" x2="${p[0]}" y2="${p[1]}" stroke="var(--line)"/>`}).join('')}
+    <polygon points="${data}" fill="var(--accent)" fill-opacity=".22" stroke="var(--accent)" stroke-width="2.5" stroke-linejoin="round"/>`;
+  for(const d of ['int','com','pai']){
+    const [x,y,a]=lab[d];
+    s += `<text x="${x}" y="${y}" text-anchor="${a}" fill="var(--fg)" font-family="Outfit, sans-serif" font-weight="700" font-size="14">${DIM[d]} <tspan fill="var(--muted)" font-weight="500">${Math.round(n[d]*100)}%</tspan></text>`;
+  }
+  return s + '</svg>';
+}
+
+function plan(r){
+  const low = r.norm[r.low] >= .75 ? 'ok' : r.low;
+  const g = r.gaps[0];
+  return [
+    `Todos os dias: uma apreciação específica no formato ação mais efeito ("obrigado por resolver a escola das crianças hoje, isso tirou um peso de mim"), registrada numa linha de nota no celular.`,
+    `Dias 1 e 2: ${PILLAR_TXT[low].ex}`,
+    `Dia 3: pergunte diretamente "como você está na nossa relação esse mês?" e compare a resposta com o que você imaginava.`,
+    `Dia 4: ${PAT_EX[r.pat]}`,
+    r.pat==='escalada' ? `Dia 5: na próxima discussão, use o sinal de reparo e anote se ele foi aceito e se vocês voltaram ao tema em 24 horas.` : `Dia 5: ${REPARO}`,
+    g.gap>=2 ? `Dia 6: faça o teste da lista com "${g.t.toLowerCase()}". Procure um episódio dos últimos três meses em que a falta disso piorou um dia seu. Se não achar, marque como peso imaginário.` : `Dia 6: liste três qualidades do seu parceiro(a) que não estavam na sua lista de ideal e um episódio recente em que cada uma melhorou um dia seu.`,
+    `Dia 7: releiam as notas da semana e respondam juntos se a temperatura das conversas mudou. Escolham uma prática para manter.`
+  ];
+}
+
+function result(){
+  const r = scores();
+  const lowKey = r.norm[r.low] >= .75 ? 'ok' : r.low;
+  const P = PILLAR_TXT[lowKey], C = PAT_TXT[r.pat];
+  const g = r.gaps[0];
+  const bars = r.gaps.slice().sort((a,b)=>TRAITS.findIndex(t=>t.k===a.k)-TRAITS.findIndex(t=>t.k===b.k)).map(x=>`
+    <div class="brow"><div class="name"><span>${x.t}</span>${x.gap>=2?'<span class="tag warn" style="margin:0">distância de '+x.gap+'</span>':''}</div>
+    <div class="bline"><span>Importância</span><div class="btrack"><div class="b1" style="width:${x.imp*20}%"></div></div></div>
+    <div class="bline"><span>Como é hoje</span><div class="btrack"><div class="b2" style="width:${x.real*20}%"></div></div></div></div>`).join('');
+
+  const locked = !S.unlocked ? `
+    <div class="card"><span class="tag">Plano de 7 dias</span>
+      <h3>Receba um plano de exercícios montado a partir das suas respostas</h3>
+      <p class="muted small">Exercícios curtos do Mapa Afetivo, escolhidos pelo seu pilar mais baixo e pelo seu padrão de conflito.</p>
+      <form class="gate" id="gate" novalidate>
+        <input type="email" id="email" placeholder="seu@email.com" autocomplete="email" value="${S.email||''}" aria-label="Seu e-mail">
+        <button class="primary" type="submit">Ver meu plano</button>
+      </form>
+      <label style="display:flex;gap:8px;align-items:flex-start;font-size:14px;margin-top:10px;cursor:pointer"><input type="checkbox" id="consent" style="width:18px;height:18px;margin-top:2px;accent-color:var(--accent)"><span>Aceito receber por e-mail o plano e conteúdos do Psicólogo Afetivo. Posso cancelar quando quiser.</span></label>
+      <div class="err" id="err" hidden></div>
+    </div>` : `
+    <div class="card"><span class="tag">Seu plano de 7 dias</span>
+      <ol class="plan">${plan(r).map(x=>`<li>${x}</li>`).join('')}</ol>
+    </div>
+    <div class="card"><span class="tag">Próximo passo</span>
+      <h3>Mapa Afetivo completo</h3>
+      <p class="small">Este plano é a primeira semana do programa. O Mapa Afetivo completo traz o Plano de 30 Dias com registro para os dois parceiros, as notas do casal comparadas na Semana 2 e no Dia 28, e o livro <em>Decodificando o Amor</em>, 2ª edição, com os dados da pesquisa do autor com 192 participantes.</p>
+      <a class="btn primary" href="/app/" style="text-decoration:none;display:inline-block">Conhecer o programa</a>
+    </div>`;
+
+  return `<h2>Seu Mapa Afetivo</h2>
+  <p class="muted">Leitura gerada a partir das suas 23 respostas.</p>
+
+  <div class="card"><span class="tag">1 · Os três pilares</span>
+    ${triangle(r.norm)}
+    <h3 style="margin-top:10px">${P.h}</h3>
+    <p class="small">${P.p}</p>
+    <p class="small"><strong>Exercício:</strong> ${P.ex}</p>
+    <p class="muted small" style="margin:0">Modelo de base: Teoria Triangular do Amor (Sternberg, 1986). No livro: ${P.cap}.</p>
+  </div>
+
+  <div class="card"><span class="tag">2 · Ideal e real</span>
+    <div class="legend"><span><span class="dot" style="background:var(--muted)"></span>Importância para você</span><span><span class="dot" style="background:var(--accent)"></span>Como é hoje</span></div>
+    <div class="bars">${bars}</div>
+    <h3 style="margin-top:16px">${g.gap>=2?'A maior distância está em '+g.t.toLowerCase():'Seu parceiro(a) está perto do seu ideal'}</h3>
+    <p class="small">No maior teste já feito sobre o parceiro ideal (10.358 pessoas em 43 países, Eastwick e colegas, 2025), a correspondência entre o parceiro real e a lista ideal previu a satisfação com efeitos entre pequenos e quase nulos. Num estudo com mais de 11 mil casais (Joel e colegas, 2020), os preditores mais fortes foram perceber que o outro está comprometido e se sentir valorizado.</p>
+    <p class="small"><strong>Na prática:</strong> use a lista para excluir incompatibilidades graves, como valores e projetos de vida, e evite usá-la para avaliar todo dia o parceiro que você já tem.</p>
+    <p class="small" style="margin:0"><strong>Exercício:</strong> para cada característica com distância, procure um episódio dos últimos três meses em que a falta dela piorou um dia seu. Se não encontrar, ela tem peso imaginário. No livro: Capítulos 2 e 6.</p>
+  </div>
+
+  <div class="card"><span class="tag">3 · ${C.tag}</span>
+    ${C.c.length?`<div class="cycle"><span>${C.c[0]}</span><i>↻</i><span>${C.c[1]}</span></div>`:''}
+    <p class="small">${C.p}</p>
+    <p class="small"><strong>Exercício:</strong> ${PAT_EX[r.pat]}</p>
+    <p class="muted small" style="margin:0">No livro: Capítulo 8.</p>
+  </div>
+
+  ${locked}
+
+  <div class="nav"><button class="ghost" data-go="-1">Revisar respostas</button><button class="ghost" id="reset">Recomeçar</button></div>`;
+}
+
+function bind(){
+  app.querySelectorAll('[data-go]').forEach(b=>b.addEventListener('click',()=>{
+    S.step = Math.min(4, Math.max(0, S.step + (+b.dataset.go))); save(); render();
+  }));
+  app.querySelectorAll('input[type=radio]').forEach(i=>i.addEventListener('change',()=>{
+    S.a[i.name] = +i.value; save();
+    const n = document.getElementById('next'); if(n) n.disabled = !complete(S.step);
+  }));
+  const f = document.getElementById('gate');
+  if(f) f.addEventListener('submit',e=>{
+    e.preventDefault();
+    const v = document.getElementById('email').value.trim();
+    const err = document.getElementById('err');
+    if(!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v)){ err.textContent='Digite um e-mail válido, como nome@gmail.com.'; err.hidden=false; return; }
+    if(!document.getElementById('consent').checked){ err.textContent='Marque a caixa de consentimento para receber o plano.'; err.hidden=false; return; }
+    const r = scores();
+    if(SB){ SB.from('leads').insert({email:v.toLowerCase(), consent:true, source:'mapa-afetivo', result:{pilar:r.low, norm:r.norm, conflito:r.pat, maior_distancia:r.gaps[0].k}}).then(({error})=>{ if(error) console.warn('lead', error.message); }); }
+    S.email=v; S.unlocked=true; save(); render();
+  });
+  const rs = document.getElementById('reset');
+  if(rs) rs.addEventListener('click',()=>{ S={step:0,a:{},email:'',unlocked:false}; save(); render(); });
+}
+render();
+</script>
+</body>
+</html>
