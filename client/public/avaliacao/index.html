@@ -369,7 +369,7 @@ function send(){
   var body = { casal: CASAL, parceiro: String(R.nome || PARC).slice(0,80), idioma: LANG, versao: A.VERSAO, consentimento: true, respostas: resp };
   fetch(CFG.SUPABASE_URL.replace(/\/$/,"") + "/rest/v1/avaliacoes", {
     method: "POST",
-    headers: { "apikey": CFG.SUPABASE_ANON_KEY, "Authorization": "Bearer " + CFG.SUPABASE_ANON_KEY, "Content-Type": "application/json", "Prefer": "return=minimal" },
+    headers: { "apikey": CFG.SUPABASE_ANON_KEY, "Content-Type": "application/json", "Prefer": "return=minimal" },
     body: JSON.stringify(body)
   }).then(function(r){
     if (!r.ok) return r.text().then(function(t){ throw new Error(r.status + " " + t); });
