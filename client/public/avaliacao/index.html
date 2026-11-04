@@ -216,7 +216,9 @@ function faCard(it){
 function faOptions(sel){
   var all = FA.positivos.concat(FA.negativos);
   return '<option value="">'+(LANG==="en"?"Choose…":"Escolha…")+'</option>' + all.map(function(it){
-    var lbl = it.n + ". " + T(it).replace(/\s*\(.*$/, "").replace(/^Meu parceiro\(a\) |^My partner /, "");
+    var t = T(it).replace(/^Meu parceiro\(a\) |^My partner /, "").replace(/\s+\(.*$/, "").replace(/\.\s*(Informe qual|Please say which)\.?$/, "").replace(/,\s*(não listado|not listed).*$/, "").replace(/\.$/, "");
+    if (it.livre && R[it.id+"_t"]) t += ": " + R[it.id+"_t"];
+    var lbl = it.n + ". " + t.charAt(0).toUpperCase() + t.slice(1);
     return '<option value="'+it.n+'"'+(String(sel)===String(it.n)?' selected':'')+'>'+esc(lbl.slice(0,90))+'</option>';
   }).join("");
 }
