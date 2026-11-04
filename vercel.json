@@ -7,8 +7,24 @@
       "destination": "/mapa/index.html"
     },
     {
+      "source": "/livro",
+      "destination": "/livro/index.html"
+    },
+    {
       "source": "/(.*)",
       "destination": "/index.html"
+    }
+  ],
+  "redirects": [
+    {
+      "source": "/ebook",
+      "destination": "/livro/",
+      "permanent": true
+    },
+    {
+      "source": "/ebook/(.*)",
+      "destination": "/livro/",
+      "permanent": true
     }
   ]
 }

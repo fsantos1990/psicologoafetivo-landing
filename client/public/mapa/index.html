@@ -281,7 +281,7 @@ function result(){
   const locked = !S.unlocked ? `
     <div class="card"><span class="tag">Plano de 7 dias</span>
       <h3>Receba um plano de exercícios montado a partir das suas respostas</h3>
-      <p class="muted small">Exercícios curtos do livro <em>Decodificando o Amor</em>, escolhidos pelo seu pilar mais baixo e pelo seu padrão de conflito.</p>
+      <p class="muted small">Exercícios curtos do livro Mapa Afetivo, escolhidos pelo seu pilar mais baixo e pelo seu padrão de conflito.</p>
       <form class="gate" id="gate" novalidate>
         <input type="email" id="email" placeholder="seu@email.com" autocomplete="email" value="${S.email||''}" aria-label="Seu e-mail">
         <button class="primary" type="submit">Ver meu plano</button>
@@ -293,9 +293,9 @@ function result(){
       <ol class="plan">${plan(r).map(x=>`<li>${x}</li>`).join('')}</ol>
     </div>
     <div class="card"><span class="tag">Próximo passo</span>
-      <h3>Decodificando o Amor, 2ª edição</h3>
+      <h3>Mapa Afetivo, o livro</h3>
       <p class="small">Este plano é a primeira semana do Plano de 30 Dias do livro. Os 12 capítulos trazem os dados da pesquisa do autor com 192 participantes, os estudos publicados de 2020 a 2025 e um exercício escrito em cada capítulo.</p>
-      <a class="btn primary" href="/ebook/" style="text-decoration:none;display:inline-block">Conhecer o livro</a>
+      <a class="btn primary" href="/livro/" style="text-decoration:none;display:inline-block">Conhecer o livro</a>
     </div>`;
 
   return `<h2>Seu Mapa Afetivo</h2>
