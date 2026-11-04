@@ -1,0 +1,397 @@
+<!doctype html>
+<html lang="pt-BR" data-lang="pt">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Avaliação do casal | Felipe Santos, Psicólogo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#F7F2EC;--ink:#1d2430;--muted:#5a6270;--accent:#235FAA;--accent-soft:#e4edf8;--card:#fffdfa;--line:#e3dbd0;--err:#b3261e;--ok:#1e7a46}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:'Outfit',system-ui,sans-serif;font-size:17px;line-height:1.55}
+html[data-lang="en"] [data-l="pt"],html[data-lang="pt"] [data-l="en"]{display:none!important}
+.wrap{max-width:720px;margin:0 auto;padding:0 16px 120px}
+header{display:flex;justify-content:space-between;align-items:center;padding:16px 0;gap:12px}
+.brand{font-weight:700;font-size:16px}
+.lang{display:flex;gap:6px}
+.lang button{font:inherit;font-size:14px;border:1px solid var(--line);background:var(--card);color:var(--ink);padding:6px 14px;border-radius:999px;cursor:pointer}
+.lang button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:#fff}
+.bar{position:sticky;top:0;z-index:5;background:var(--bg);padding:8px 0 12px}
+.bar .track{height:6px;background:var(--line);border-radius:6px;overflow:hidden}
+.bar .fill{height:100%;background:var(--accent);width:0;transition:width .25s}
+.bar .lbl{font-size:13px;color:var(--muted);margin-top:6px}
+h1{font-weight:900;font-size:clamp(26px,6vw,36px);line-height:1.15;margin:8px 0 12px}
+h2{font-weight:700;font-size:22px;margin:0 0 8px}
+.instr{color:var(--muted);margin:0 0 18px}
+.src{font-size:12px;color:var(--muted);margin-top:-10px;margin-bottom:16px}
+.q{scroll-margin:80px 0 110px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;margin:0 0 14px}
+.q.missing{border-color:var(--err);box-shadow:0 0 0 2px rgba(179,38,30,.15)}
+.q .qt{font-weight:600;margin:0 0 12px}
+.q .qn{color:var(--accent);font-weight:700;margin-right:6px}
+.opts{display:flex;flex-direction:column;gap:8px}
+.opt{display:flex;align-items:center;gap:10px;border:1px solid var(--line);border-radius:10px;padding:11px 12px;cursor:pointer;background:#fff;min-height:46px}
+.opt input{position:absolute;opacity:0;pointer-events:none}
+.opt .dot{width:20px;height:20px;border-radius:50%;border:2px solid #9aa3af;flex:none}
+.opt.sel{border-color:var(--accent);background:var(--accent-soft)}
+.opt.sel .dot{border-color:var(--accent);background:radial-gradient(var(--accent) 45%,transparent 50%)}
+.opt:focus-within{outline:3px solid #f0a500;outline-offset:1px}
+.pair{display:grid;grid-template-columns:1fr;gap:8px}
+.pair .ends{display:flex;justify-content:space-between;font-weight:600;font-size:15px}
+.nums{display:grid;gap:6px}
+.nums.n6{grid-template-columns:repeat(6,1fr)}
+.nums.n10{grid-template-columns:repeat(10,1fr)}
+.nums.n5{grid-template-columns:repeat(5,1fr)}
+.nums.n6b{grid-template-columns:repeat(6,1fr)}
+.nb{position:relative;display:flex;align-items:center;justify-content:center;border:1px solid var(--line);background:#fff;border-radius:10px;min-height:44px;font-weight:700;cursor:pointer;font-size:16px}
+.nb input{position:absolute;opacity:0;pointer-events:none}
+.nb.sel{background:var(--accent);border-color:var(--accent);color:#fff}
+.nb:focus-within{outline:3px solid #f0a500;outline-offset:1px}
+.ends2{display:flex;justify-content:space-between;font-size:13px;color:var(--muted);margin-top:4px;gap:10px}
+.ends2 span:last-child{text-align:right}
+.sub{font-size:14px;font-weight:600;color:var(--muted);margin:14px 0 8px;text-transform:uppercase;letter-spacing:.4px}
+.freq{display:flex;gap:8px;align-items:stretch;flex-wrap:wrap}
+.freq input[type=number]{width:84px;font:inherit;font-size:18px;padding:10px;border:1px solid var(--line);border-radius:10px;background:#fff;text-align:center}
+.seg{display:flex;border:1px solid var(--line);border-radius:10px;overflow:hidden;flex:1;min-width:210px}
+.seg label{flex:1;text-align:center;padding:10px 4px;cursor:pointer;background:#fff;font-size:15px;position:relative;border-left:1px solid var(--line)}
+.seg label:first-child{border-left:0}
+.seg input{position:absolute;opacity:0;pointer-events:none}
+.seg label.sel{background:var(--accent);color:#fff}
+input[type=text],textarea{width:100%;font:inherit;padding:11px 12px;border:1px solid var(--line);border-radius:10px;background:#fff}
+textarea{min-height:130px;resize:vertical}
+.check{display:flex;gap:10px;align-items:flex-start;cursor:pointer}
+.check input{width:22px;height:22px;margin-top:2px;flex:none;accent-color:var(--accent)}
+.skip{display:inline-flex;gap:8px;align-items:center;font-size:15px;color:var(--muted);margin-bottom:10px;cursor:pointer}
+.skip input{width:18px;height:18px;accent-color:var(--accent)}
+.q.na .body{opacity:.35;pointer-events:none}
+select{font:inherit;width:100%;padding:11px 12px;border:1px solid var(--line);border-radius:10px;background:#fff}
+.rank{display:grid;gap:10px}
+.rank label{font-weight:600;font-size:15px}
+.nav{position:fixed;left:0;right:0;bottom:0;background:rgba(247,242,236,.96);border-top:1px solid var(--line);padding:12px 16px calc(12px + env(safe-area-inset-bottom));backdrop-filter:blur(6px)}
+.nav .in{max-width:720px;margin:0 auto;display:flex;gap:10px}
+.btn{flex:1;font:inherit;font-weight:700;font-size:17px;padding:14px;border-radius:12px;border:2px solid var(--accent);cursor:pointer;background:var(--accent);color:#fff}
+.btn.alt{background:transparent;color:var(--accent);flex:0 0 auto;padding:14px 20px}
+.btn[disabled]{opacity:.5;cursor:default}
+.btn:focus-visible{outline:3px solid #f0a500;outline-offset:2px}
+.msg{padding:12px 14px;border-radius:10px;margin:0 0 14px;font-size:15px}
+.msg.err{background:#fbe9e7;color:var(--err)}
+.msg.info{background:var(--accent-soft);color:#173f73}
+.done{text-align:center;padding:40px 0}
+.done .big{font-size:48px}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+@media (max-width:420px){
+  .nums.n10{grid-template-columns:repeat(5,1fr)}
+  body{font-size:16px}
+}
+</style>
+<script src="config.js"></script>
+<script src="instrumentos.js"></script>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <div class="brand">Felipe Santos · <span data-l="pt">Psicólogo</span><span data-l="en">Psychologist</span></div>
+  <div class="lang" role="group" aria-label="Idioma / Language">
+    <button type="button" data-set="pt" aria-pressed="true">PT</button>
+    <button type="button" data-set="en" aria-pressed="false">EN</button>
+  </div>
+</header>
+<div class="bar" id="bar" hidden>
+  <div class="track"><div class="fill" id="fill"></div></div>
+  <div class="lbl" id="lbl"></div>
+</div>
+<main id="app" aria-live="polite"></main>
+</div>
+<nav class="nav" id="nav" hidden>
+  <div class="in">
+    <button type="button" class="btn alt" id="back"><span data-l="pt">Voltar</span><span data-l="en">Back</span></button>
+    <button type="button" class="btn" id="next"></button>
+  </div>
+</nav>
+
+<script>
+(function(){
+"use strict";
+var A = window.Avaliacao, CFG = window.AVALIACAO_CONFIG || {};
+var qs = new URLSearchParams(location.search);
+var CASAL = (qs.get("c") || "").trim().slice(0,40);
+var PARC = (qs.get("p") || "").trim().slice(0,60);
+var KEY = "avaliacao:" + CASAL + ":" + PARC;
+var LANG = qs.get("lang") === "en" ? "en" : "pt";
+var R = {}, step = 0, sending = false;
+
+// ---------- armazenamento local (rascunho) ----------
+function load(){ try{ var s = localStorage.getItem(KEY); if(s){ var o = JSON.parse(s); R = o.r || {}; step = o.s || 0; if(o.l) LANG = o.l; } }catch(e){} }
+function save(){ try{ localStorage.setItem(KEY, JSON.stringify({ r:R, s:step, l:LANG })); }catch(e){} }
+function clear(){ try{ localStorage.removeItem(KEY); }catch(e){} }
+
+function setLang(l){
+  LANG = l; document.documentElement.dataset.lang = l; document.documentElement.lang = l === "en" ? "en" : "pt-BR";
+  document.querySelectorAll(".lang button").forEach(function(b){ b.setAttribute("aria-pressed", b.dataset.set === l); });
+  save(); render();
+}
+document.querySelectorAll(".lang button").forEach(function(b){ b.onclick = function(){ setLang(b.dataset.set); }; });
+
+function T(o){ return o[LANG] || o.pt; }
+function bi(pt,en){ return '<span data-l="pt">'+pt+'</span><span data-l="en">'+en+'</span>'; }
+function esc(s){ return String(s==null?"":s).replace(/[&<>"']/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];}); }
+
+// ---------- etapas ----------
+var FA = A.FA, CSI = A.CSI;
+var STEPS = [
+  { id:"intro" },
+  { id:"csi1", req: CSI.itens.map(function(i){return i.id;}) },
+  { id:"csi2", req: CSI.pares.itens.map(function(i){return i.id;}) },
+  { id:"faPos" }, { id:"faNeg" }, { id:"faTop" },
+  { id:"comp", req:["comp1","comp2"] },
+  { id:"areas" },
+  { id:"viol", req:["vA","vB","vC"] },
+  { id:"rev" }
+];
+
+function faReq(list){
+  var ids = [];
+  list.forEach(function(it){
+    if (it.opcional) { // só exige se começou a preencher
+      if (R[it.id+"_t"] || R[it.id+"_f"] != null && R[it.id+"_f"] !== "") ids.push(it.id+"_f", it.id+"_a");
+      return;
+    }
+    if (it.opcionalSemFilhos && R[it.id+"_na"]) return;
+    ids.push(it.id+"_f", it.id+"_a");
+    if (it.descricao && Number(R[it.id+"_f"]) > 0) ids.push(it.id+"_t");
+  });
+  return ids;
+}
+function required(s){
+  var st = STEPS[s];
+  if (st.id === "intro") return ["nome","consent"];
+  if (st.id === "faPos") return faReq(FA.positivos);
+  if (st.id === "faNeg") return faReq(FA.negativos);
+  if (st.id === "areas") return A.AREAS.itens.filter(function(i){return !i.opcional;}).map(function(i){return i.id;});
+  return st.req || [];
+}
+function filled(id){ var v = R[id]; return !(v === undefined || v === null || v === "" || v === false); }
+
+// ---------- componentes ----------
+function radioList(id, opcoes){
+  return '<div class="opts" role="radiogroup">' + opcoes.map(function(o){
+    var sel = String(R[id]) === String(o.v);
+    return '<label class="opt'+(sel?' sel':'')+'"><input type="radio" name="'+id+'" value="'+o.v+'"'+(sel?' checked':'')+'><span class="dot"></span><span>'+bi(o.pt,o.en)+'</span></label>';
+  }).join("") + '</div>';
+}
+function numRow(id, vals, cls){
+  return '<div class="nums '+cls+'" role="radiogroup">' + vals.map(function(v){
+    var sel = String(R[id]) === String(v);
+    return '<label class="nb'+(sel?' sel':'')+'"><input type="radio" name="'+id+'" value="'+v+'"'+(sel?' checked':'')+' aria-label="'+v+'">'+v+'</label>';
+  }).join("") + '</div>';
+}
+function range(a,b){ var o=[]; for(var i=a;i<=b;i++) o.push(i); return o; }
+function q(id, num, html, title){
+  return '<div class="q" data-q="'+id+'">'+(title?'<p class="qt">'+(num?'<span class="qn">'+num+'.</span>':'')+title+'</p>':'')+html+'</div>';
+}
+
+function faCard(it){
+  var na = !!R[it.id+"_na"];
+  var unit = R[it.id+"_u"] || "mes";
+  var h = '';
+  if (it.opcionalSemFilhos) h += '<label class="skip"><input type="checkbox" data-k="'+it.id+'_na"'+(na?' checked':'')+'>'+bi("Não temos filhos (pular)","We have no children (skip)")+'</label>';
+  h += '<div class="body">';
+  if (it.livre) h += '<input type="text" data-k="'+it.id+'_t" value="'+esc(R[it.id+"_t"])+'" placeholder="'+(LANG==="en"?"Which behavior? (optional)":"Qual comportamento? (opcional)")+'" style="margin-bottom:10px">';
+  h += '<div class="sub">'+bi("A · Frequência no último mês","A · Frequency in the last month")+'</div>';
+  h += '<div class="freq"><input type="number" inputmode="numeric" min="0" max="99" data-k="'+it.id+'_f" value="'+esc(R[it.id+"_f"])+'" aria-label="'+(LANG==="en"?"Number of times":"Número de vezes")+'" placeholder="0">';
+  h += '<div class="seg" role="radiogroup">' + FA.unidades.map(function(u){
+    var s = unit === u.v; return '<label class="'+(s?'sel':'')+'"><input type="radio" name="'+it.id+'_u" value="'+u.v+'"'+(s?' checked':'')+'>'+bi(u.pt,u.en)+'</label>';
+  }).join("") + '</div></div>';
+  if (it.descricao) h += '<input type="text" data-k="'+it.id+'_t" value="'+esc(R[it.id+"_t"])+'" placeholder="'+(LANG==="en"?"Which behavior?":"Qual comportamento?")+'" style="margin-top:10px">';
+  h += '<div class="sub">'+bi("B · O quanto essa frequência foi aceitável para você?","B · How acceptable was this frequency to you?")+'</div>';
+  h += numRow(it.id+"_a", range(0,9), "n10");
+  h += '<div class="ends2"><span>'+bi("0 · Totalmente inaceitável","0 · Totally unacceptable")+'</span><span>'+bi("9 · Totalmente aceitável","9 · Totally acceptable")+'</span></div>';
+  h += '</div>';
+  return '<div class="q'+(na?' na':'')+'" data-q="'+it.id+'"><p class="qt"><span class="qn">'+it.n+'.</span>'+bi(it.pt,it.en)+(it.opcional?' <span style="color:var(--muted);font-weight:400">'+bi("(opcional)","(optional)")+'</span>':'')+'</p>'+h+'</div>';
+}
+
+function faOptions(sel){
+  var all = FA.positivos.concat(FA.negativos);
+  return '<option value="">'+(LANG==="en"?"Choose…":"Escolha…")+'</option>' + all.map(function(it){
+    var t = T(it).replace(/^Meu parceiro\(a\) |^My partner /, "").replace(/\s+\(.*$/, "").replace(/\.\s*(Informe qual|Please say which)\.?$/, "").replace(/,\s*(não listado|not listed).*$/, "").replace(/\.$/, "");
+    if (it.livre && R[it.id+"_t"]) t += ": " + R[it.id+"_t"];
+    var lbl = it.n + ". " + t.charAt(0).toUpperCase() + t.slice(1);
+    return '<option value="'+it.n+'"'+(String(sel)===String(it.n)?' selected':'')+'>'+esc(lbl.slice(0,90))+'</option>';
+  }).join("");
+}
+
+// ---------- telas ----------
+function header(o){ return '<h2>'+bi(o.titulo.pt,o.titulo.en)+'</h2>'+(o.instrucao?'<p class="instr">'+bi(o.instrucao.pt,o.instrucao.en)+'</p>':'')+(o.fonte?'<p class="src">'+esc(o.fonte)+'</p>':''); }
+
+function screen(){
+  var st = STEPS[step].id, h = "";
+  if (st === "intro"){
+    h += '<h1>'+bi("Questionários de avaliação do casal","Couple assessment questionnaires")+'</h1>';
+    h += '<p class="instr">'+bi(
+      "Estes questionários fazem parte da avaliação inicial da terapia de casal. Responda sozinho(a), sem consultar seu parceiro(a): cada um tem o próprio link e as respostas chegam só para o terapeuta. Leva cerca de 20 a 25 minutos. Suas respostas ficam salvas neste aparelho enquanto você preenche, e você pode parar e continuar depois.",
+      "These questionnaires are part of the initial couples therapy assessment. Answer on your own, without consulting your partner: each of you has your own link and the answers go only to the therapist. It takes about 20 to 25 minutes. Your answers are saved on this device while you fill them in, so you can stop and continue later.")+'</p>';
+    h += q("nome", 0, '<input type="text" data-k="nome" autocomplete="given-name" value="'+esc(R.nome != null ? R.nome : PARC)+'">', bi("Seu nome","Your name"));
+    h += '<div class="q" data-q="consent"><label class="check"><input type="checkbox" data-k="consent"'+(R.consent?' checked':'')+'><span>'+bi(
+      "Autorizo o psicólogo Felipe Santos (CRP 03/15591) a receber e guardar minhas respostas para uso exclusivo na minha avaliação e acompanhamento clínico, sob sigilo profissional, conforme o Código de Ética do Psicólogo e a LGPD. Posso pedir a exclusão dos meus dados a qualquer momento.",
+      "I authorize psychologist Felipe Santos (CRP 03/15591) to receive and store my answers exclusively for my clinical assessment and follow-up, under professional confidentiality, in accordance with the Brazilian Psychologists' Code of Ethics and data protection law (LGPD). I may request deletion of my data at any time.")+'</span></label></div>';
+    h += '<div class="hp" aria-hidden="true"><input type="text" tabindex="-1" autocomplete="off" data-k="_hp"></div>';
+  }
+  else if (st === "csi1"){
+    h += header(CSI);
+    CSI.itens.forEach(function(it,i){ h += q(it.id, i+1, radioList(it.id, it.opcoes), bi(it.pt,it.en)); });
+  }
+  else if (st === "csi2"){
+    h += '<h2>'+bi(CSI.titulo.pt,CSI.titulo.en)+'</h2><p class="instr">'+bi(CSI.pares.instrucao.pt,CSI.pares.instrucao.en)+'</p>';
+    CSI.pares.itens.forEach(function(it,i){
+      h += '<div class="q" data-q="'+it.id+'"><div class="pair"><div class="ends"><span>'+bi(it.pos.pt,it.pos.en)+'</span><span>'+bi(it.neg.pt,it.neg.en)+'</span></div>'+
+        '<div class="nums n6" role="radiogroup" aria-label="'+esc(T(it.pos))+' / '+esc(T(it.neg))+'">'+[5,4,3,2,1,0].map(function(v,ix){
+          var sel = String(R[it.id]) === String(v);
+          return '<label class="nb'+(sel?' sel':'')+'"><input type="radio" name="'+it.id+'" value="'+v+'"'+(sel?' checked':'')+' aria-label="'+(ix+1)+'">'+'•'.repeat(1)+'</label>';
+        }).join("")+'</div></div></div>';
+    });
+  }
+  else if (st === "faPos" || st === "faNeg"){
+    h += header({ titulo: FA.titulo, instrucao: step === 3 ? FA.instrucao : null, fonte: step === 3 ? FA.fonte : null });
+    h += '<p class="sub">'+(st==="faPos"?bi("Comportamentos positivos","Positive behaviors"):bi("Comportamentos negativos","Negative behaviors"))+'</p>';
+    if (st === "faNeg") h += '<p class="instr">'+bi("Mesma lógica: quantas vezes aconteceu e o quanto essa frequência foi aceitável para você.","Same logic: how many times it happened and how acceptable that frequency was to you.")+'</p>';
+    (st==="faPos"?FA.positivos:FA.negativos).forEach(function(it){ h += faCard(it); });
+  }
+  else if (st === "faTop"){
+    h += '<h2>'+bi("Os comportamentos mais importantes","The most important behaviors")+'</h2>';
+    h += '<p class="instr">'+bi("Escolha, em ordem, até 5 comportamentos (positivos ou negativos) que foram mais importantes para você ou que mais incomodaram no último mês.","Choose, in order, up to 5 behaviors (positive or negative) that mattered most to you or bothered you most in the last month.")+'</p>';
+    h += '<div class="q" data-q="fa_top1"><div class="rank">';
+    for (var t=1;t<=5;t++) h += '<label>'+t+'º<select data-k="fa_top'+t+'">'+faOptions(R["fa_top"+t])+'</select></label>';
+    h += '</div></div>';
+  }
+  else if (st === "comp"){
+    h += header(A.COMP);
+    A.COMP.itens.forEach(function(it,i){ h += q(it.id, i+1, numRow(it.id, range(0,5), "n6b")+'<div class="ends2"><span>'+bi("0 · Nada","0 · Not at all")+'</span><span>'+bi("5 · Totalmente","5 · Completely")+'</span></div>', bi(it.pt,it.en)); });
+  }
+  else if (st === "areas"){
+    var AR = A.AREAS; h += header(AR);
+    AR.itens.forEach(function(it,i){
+      var extra = it.livre ? '<input type="text" data-k="'+it.id+'_t" value="'+esc(R[it.id+"_t"])+'" placeholder="'+(LANG==="en"?"Which area? (optional)":"Qual área? (opcional)")+'" style="margin-bottom:10px">' : "";
+      h += q(it.id, i+1, extra + numRow(it.id, range(1,6), "n6b") + '<div class="ends2"><span>'+bi("1 · "+AR.escala.minRot.pt,"1 · "+AR.escala.minRot.en)+'</span><span>'+bi("6 · "+AR.escala.maxRot.pt,"6 · "+AR.escala.maxRot.en)+'</span></div>', bi(it.pt,it.en));
+    });
+    h += '<div class="q"><p class="qt">'+bi("Quais são as 3 áreas mais importantes que você gostaria de trabalhar na terapia?","Which 3 areas would you most like to work on in therapy?")+'</p><div class="rank">';
+    for (var k=1;k<=3;k++){
+      h += '<label>'+k+'º<select data-k="ar_top'+k+'"><option value="">'+(LANG==="en"?"Choose…":"Escolha…")+'</option>'+AR.itens.map(function(it,ix){ return '<option value="'+it.id+'"'+(R["ar_top"+k]===it.id?' selected':'')+'>'+(ix+1)+'. '+esc(T(it))+'</option>'; }).join("")+'</select></label>';
+    }
+    h += '</div></div>';
+  }
+  else if (st === "viol"){
+    var V = A.VIOL; h += header(V);
+    V.itens.forEach(function(it,i){ h += q(it.id, ["A","B"][i], radioList(it.id, V.freq), bi(it.pt,it.en)); });
+    h += q(V.medo.id, "C", radioList(V.medo.id, V.medo.opcoes), bi(V.medo.pt,V.medo.en));
+    V.abertas.forEach(function(it){ h += q(it.id, 0, '<textarea data-k="'+it.id+'">'+esc(R[it.id])+'</textarea>', bi(it.pt,it.en)); });
+  }
+  else if (st === "rev"){
+    h += '<h2>'+bi("Tudo pronto para enviar","Ready to send")+'</h2>';
+    h += '<p class="instr">'+bi("Você pode voltar e revisar qualquer resposta. Ao enviar, as respostas vão direto para o terapeuta e são apagadas deste aparelho.","You can go back and review any answer. When you send, the answers go straight to the therapist and are deleted from this device.")+'</p>';
+    h += '<div id="sendmsg"></div>';
+  }
+  return h;
+}
+
+function render(){
+  var app = document.getElementById("app"), nav = document.getElementById("nav"), bar = document.getElementById("bar");
+  if (!CASAL){
+    app.innerHTML = '<h1>'+bi("Link incompleto","Incomplete link")+'</h1><p class="instr">'+bi("Este link não identifica o casal. Peça ao terapeuta o link enviado para você.","This link does not identify the couple. Please ask the therapist for the link sent to you.")+'</p>';
+    nav.hidden = true; bar.hidden = true; return;
+  }
+  app.innerHTML = screen();
+  nav.hidden = false; bar.hidden = step === 0;
+  var pct = Math.round(step / (STEPS.length - 1) * 100);
+  document.getElementById("fill").style.width = pct + "%";
+  document.getElementById("lbl").innerHTML = bi("Etapa "+step+" de "+(STEPS.length-1), "Step "+step+" of "+(STEPS.length-1));
+  document.getElementById("back").style.display = step === 0 ? "none" : "";
+  document.getElementById("next").innerHTML = step === 0 ? bi("Começar","Start") : step === STEPS.length-1 ? bi("Enviar respostas","Send answers") : bi("Continuar","Continue");
+  document.getElementById("next").disabled = sending;
+  bind();
+}
+
+function bind(){
+  var app = document.getElementById("app");
+  app.querySelectorAll('input[type=radio]').forEach(function(inp){
+    inp.addEventListener("change", function(){
+      R[inp.name] = inp.value; save();
+      var grp = inp.closest('[role=radiogroup]');
+      grp.querySelectorAll("label").forEach(function(l){ l.classList.toggle("sel", l.contains(inp)); });
+      var qq = inp.closest(".q"); if (qq) qq.classList.remove("missing");
+    });
+  });
+  app.querySelectorAll('[data-k]').forEach(function(el){
+    var k = el.dataset.k;
+    var ev = el.tagName === "SELECT" || el.type === "checkbox" ? "change" : "input";
+    el.addEventListener(ev, function(){
+      if (el.type === "checkbox") R[k] = el.checked;
+      else if (el.type === "number") { var v = el.value === "" ? "" : Math.max(0, Math.min(99, parseInt(el.value,10) || 0)); R[k] = v; }
+      else R[k] = el.value.slice(0, 4000);
+      save();
+      var qq = el.closest(".q"); if (qq) qq.classList.remove("missing");
+      if (k.slice(-3) === "_na") render();
+    });
+  });
+}
+
+function validate(){
+  var miss = required(step).filter(function(id){ return !filled(id) && !(id === "nome" && PARC && R.nome == null); });
+  document.querySelectorAll(".q.missing").forEach(function(e){ e.classList.remove("missing"); });
+  if (!miss.length) return true;
+  var first = null;
+  miss.forEach(function(id){
+    var base = id.replace(/_(f|a|t|u)$/, "");
+    var el = document.querySelector('[data-q="'+base+'"]') || document.querySelector('[data-q="'+id+'"]');
+    if (el){ el.classList.add("missing"); if (!first) first = el; }
+  });
+  if (first) first.scrollIntoView({ behavior:"smooth", block:"center" });
+  return false;
+}
+
+function go(d){
+  if (d > 0 && !validate()) return;
+  if (step === 0 && R.nome == null) R.nome = PARC;
+  if (d > 0 && step === STEPS.length - 1) return send();
+  step = Math.max(0, Math.min(STEPS.length - 1, step + d)); save(); render(); window.scrollTo(0,0);
+}
+document.getElementById("next").onclick = function(){ go(1); };
+document.getElementById("back").onclick = function(){ go(-1); };
+
+function send(){
+  if (sending) return;
+  if (R._hp) { done(); return; } // robô
+  if (!CFG.SUPABASE_URL || CFG.SUPABASE_URL.indexOf("SEU-PROJETO") > -1){
+    document.getElementById("sendmsg").innerHTML = '<div class="msg err">'+bi("Formulário ainda não configurado. Avise o terapeuta.","Form not configured yet. Please let the therapist know.")+'</div>'; return;
+  }
+  sending = true; render();
+  var resp = {}; for (var k in R) if (k !== "_hp" && k !== "consent" && k !== "nome") resp[k] = R[k];
+  var body = { casal: CASAL, parceiro: String(R.nome || PARC).slice(0,80), idioma: LANG, versao: A.VERSAO, consentimento: true, respostas: resp };
+  fetch(CFG.SUPABASE_URL.replace(/\/$/,"") + "/rest/v1/avaliacoes", {
+    method: "POST",
+    headers: { "apikey": CFG.SUPABASE_ANON_KEY, "Content-Type": "application/json", "Prefer": "return=minimal" },
+    body: JSON.stringify(body)
+  }).then(function(r){
+    if (!r.ok) return r.text().then(function(t){ throw new Error(r.status + " " + t); });
+    clear(); done();
+  }).catch(function(e){
+    sending = false; render();
+    document.getElementById("sendmsg").innerHTML = '<div class="msg err">'+bi("Não foi possível enviar agora. Suas respostas continuam salvas neste aparelho. Verifique a internet e tente de novo.","Could not send right now. Your answers are still saved on this device. Check your connection and try again.")+'</div>';
+    if (window.console) console.error(e);
+  });
+}
+function done(){
+  document.getElementById("nav").hidden = true; document.getElementById("bar").hidden = true;
+  document.getElementById("app").innerHTML = '<div class="done"><div class="big">✓</div><h1>'+bi("Respostas enviadas","Answers sent")+'</h1><p class="instr">'+bi("Obrigado. Felipe vai ler suas respostas antes da sua sessão individual. Você já pode fechar esta página.","Thank you. Felipe will read your answers before your individual session. You can close this page now.")+'</p></div>';
+}
+
+load();
+document.documentElement.dataset.lang = LANG;
+document.querySelectorAll(".lang button").forEach(function(b){ b.setAttribute("aria-pressed", b.dataset.set === LANG); });
+render();
+})();
+</script>
+</body>
+</html>
