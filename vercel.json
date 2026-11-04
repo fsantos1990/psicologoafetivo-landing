@@ -7,10 +7,6 @@
       "destination": "/mapa/index.html"
     },
     {
-      "source": "/app",
-      "destination": "/app/index.html"
-    },
-    {
       "source": "/(.*)",
       "destination": "/index.html"
     }

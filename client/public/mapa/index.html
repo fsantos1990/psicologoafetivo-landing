@@ -169,7 +169,7 @@ function nav(){
 
 function intro(){
   return `<div class="step-label" style="margin-top:28px">Por Psicólogo Afetivo</div><h1 style="margin-top:6px">Mapa Afetivo</h1>
-  <p class="muted" style="font-weight:500">Programa de 30 dias para casais, baseado em pesquisa</p>
+  <p class="muted" style="font-weight:500">Diagnóstico gratuito para casais, baseado em pesquisa</p>
   <p>Em 5 minutos você responde 23 perguntas sobre a sua relação e recebe três leituras: como estão os três pilares do amor, a distância entre o parceiro que você imagina e o que você tem, e o padrão que vocês repetem quando brigam.</p>
   <p class="muted small">Responda pensando nos últimos 3 meses. Se estiver solteiro(a), use o seu último relacionamento. As respostas ficam só neste aparelho.</p>
   <div class="nav"><span></span><button class="primary" data-go="1">Começar</button></div>`;
@@ -281,7 +281,7 @@ function result(){
   const locked = !S.unlocked ? `
     <div class="card"><span class="tag">Plano de 7 dias</span>
       <h3>Receba um plano de exercícios montado a partir das suas respostas</h3>
-      <p class="muted small">Exercícios curtos do Mapa Afetivo, escolhidos pelo seu pilar mais baixo e pelo seu padrão de conflito.</p>
+      <p class="muted small">Exercícios curtos do livro <em>Decodificando o Amor</em>, escolhidos pelo seu pilar mais baixo e pelo seu padrão de conflito.</p>
       <form class="gate" id="gate" novalidate>
         <input type="email" id="email" placeholder="seu@email.com" autocomplete="email" value="${S.email||''}" aria-label="Seu e-mail">
         <button class="primary" type="submit">Ver meu plano</button>
@@ -293,9 +293,9 @@ function result(){
       <ol class="plan">${plan(r).map(x=>`<li>${x}</li>`).join('')}</ol>
     </div>
     <div class="card"><span class="tag">Próximo passo</span>
-      <h3>Mapa Afetivo completo</h3>
-      <p class="small">Este plano é a primeira semana do programa. O Mapa Afetivo completo traz o Plano de 30 Dias com registro para os dois parceiros, as notas do casal comparadas na Semana 2 e no Dia 28, e o livro <em>Decodificando o Amor</em>, 2ª edição, com os dados da pesquisa do autor com 192 participantes.</p>
-      <a class="btn primary" href="/app/" style="text-decoration:none;display:inline-block">Conhecer o programa</a>
+      <h3>Decodificando o Amor, 2ª edição</h3>
+      <p class="small">Este plano é a primeira semana do Plano de 30 Dias do livro. Os 12 capítulos trazem os dados da pesquisa do autor com 192 participantes, os estudos publicados de 2020 a 2025 e um exercício escrito em cada capítulo.</p>
+      <a class="btn primary" href="/ebook/" style="text-decoration:none;display:inline-block">Conhecer o livro</a>
     </div>`;
 
   return `<h2>Seu Mapa Afetivo</h2>
