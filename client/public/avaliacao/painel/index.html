@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Painel de avaliações</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#F7F2EC;--ink:#1d2430;--muted:#5a6270;--accent:#235FAA;--soft:#e4edf8;--card:#fffdfa;--line:#e3dbd0;--red:#b3261e;--redbg:#fbe9e7;--amb:#8a5a00;--ambbg:#fff3d6;--grn:#1e7a46;--grnbg:#e3f4ea}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:'Outfit',system-ui,sans-serif;font-size:16px;line-height:1.5}
+.wrap{max-width:1100px;margin:0 auto;padding:16px 16px 60px}
+header{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:16px}
+h1{font-size:24px;margin:0;font-weight:900}
+h2{font-size:19px;margin:0 0 10px}
+h3{font-size:15px;margin:16px 0 6px;color:var(--muted);text-transform:uppercase;letter-spacing:.4px}
+a{color:var(--accent)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;margin-bottom:14px}
+.btn{font:inherit;font-weight:700;padding:9px 16px;border-radius:10px;border:2px solid var(--accent);background:var(--accent);color:#fff;cursor:pointer}
+.btn.alt{background:transparent;color:var(--accent)}
+.btn.sm{padding:5px 10px;font-size:14px}
+.btn.danger{border-color:var(--red);color:var(--red);background:transparent}
+input,select{font:inherit;padding:9px 11px;border:1px solid var(--line);border-radius:10px;background:#fff;width:100%}
+.row{display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));align-items:end}
+label.f{display:block;font-size:14px;color:var(--muted)}
+.link{display:flex;gap:8px;margin-top:8px;align-items:center}
+.link code{flex:1;background:#fff;border:1px solid var(--line);border-radius:8px;padding:7px 9px;font-size:13px;overflow-x:auto;white-space:nowrap}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th,td{text-align:left;padding:7px 8px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-weight:600;color:var(--muted)}
+td.n{text-align:center;font-variant-numeric:tabular-nums}
+.pill{display:inline-block;padding:2px 10px;border-radius:999px;font-size:13px;font-weight:600}
+.verde{background:var(--grnbg);color:var(--grn)} .amarela{background:var(--ambbg);color:var(--amb)} .vermelha{background:var(--redbg);color:var(--red)}
+.alert{padding:8px 12px;border-radius:10px;margin:0 0 8px;font-size:14px;font-weight:600}
+.alert.grave{background:var(--redbg);color:var(--red)} .alert.atencao{background:var(--ambbg);color:var(--amb)}
+.cols{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:10px;margin:8px 0}
+.kpi{background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px}
+.kpi b{display:block;font-size:24px;font-variant-numeric:tabular-nums}
+.kpi span{font-size:13px;color:var(--muted)}
+.low{color:var(--red);font-weight:700}
+.muted{color:var(--muted);font-size:14px}
+.text{white-space:pre-wrap;background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px;font-size:15px}
+.unread{background:var(--accent);color:#fff}
+.list a{display:flex;justify-content:space-between;gap:10px;padding:10px 4px;border-bottom:1px solid var(--line);text-decoration:none;color:var(--ink)}
+.list a:hover{background:#fff}
+.hidden{display:none}
+.scroll{overflow-x:auto}
+@media print{.noprint{display:none!important} body{background:#fff} .card{border-color:#ccc;break-inside:avoid}}
+</style>
+<script src="../config.js"></script>
+<script src="../instrumentos.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <h1>Avaliações de casal</h1>
+  <div class="noprint" id="who"></div>
+</header>
+<div id="app"></div>
+</div>
+<script>
+(function(){
+"use strict";
+var CFG = window.AVALIACAO_CONFIG, A = window.Avaliacao;
+var sb = window.supabase.createClient(CFG.SUPABASE_URL, CFG.SUPABASE_ANON_KEY);
+var app = document.getElementById("app");
+var BASE = location.origin + "/avaliacao/";
+function esc(s){ return String(s==null?"":s).replace(/[&<>"']/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];}); }
+function fmt(d){ return new Date(d).toLocaleString("pt-BR",{dateStyle:"short",timeStyle:"short"}); }
+function slug(s){ return String(s||"").normalize("NFD").replace(/[̀-ͯ]/g,"").toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"").slice(0,16); }
+
+// ---------- login ----------
+function loginView(msg){
+  document.getElementById("who").innerHTML = "";
+  app.innerHTML = '<div class="card" style="max-width:420px"><h2>Entrar</h2><p class="muted">Você recebe um link de acesso no e-mail cadastrado.</p>'+
+    '<form id="lf"><input type="email" id="em" value="'+esc(CFG.EMAIL_TERAPEUTA)+'" required><p></p><button class="btn" type="submit">Enviar link de acesso</button></form>'+
+    (msg?'<p class="muted" style="margin-top:10px">'+esc(msg)+'</p>':'')+'</div>';
+  document.getElementById("lf").onsubmit = function(e){
+    e.preventDefault();
+    sb.auth.signInWithOtp({ email: document.getElementById("em").value.trim(), options: { shouldCreateUser: false, emailRedirectTo: location.origin + location.pathname } })
+      .then(function(r){ loginView(r.error ? "Erro: " + r.error.message : "Link enviado. Abra o e-mail neste mesmo navegador."); });
+  };
+}
+
+// ---------- gerador de links ----------
+function geradorHTML(){
+  return '<div class="card noprint"><h2>Gerar links para um casal</h2>'+
+    '<div class="row"><label class="f">Parceiro(a) 1<input id="g1" placeholder="Ana"></label>'+
+    '<label class="f">Parceiro(a) 2<input id="g2" placeholder="John"></label>'+
+    '<label class="f">Código do casal<input id="gc" placeholder="gerado automaticamente"></label>'+
+    '<label class="f">Idioma inicial<select id="gl"><option value="pt">Português</option><option value="en">English</option></select></label></div>'+
+    '<p></p><button class="btn" id="gb">Gerar</button><div id="gout"></div>'+
+    '<p class="muted">Cada parceiro(a) recebe o próprio link. O código agrupa as respostas no painel; use letras e números, sem dados sensíveis.</p></div>';
+}
+function bindGerador(){
+  document.getElementById("gb").onclick = function(){
+    var n1 = document.getElementById("g1").value.trim(), n2 = document.getElementById("g2").value.trim();
+    var c = slug(document.getElementById("gc").value) || (slug(n1).slice(0,6)+"-"+slug(n2).slice(0,6)+"-"+Math.random().toString(36).slice(2,6));
+    document.getElementById("gc").value = c;
+    var lang = document.getElementById("gl").value;
+    var out = [n1||"Parceiro 1", n2||"Parceiro 2"].map(function(n){
+      var url = BASE + "?c=" + encodeURIComponent(c) + "&p=" + encodeURIComponent(n) + (lang==="en"?"&lang=en":"");
+      var wa = "https://wa.me/?text=" + encodeURIComponent((lang==="en"?"Hi "+n+", here is your assessment questionnaire link. Please answer on your own: ":"Olá, "+n+". Este é o seu link dos questionários de avaliação. Responda sozinho(a): ")+url);
+      return '<div class="link"><b style="min-width:80px">'+esc(n)+'</b><code>'+esc(url)+'</code><button class="btn sm alt" data-copy="'+esc(url)+'">Copiar</button><a class="btn sm" href="'+wa+'" target="_blank" rel="noopener">WhatsApp</a></div>';
+    }).join("");
+    document.getElementById("gout").innerHTML = out;
+    document.querySelectorAll("[data-copy]").forEach(function(b){ b.onclick = function(){ navigator.clipboard.writeText(b.dataset.copy).then(function(){ b.textContent = "Copiado"; }); }; });
+  };
+}
+
+// ---------- lista ----------
+function listaView(){
+  app.innerHTML = geradorHTML() + '<div class="card"><h2>Respostas recebidas</h2><div id="lst" class="list muted">Carregando…</div></div>';
+  bindGerador();
+  sb.from("avaliacoes").select("id,criado_em,casal,parceiro,lido").order("criado_em",{ascending:false}).limit(500).then(function(r){
+    var el = document.getElementById("lst");
+    if (r.error){ el.textContent = "Erro: " + r.error.message; return; }
+    if (!r.data.length){ el.textContent = "Nenhuma resposta ainda."; return; }
+    var g = {};
+    r.data.forEach(function(x){ (g[x.casal] = g[x.casal] || []).push(x); });
+    el.classList.remove("muted");
+    el.innerHTML = Object.keys(g).map(function(c){
+      var it = g[c], novos = it.filter(function(x){ return !x.lido; }).length;
+      return '<a href="?casal='+encodeURIComponent(c)+'"><span><b>'+esc(c)+'</b> · '+esc(it.map(function(x){return x.parceiro;}).join(", "))+'</span><span>'+(novos?'<span class="pill unread">'+novos+' nova(s)</span> ':'')+'<span class="muted">'+fmt(it[0].criado_em)+'</span></span></a>';
+    }).join("");
+  });
+}
+
+// ---------- relatório ----------
+var ZONA = { verde:"Zona verde (> 68)", amarela:"Zona amarela (52 a 68)", vermelha:"Zona vermelha (< 52)" };
+var VFREQ = ["Nunca","1 vez","2 a 5 vezes","6 a 10 vezes","Mais de 10 vezes"];
+var MEDO = ["Não","Às vezes","Sim"];
+var UNI = { dia:"/dia", semana:"/sem", mes:"/mês" };
+function faNome(n){
+  var it = A.FA.positivos.concat(A.FA.negativos).filter(function(i){ return i.n === Number(n); })[0];
+  return it ? it.n + ". " + it.pt.replace(/^Meu parceiro\(a\) /,"").replace(/\s*\(.*$/,"") : n;
+}
+function arNome(id){ var it = A.AREAS.itens.filter(function(i){ return i.id === id; })[0]; return it ? it.pt : id; }
+
+function relatorio(row){
+  var R = row.respostas || {}, S = A.corrigir(R), h = "";
+  h += '<div class="card"><h2>'+esc(row.parceiro)+'</h2><p class="muted">Enviado em '+fmt(row.criado_em)+' · respondeu em '+(row.idioma==="en"?"inglês":"português")+'</p>';
+  h += S.alertas.length ? S.alertas.map(function(a){ return '<div class="alert '+a.nivel+'">'+(a.nivel==="grave"?"⚠ ":"")+esc(a.pt)+'</div>'; }).join("") : '<p class="muted">Sem alertas automáticos.</p>';
+  h += '<div class="kpis"><div class="kpi"><b>'+S.csi.total+'<small style="font-size:14px">/81</small></b><span>Satisfação (CSI-16)</span></div>'+
+       '<div class="kpi"><b>'+(S.comp.quer==null?"–":S.comp.quer)+' · '+(S.comp.fara==null?"–":S.comp.fara)+'</b><span>Compromisso: quer · fará (0–5)</span></div>'+
+       '<div class="kpi"><b>'+(S.fa.mediaPos==null?"–":S.fa.mediaPos)+'</b><span>Aceitab. média, positivos (0–9)</span></div>'+
+       '<div class="kpi"><b>'+(S.fa.mediaNeg==null?"–":S.fa.mediaNeg)+'</b><span>Aceitab. média, negativos (0–9)</span></div>'+
+       '<div class="kpi"><b>'+(S.areas.media==null?"–":S.areas.media)+'</b><span>Áreas, média (1–6)</span></div></div>';
+  if (S.csi.zona) h += '<span class="pill '+S.csi.zona+'">'+ZONA[S.csi.zona]+'</span>';
+  else h += '<span class="muted">CSI incompleto ('+S.csi.respondidos+'/16)</span>';
+
+  h += '<h3>Segurança (último ano)</h3><table><tr><td>A. Eu agredi fisicamente</td><td>'+(S.viol.eu==null?"–":VFREQ[S.viol.eu])+'</td></tr>'+
+       '<tr><td>B. Parceiro(a) me agrediu fisicamente</td><td>'+(S.viol.parceiro==null?"–":VFREQ[S.viol.parceiro])+'</td></tr>'+
+       '<tr><td>C. Medo de represália ao opinar</td><td>'+(S.viol.medo==null?"–":MEDO[S.viol.medo])+'</td></tr></table>';
+
+  h += '<h3>5 comportamentos mais importantes</h3>' + (S.fa.top5.length ? '<ol>'+S.fa.top5.map(function(n){ return '<li>'+esc(faNome(n))+'</li>'; }).join("")+'</ol>' : '<p class="muted">Não indicou.</p>');
+  h += '<h3>Baixa aceitabilidade (≤ 3)</h3>' + (S.fa.baixaAceit.length ? '<ul>'+S.fa.baixaAceit.map(function(l){ return '<li><span class="low">'+l.aceit+'</span> · '+esc(faNome(l.n))+(l.texto?' ("'+esc(l.texto)+'")':'')+' · '+l.vezes+UNI[l.unidade]+'</li>'; }).join("")+'</ul>' : '<p class="muted">Nenhum item.</p>');
+  h += '<h3>Áreas que quer trabalhar</h3>' + (S.areas.top3.length ? '<ol>'+S.areas.top3.map(function(id){ return '<li>'+esc(arNome(id))+(id==="ar15"&&R.ar15_t?' ("'+esc(R.ar15_t)+'")':'')+'</li>'; }).join("")+'</ol>' : '<p class="muted">Não indicou.</p>');
+  h += '<h3>Interação típica dos problemas</h3><div class="text">'+(esc(R.vNeg)||'<span class="muted">Sem resposta.</span>')+'</div>';
+  h += '<h3>Interação típica do que é positivo</h3><div class="text">'+(esc(R.vPos)||'<span class="muted">Sem resposta.</span>')+'</div>';
+  h += '<p class="noprint" style="margin-top:14px;display:flex;gap:8px;flex-wrap:wrap">'+(row.lido?'':'<button class="btn sm alt" data-lido="'+row.id+'">Marcar como lida</button>')+'<button class="btn sm danger" data-del="'+row.id+'">Apagar esta resposta</button></p></div>';
+  return { html: h, S: S, R: R };
+}
+
+function comparativo(rows, rels){
+  if (rows.length < 2) return '<p class="muted">Aguardando a resposta do(a) outro(a) parceiro(a) para o comparativo.</p>';
+  var a = rows[0], b = rows[1], ra = rels[0], rb = rels[1];
+  var h = '<div class="card"><h2>Comparativo do casal</h2>';
+  h += '<div class="kpis"><div class="kpi"><b>'+ra.S.csi.total+' · '+rb.S.csi.total+'</b><span>CSI: '+esc(a.parceiro)+' · '+esc(b.parceiro)+'</span></div>'+
+       '<div class="kpi"><b>'+Math.abs(ra.S.csi.total - rb.S.csi.total)+'</b><span>Diferença no CSI</span></div></div>';
+  // Áreas lado a lado
+  h += '<h3>Áreas de desacordo (1–6)</h3><div class="scroll"><table><tr><th>Área</th><th class="n">'+esc(a.parceiro)+'</th><th class="n">'+esc(b.parceiro)+'</th></tr>';
+  var linhas = A.AREAS.itens.map(function(it){ return { it:it, va: ra.R[it.id], vb: rb.R[it.id] }; })
+    .filter(function(x){ return x.va || x.vb; })
+    .sort(function(x,y){ return (Number(y.va||0)+Number(y.vb||0)) - (Number(x.va||0)+Number(x.vb||0)); });
+  linhas.forEach(function(x){
+    var ta = ra.S.areas.top3.indexOf(x.it.id) > -1, tb = rb.S.areas.top3.indexOf(x.it.id) > -1;
+    h += '<tr><td>'+esc(x.it.pt)+'</td><td class="n'+(Number(x.va)>=5?' low':'')+'">'+(x.va||"–")+(ta?' ★':'')+'</td><td class="n'+(Number(x.vb)>=5?' low':'')+'">'+(x.vb||"–")+(tb?' ★':'')+'</td></tr>';
+  });
+  h += '</table></div><p class="muted">★ = entre as 3 áreas que a pessoa quer trabalhar. Em vermelho, notas 5 ou 6.</p>';
+  // FAPBI cruzado
+  h += '<h3>Comportamentos: o que cada um relata do outro</h3><div class="scroll"><table><tr><th>Comportamento</th><th class="n">'+esc(a.parceiro)+' sobre '+esc(b.parceiro)+'<br><span class="muted">freq/mês · aceit.</span></th><th class="n">'+esc(b.parceiro)+' sobre '+esc(a.parceiro)+'<br><span class="muted">freq/mês · aceit.</span></th></tr>';
+  A.FA.positivos.concat(A.FA.negativos).forEach(function(it){
+    var la = ra.S.fa.linhas.filter(function(l){ return l.n === it.n; })[0], lb = rb.S.fa.linhas.filter(function(l){ return l.n === it.n; })[0];
+    if (!la && !lb) return;
+    function cel(l){ return l ? (l.porMes==null?"–":l.porMes)+' · <span class="'+(l.aceit!==null&&l.aceit<=3?'low':'')+'">'+(l.aceit==null?"–":l.aceit)+'</span>' : "–"; }
+    h += '<tr><td>'+esc(faNome(it.n))+'</td><td class="n">'+cel(la)+'</td><td class="n">'+cel(lb)+'</td></tr>';
+  });
+  h += '</table></div><p class="muted">Frequências convertidas para vezes por mês (dia × 30, semana × 4,33).</p></div>';
+  return h;
+}
+
+function casalView(casal){
+  app.innerHTML = '<p class="noprint"><a href="./">← Todas as respostas</a> · <a href="#" id="pr">Imprimir / salvar PDF</a></p><div id="cv" class="muted">Carregando…</div>';
+  document.getElementById("pr").onclick = function(e){ e.preventDefault(); window.print(); };
+  sb.from("avaliacoes").select("*").eq("casal", casal).order("criado_em",{ascending:true}).then(function(r){
+    var cv = document.getElementById("cv");
+    if (r.error){ cv.textContent = "Erro: " + r.error.message; return; }
+    if (!r.data.length){ cv.textContent = "Nenhuma resposta para este casal."; return; }
+    // última resposta de cada parceiro primeiro no comparativo
+    var porP = {}; r.data.forEach(function(x){ porP[x.parceiro] = x; });
+    var ult = Object.keys(porP).map(function(k){ return porP[k]; });
+    var relsUlt = ult.map(relatorio);
+    cv.classList.remove("muted");
+    cv.innerHTML = '<h2 style="margin-bottom:14px">Casal: '+esc(casal)+'</h2>' + comparativo(ult, relsUlt) +
+      '<div class="cols">' + r.data.slice().reverse().map(function(x){ return relatorio(x).html; }).join("") + '</div>';
+    cv.querySelectorAll("[data-lido]").forEach(function(b){ b.onclick = function(){ sb.from("avaliacoes").update({lido:true}).eq("id", b.dataset.lido).then(function(){ casalView(casal); }); }; });
+    cv.querySelectorAll("[data-del]").forEach(function(b){ b.onclick = function(){
+      if (!confirm("Apagar definitivamente esta resposta? Não há como desfazer.")) return;
+      sb.from("avaliacoes").delete().eq("id", b.dataset.del).then(function(x){ if (x.error) alert(x.error.message); casalView(casal); });
+    }; });
+  });
+}
+
+function route(session){
+  if (!session){ loginView(); return; }
+  document.getElementById("who").innerHTML = '<span class="muted">'+esc(session.user.email)+'</span> <button class="btn sm alt" id="out">Sair</button>';
+  document.getElementById("out").onclick = function(){ sb.auth.signOut().then(function(){ loginView(); }); };
+  var c = new URLSearchParams(location.search).get("casal");
+  if (c) casalView(c); else listaView();
+}
+sb.auth.getSession().then(function(r){ route(r.data.session); });
+sb.auth.onAuthStateChange(function(ev, s){ if (ev === "SIGNED_IN") route(s); });
+})();
+</script>
+</body>
+</html>
