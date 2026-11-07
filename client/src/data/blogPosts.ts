@@ -10,6 +10,65 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    id: "pesquisa-192-pessoas-intimidade-compromisso",
+    title: "Pesquisei 192 pessoas em relacionamentos: o que explicou a satisfação",
+    excerpt:
+      "Na minha pesquisa de mestrado, a distância entre o parceiro ideal e o real reduziu a satisfação, e intimidade e compromisso explicaram a saúde da relação.",
+    date: "07 de novembro de 2026",
+    author: "Felipe Santos",
+    image: "/blog/pesquisa-192-pessoas.jpg",
+    content: `
+      <h2>O que foi medido</h2>
+      <p>
+        Na minha pesquisa de mestrado em Psicologia Social na UFBA, 192 pessoas em relacionamentos de pelo menos
+        um ano responderam a questionários sobre quatro temas: amor, ideais de parceiro, sexismo e satisfação com a relação.
+        Para medir o amor, usei os três componentes descritos por Robert Sternberg: intimidade, paixão e compromisso.
+      </p>
+      <h2>Resultado 1: a distância entre o parceiro ideal e o parceiro real</h2>
+      <p>
+        Cada participante descreveu o parceiro ideal e o parceiro com quem estava. Quanto maior a distância entre os dois,
+        menor a satisfação com a relação.
+      </p>
+      <p>
+        Esse resultado tem uma implicação prática. Quando o parceiro faz algo diferente do esperado, a comparação com o
+        ideal tende a ser registrada como defeito do parceiro. Um exemplo: a pessoa espera que o parceiro planeje surpresas
+        e ele demonstra cuidado resolvendo problemas da casa. Se a comparação é sempre com o ideal, o cuidado que existe
+        deixa de ser notado.
+      </p>
+      <h2>Resultado 2: intimidade e compromisso</h2>
+      <p>
+        Entre os três componentes do amor, intimidade e compromisso apareceram como os mecanismos que explicam a saúde
+        da relação. A paixão não ocupou esse papel.
+      </p>
+      <p>
+        Isso combina com o que outros estudos mostram sobre relações longas: a paixão costuma diminuir primeiro, enquanto
+        intimidade e compromisso podem continuar crescendo por décadas. Uma queda do desejo do início, sozinha, não indica
+        que a relação vai mal.
+      </p>
+      <h2>O que acompanhar na sua relação</h2>
+      <ul>
+        <li><strong>Intimidade:</strong> vocês ainda contam um ao outro o que acontece no dia, inclusive o que deu errado?</li>
+        <li><strong>Compromisso:</strong> vocês mantêm os planos que fizeram juntos e falam sobre os próximos?</li>
+        <li><strong>Ideal e real:</strong> a última crítica que você fez ao parceiro foi sobre algo que ele fez ou sobre algo que ele não é?</li>
+      </ul>
+      <p>
+        Se a resposta às duas primeiras perguntas é não há vários meses, esse é um critério para considerar terapia de casal,
+        mesmo sem brigas frequentes.
+      </p>
+      <h2>Para ir além</h2>
+      <p>
+        O livro <a href="/livro/">Mapa Afetivo</a> apresenta esses resultados no Capítulo 4, junto com os maiores estudos
+        publicados sobre o tema entre 2020 e 2025, e traz um exercício escrito para o casal. Antes de comprar, você pode
+        fazer o <a href="/mapa/">diagnóstico gratuito do casal</a>.
+      </p>
+      <p>
+        Atendo casais online, em português e inglês, com experiência em casais interculturais.
+      </p>
+      <p><em>Referência: Santos, F. M. S. (2019). Amor romântico, ideais e satisfação nos relacionamentos amorosos.
+        Dissertação de mestrado, Universidade Federal da Bahia.</em></p>
+    `,
+  },
+  {
     id: "terapia-casal-online-ibct",
     title: "Terapia de Casal Online: Por que a IBCT é a abordagem mais afetiva?",
     excerpt:

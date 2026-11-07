@@ -1,0 +1,16 @@
+{
+  "criterio": "Reciclado é 'útil' se, 7 dias após publicar, (salvamentos + compartilhamentos) >= 60% do original OU >= mediana dos últimos 10 posts do feed. Caso contrário, 'esgotado' e o original sai da fila de reciclagem.",
+  "itens": [
+    {
+      "id": "r01_pesquisa192",
+      "original_url": "https://www.instagram.com/p/DVJe3OuEXPU/",
+      "original_data": "2026-02-24",
+      "original_metricas": {"alcance": 1193, "interacoes": 139, "salvamentos": 18, "compartilhamentos": 44},
+      "reciclado_data": "2026-11-14T19:00:00-03:00",
+      "reciclado_url": null,
+      "reciclado_metricas": null,
+      "blog_slug": "pesquisa-192-pessoas-intimidade-compromisso",
+      "veredito": null
+    }
+  ]
+}
