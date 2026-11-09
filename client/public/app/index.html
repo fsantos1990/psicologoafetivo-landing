@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<meta name="description" content="Plano de 30 Dias do livro Mapa Afetivo, para fazer a dois. Por Felipe Santos, psicólogo (CRP 03/15591).">
+<title>Plano de 30 Dias · Mapa Afetivo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;700;900&display=swap">
+<style>
+/* Mesma identidade da página /mapa: coluna única, cartões, azul de destaque */
+:root{
+  --bg:#F7F2EC; --surface:#FFFDF9; --fg:#1F2430; --muted:#5E6472; --line:#E3DCD2;
+  --accent:#235FAA; --accent-soft:#DCE6F4; --on-accent:#FFFFFF; --warn:#B5562B; --warn-soft:#F6E3D8;
+  --ok:#2E7D4F; --ok-soft:#DDEFE3;
+  --font:'Outfit', 'Segoe UI', system-ui, -apple-system, sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#14171D; --surface:#1C2029; --fg:#ECE7DF; --muted:#A3A9B5; --line:#2E333D;
+  --accent:#86ADE6; --accent-soft:#22314B; --on-accent:#0E1420; --warn:#E39068; --warn-soft:#3A271E;
+  --ok:#7CC69A; --ok-soft:#1E3227; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#14171D; --surface:#1C2029; --fg:#ECE7DF; --muted:#A3A9B5; --line:#2E333D;
+  --accent:#86ADE6; --accent-soft:#22314B; --on-accent:#0E1420; --warn:#E39068; --warn-soft:#3A271E;
+  --ok:#7CC69A; --ok-soft:#1E3227; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--font);font-size:17px;line-height:1.55;margin:0;
+  padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px));padding-bottom:48px}
+.wrap{max-width:680px;margin:0 auto}
+header.top{display:flex;justify-content:space-between;align-items:center;gap:12px;padding-block:16px;border-bottom:1px solid var(--line)}
+header.top .brand{font-weight:900;letter-spacing:-.01em}
+header.top .brand small{display:block;font-weight:500;font-size:13px;color:var(--muted)}
+h1{font-weight:900;font-size:clamp(30px,7vw,42px);line-height:1.08;margin:28px 0 12px;text-wrap:balance;letter-spacing:-.01em}
+h2{font-weight:900;font-size:26px;line-height:1.15;margin:8px 0 8px;text-wrap:balance}
+h3{font-weight:700;font-size:19px;margin:0 0 6px}
+p{margin:0 0 12px;max-width:62ch}
+.muted{color:var(--muted)} .small{font-size:14px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:20px;margin-top:16px}
+.tag{display:inline-block;font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
+  background:var(--accent-soft);color:var(--accent);padding:4px 10px;border-radius:999px;margin-bottom:10px}
+.tag.warn{background:var(--warn-soft);color:var(--warn)} .tag.ok{background:var(--ok-soft);color:var(--ok)}
+button,.btn{font-family:var(--font);font-size:16px;font-weight:700;border-radius:12px;padding:12px 20px;cursor:pointer;
+  border:1.5px solid var(--accent);text-decoration:none;display:inline-block}
+.primary{background:var(--accent);color:var(--on-accent)}
+.primary:disabled{opacity:.4;cursor:not-allowed}
+.ghost{background:transparent;color:var(--accent)}
+.link{background:none;border:0;padding:0;color:var(--accent);font-weight:500;font-size:15px;text-decoration:underline}
+button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible,a:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+input[type=email],input[type=text],input[type=date],textarea,select{width:100%;font-family:var(--font);font-size:16px;padding:12px 14px;
+  border-radius:12px;border:1.5px solid var(--line);background:var(--bg);color:var(--fg)}
+textarea{min-height:92px;resize:vertical;line-height:1.45}
+label.f{display:block;font-weight:500;margin:14px 0 6px}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.row > input{flex:1 1 200px;min-width:0}
+.err{color:var(--warn);font-size:14px;margin-top:8px}
+.okmsg{color:var(--ok);font-size:14px;margin-top:8px}
+.hidden{display:none !important}
+
+/* status do dia */
+.daybar{display:grid;gap:8px;margin-top:6px}
+.track{height:8px;background:var(--line);border-radius:4px;overflow:hidden}
+.fill{height:100%;background:var(--accent);transition:width .3s}
+.code{font-size:28px;font-weight:900;letter-spacing:.12em;font-variant-numeric:tabular-nums}
+
+/* abas das semanas */
+nav.tabs{display:flex;gap:6px;overflow-x:auto;margin-top:22px;padding-bottom:4px;scrollbar-width:thin}
+nav.tabs button{flex:0 0 auto;padding:9px 14px;font-size:15px;border-radius:999px;background:transparent;color:var(--fg);border:1.5px solid var(--line)}
+nav.tabs button[aria-selected=true]{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
+nav.tabs button.now::after{content:" •";color:inherit}
+
+/* tarefas */
+ul.tasks{list-style:none;margin:8px 0 0;padding:0;display:grid;gap:10px}
+ul.tasks li{display:grid;grid-template-columns:28px 1fr;gap:10px;align-items:start}
+ul.tasks input[type=checkbox]{width:22px;height:22px;margin-top:3px;accent-color:var(--accent)}
+ul.tasks .when{font-size:13px;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.05em}
+.saved{font-size:13px;color:var(--muted);min-height:18px;margin-top:4px}
+
+/* notas 1 a 10 */
+.q{padding-block:16px;border-top:1px solid var(--line);display:grid;gap:8px}
+.q:first-of-type{border-top:0}
+.q-text{font-weight:500}
+.scale{display:grid;grid-template-columns:repeat(10,1fr);gap:4px}
+@media (max-width:480px){.scale{grid-template-columns:repeat(5,1fr)}}
+.scale input{position:absolute;opacity:0;pointer-events:none}
+.scale label{display:flex;align-items:center;justify-content:center;height:42px;border:1.5px solid var(--line);border-radius:10px;
+  background:var(--bg);font-weight:700;cursor:pointer;font-variant-numeric:tabular-nums}
+.scale label:hover{border-color:var(--accent)}
+.scale input:checked + label{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
+.scale input:focus-visible + label{outline:3px solid var(--accent);outline-offset:2px}
+.ends{display:flex;justify-content:space-between;font-size:13px;color:var(--muted)}
+
+/* comparação */
+table.cmp{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums;font-size:15px}
+table.cmp th,table.cmp td{padding:8px 6px;border-bottom:1px solid var(--line);text-align:left}
+table.cmp th{font-size:12px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);font-weight:700}
+table.cmp td.n{text-align:center;width:64px} table.cmp th.n{text-align:center}
+.gap{font-weight:700;color:var(--warn)}
+.scroll-x{overflow-x:auto}
+
+/* registro diário */
+details.log{border-top:1px solid var(--line);padding-block:10px}
+details.log summary{cursor:pointer;font-weight:500}
+details.log[open] summary{margin-bottom:6px}
+.yn{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.yn label{font-size:14px;color:var(--muted)}
+
+.safety{margin-top:36px;font-size:14px;color:var(--muted);border-top:1px solid var(--line);padding-top:16px}
+.safety strong{color:var(--fg)}
+footer{margin-top:20px;font-size:13px;color:var(--muted);text-align:center}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div class="brand">Mapa Afetivo<small>Plano de 30 Dias</small></div>
+    <button id="btnSair" class="link hidden" type="button">Sair</button>
+  </header>
+
+  <main id="app" aria-live="polite">
+    <p class="muted" style="margin-top:32px">Carregando…</p>
+  </main>
+
+  <aside class="safety" aria-label="Quando o problema é outro">
+    <strong>Quando o problema é outro.</strong> Se há agressão, ameaça, intimidação, controle de dinheiro, isolamento ou medo
+    do parceiro, este plano não se aplica e a conversa a dois não é segura. Ligue <strong>180</strong> (Central de Atendimento
+    à Mulher, 24 h) ou <strong>190</strong> em emergência. Em crise emocional, o <strong>CVV</strong> atende 24 h pelo
+    <strong>188</strong>. Este plano não substitui terapia.
+  </aside>
+  <footer>Felipe Santos · Psicólogo Afetivo · CRP 03/15591</footer>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
+<script>
+"use strict";
+const SB = window.supabase.createClient(
+  "https://bzkzfculngbydrigulnf.supabase.co",
+  "sb_publishable_xASm0mMN9Vt3uP_Wx9BHeg_xWwwYtkf"
+);
+const URL_LIVRO = "/livro/";
+
+/* ---------- conteúdo do livro ----------
+   Os textos do plano (capítulo 12 e exercícios citados) NÃO ficam nesta página, que é pública:
+   vêm da tabela app_content, que o banco só entrega a quem tem compra ativa ou é par de quem comprou. */
+let ITENS = [], NOME_CURTO = {}, SEMANAS = [], T = {};
+async function carregarConteudo(){
+  const { data, error } = await SB.from("app_content").select("value").eq("key", "plano").maybeSingle();
+  if (error) throw error;
+  if (!data) throw new Error("Conteúdo do plano indisponível para esta conta.");
+  ({ itens:ITENS, nomes:NOME_CURTO, semanas:SEMANAS, t:T } = data.value);
+}
+
+/* ---------- estado ---------- */
+const S = { user:null, couple:null, members:[], plan:{}, priv:{}, ratings:[], tab:null };
+
+/* ---------- utilidades ---------- */
+const $app = document.getElementById("app");
+function h(tag, attrs, ...kids){
+  const el = document.createElement(tag);
+  for (const [k,v] of Object.entries(attrs||{})){
+    if (v == null || v === false) continue;
+    if (k === "class") el.className = v;
+    else if (k.startsWith("on")) el.addEventListener(k.slice(2), v);
+    else if (k === "html") throw new Error("sem html cru");
+    else el.setAttribute(k, v === true ? "" : v);
+  }
+  for (const kid of kids.flat()){
+    if (kid == null || kid === false) continue;
+    el.append(kid instanceof Node ? kid : document.createTextNode(String(kid)));
+  }
+  return el;
+}
+function render(...nodes){ $app.replaceChildren(...nodes); }
+function msgErro(e){
+  const m = (e && (e.message || e.error_description)) || String(e);
+  return m.replace(/^.*?:\s*/, "") || "Algo deu errado. Tente de novo.";
+}
+function hojeISO(){ const d=new Date(); d.setMinutes(d.getMinutes()-d.getTimezoneOffset()); return d.toISOString().slice(0,10); }
+function diaAtual(){
+  if (!S.couple || !S.couple.start_date) return null;
+  const [y,m,d] = S.couple.start_date.split("-").map(Number);
+  const ini = new Date(y, m-1, d), hoje = new Date(); hoje.setHours(0,0,0,0);
+  return Math.floor((hoje - ini) / 86400000) + 1;
+}
+function semanaDoDia(dia){
+  if (dia == null || dia < 1) return 1;
+  return (SEMANAS.find(s => dia >= s.dias[0] && dia <= s.dias[1]) || SEMANAS[3]).n;
+}
+function debounce(fn, ms){ let t; return (...a)=>{ clearTimeout(t); t=setTimeout(()=>fn(...a), ms); }; }
+
+/* ---------- gravação ---------- */
+async function salvarPlano(key, value){
+  const { error } = await SB.from("plan_entries").upsert(
+    { couple_id:S.couple.id, key, value, updated_by:S.user.id, updated_at:new Date().toISOString() },
+    { onConflict:"couple_id,key" });
+  if (error) throw error;
+  S.plan[key] = value;
+}
+async function salvarPrivado(key, value){
+  const { error } = await SB.from("private_entries").upsert(
+    { user_id:S.user.id, key, value, updated_at:new Date().toISOString() },
+    { onConflict:"user_id,key" });
+  if (error) throw error;
+  S.priv[key] = value;
+}
+async function salvarNota(round, item, value){
+  const { error } = await SB.from("ratings").upsert(
+    { user_id:S.user.id, couple_id:S.couple.id, round, item, value, updated_at:new Date().toISOString() },
+    { onConflict:"user_id,round,item" });
+  if (error) throw error;
+  const i = S.ratings.findIndex(r => r.user_id===S.user.id && r.round===round && r.item===item);
+  if (i >= 0) S.ratings[i].value = value; else S.ratings.push({ user_id:S.user.id, round, item, value });
+}
+
+/* campo de texto com gravação automática (compartilhado ou só meu) */
+function campo({ key, rotulo, ajuda, privado=false, tipo="textarea", placeholder="" }){
+  const fonte = privado ? S.priv : S.plan;
+  const id = "f_" + key;
+  const status = h("div", { class:"saved", "aria-live":"polite" });
+  const el = tipo === "textarea"
+    ? h("textarea", { id, placeholder })
+    : h("input", { id, type:tipo, placeholder });
+  el.value = fonte[key] ?? "";
+  const gravar = async () => {
+    status.textContent = "Salvando…";
+    try { await (privado ? salvarPrivado : salvarPlano)(key, el.value); status.textContent = "Salvo"; }
+    catch(e){ status.textContent = "Não salvou: " + msgErro(e); }
+  };
+  const adiado = debounce(gravar, 900);
+  el.addEventListener("input", () => { status.textContent = "…"; adiado(); });
+  el.addEventListener("blur", () => { if ((fonte[key] ?? "") !== el.value) gravar(); });
+  return h("div", {},
+    h("label", { class:"f", for:id }, rotulo, privado ? h("span", { class:"muted small" }, "  · só você vê") : null),
+    ajuda ? h("p", { class:"muted small", style:"margin-top:-2px" }, ajuda) : null,
+    el, status);
+}
+
+/* tarefa com caixa de marcar (compartilhada pelo casal) */
+function tarefa(key, quando, texto, detalhe){
+  const id = "t_" + key;
+  const cb = h("input", { type:"checkbox", id });
+  cb.checked = S.plan["done_" + key] === true;
+  cb.addEventListener("change", async () => {
+    try { await salvarPlano("done_" + key, cb.checked); }
+    catch(e){ cb.checked = !cb.checked; alert("Não salvou: " + msgErro(e)); }
+  });
+  return h("li", {}, cb, h("label", { for:id },
+    quando ? h("div", { class:"when" }, quando) : null,
+    h("div", {}, texto),
+    detalhe ? h("div", { class:"muted small" }, detalhe) : null));
+}
+
+/* ---------- telas de entrada ---------- */
+function telaLogin(aviso){
+  const email = h("input", { type:"email", id:"email", autocomplete:"email", required:true, placeholder:"seu@email.com" });
+  const out = h("div", {});
+  const btn = h("button", { class:"primary", type:"submit" }, "Receber link de acesso");
+  const form = h("form", { class:"row", onsubmit: async (ev) => {
+    ev.preventDefault();
+    btn.disabled = true; out.replaceChildren();
+    const { error } = await SB.auth.signInWithOtp({
+      email: email.value.trim().toLowerCase(),
+      options: { emailRedirectTo: location.origin + "/app/" }
+    });
+    btn.disabled = false;
+    out.replaceChildren(error
+      ? h("p", { class:"err" }, "Não foi possível enviar: " + msgErro(error))
+      : h("p", { class:"okmsg" }, "Enviamos um link para " + email.value.trim() + ". Abra o e-mail neste aparelho e toque no link. Confira também o spam."));
+  }}, email, btn);
+  render(
+    h("h1", {}, "O Plano de 30 Dias, para fazer a dois"),
+    h("p", { class:"muted" }, "Cada um entra com o próprio e-mail. Quem comprou o livro cria o espaço do casal e envia um código para o parceiro ou parceira."),
+    aviso ? h("p", { class:"err" }, aviso) : null,
+    h("div", { class:"card" }, h("label", { class:"f", for:"email", style:"margin-top:0" }, "Seu e-mail"), form, out,
+      h("p", { class:"muted small", style:"margin-top:12px" }, "Use o mesmo e-mail da compra na Hotmart. Sem senha: você recebe um link a cada acesso."))
+  );
+}
+
+function formCodigo(){
+  const code = h("input", { type:"text", id:"code", autocomplete:"off", placeholder:"Ex.: 3FA9C21B", maxlength:"8", style:"text-transform:uppercase" });
+  const out = h("div", {});
+  const btn = h("button", { class:"primary", type:"submit" }, "Entrar no casal");
+  return h("div", {},
+    h("label", { class:"f", for:"code" }, "Recebeu um código de convite?"),
+    h("form", { class:"row", onsubmit: async (ev) => {
+      ev.preventDefault(); btn.disabled = true; out.replaceChildren();
+      const { error } = await SB.rpc("join_couple", { code: code.value });
+      btn.disabled = false;
+      if (error) out.replaceChildren(h("p", { class:"err" }, msgErro(error)));
+      else iniciar();
+    }}, code, btn), out);
+}
+
+function telaSemCasal(temAcesso){
+  const out = h("div", {});
+  const criar = h("button", { class:"primary", type:"button", onclick: async () => {
+    criar.disabled = true;
+    const { error } = await SB.rpc("create_couple");
+    criar.disabled = false;
+    if (error) out.replaceChildren(h("p", { class:"err" }, msgErro(error)));
+    else iniciar();
+  }}, "Criar o espaço do casal");
+  render(
+    h("h1", {}, temAcesso ? "Vamos começar" : "Acesso não encontrado"),
+    temAcesso
+      ? h("div", { class:"card" },
+          h("h3", {}, "Comprou o livro?"),
+          h("p", { class:"muted" }, "Crie o espaço do casal. Você recebe um código para enviar ao seu parceiro ou parceira; essa pessoa não precisa comprar."),
+          criar, out)
+      : h("div", { class:"card" },
+          h("p", {}, "Não encontramos uma compra para ", h("strong", {}, S.user.email), "."),
+          h("p", { class:"muted small" }, "Se comprou com outro e-mail, saia e entre com ele. A liberação pode levar alguns minutos depois da confirmação do pagamento."),
+          h("a", { class:"btn ghost", href:URL_LIVRO }, "Conhecer o livro")),
+    h("div", { class:"card" }, formCodigo())
+  );
+}
+
+/* ---------- painel do casal ---------- */
+function cabecalhoCasal(){
+  const dia = diaAtual();
+  const parceiro = S.members.find(m => m.user_id !== S.user.id);
+  const blocos = [];
+
+  if (!S.couple.start_date){
+    const data = h("input", { type:"date", id:"inicio", value:hojeISO() });
+    const out = h("div", {});
+    blocos.push(h("div", { class:"card" },
+      h("span", { class:"tag" }, "Antes de começar"),
+      h("h3", {}, "Quando vocês começam o Dia 1?"),
+      h("p", { class:"muted small" }, "O app usa essa data para mostrar a semana e as tarefas do dia. Dá para mudar depois."),
+      h("div", { class:"row" }, data, h("button", { class:"primary", type:"button", onclick: async () => {
+        const { error } = await SB.from("couples").update({ start_date: data.value }).eq("id", S.couple.id);
+        if (error) out.replaceChildren(h("p", { class:"err" }, msgErro(error)));
+        else { S.couple.start_date = data.value; S.tab = semanaDoDia(diaAtual()); desenharPainel(); }
+      }}, "Definir")), out));
+  } else {
+    let titulo, sub;
+    if (dia < 1){ titulo = "Começa em " + (1 - dia) + (1 - dia === 1 ? " dia" : " dias"); sub = "Dia 1: " + new Date(S.couple.start_date + "T12:00").toLocaleDateString("pt-BR"); }
+    else if (dia <= 30){ titulo = "Dia " + dia + " de 30"; sub = "Semana " + semanaDoDia(dia) + " · " + SEMANAS[semanaDoDia(dia)-1].titulo; }
+    else { titulo = "Os 30 dias terminaram"; sub = "Hora do contrato de manutenção e da revisão trimestral."; }
+    const pct = Math.max(0, Math.min(100, ((dia||0) / 30) * 100));
+    blocos.push(h("div", { class:"daybar" },
+      h("h1", { style:"margin-bottom:0" }, titulo),
+      h("p", { class:"muted", style:"margin:0" }, sub),
+      h("div", { class:"track", role:"progressbar", "aria-valuemin":"0", "aria-valuemax":"30", "aria-valuenow":String(Math.max(0,Math.min(30,dia||0))) },
+        h("div", { class:"fill", style:"width:" + pct + "%" })),
+      h("button", { class:"link", type:"button", style:"justify-self:start", onclick: () => {
+        const nova = prompt("Nova data do Dia 1 (AAAA-MM-DD):", S.couple.start_date);
+        if (!nova || !/^\d{4}-\d{2}-\d{2}$/.test(nova)) return;
+        SB.from("couples").update({ start_date:nova }).eq("id", S.couple.id).then(({ error }) => {
+          if (error) alert(msgErro(error)); else { S.couple.start_date = nova; desenharPainel(); }
+        });
+      }}, "Mudar a data de início")));
+  }
+
+  if (!parceiro){
+    const texto = "Entre em " + location.origin + "/app/ com o seu e-mail e use o código " + S.couple.invite_code + " para entrar no nosso Plano de 30 Dias.";
+    blocos.push(h("div", { class:"card" },
+      h("span", { class:"tag warn" }, "Falta o seu par"),
+      h("p", {}, "Envie este código para o seu parceiro ou parceira. Essa pessoa entra com o próprio e-mail e digita o código."),
+      h("div", { class:"code" }, S.couple.invite_code),
+      h("div", { class:"row", style:"margin-top:12px" },
+        h("button", { class:"ghost", type:"button", onclick: async (ev) => {
+          try {
+            if (navigator.share) await navigator.share({ text:texto });
+            else { await navigator.clipboard.writeText(texto); ev.target.textContent = "Mensagem copiada"; }
+          } catch(_) {}
+        }}, "Enviar convite"))));
+  }
+  return blocos;
+}
+
+function abas(){
+  const atual = semanaDoDia(diaAtual());
+  const itens = [...SEMANAS.map(s => ({ id:s.n, nome:"Semana " + s.n })), { id:"contrato", nome:"Contrato" }];
+  return h("nav", { class:"tabs", role:"tablist", "aria-label":"Semanas do plano" },
+    itens.map(it => h("button", {
+      type:"button", role:"tab", "aria-selected": String(S.tab === it.id),
+      class: (it.id === atual && S.couple.start_date && diaAtual() >= 1 && diaAtual() <= 30) ? "now" : null,
+      onclick: () => { S.tab = it.id; desenharPainel(); }
+    }, it.nome)));
+}
+
+/* --- Semana 1 --- */
+function semana1(){
+  const logs = [];
+  for (let d = 1; d <= 7; d++){
+    const aberto = diaAtual() === d;
+    logs.push(h("details", { class:"log", open: aberto || null },
+      h("summary", {}, "Dia " + d, (S.priv["w1_d"+d+"_resp"] || S.priv["w1_d"+d+"_apr"]) ? h("span", { class:"muted small" }, "  · registrado") : null),
+      campo({ key:"w1_d"+d+"_resp", privado:true, tipo:"text", rotulo:"Resposta responsiva do dia",
+        placeholder:T.w1_ph_resp }),
+      campo({ key:"w1_d"+d+"_apr", privado:true, tipo:"text", rotulo:"Apreciação específica do dia",
+        placeholder:T.w1_ph_apr })));
+  }
+  return [
+    h("div", { class:"card" },
+      h("span", { class:"tag" }, "Todos os dias"),
+      h("h3", {}, "Duas práticas por dia"),
+      h("ul", { class:"tasks" },
+        h("li", {}, h("span", {}, "1."), h("div", {}, T.w1_pratica1)),
+        h("li", {}, h("span", {}, "2."), h("div", {}, T.w1_pratica2))),
+      h("p", { class:"muted small", style:"margin-top:12px" }, "Registre uma linha por dia. Cada um registra o seu.")),
+    h("div", { class:"card" }, h("h3", {}, "Seu registro"), logs),
+    h("div", { class:"card" },
+      h("span", { class:"tag" }, "Fim de semana"),
+      h("ul", { class:"tasks" }, tarefa("w1_revisao", "Dia 6 ou 7", T.w1_revisao)),
+      campo({ key:"w1_temperatura", rotulo:"O que vocês notaram" }))
+  ];
+}
+
+/* --- notas 1 a 10 (Semana 2 e Dia 28) --- */
+function minhas(round){ const o = {}; S.ratings.filter(r => r.user_id===S.user.id && r.round===round).forEach(r => o[r.item]=r.value); return o; }
+function doParceiro(round){ const o = {}; S.ratings.filter(r => r.user_id!==S.user.id && r.round===round).forEach(r => o[r.item]=r.value); return o; }
+const completo = o => ITENS.every(i => o[i.id] != null);
+
+function formNotas(round){
+  const m = minhas(round);
+  let grupo = null;
+  const qs = [];
+  for (const it of ITENS){
+    if (it.grupo !== grupo){ grupo = it.grupo; qs.push(h("div", { class:"sub muted small", style:"margin-top:14px;font-weight:700;text-transform:uppercase;letter-spacing:.05em" }, grupo)); }
+    const nome = round + "_" + it.id;
+    const escala = h("div", { class:"scale", role:"radiogroup", "aria-label":it.texto });
+    for (let v = 1; v <= 10; v++){
+      const id = nome + "_" + v;
+      const r = h("input", { type:"radio", name:nome, id, value:String(v) });
+      r.checked = m[it.id] === v;
+      r.addEventListener("change", async () => {
+        try { await salvarNota(round, it.id, v); if (completo(minhas(round))) desenharPainel(); }
+        catch(e){ alert("Não salvou: " + msgErro(e)); }
+      });
+      escala.append(r, h("label", { for:id }, v));
+    }
+    const ends = it.ends || ["nada","totalmente"];
+    qs.push(h("div", { class:"q" }, h("div", { class:"q-text" }, it.texto), escala,
+      h("div", { class:"ends" }, h("span", {}, "1 · " + ends[0]), h("span", {}, ends[1] + " · 10"))));
+  }
+  return qs;
+}
+
+function comparacao(round){
+  const m = minhas(round), p = doParceiro(round);
+  if (!completo(m)) return h("p", { class:"muted" }, "Responda os 9 itens para ver a comparação.");
+  if (!completo(p)) return h("p", { class:"muted" }, "Suas notas estão salvas. A comparação aparece quando seu parceiro ou parceira terminar as dele(a). Nenhum dos dois vê as notas do outro antes de completar as próprias.");
+  const linhas = ITENS.map(it => {
+    const dif = Math.abs(m[it.id] - p[it.id]);
+    return h("tr", {}, h("td", {}, NOME_CURTO[it.id]), h("td", { class:"n" }, m[it.id]), h("td", { class:"n" }, p[it.id]),
+      h("td", { class:"n" + (dif >= 3 ? " gap" : "") }, dif));
+  });
+  const erroMeu = Math.abs(m.psat - p.sat), erroDele = Math.abs(p.psat - m.sat);
+  const media = ITENS.filter(i => i.id !== "sat" && i.id !== "psat").map(i => ({ id:i.id, v:(m[i.id]+p[i.id])/2 })).sort((a,b) => a.v-b.v);
+  return h("div", {},
+    h("div", { class:"scroll-x" }, h("table", { class:"cmp" },
+      h("thead", {}, h("tr", {}, h("th", {}, "Item"), h("th", { class:"n" }, "Você"), h("th", { class:"n" }, "Par"), h("th", { class:"n" }, "Diferença"))),
+      h("tbody", {}, linhas))),
+    h("p", { class:"muted small", style:"margin-top:8px" }, "Diferenças de 3 pontos ou mais aparecem em destaque: indicam sinais que um emite e o outro não recebe."),
+    h("h3", { style:"margin-top:18px" }, "Erro de leitura de mente"),
+    h("p", {}, "Você leu a satisfação do seu par como ", h("strong", {}, m.psat), "; ele(a) declarou ", h("strong", {}, p.sat),
+      ". Erro: ", h("strong", {}, erroMeu), "."),
+    h("p", {}, "Seu par leu a sua satisfação como ", h("strong", {}, p.psat), "; você declarou ", h("strong", {}, m.sat),
+      ". Erro: ", h("strong", {}, erroDele), "."),
+    h("p", { class:"muted small" }, "Menor média do casal: ", h("strong", {}, NOME_CURTO[media[0].id]), " (" + media[0].v.toFixed(1).replace(".", ",") + ")."));
+}
+
+/* --- Semana 2 --- */
+function semana2(){
+  const m = minhas("w2"), p = doParceiro("w2");
+  const prio = h("select", { id:"f_w2_prioridade" },
+    h("option", { value:"" }, "Escolham um item"),
+    ITENS.filter(i => i.id !== "sat" && i.id !== "psat").map(i => {
+      const o = h("option", { value:i.id }, NOME_CURTO[i.id]); if (S.plan.w2_prioridade === i.id) o.selected = true; return o; }));
+  const st = h("div", { class:"saved" });
+  prio.addEventListener("change", async () => {
+    try { await salvarPlano("w2_prioridade", prio.value); st.textContent = "Salvo"; } catch(e){ st.textContent = "Não salvou: " + msgErro(e); } });
+
+  return [
+    h("div", { class:"card" },
+      h("span", { class:"tag" }, "Dia 8 ou 9 · cada um em separado"),
+      h("h3", {}, "Notas de 1 a 10"),
+      h("p", { class:"muted small" }, "Responda sem conversar antes. Você só vê as notas do seu par depois de completar as suas."),
+      completo(m) ? h("p", { class:"okmsg" }, "Suas 9 notas estão salvas. Dá para ajustar até a conversa.") : null,
+      formNotas("w2")),
+    h("div", { class:"card" },
+      h("span", { class:"tag" }, "Dia 10 · conversa de comparação"),
+      h("h3", {}, "Comparação"),
+      comparacao("w2"),
+      completo(m) && completo(p) ? h("p", { style:"margin-top:12px" }, "Comecem pela pergunta: ",
+        h("em", {}, T.w2_pergunta)) : null),
+    h("div", { class:"card" },
+      h("span", { class:"tag warn" }, "Saída obrigatória da conversa"),
+      h("label", { class:"f", for:"f_w2_prioridade", style:"margin-top:0" }, "Componente ou preditor prioritário do casal"), prio, st,
+      campo({ key:"w2_comp1", tipo:"text", rotulo:"Comportamento concreto e datável 1",
+        placeholder:T.w2_ph_comp }),
+      campo({ key:"w2_comp2", tipo:"text", rotulo:"Comportamento concreto e datável 2" }),
+      h("p", { class:"muted small" }, T.w2_datavel))
+  ];
+}
+
+/* --- Semana 3 --- */
+function semana3(){
+  const dias = [];
+  for (let d = 16; d <= 21; d++){
+    const k = "w3_reparo_d" + d;
+    const val = Object.assign({ usado:"", aceito:"", retorno:"" }, S.plan[k] || {});
+    const st = h("div", { class:"saved" });
+    const sel = (campoNome, rot) => {
+      const s = h("select", { "aria-label":rot + " no dia " + d },
+        ["", "sim", "não", "não houve escalada"].map(o => { const op = h("option", { value:o }, o || "—"); if (val[campoNome] === o) op.selected = true; return op; }));
+      s.addEventListener("change", async () => {
+        val[campoNome] = s.value;
+        try { await salvarPlano(k, { ...val }); st.textContent = "Salvo"; } catch(e){ st.textContent = "Não salvou: " + msgErro(e); } });
+      return h("label", {}, rot, s);
+    };
+    dias.push(h("details", { class:"log", open: diaAtual() === d || null },
+      h("summary", {}, "Dia " + d, (val.usado||val.aceito||val.retorno) ? h("span", { class:"muted small" }, "  · registrado") : null),
+      h("div", { class:"yn" }, sel("usado", "Foi usado?"), sel("aceito", "Foi aceito?"), sel("retorno", "Voltaram ao tema em 24 h?")), st));
+  }
+  return [
+    h("div", { class:"card" },
+      h("span", { class:"tag" }, "Dia 15"),
+      h("h3", {}, "Reclassificar os conflitos"),
+      h("p", { class:"muted small" }, T.w3_reclass),
+      campo({ key:"w3_minha_lista", privado:true, rotulo:"Minha lista de cinco temas" }),
+      campo({ key:"w3_solucionaveis", rotulo:"Temas solucionáveis" }),
+      campo({ key:"w3_perpetuos", rotulo:"Temas perpétuos" }),
+      campo({ key:"w3_acordo", rotulo:"Acordo para um tema solucionável", ajuda:T.w3_acordo }),
+      campo({ key:"sinal", tipo:"text", rotulo:"Nosso sinal de reparo",
+        ajuda:T.w3_sinal,
+        placeholder:"Ex.: “tempo”, mão no peito" })),
+    h("div", { class:"card" },
+      h("span", { class:"tag" }, "Dias 16 a 21"),
+      h("h3", {}, "Registro do sinal de reparo"),
+      h("p", { class:"muted small" }, T.w3_reparo),
+      dias),
+    h("div", { class:"card" },
+      h("span", { class:"tag" }, "Uma vez na semana"),
+      h("h3", {}, "Exercício de história"),
+      h("p", { class:"muted small" }, T.w3_historia),
+      h("ul", { class:"tasks" }, tarefa("w3_historia_1", null, "Primeira rodada feita"), tarefa("w3_historia_2", null, "Segunda rodada, com os papéis invertidos")))
+  ];
+}
+
+/* --- Semana 4 --- */
+function semana4(){
+  const m28 = minhas("d28"), p28 = doParceiro("d28");
+  const evolucao = () => {
+    const mw = minhas("w2");
+    if (!completo(m28) || !completo(mw)) return null;
+    return h("div", { class:"scroll-x", style:"margin-top:14px" }, h("table", { class:"cmp" },
+      h("thead", {}, h("tr", {}, h("th", {}, "Suas notas"), h("th", { class:"n" }, "Sem. 2"), h("th", { class:"n" }, "Dia 28"), h("th", { class:"n" }, "Mudança"))),
+      h("tbody", {}, ITENS.map(it => { const d = m28[it.id] - mw[it.id];
+        return h("tr", {}, h("td", {}, NOME_CURTO[it.id]), h("td", { class:"n" }, mw[it.id]), h("td", { class:"n" }, m28[it.id]),
+          h("td", { class:"n" }, (d > 0 ? "+" : "") + d)); }))));
+  };
+  return [
+    h("div", { class:"card" },
+      h("span", { class:"tag" }, "Duas vezes na semana"),
+      h("h3", {}, "Tempo de casal protegido"),
+      h("p", { class:"muted small" }, T.w4_tempo),
+      h("ul", { class:"tasks" }, tarefa("w4_tempo_1", null, "Primeiro encontro protegido"), tarefa("w4_tempo_2", null, "Segundo encontro protegido"))),
+    h("div", { class:"card" },
+      h("span", { class:"tag" }, "Uma vez na semana · individual"),
+      h("h3", {}, "Mapa de contexto do desejo (Cap. 9)"),
+      h("p", { class:"muted small" }, T.w4_desejo),
+      campo({ key:"d25_com", privado:true, rotulo:T.w4_desejo1 }),
+      campo({ key:"d25_sem", privado:true, rotulo:T.w4_desejo2 }),
+      campo({ key:"d25_condicoes", privado:true, rotulo:T.w4_desejo3 }),
+      h("p", { class:"muted small" }, T.w4_desejo_conversa),
+      h("ul", { class:"tasks" }, tarefa("w4_desejo_conversa", null, "Conversamos sobre os mapas"))),
+    h("div", { class:"card" },
+      h("span", { class:"tag warn" }, "Dia 28 · reavaliação"),
+      h("h3", {}, "As mesmas notas da Semana 2"),
+      h("p", { class:"muted small" }, "Cada um em separado, como na Semana 2."),
+      formNotas("d28"),
+      evolucao(),
+      h("h3", { style:"margin-top:18px" }, "Comparação do casal no Dia 28"),
+      comparacao("d28"),
+      h("h3", { style:"margin-top:18px" }, "Decisão com critério"),
+      h("p", { class:"muted small" }, T.d28_decisao),
+      campo({ key:"d28_decisao", rotulo:"Nossa decisão" }))
+  ];
+}
+
+/* --- Contrato de manutenção --- */
+function contrato(){
+  return [h("div", { class:"card" },
+    h("span", { class:"tag" }, "Ao fim dos 30 dias"),
+    h("h3", {}, "Contrato de manutenção"),
+    h("p", { class:"muted small" }, "Um documento de uma página, escrito pelos dois."),
+    campo({ key:"contrato_funcionou", rotulo:"1. O que funcionou", ajuda:T.ct_funcionou }),
+    campo({ key:"contrato_trava", rotulo:"2. O que trava", ajuda:T.ct_trava }),
+    campo({ key:"contrato_revisao", tipo:"date", rotulo:"3. Próxima revisão trimestral",
+      ajuda:T.ct_revisao }))];
+}
+
+function desenharPainel(){
+  if (S.tab == null) S.tab = semanaDoDia(diaAtual());
+  const sem = SEMANAS.find(s => s.n === S.tab);
+  const corpo = S.tab === "contrato" ? contrato()
+    : S.tab === 1 ? semana1() : S.tab === 2 ? semana2() : S.tab === 3 ? semana3() : semana4();
+  render(
+    ...cabecalhoCasal(),
+    abas(),
+    sem ? h("div", { style:"margin-top:18px" },
+      h("span", { class:"tag" }, "Dias " + sem.dias[0] + " a " + sem.dias[1] + " · " + sem.caps),
+      h("h2", {}, sem.titulo)) : null,
+    ...corpo
+  );
+}
+
+/* ---------- carregamento ---------- */
+async function carregarCasal(){
+  const [c, mem, pl, pv, rt] = await Promise.all([
+    SB.from("couples").select("id, invite_code, start_date").single(),
+    SB.from("couple_members").select("user_id, joined_at"),
+    SB.from("plan_entries").select("key, value"),
+    SB.from("private_entries").select("key, value"),
+    SB.from("ratings").select("user_id, round, item, value"),
+  ]);
+  for (const r of [c, mem, pl, pv, rt]) if (r.error) throw r.error;
+  S.couple = c.data; S.members = mem.data || [];
+  S.plan = Object.fromEntries((pl.data||[]).map(r => [r.key, r.value]));
+  S.priv = Object.fromEntries((pv.data||[]).map(r => [r.key, r.value]));
+  S.ratings = rt.data || [];
+}
+
+async function iniciar(){
+  const { data:{ session } } = await SB.auth.getSession();
+  document.getElementById("btnSair").classList.toggle("hidden", !session);
+  if (!session){ telaLogin(); return; }
+  S.user = session.user;
+  try {
+    const [mc, ha] = await Promise.all([SB.rpc("my_couple"), SB.rpc("has_access")]);
+    if (mc.error) throw mc.error;
+    if (!mc.data){ telaSemCasal(ha.data === true); return; }
+    await Promise.all([carregarCasal(), carregarConteudo()]);
+    desenharPainel();
+  } catch(e){
+    render(h("p", { class:"err", style:"margin-top:32px" }, "Não foi possível carregar: " + msgErro(e)),
+      h("button", { class:"ghost", type:"button", onclick: iniciar }, "Tentar de novo"));
+  }
+}
+
+document.getElementById("btnSair").addEventListener("click", async () => { await SB.auth.signOut(); S.tab = null; iniciar(); });
+
+/* atualiza ao voltar para a aba, para ver o que o par registrou (sem atropelar quem está digitando) */
+document.addEventListener("visibilitychange", async () => {
+  if (document.visibilityState !== "visible" || !S.couple) return;
+  const ativo = document.activeElement;
+  if (ativo && (ativo.tagName === "TEXTAREA" || ativo.tagName === "INPUT")) return;
+  try { await carregarCasal(); desenharPainel(); } catch(_) {}
+});
+
+SB.auth.onAuthStateChange((ev) => { if (ev === "SIGNED_IN" && !S.user) iniciar(); });
+
+/* erro vindo do link do e-mail (expirado ou já usado) */
+const hashErro = new URLSearchParams(location.hash.slice(1)).get("error_description");
+if (hashErro){ history.replaceState(null, "", location.pathname); telaLogin("O link não funcionou: " + hashErro.replace(/\+/g," ") + ". Peça um novo."); }
+else iniciar();
+</script>
+</body>
+</html>
