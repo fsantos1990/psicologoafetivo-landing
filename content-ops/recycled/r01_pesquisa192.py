@@ -18,7 +18,7 @@ POST = {
    "Num casal com 8 anos de relação, a queda do desejo do início é esperada. Os dados indicam que vale acompanhar outras duas coisas: se os dois ainda contam um ao outro o que acontece no dia e se mantêm os planos que fizeram juntos.",
    "After 8 years, some drop in early desire is expected. The data point to two other things to watch: whether you still tell each other about your day, and whether you keep your shared plans."),
   ("cta", None,
-   "O livro Mapa Afetivo apresenta esses resultados no Capítulo 4, com um exercício escrito para o casal. Ebook, R$ 39.\n\nTerapia de casal online em português e inglês, com experiência em casais interculturais.\nPsicólogos: supervisão individual em ACT e IBCT.\nLink na bio.",
+   "O livro Mapa Afetivo apresenta esses resultados no Capítulo 4, com um exercício escrito para o casal. Ebook, R$ 39.",
    "The Mapa Afetivo book covers these results in Chapter 4, with a written exercise for couples."),
  ],
  "refs": "Santos, F. M. S. (2019). Amor romântico, ideais e satisfação nos relacionamentos amorosos. Dissertação de mestrado, UFBA",

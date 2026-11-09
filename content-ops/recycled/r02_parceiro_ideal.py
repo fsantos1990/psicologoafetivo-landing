@@ -21,7 +21,7 @@ POST = {
    "Na próxima discussão, antes de responder, veja se a sua queixa é sobre algo que o parceiro fez ou sobre algo que ele não é. Queixas do segundo tipo vêm do modelo.",
    "In your next argument, check whether your complaint is about something your partner did or something they are not. The second kind comes from the model."),
   ("cta", None,
-   "O livro Mapa Afetivo trata do parceiro ideal contra o parceiro real no Capítulo 2, com uma atividade escrita. Ebook, R$ 39.\n\nTerapia de casal online em português e inglês, com experiência em casais interculturais.\nPsicólogos: supervisão individual em ACT e IBCT.\nLink na bio.",
+   "O livro Mapa Afetivo trata do parceiro ideal contra o parceiro real no Capítulo 2, com uma atividade escrita. Ebook, R$ 39.\n\nQuem compra ganha o Plano de 30 Dias em app, para fazer a dois.\nDiagnóstico gratuito do casal: link na bio.",
    "The Mapa Afetivo book covers the ideal versus the real partner in Chapter 2, with a written activity."),
  ],
  "refs": "Santos, F. M. S. (2019). Amor romântico, ideais e satisfação nos relacionamentos amorosos. Dissertação de mestrado, UFBA",
