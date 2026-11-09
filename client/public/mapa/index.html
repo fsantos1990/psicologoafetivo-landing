@@ -346,7 +346,7 @@ function bind(){
     if(!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v)){ err.textContent='Digite um e-mail válido, como nome@gmail.com.'; err.hidden=false; return; }
     if(!document.getElementById('consent').checked){ err.textContent='Marque a caixa de consentimento para ver o plano.'; err.hidden=false; return; }
     const r = scores();
-    if(SB){ SB.from('leads').insert({email:v.toLowerCase(), consent:true, source:'mapa-afetivo', result:{pilar:r.low, norm:r.norm, conflito:r.pat, maior_distancia:r.gaps[0].k}}).then(({error})=>{ if(error) console.warn('lead', error.message); }); }
+    if(SB){ SB.from('leads').insert({email:v.toLowerCase(), consent:true, source:'mapa-afetivo', result:{pilar:r.low, norm:r.norm, conflito:r.pat, maior_distancia:r.gaps[0].k, pilar_txt:PILLAR_TXT[r.norm[r.low] >= .75 ? 'ok' : r.low].h, conflito_txt:PAT_TXT[r.pat].tag, plano:plan(r)}}).then(({error})=>{ if(error) console.warn('lead', error.message); }); }
     S.email=v; S.unlocked=true; save(); render();
   });
   const rs = document.getElementById('reset');
