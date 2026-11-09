@@ -11,6 +11,17 @@
       "reciclado_metricas": null,
       "blog_slug": "pesquisa-192-pessoas-intimidade-compromisso",
       "veredito": null
+    },
+    {
+      "id": "r02_parceiro_ideal",
+      "original_url": "https://www.instagram.com/p/DXExRbvEYjb/",
+      "original_data": "2026-04-13",
+      "original_metricas": {"alcance": 1343, "interacoes": 79, "salvamentos": 8, "compartilhamentos": 18},
+      "reciclado_data": "2026-11-21T19:00:00-03:00",
+      "reciclado_url": null,
+      "reciclado_metricas": null,
+      "blog_slug": "parceiro-ideal-parceiro-real",
+      "veredito": null
     }
   ]
 }
