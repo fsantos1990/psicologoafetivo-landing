@@ -54,22 +54,23 @@ Referências marcadas com "conferir" precisam de checagem antes de virar post.
 1. **Enquete:** "Vocês ainda contam um ao outro o que aconteceu no dia?" Sim / Às vezes.
 2. **Dado:** "Num estudo com mais de 11 mil casais, sentir-se valorizado ficou entre os maiores preditores de satisfação." (Joel et al., 2020)
 3. **Teste rápido:** "Intimidade, paixão ou compromisso: qual está mais baixo em vocês?" (enquete com 3 opções)
-4. **Ponte:** "O diagnóstico gratuito responde isso em 23 perguntas." Link do /mapa.
-5. **Livro:** "Quem compra o Mapa Afetivo ganha o Plano de 30 Dias em app, para fazer a dois. R$ 39." Link do livro.
+4. **Ponte:** "O diagnóstico gratuito responde isso em 23 perguntas. Link na bio."
+5. **Livro:** "Quem compra o Mapa Afetivo ganha o Plano de 30 Dias em app, para fazer a dois. R$ 39." "Link na bio."
 
 ### Série B. “Bastidores do Plano de 30 Dias” (4 stories, uma semana, um por dia)
 1. Segunda: "Semana 1 do plano: uma apreciação por dia, no formato 'obrigado por X, isso me deu Y'. Topa fazer hoje?" (caixa de resposta)
 2. Quarta: print do app (tela da Semana 1, sem dados de casal real) + "É assim que fica no celular de vocês dois."
 3. Sexta: repost das respostas recebidas (com permissão).
-4. Domingo: "O plano completo tem 4 semanas e vem com o livro." Link do livro.
+4. Domingo: "O plano completo tem 4 semanas e vem com o livro." "Link na bio."
 
 ### Série C. “Mitos de relacionamento” (3 stories, para acompanhar o post 3)
 1. Quiz: "A crise dos 7 anos é real?" Sim / Não.
 2. Resposta: "Os dados mostram queda até perto dos 10 anos e recuperação depois."
-3. "O Capítulo 7 do Mapa Afetivo explica a curva." Link do livro.
+3. "O Capítulo 7 do Mapa Afetivo explica a curva." "Link na bio."
 
 ## Descartado nesta rodada
 - Casos de celebridades nas buscas: um envolve violência e o outro é boato sobre a vida de um casal real. Só usamos fofoca como gancho quando as próprias pessoas falaram publicamente, e nunca para avaliar o casal.
 - Buscas jurídicas (separação de bens, divórcio extrajudicial) e de benefícios: fora do tema.
 
-Observação: link clicável em story precisa do adesivo de link, que o Metricool não adiciona sozinho. Ou você coloca o adesivo na hora, ou o story diz "link na bio".
+Regra (09/11): nada de adesivo de link nem de nada que exija ação manual no Instagram. Todo chamado leva para o link na bio.
+Aprovados em 09/11: posts 2 a 6 e série B (agendados de 03 a 17/12).
