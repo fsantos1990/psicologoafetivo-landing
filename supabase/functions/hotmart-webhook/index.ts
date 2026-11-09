@@ -1,6 +1,6 @@
 // Edge Function: recebe o webhook da Hotmart e libera ou bloqueia o acesso ao app.
 // Configuração:
-//   supabase secrets set HOTMART_HOTTOK=<token do painel da Hotmart>
+//   supabase secrets set HOTMART_HOTOK=<token do painel da Hotmart>
 //   supabase functions deploy hotmart-webhook --no-verify-jwt
 // Na Hotmart: Ferramentas > Webhook, apontar para https://<projeto>.supabase.co/functions/v1/hotmart-webhook
 // Confira os nomes dos eventos no painel antes de ativar; a Hotmart muda a versão do webhook de tempos em tempos.
@@ -14,7 +14,7 @@ Deno.serve(async (req) => {
   if (req.method !== "POST") return new Response("Método não permitido", { status: 405 });
 
   const hottok = req.headers.get("x-hotmart-hottok");
-  if (!hottok || hottok !== Deno.env.get("HOTMART_HOTTOK")) {
+  if (!hottok || hottok !== Deno.env.get("HOTMART_HOTOK")) {
     return new Response("Token inválido", { status: 401 });
   }
 
