@@ -1,6 +1,6 @@
 import os
 from PIL import Image, ImageDraw
-from render import font, wrap, BG, INK, BLUE, MUTED, WM
+from render import font, wrap, BG, INK, BLUE, MUTED, WM, checar_texto
 
 W, H = 1080, 1920
 M = 96
@@ -27,7 +27,7 @@ S = [
   "Responda este story com “eu cobro” ou “eu me calo”.",
   "Who usually pushes and who usually goes quiet? Reply to this story."),
  ("2026-11-10", "bids",
-  "86% contra 33%: o que separou casais que ficaram juntos dos que se divorciaram.", "86% versus 33%: what set apart couples who stayed together.",
+  "Quando o seu par diz “olha isso”, o que você faz?", "When your partner says “look at this”, what do you do?",
   "COMPARTILHE",
   "Quem para o que está fazendo quando você diz “olha isso”?",
   "Mande o post do feed para essa pessoa.",
@@ -74,6 +74,12 @@ S = [
   "O item da sua lista que mais gera briga veio de onde?",
   "Responda este story com “filmes”, “família” ou “amigos”.",
   "Where did the list item that causes most of your fights come from? Reply: films, family or friends."),
+ ("2026-12-01", "desejo",
+  "Se você precisa de clima para ter vontade, o desejo não acabou.", "If you need the right context to feel like it, desire is not gone.",
+  "E NA SUA RELAÇÃO?",
+  "O que costuma vir antes dos momentos em que a vontade aparece?",
+  "Responda este story com uma palavra.",
+  "What usually comes before the moments when desire shows up? Reply with one word."),
 ]
 
 def teaser(t_pt, t_en):
@@ -105,6 +111,7 @@ def expand(label, q, instr, en):
 if __name__ == "__main__":
     os.makedirs("stories", exist_ok=True)
     for (dt, key, tpt, ten, lab, q, ins, en) in S:
+        checar_texto(tpt, ten, lab, q, ins, en)
         teaser(tpt, ten).save(f"stories/{dt}_{key}_a.png", optimize=True)
         expand(lab, q, ins, en).save(f"stories/{dt}_{key}_b.png", optimize=True)
     print(sorted(os.listdir("stories")))

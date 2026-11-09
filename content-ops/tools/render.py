@@ -46,9 +46,21 @@ def footer(draw, idx, total):
     t = f"{idx}/{total}"
     draw.text((W - M - draw.textlength(t, font=f), H - 92), t, font=f, fill=MUTED)
 
+# Chamado padrão do último slide. A comunicação não oferece mais supervisão para terapeutas (decisão de 09/11/2026).
+CTA_PADRAO = "Diagnóstico gratuito do casal: 23 perguntas, resultado na hora.\nLink na bio."
+PROIBIDO = ("supervis",)
+
+def checar_texto(*textos):
+    """Recusa gerar peças que voltem a citar temas fora do foco atual (ex.: supervisão)."""
+    t = " ".join(str(x) for x in textos if x).lower()
+    for p in PROIBIDO:
+        if p in t:
+            raise ValueError(f"Texto contém '{p}', que saiu da comunicação. Revise o post antes de gerar.")
+
 def render(key, post):
     os.makedirs("out", exist_ok=True)
     slides = post["slides"]; n = len(slides)
+    checar_texto(post.get("caption"), post.get("refs"), *[x for s in slides for x in s])
     files = []
     for i, (tag, title, body, en) in enumerate(slides, 1):
         im = Image.new("RGB", (W, H), BG); d = ImageDraw.Draw(im)
@@ -66,13 +78,14 @@ def render(key, post):
         elif tag == "cta":
             d.text((M, 150), "PARA VOCÊ · FOR YOU", font=font(32, 700), fill=BLUE)
             d.rectangle((M, 210, M + 120, 218), fill=BLUE)
-            couples, ther = body.split("\n\n", 1)
-            y = block(d, 290, couples, font(46, 700), INK, 60)
+            # body: "texto principal" ou "texto principal\n\nchamado"; sem chamado, usa CTA_PADRAO
+            principal, _, chamado = body.partition("\n\n")
+            y = block(d, 290, principal, font(46, 700), INK, 60)
             y += 20
             y = block(d, y, en, font(34, 400), MUTED, 46)
             y += 44
             d.line((M, y, M + 80, y), fill="#C9C1B6", width=3)
-            y = block(d, y + 32, ther, font(34, 700), BLUE, 48)
+            y = block(d, y + 32, chamado or CTA_PADRAO, font(34, 700), BLUE, 48)
             assert y < H - 280, ("overflow", y)
             d.line((M, H - 270, W - M, H - 270), fill="#D9D2C8", width=2)
             block(d, H - 240, "Fontes: " + post["refs"], font(26, 400), MUTED, 36)
