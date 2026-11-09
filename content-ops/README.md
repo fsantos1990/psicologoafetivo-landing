@@ -7,3 +7,10 @@ Rotina semanal executada pelo Claude:
 4. Adiciona artigo no topo de `client/src/data/blogPosts.ts` (imagem em `client/public/blog/`), com links para `/livro/` e `/mapa/`.
 5. Testa `npx vite build`, faz commit e push em `main` (Vercel publica).
 6. Agenda o carrossel no Metricool para o sábado seguinte, 19h, publicação automática.
+
+## Captação de ideias
+
+`python3 tools/ideias.py` (ou `--fundo` para mais sugestões) gera `ideias/AAAA-MM-DD.md` com:
+- assuntos em alta no Brasil ligados a relacionamento (Google Trends, últimas ~24 h, onde aparece a fofoca do momento);
+- o que as pessoas digitam no Google sobre marido, namorado, traição, desejo, terapia etc., com 🆕 no que é novo desde a rodada anterior.
+Sementes e filtros ficam no topo do script.
