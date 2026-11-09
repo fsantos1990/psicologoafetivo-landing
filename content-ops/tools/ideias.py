@@ -29,7 +29,7 @@ SEMENTES = {
     "Conflito e crise": ["brigas no casamento", "crise no casamento", "como fazer as pazes",
                          "como conversar com o parceiro", "ciúmes no relacionamento"],
     "Traição e término": ["traição", "como superar traição", "como superar término", "vale a pena voltar com ex",
-                          "separação", "divórcio"],
+                          "pensando em separar", "depois da separação", "divórcio e filhos"],
     "Desejo e intimidade": ["falta de desejo", "sem vontade de transar", "vida sexual do casal", "libido"],
     "Ajuda": ["terapia de casal", "terapia de casal online", "livro sobre relacionamento"],
 }
@@ -38,13 +38,17 @@ SEMENTES = {
 DESCARTAR = ["bolsa família", "inss", "aposentad", "carteira assinada", "auxílio", "imposto de renda",
              "loas", "pensão por morte", "bpc", "cifra", "letra", "música", "filme", "série", "novela"]
 
+# Violência fica fora do perfil (decisão de 09/11/2026): descarta sugestões e assuntos em alta com estes radicais.
+VIOLENCIA = ["bate", "bateu", "agred", "agress", "violen", "abus", "estupr", "feminic", "assassin", "matou",
+             "ameac", "medida protetiva", "maria da penha", "espanc", "esfaque", "baleado", "morta", "morto"]
+
 # Sugestões com estes radicais vão para "dúvidas reais"; o resto (títulos de novela, dorama, música) fica recolhido.
 RADICAIS_RELEVANTES = ["o que fazer", "como ", "por que", "porque", "normal", "sinais", "sinal", "desejo", "procura",
                        "respeit", "confi", "ama ", "ama mais", "amor", "celular", "ciúme", "ciume", "trai", "brig",
                        "grit", "separ", "divorc", "divórci", "sexo", "transar", "libido", "conversa", "mentir", "ment",
                        "frio", "distant", "ignor", "carinho", "atenção", "atencao", "casar", "terapia", "voltar",
                        "superar", "ex ", "culpa", "perdo", "vale a pena", "acabou", "acabar", "cansad", "rotina",
-                       "filho", "sogr", "bateu", "agred", "agress", "violen", "abus", "mensagem", "whatsapp", "bloque", "gosta", "grávida", "gravida", "dinheiro", "ajuda", "psicólog", "psicolog", "online", "preço", "valor"]
+                       "filho", "sogr", "mensagem", "whatsapp", "bloque", "gosta", "grávida", "gravida", "dinheiro", "ajuda", "psicólog", "psicolog", "online", "preço", "valor"]
 
 # Assuntos em alta só entram se o título ou as notícias tiverem um destes radicais.
 RADICAIS_TRENDS = ["separa", "términ", "termin", "divórci", "divorci", "trai", "namor", "casament", "casou",
@@ -70,7 +74,7 @@ def sugestoes(q):
         return []
 
 def coletar_sugestoes(fundo):
-    descartar = [norm(d) for d in DESCARTAR]
+    descartar = [norm(d) for d in DESCARTAR + VIOLENCIA]
     out = {}
     for tema, seeds in SEMENTES.items():
         vistos = set()
@@ -101,7 +105,7 @@ def coletar_trends():
         noticias = [(n.findtext("ht:news_item_title", "", ns), n.findtext("ht:news_item_url", "", ns))
                     for n in it.findall("ht:news_item", ns)]
         texto = norm(titulo + " " + " ".join(t for t, _ in noticias))
-        if any(r in texto for r in radicais):
+        if any(r in texto for r in radicais) and not any(norm(v) in texto for v in VIOLENCIA):
             itens.append((titulo, trafego, noticias[:2]))
     return itens, total
 
