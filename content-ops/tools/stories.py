@@ -62,6 +62,18 @@ S = [
   "Se um teste dissesse que seu casamento vai acabar, você acreditaria?",
   "Responda este story com “sim” ou “não” e o motivo.",
   "If a test said your marriage would end, would you believe it? Reply with yes or no and why."),
+ ("2026-11-14", "pesquisa192",
+  "Pesquisei 192 pessoas em relacionamentos. A paixão não explicou a satisfação.", "I studied 192 people in relationships. Passion did not explain satisfaction.",
+  "E NA SUA RELAÇÃO?",
+  "Vocês ainda contam um ao outro o que aconteceu no dia?",
+  "Responda este story com “sim” ou “não”.",
+  "Do you still tell each other what happened in your day? Reply with yes or no."),
+ ("2026-11-28", "parceiroideal",
+  "Seu parceiro é comparado a um modelo que você montou antes de conhecê-lo.", "Your partner is being compared with a model you built before you met.",
+  "CONTA PRA GENTE",
+  "O item da sua lista que mais gera briga veio de onde?",
+  "Responda este story com “filmes”, “família” ou “amigos”.",
+  "Where did the list item that causes most of your fights come from? Reply: films, family or friends."),
 ]
 
 def teaser(t_pt, t_en):
