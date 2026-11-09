@@ -286,7 +286,7 @@ function result(){
         <input type="email" id="email" placeholder="seu@email.com" autocomplete="email" value="${S.email||''}" aria-label="Seu e-mail">
         <button class="primary" type="submit">Ver meu plano</button>
       </form>
-      <label style="display:flex;gap:8px;align-items:flex-start;font-size:14px;margin-top:10px;cursor:pointer"><input type="checkbox" id="consent" style="width:18px;height:18px;margin-top:2px;accent-color:var(--accent)"><span>Aceito receber por e-mail o plano e conteúdos do Psicólogo Afetivo. Posso cancelar quando quiser.</span></label>
+      <label style="display:flex;gap:8px;align-items:flex-start;font-size:14px;margin-top:10px;cursor:pointer"><input type="checkbox" id="consent" style="width:18px;height:18px;margin-top:2px;accent-color:var(--accent)"><span>Aceito receber conteúdos do Psicólogo Afetivo por e-mail. Posso cancelar quando quiser.</span></label>
       <div class="err" id="err" hidden></div>
     </div>` : `
     <div class="card"><span class="tag">Seu plano de 7 dias</span>
@@ -344,7 +344,7 @@ function bind(){
     const v = document.getElementById('email').value.trim();
     const err = document.getElementById('err');
     if(!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v)){ err.textContent='Digite um e-mail válido, como nome@gmail.com.'; err.hidden=false; return; }
-    if(!document.getElementById('consent').checked){ err.textContent='Marque a caixa de consentimento para receber o plano.'; err.hidden=false; return; }
+    if(!document.getElementById('consent').checked){ err.textContent='Marque a caixa de consentimento para ver o plano.'; err.hidden=false; return; }
     const r = scores();
     if(SB){ SB.from('leads').insert({email:v.toLowerCase(), consent:true, source:'mapa-afetivo', result:{pilar:r.low, norm:r.norm, conflito:r.pat, maior_distancia:r.gaps[0].k}}).then(({error})=>{ if(error) console.warn('lead', error.message); }); }
     S.email=v; S.unlocked=true; save(); render();

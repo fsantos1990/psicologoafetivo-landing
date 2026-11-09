@@ -108,10 +108,36 @@ def expand(label, q, instr, en):
     d.text((M, H - 200), "@psicologoafetivo", font=font(32, 400), fill=MUTED)
     return im
 
+# Lembrete de domingo (15/11, 22/11, 29/11). O diagnóstico mostra o plano na tela; não envia por e-mail.
+DOMINGO = ("MAPA AFETIVO", "Faça o seu diagnóstico.",
+           "No fim, você destrava um plano de 7 dias para o seu pilar mais baixo.",
+           "Free couple assessment, in Portuguese.")
+
+def domingo():
+    lab, tit, corpo, en = DOMINGO
+    checar_texto(*DOMINGO)
+    im = Image.new("RGB", (W, H), BG); d = ImageDraw.Draw(im); watermark(d)
+    d.text((M, 300), lab, font=font(36, 700), fill=BLUE)
+    d.rectangle((M, 366, M + 140, 375), fill=BLUE)
+    y = block(d, 420, tit, font(110, 900), INK, 124)
+    y = block(d, y + 30, corpo, font(52, 400), INK, 70)
+    y = block(d, y + 20, en, font(38, 400), MUTED, 52)
+    cx, ay = W // 2, y + 120  # seta para baixo, onde entra o link
+    d.line((cx, ay, cx, ay + 70), fill=BLUE, width=8)
+    d.line((cx - 30, ay + 40, cx, ay + 72), fill=BLUE, width=8)
+    d.line((cx + 30, ay + 40, cx, ay + 72), fill=BLUE, width=8)
+    f, fb = font(36, 400), font(36, 700)
+    x = M
+    for t, ff, c in (("Para aprofundar: livro ", f, MUTED), ("Mapa Afetivo", fb, INK), (", R$ 39, link na bio.", f, MUTED)):
+        d.text((x, H - 330), t, font=ff, fill=c); x += d.textlength(t, font=ff)
+    d.text((M, H - 260), "@psicologoafetivo", font=font(32, 400), fill=MUTED)
+    return im
+
 if __name__ == "__main__":
     os.makedirs("stories", exist_ok=True)
     for (dt, key, tpt, ten, lab, q, ins, en) in S:
         checar_texto(tpt, ten, lab, q, ins, en)
         teaser(tpt, ten).save(f"stories/{dt}_{key}_a.png", optimize=True)
         expand(lab, q, ins, en).save(f"stories/{dt}_{key}_b.png", optimize=True)
+    domingo().save("stories/domingo_diagnostico_v2.png", optimize=True)
     print(sorted(os.listdir("stories")))
