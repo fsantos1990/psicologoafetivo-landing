@@ -25,6 +25,26 @@
       "source": "/ebook/(.*)",
       "destination": "/livro/",
       "permanent": true
+    },
+    {
+      "source": "/guia",
+      "destination": "/guia-ibct.pdf",
+      "permanent": false
+    }
+  ],
+  "headers": [
+    {
+      "source": "/guia-ibct.pdf",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex"
+        },
+        {
+          "key": "Content-Disposition",
+          "value": "inline; filename=\"Guia-IBCT-casais.pdf\""
+        }
+      ]
     }
   ]
 }
