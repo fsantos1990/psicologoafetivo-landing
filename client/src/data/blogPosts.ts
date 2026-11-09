@@ -10,6 +10,90 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    id: "parceiro-ideal-parceiro-real",
+    title: "Parceiro ideal e parceiro real: com quem você está discutindo?",
+    excerpt:
+      "Na minha pesquisa com 192 pessoas, quanto maior a distância entre o parceiro ideal e o real, menor a satisfação. Veja como separar uma necessidade de um item herdado da sua lista.",
+    date: "09 de novembro de 2026",
+    author: "Felipe Santos",
+    image: "/blog/parceiro-ideal-parceiro-real.jpg",
+    content: `
+      <h2>O modelo que chega antes do parceiro</h2>
+      <p>
+        Toda pessoa entra numa relação com uma descrição interna do parceiro ideal. Essa descrição se forma com filmes
+        e séries, com o casal que ela observou em casa na infância e com as histórias que ouviu de amigos e parentes.
+        Boa parte dos itens nunca foi escolhida de forma consciente. Muita gente só descobre que espera algo do parceiro
+        quando ele deixa de fazer.
+      </p>
+      <p>
+        O modelo continua em uso depois que a relação começa. Cada ação do parceiro real é comparada com ele, em geral
+        sem que a pessoa perceba que está fazendo uma comparação.
+      </p>
+      <h2>O que a pesquisa mostrou</h2>
+      <p>
+        Na minha pesquisa de mestrado em Psicologia Social na UFBA, 192 pessoas em relacionamentos de pelo menos um ano
+        descreveram o parceiro ideal e o parceiro com quem estavam. Quanto maior a distância entre as duas descrições,
+        menor a satisfação com a relação.
+      </p>
+      <p>
+        Esse dado indica uma correlação. Ele não mostra se a distância reduz a satisfação ou se pessoas insatisfeitas
+        passam a enxergar o parceiro mais longe do ideal. Para o dia a dia, a implicação prática é a mesma: a comparação
+        com o modelo acompanha a insatisfação e vale ser examinada.
+      </p>
+      <h2>Como a comparação aparece no cotidiano</h2>
+      <p>
+        Quando o parceiro age diferente do esperado, a diferença tende a ser registrada como defeito. Um exemplo comum:
+        uma pessoa espera que o parceiro planeje o fim de semana, porque o pai dela fazia isso. O parceiro prefere decidir
+        no próprio sábado. Depois de alguns meses, cada fim de semana sem plano conta como prova de que ele não se importa,
+        mesmo que ele demonstre cuidado de outras formas, como resolver os problemas da casa ou lembrar das consultas médicas dela.
+      </p>
+      <p>
+        Nesse processo, a pessoa passa a reunir evidências de que escolheu mal. As brigas giram em torno do que o parceiro
+        não é, e esse tipo de queixa é difícil de resolver, porque pede que o outro mude de personalidade.
+      </p>
+      <h2>Um critério para separar necessidade de modelo herdado</h2>
+      <p>
+        Nem todo item da lista é problema. Algumas expectativas protegem a relação, como a de que o parceiro cumpra
+        acordos financeiros ou trate você com respeito em público. Para decidir o que fazer com cada item, use uma pergunta:
+        a falta disso prejudica a minha rotina de forma concreta?
+      </p>
+      <ul>
+        <li><strong>Se prejudica</strong>, o item merece uma conversa com o parceiro, com um pedido específico. Por exemplo:
+          "Preciso saber até quinta-feira se vamos viajar no fim de semana, porque tenho que organizar o trabalho."</li>
+        <li><strong>Se o item veio só do que você aprendeu sobre bons parceiros</strong>, ele pode ficar registrado como
+          diferença entre vocês, sem virar cobrança.</li>
+      </ul>
+      <p>
+        No exemplo do fim de semana, a necessidade concreta pode ser previsibilidade para organizar o trabalho. Essa
+        necessidade pode ser atendida com um combinado de horário, sem que o parceiro precise virar a pessoa que planeja tudo.
+      </p>
+      <h2>Um teste para a próxima discussão</h2>
+      <p>
+        Antes de responder numa discussão, identifique se a sua queixa é sobre algo que o parceiro fez ou sobre algo que ele
+        não é. "Você esqueceu de pagar a conta de luz" descreve uma ação, e uma ação pode ser corrigida. "Você nunca se
+        preocupa com nada" descreve uma característica, e queixas desse tipo costumam vir do modelo ideal.
+      </p>
+      <p>
+        Na terapia de casal comportamental integrativa (IBCT), parte do trabalho consiste em separar essas duas categorias:
+        mudar o que pode ser mudado e aceitar as diferenças que vão continuar existindo. Uma queixa sobre comportamento
+        específico dá ao parceiro algo que ele consegue fazer na semana seguinte.
+      </p>
+      <h2>Para ir além</h2>
+      <p>
+        O livro <a href="/livro/">Mapa Afetivo</a> trata do parceiro ideal contra o parceiro real no Capítulo 2. O capítulo
+        discute o teste de Eastwick e colegas (2025), com 10.358 pessoas em 43 países, e traz uma atividade escrita para
+        revisar a sua lista. O ebook custa R$&nbsp;39. Antes de comprar, você pode fazer o
+        <a href="/mapa/">diagnóstico gratuito do casal</a>, que mostra a distância entre o seu parceiro ideal e o real.
+      </p>
+      <p>
+        Atendo casais online, em português e inglês, com experiência em casais interculturais.
+        <em>Online couples therapy in Portuguese and English.</em>
+      </p>
+      <p><em>Referências: Santos, F. M. S. (2019). Amor romântico, ideais e satisfação nos relacionamentos amorosos.
+        Dissertação de mestrado, Universidade Federal da Bahia. Eastwick, P. W. et al. (2025), discutido no Capítulo 2 do livro Mapa Afetivo.</em></p>
+    `,
+  },
+  {
     id: "pesquisa-192-pessoas-intimidade-compromisso",
     title: "Pesquisei 192 pessoas em relacionamentos: o que explicou a satisfação",
     excerpt:
