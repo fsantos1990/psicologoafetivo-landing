@@ -80,6 +80,36 @@ S = [
   "O que costuma vir antes dos momentos em que a vontade aparece?",
   "Responda este story com uma palavra.",
   "What usually comes before the moments when desire shows up? Reply with one word."),
+ ("2026-12-03", "sozinha",
+  "Dá para se sentir só dormindo ao lado de alguém.", "You can feel alone lying next to someone.",
+  "E NA SUA RELAÇÃO?",
+  "Quando você conta algo importante, você se sente ouvido ou ouvida?",
+  "Responda este story com “quase sempre” ou “quase nunca”.",
+  "When you share something important, do you feel heard? Reply: almost always or almost never."),
+ ("2026-12-08", "crise7anos",
+  "Crise dos 7 anos: o que os dados dizem.", "The seven-year itch: what the data say.",
+  "CONTA PRA GENTE",
+  "Qual ano da relação foi o mais difícil até agora?",
+  "Responda este story com o número do ano.",
+  "Which year of your relationship was the hardest so far? Reply with the number."),
+ ("2026-12-10", "ciume",
+  "Ele não tem ciúme. Isso é falta de amor?", "He is not jealous. Does that mean he doesn't love me?",
+  "OPINIÃO",
+  "Ciúme é prova de amor?",
+  "Responda este story com “sim” ou “não” e o motivo.",
+  "Is jealousy proof of love? Reply with yes or no and why."),
+ ("2026-12-15", "perpetuos",
+  "Brigam sempre pelo mesmo assunto? Talvez ele não tenha solução.", "Always fighting about the same thing? Maybe it has no solution.",
+  "E NA SUA RELAÇÃO?",
+  "Qual é o assunto que sempre volta nas brigas de vocês?",
+  "Responda este story com uma palavra.",
+  "Which topic keeps coming back in your fights? Reply with one word."),
+ ("2026-12-17", "pausa",
+  "Três dias sem se falar não é dar um tempo. É um padrão.", "Three days of silence is not taking a break. It is a pattern.",
+  "COMPARTILHE",
+  "Com quem você precisa combinar um sinal de pausa?",
+  "Mande o post do feed para essa pessoa.",
+  "Who do you need to agree on a pause signal with? Send them the post."),
 ]
 
 def teaser(t_pt, t_en):
@@ -133,6 +163,48 @@ def domingo():
     d.text((M, H - 260), "@psicologoafetivo", font=font(32, 400), fill=MUTED)
     return im
 
+# Série B, "Bastidores do Plano de 30 Dias" (07 a 13/12/2026). Tudo leva para o link na bio, sem adesivo de link.
+# As telas do app vêm de app_demo.py (casal fictício): rode-o antes para gerar out/app_s1.png e out/app_s2.png.
+SERIE_B = [
+ ("2026-12-07", "b1", "texto", ("PLANO DE 30 DIAS · SEMANA 1",
+   "Desafio de hoje: uma apreciação no formato “obrigado por X, isso me deu Y”.",
+   "Exemplo: “Obrigado por fazer o café, isso me deu dez minutos a mais de sono.” Depois, responda este story contando a reação.",
+   "Today's challenge: thank your partner for one action and say what it gave you. Then reply with their reaction.")),
+ ("2026-12-09", "b2", "app", ("BASTIDORES DO PLANO", "É assim que fica no celular de vocês dois.",
+   "Semana 1: duas práticas por dia e um registro de uma linha. Tela de demonstração.", "out/app_s1.png")),
+ ("2026-12-11", "b3", "app", ("BASTIDORES DO PLANO", "Na Semana 2, as notas aparecem lado a lado.",
+   "Cada um responde sozinho. A comparação só abre quando os dois terminam. Tela de demonstração.", "out/app_s2.png")),
+ ("2026-12-13", "b4", "texto", ("MAPA AFETIVO",
+   "O Plano de 30 Dias vem com o livro.",
+   "Ebook, R$ 39. Quem compra ganha o app para fazer a dois: 4 semanas, do dia a dia ao contrato do casal. Link na bio.",
+   "The 30-day plan comes with the book (in Portuguese). Link in bio.")),
+]
+
+def app_story(label, titulo, sub, tela):
+    checar_texto(label, titulo, sub)
+    im = Image.new("RGB", (W, H), BG); d = ImageDraw.Draw(im); watermark(d)
+    d.text((M, 200), label, font=font(36, 700), fill=BLUE)
+    d.rectangle((M, 266, M + 140, 275), fill=BLUE)
+    y = block(d, 320, titulo, font(76, 900), INK, 90)
+    y = block(d, y + 16, sub, font(38, 400), MUTED, 50)
+    # celular: captura da tela com moldura arredondada
+    pw, top, bottom = 760, y + 50, H - 140
+    shot = Image.open(tela).convert("RGB")
+    k = pw / shot.width
+    shot = shot.resize((pw, int(shot.height * k)), Image.LANCZOS).crop((0, 0, pw, bottom - top))
+    x0 = (W - pw) // 2
+    d.rounded_rectangle((x0 - 18, top - 18, x0 + pw + 18, bottom + 18), radius=64, fill=INK)
+    mask = Image.new("L", shot.size, 0)
+    ImageDraw.Draw(mask).rounded_rectangle((0, 0, shot.width - 1, shot.height - 1), radius=48, fill=255)
+    im.paste(shot, (x0, top), mask)
+    d.text((M, H - 90), "@psicologoafetivo · link na bio", font=font(30, 400), fill=MUTED)
+    return im
+
+def serie_b():
+    for dt, key, tipo, a in SERIE_B:
+        im = expand(*a) if tipo == "texto" else app_story(*a)
+        im.save(f"stories/{dt}_serieb_{key}.png", optimize=True)
+
 if __name__ == "__main__":
     os.makedirs("stories", exist_ok=True)
     for (dt, key, tpt, ten, lab, q, ins, en) in S:
@@ -140,4 +212,5 @@ if __name__ == "__main__":
         teaser(tpt, ten).save(f"stories/{dt}_{key}_a.png", optimize=True)
         expand(lab, q, ins, en).save(f"stories/{dt}_{key}_b.png", optimize=True)
     domingo().save("stories/domingo_diagnostico_v2.png", optimize=True)
+    serie_b()
     print(sorted(os.listdir("stories")))
