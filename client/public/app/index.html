@@ -190,12 +190,16 @@ function semanaDoDia(dia){
 function debounce(fn, ms){ let t; return (...a)=>{ clearTimeout(t); t=setTimeout(()=>fn(...a), ms); }; }
 
 /* ---------- gravação ---------- */
+let pend = 0, rev = 0;   // gravações em curso e contador de gravações (ver sincronizar)
 async function salvarPlano(key, value){
-  const { error } = await SB.from("plan_entries").upsert(
-    { couple_id:S.couple.id, key, value, updated_by:S.user.id, updated_at:new Date().toISOString() },
-    { onConflict:"couple_id,key" });
-  if (error) throw error;
-  S.plan[key] = value;
+  pend++; rev++;
+  try {
+    const { error } = await SB.from("plan_entries").upsert(
+      { couple_id:S.couple.id, key, value, updated_by:S.user.id, updated_at:new Date().toISOString() },
+      { onConflict:"couple_id,key" });
+    if (error) throw error;
+    S.plan[key] = value;
+  } finally { pend--; }
 }
 async function salvarPrivado(key, value){
   const { error } = await SB.from("private_entries").upsert(
@@ -205,10 +209,13 @@ async function salvarPrivado(key, value){
   S.priv[key] = value;
 }
 async function salvarNota(round, item, value){
-  const { error } = await SB.from("ratings").upsert(
-    { user_id:S.user.id, couple_id:S.couple.id, round, item, value, updated_at:new Date().toISOString() },
-    { onConflict:"user_id,round,item" });
-  if (error) throw error;
+  pend++; rev++;
+  try {
+    const { error } = await SB.from("ratings").upsert(
+      { user_id:S.user.id, couple_id:S.couple.id, round, item, value, updated_at:new Date().toISOString() },
+      { onConflict:"user_id,round,item" });
+    if (error) throw error;
+  } finally { pend--; }
   const i = S.ratings.findIndex(r => r.user_id===S.user.id && r.round===round && r.item===item);
   if (i >= 0) S.ratings[i].value = value; else S.ratings.push({ user_id:S.user.id, round, item, value });
 }
@@ -316,6 +323,15 @@ function telaSemCasal(temAcesso){
   );
 }
 
+function telaAcessoEncerrado(){
+  render(
+    h("h1", {}, "Acesso encerrado"),
+    h("div", { class:"card" },
+      h("p", {}, "A compra ligada a este casal foi cancelada ou reembolsada, e o plano ficou indisponível."),
+      h("p", { class:"muted small" }, "Os registros de vocês continuam guardados e voltam a aparecer se a compra for refeita com o mesmo e-mail."),
+      h("a", { class:"btn ghost", href:URL_LIVRO }, "Ver o livro")));
+}
+
 /* ---------- painel do casal ---------- */
 function cabecalhoCasal(){
   const dia = diaAtual();
@@ -415,8 +431,10 @@ function minhas(round){ const o = {}; S.ratings.filter(r => r.user_id===S.user.i
 function doParceiro(round){ const o = {}; S.ratings.filter(r => r.user_id!==S.user.id && r.round===round).forEach(r => o[r.item]=r.value); return o; }
 const completo = o => ITENS.every(i => o[i.id] != null);
 
+const travada = round => completo(minhas(round)) && completo(doParceiro(round));
+
 function formNotas(round){
-  const m = minhas(round);
+  const m = minhas(round), trava = travada(round);
   let grupo = null;
   const qs = [];
   for (const it of ITENS){
@@ -427,6 +445,7 @@ function formNotas(round){
       const id = nome + "_" + v;
       const r = h("input", { type:"radio", name:nome, id, value:String(v) });
       r.checked = m[it.id] === v;
+      r.disabled = trava;
       r.addEventListener("change", async () => {
         try { await salvarNota(round, it.id, v); if (completo(minhas(round))) desenharPainel(); }
         catch(e){ alert("Não salvou: " + msgErro(e)); }
@@ -479,8 +498,9 @@ function semana2(){
     h("div", { class:"card" },
       h("span", { class:"tag" }, "Dia 8 ou 9 · cada um em separado"),
       h("h3", {}, "Notas de 1 a 10"),
-      h("p", { class:"muted small" }, "Responda sem conversar antes. Você só vê as notas do seu par depois de completar as suas."),
-      completo(m) ? h("p", { class:"okmsg" }, "Suas 9 notas estão salvas. Dá para ajustar até a conversa.") : null,
+      h("p", { class:"muted small" }, "Responda sem conversar antes. As notas do seu par só aparecem quando os dois terminam, e nesse momento as notas travam. Confira as suas antes de marcar a última."),
+      travada("w2") ? h("p", { class:"okmsg" }, "Os dois terminaram. As notas ficaram travadas para a comparação valer.")
+        : completo(m) ? h("p", { class:"okmsg" }, "Suas 9 notas estão salvas. Dá para ajustar até o seu par terminar as dele(a).") : null,
       formNotas("w2")),
     h("div", { class:"card" },
       h("span", { class:"tag" }, "Dia 10 · conversa de comparação"),
@@ -502,17 +522,18 @@ function semana2(){
 function semana3(){
   const dias = [];
   for (let d = 16; d <= 21; d++){
+    // cada resposta é gravada sozinha: assim um não apaga o que o outro marcou em outro celular
     const k = "w3_reparo_d" + d;
-    const val = Object.assign({ usado:"", aceito:"", retorno:"" }, S.plan[k] || {});
     const st = h("div", { class:"saved" });
     const sel = (campoNome, rot) => {
-      const s = h("select", { "aria-label":rot + " no dia " + d },
-        ["", "sim", "não", "não houve escalada"].map(o => { const op = h("option", { value:o }, o || "—"); if (val[campoNome] === o) op.selected = true; return op; }));
+      const key = k + "_" + campoNome;
+      const s = h("select", { id:"f_" + key, "aria-label":rot + " no dia " + d },
+        ["", "sim", "não", "não houve escalada"].map(o => { const op = h("option", { value:o }, o || "—"); if ((S.plan[key] ?? "") === o) op.selected = true; return op; }));
       s.addEventListener("change", async () => {
-        val[campoNome] = s.value;
-        try { await salvarPlano(k, { ...val }); st.textContent = "Salvo"; } catch(e){ st.textContent = "Não salvou: " + msgErro(e); } });
+        try { await salvarPlano(key, s.value); st.textContent = "Salvo"; } catch(e){ st.textContent = "Não salvou: " + msgErro(e); } });
       return h("label", {}, rot, s);
     };
+    const val = { usado:S.plan[k+"_usado"], aceito:S.plan[k+"_aceito"], retorno:S.plan[k+"_retorno"] };
     dias.push(h("details", { class:"log", open: diaAtual() === d || null },
       h("summary", {}, "Dia " + d, (val.usado||val.aceito||val.retorno) ? h("span", { class:"muted small" }, "  · registrado") : null),
       h("div", { class:"yn" }, sel("usado", "Foi usado?"), sel("aceito", "Foi aceito?"), sel("retorno", "Voltaram ao tema em 24 h?")), st));
@@ -572,7 +593,7 @@ function semana4(){
     h("div", { class:"card" },
       h("span", { class:"tag warn" }, "Dia 28 · reavaliação"),
       h("h3", {}, "As mesmas notas da Semana 2"),
-      h("p", { class:"muted small" }, "Cada um em separado, como na Semana 2."),
+      h("p", { class:"muted small" }, "Cada um em separado, como na Semana 2. Quando os dois terminam, as notas travam."),
       formNotas("d28"),
       evolucao(),
       h("h3", { style:"margin-top:18px" }, "Comparação do casal no Dia 28"),
@@ -606,7 +627,16 @@ function desenharPainel(){
     sem ? h("div", { style:"margin-top:18px" },
       h("span", { class:"tag" }, "Dias " + sem.dias[0] + " a " + sem.dias[1] + " · " + sem.caps),
       h("h2", {}, sem.titulo)) : null,
-    ...corpo
+    ...corpo,
+    (Object.keys(S.plan).length === 0 && S.ratings.length === 0)
+      ? h("p", { class:"muted small", style:"margin-top:24px" }, "Entrou no casal errado? ",
+          h("button", { class:"link", type:"button", onclick: async () => {
+            if (!confirm("Sair deste casal? Depois você pode criar outro ou entrar com um novo código.")) return;
+            const { error } = await SB.rpc("leave_couple");
+            if (error) alert(msgErro(error));
+            else { S.couple = null; S.tab = null; iniciar(); }
+          }}, "Sair deste casal"))
+      : null
   );
 }
 
@@ -635,6 +665,12 @@ async function iniciar(){
     const [mc, ha] = await Promise.all([SB.rpc("my_couple"), SB.rpc("has_access")]);
     if (mc.error) throw mc.error;
     if (!mc.data){ telaSemCasal(ha.data === true); return; }
+    if (ha.data !== true){
+      // quem entrou por convite não tem compra própria: vale a compra de quem criou o casal
+      const ca = await SB.rpc("couple_has_access");
+      if (ca.error) throw ca.error;
+      if (ca.data !== true){ telaAcessoEncerrado(); return; }
+    }
     await Promise.all([carregarCasal(), carregarConteudo()]);
     desenharPainel();
   } catch(e){
@@ -643,7 +679,7 @@ async function iniciar(){
   }
 }
 
-document.getElementById("btnSair").addEventListener("click", async () => { await SB.auth.signOut(); S.tab = null; iniciar(); });
+document.getElementById("btnSair").addEventListener("click", async () => { await SB.auth.signOut(); S.couple = null; S.tab = null; iniciar(); });
 
 /* atualiza ao voltar para a aba, para ver o que o par registrou (sem atropelar quem está digitando) */
 document.addEventListener("visibilitychange", async () => {
@@ -652,6 +688,38 @@ document.addEventListener("visibilitychange", async () => {
   if (ativo && (ativo.tagName === "TEXTAREA" || ativo.tagName === "INPUT")) return;
   try { await carregarCasal(); desenharPainel(); } catch(_) {}
 });
+
+/* a cada 20 s, traz o que o par gravou no outro celular, sem redesenhar a tela nem mexer no campo em uso */
+async function sincronizar(){
+  if (pend || !S.couple || document.visibilityState !== "visible") return;
+  const r0 = rev;
+  const [pl, rt] = await Promise.all([
+    SB.from("plan_entries").select("key, value"),
+    SB.from("ratings").select("user_id, round, item, value"),
+  ]);
+  if (pl.error || rt.error || pend || rev !== r0 || !S.couple) return;   // houve gravação no meio: fica para a próxima
+  for (const { key, value } of pl.data){
+    const antigo = S.plan[key];
+    if (JSON.stringify(antigo) === JSON.stringify(value)) continue;
+    if (key.startsWith("done_")){
+      const cb = document.getElementById("t_" + key.slice(5));
+      if (cb) cb.checked = value === true;
+    } else {
+      const el = document.getElementById("f_" + key);
+      if (el){
+        if (el === document.activeElement || el.value !== (antigo ?? "")) continue;   // em edição aqui: não mexe
+        el.value = value ?? "";
+      }
+    }
+    S.plan[key] = value;
+  }
+  if (rt.data.length !== S.ratings.length){
+    S.ratings = rt.data;
+    const ativo = document.activeElement;
+    if (!(ativo && (ativo.tagName === "TEXTAREA" || ativo.tagName === "INPUT" || ativo.tagName === "SELECT"))) desenharPainel();
+  }
+}
+setInterval(() => { sincronizar().catch(() => {}); }, 20000);
 
 SB.auth.onAuthStateChange((ev) => { if (ev === "SIGNED_IN" && !S.user) iniciar(); });
 
