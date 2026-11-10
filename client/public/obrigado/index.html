@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<title>Compra confirmada · Mapa Afetivo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --ink: #1A1A1A; --blue: #235FAA; --blue-light: #e8f0fb; --white: #FFFFFF;
+    --muted: #555; --rule: #e0e0e0;
+    --serif: 'Playfair Display', Georgia, serif;
+    --sans: 'DM Sans', system-ui, sans-serif;
+  }
+  body { font-family: var(--sans); background: var(--white); color: var(--ink); font-size: 17px; line-height: 1.75; }
+  .topbar { text-align: center; padding: 10px 1rem; font-size: 13px; letter-spacing: .06em; text-transform: uppercase; color: var(--blue); background: var(--blue-light); }
+  main { max-width: 640px; margin: 0 auto; padding: 3.5rem 1.25rem 3rem; }
+  h1 { font-family: var(--serif); font-weight: 600; font-size: clamp(2rem, 6vw, 2.8rem); line-height: 1.15; margin-bottom: 1rem; }
+  .lead { color: var(--muted); margin-bottom: 2.5rem; }
+  ol { list-style: none; counter-reset: passo; display: grid; gap: 1.25rem; margin-bottom: 2.5rem; }
+  ol li { counter-increment: passo; border: 1px solid var(--rule); border-radius: 12px; padding: 1.25rem 1.25rem 1.25rem 4rem; position: relative; }
+  ol li::before { content: counter(passo); position: absolute; left: 1.25rem; top: 1.2rem; width: 2rem; height: 2rem; border-radius: 50%; background: var(--blue-light); color: var(--blue); font-weight: 500; display: grid; place-items: center; }
+  ol h2 { font-family: var(--serif); font-weight: 600; font-size: 1.25rem; line-height: 1.3; margin-bottom: .35rem; }
+  ol p { color: var(--muted); font-size: 16px; }
+  .cta-primary { display: inline-block; background: var(--ink); color: var(--white); text-decoration: none; padding: 1rem 1.75rem; border-radius: 4px; font-weight: 500; margin-top: .9rem; }
+  .cta-primary:hover { background: #333; }
+  .nota { font-size: 15px; color: var(--muted); border-top: 1px solid var(--rule); padding-top: 1.5rem; }
+  .nota + .nota { border-top: 0; padding-top: .75rem; }
+  footer { text-align: center; font-size: 14px; color: var(--muted); padding: 2rem 1rem 3rem; }
+  a { color: var(--blue); }
+</style>
+</head>
+<body>
+<div class="topbar">Compra confirmada</div>
+<main>
+  <h1>Obrigado por comprar o Mapa Afetivo</h1>
+  <p class="lead">Sua compra inclui o livro em PDF e o app do Plano de 30 Dias. Veja como acessar cada um.</p>
+
+  <ol>
+    <li>
+      <h2>O livro chega pelo e-mail da Hotmart</h2>
+      <p>A Hotmart envia o acesso ao PDF para o e-mail que você usou na compra. Se não encontrar em alguns minutos, confira o spam e a aba Promoções.</p>
+    </li>
+    <li>
+      <h2>Entre no app com o mesmo e-mail</h2>
+      <p>O app acompanha o casal nas quatro semanas do Plano de 30 Dias, do Capítulo 12. Não tem senha: você digita o e-mail da compra e recebe um link de acesso.</p>
+      <a class="cta-primary" href="/app/">Abrir o app →</a>
+    </li>
+    <li>
+      <h2>Convide o seu par</h2>
+      <p>No app, crie o espaço do casal e envie o código de convite. Seu parceiro ou parceira entra com o próprio e-mail e não precisa comprar.</p>
+    </li>
+  </ol>
+
+  <p class="nota">Se o app disser que não encontrou a compra, aguarde alguns minutos: a liberação acontece logo depois de a Hotmart confirmar o pagamento. Confira também se entrou com o mesmo e-mail da compra.</p>
+  <p class="nota">O livro e o app são material educativo e não substituem terapia. Se há agressão, ameaça ou medo na relação, o Apêndice B indica onde buscar ajuda; em emergência, ligue 190, ou 180 para a Central de Atendimento à Mulher.</p>
+</main>
+<footer>Felipe Santos · Psicólogo Afetivo · CRP 03/15591 · <a href="https://www.instagram.com/psicologoafetivo/">@psicologoafetivo</a></footer>
+</body>
+</html>
