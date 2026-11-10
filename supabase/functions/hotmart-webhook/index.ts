@@ -1,13 +1,13 @@
 // Edge Function: recebe o webhook da Hotmart e libera ou bloqueia o acesso ao app.
 // Configuração:
 //   supabase secrets set HOTMART_HOTOK=<token do painel da Hotmart>
-//   supabase secrets set HOTMART_PRODUCT_IDS=<id numérico do produto Mapa Afetivo; vários separados por vírgula>
+//   opcional: supabase secrets set HOTMART_PRODUCT_IDS=<ids numéricos separados por vírgula>, para trocar o produto sem mexer no código
 //   supabase functions deploy hotmart-webhook --no-verify-jwt
 // Na Hotmart: Ferramentas > Webhook, apontar para https://<projeto>.supabase.co/functions/v1/hotmart-webhook
 // Confira os nomes dos eventos no painel antes de ativar; a Hotmart muda a versão do webhook de tempos em tempos.
 //
 // Regras:
-//   - Com HOTMART_PRODUCT_IDS definido, só eventos desses produtos mexem no acesso. Sem ele, qualquer produto da conta libera.
+//   - Só eventos do produto Mapa Afetivo (PRODUTOS_PADRAO, ou o segredo HOTMART_PRODUCT_IDS) mexem no acesso.
 //   - Cancelamento, reembolso ou chargeback só desligam o acesso se forem da mesma transação que liberou.
 //     Assim, uma tentativa de pagamento que falhou não derruba quem pagou em outra tentativa.
 
@@ -15,6 +15,8 @@ import { createClient } from "jsr:@supabase/supabase-js@2";
 
 const LIBERA = new Set(["PURCHASE_APPROVED", "PURCHASE_COMPLETE"]);
 const BLOQUEIA = new Set(["PURCHASE_REFUNDED", "PURCHASE_CHARGEBACK", "PURCHASE_CANCELED"]);
+// Produto Mapa Afetivo na Hotmart. O segredo HOTMART_PRODUCT_IDS, se existir, substitui este valor.
+const PRODUTOS_PADRAO = "8887200";
 const ok = () => new Response("ok", { status: 200 });
 
 Deno.serve(async (req) => {
@@ -36,7 +38,7 @@ Deno.serve(async (req) => {
   // eventos que não mexem no acesso também recebem 200, para a Hotmart não reenviar
   if (!LIBERA.has(event) && !BLOQUEIA.has(event)) return ok();
 
-  const permitidos = (Deno.env.get("HOTMART_PRODUCT_IDS") ?? "").split(",").map((s) => s.trim()).filter(Boolean);
+  const permitidos = (Deno.env.get("HOTMART_PRODUCT_IDS") ?? PRODUTOS_PADRAO).split(",").map((s) => s.trim()).filter(Boolean);
   if (permitidos.length && (!productId || !permitidos.includes(productId))) {
     console.log(`ignorado: ${event} do produto ${productId ?? "sem id"}, fora de HOTMART_PRODUCT_IDS`);
     return ok();
