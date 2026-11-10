@@ -152,13 +152,12 @@ def domingo():
     y = block(d, 420, tit, font(110, 900), INK, 124)
     y = block(d, y + 30, corpo, font(52, 400), INK, 70)
     y = block(d, y + 20, en, font(38, 400), MUTED, 52)
-    cx, ay = W // 2, y + 120  # seta para baixo, onde entra o link
-    d.line((cx, ay, cx, ay + 70), fill=BLUE, width=8)
-    d.line((cx - 30, ay + 40, cx, ay + 72), fill=BLUE, width=8)
-    d.line((cx + 30, ay + 40, cx, ay + 72), fill=BLUE, width=8)
+    # sem adesivo de link: o caminho é a bio, dito no próprio story
+    y = block(d, y + 200, "Link na bio.", font(76, 900), BLUE, 90)
+    y = block(d, y + 10, "23 perguntas, resultado na hora.", font(40, 400), MUTED, 54)
     f, fb = font(36, 400), font(36, 700)
     x = M
-    for t, ff, c in (("Para aprofundar: livro ", f, MUTED), ("Mapa Afetivo", fb, INK), (", R$ 39, link na bio.", f, MUTED)):
+    for t, ff, c in (("Para aprofundar: livro ", f, MUTED), ("Mapa Afetivo", fb, INK), (", R$ 39, no mesmo link.", f, MUTED)):
         d.text((x, H - 330), t, font=ff, fill=c); x += d.textlength(t, font=ff)
     d.text((M, H - 260), "@psicologoafetivo", font=font(32, 400), fill=MUTED)
     return im
@@ -211,6 +210,6 @@ if __name__ == "__main__":
         checar_texto(tpt, ten, lab, q, ins, en)
         teaser(tpt, ten).save(f"stories/{dt}_{key}_a.png", optimize=True)
         expand(lab, q, ins, en).save(f"stories/{dt}_{key}_b.png", optimize=True)
-    domingo().save("stories/domingo_diagnostico_v2.png", optimize=True)
+    domingo().save("stories/domingo_diagnostico_v3.png", optimize=True)
     serie_b()
     print(sorted(os.listdir("stories")))
