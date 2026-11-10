@@ -15,6 +15,10 @@
       "destination": "/livro/index.html"
     },
     {
+      "source": "/obrigado",
+      "destination": "/obrigado/index.html"
+    },
+    {
       "source": "/(.*)",
       "destination": "/index.html"
     }
