@@ -204,6 +204,38 @@ def serie_b():
         im = expand(*a) if tipo == "texto" else app_story(*a)
         im.save(f"stories/{dt}_serieb_{key}.png", optimize=True)
 
+# Kit dos destaques (Diagnóstico, Livro, App 30 dias). O terceiro story do Diagnóstico é o lembrete de domingo.
+KIT = [
+ ("diag1", "texto", ("DIAGNÓSTICO GRATUITO", "Qual é o pilar mais baixo da sua relação?",
+   "23 perguntas, cerca de 5 minutos. Resultado na hora.",
+   "Free couple assessment, in Portuguese.")),
+ ("diag2", "texto", ("O QUE VOCÊ RECEBE", "Três leituras da sua relação.",
+   "Os três pilares do amor, a distância entre o parceiro ideal e o real e o padrão das brigas de vocês.",
+   "Three readings: the pillars of love, the ideal-real gap and your conflict pattern.")),
+ ("livro1", "texto", ("LIVRO MAPA AFETIVO", "O que a pesquisa sabe sobre relacionamentos.",
+   "12 capítulos, com estudos de 2020 a 2025 e a minha pesquisa de mestrado com 192 pessoas.",
+   "A 12-chapter book on relationship research, in Portuguese.")),
+ ("livro2", "texto", ("EM CADA CAPÍTULO", "Mito, dado e um exercício escrito.",
+   "Cada crença popular sobre amor aparece ao lado do estudo que a testou.",
+   "Each popular belief next to the study that tested it.")),
+ ("livro3", "texto", ("COMO COMPRAR", "Ebook, R$ 39.",
+   "Vem com o app do Plano de 30 Dias, para fazer a dois. Link na bio.",
+   "The ebook comes with the 30-day plan app. Link in bio.")),
+ ("app1", "app", ("APP · PLANO DE 30 DIAS", "É assim que fica no celular de vocês dois.",
+   "Semana 1: duas práticas por dia e um registro de uma linha. Tela de demonstração.", "out/app_s1.png")),
+ ("app2", "app", ("APP · PLANO DE 30 DIAS", "Na Semana 2, as notas aparecem lado a lado.",
+   "Cada um responde sozinho. A comparação só abre quando os dois terminam. Tela de demonstração.", "out/app_s2.png")),
+ ("app3", "texto", ("COMO ENTRAR", "O app vem com o livro.",
+   "Entre com o e-mail da compra e convide o seu par com um código. Seu par não precisa comprar. Link na bio.",
+   "The app comes with the book. Your partner joins with an invite code.")),
+]
+
+def kit():
+    for key, tipo, a in KIT:
+        if tipo == "texto": checar_texto(*a)
+        im = expand(*a) if tipo == "texto" else app_story(*a)
+        im.save(f"stories/kit_{key}.png", optimize=True)
+
 if __name__ == "__main__":
     os.makedirs("stories", exist_ok=True)
     for (dt, key, tpt, ten, lab, q, ins, en) in S:
