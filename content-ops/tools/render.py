@@ -47,7 +47,16 @@ def footer(draw, idx, total):
     draw.text((W - M - draw.textlength(t, font=f), H - 92), t, font=f, fill=MUTED)
 
 # Chamado padrão do último slide. A comunicação não oferece mais supervisão para terapeutas (decisão de 09/11/2026).
-CTA_PADRAO = "Diagnóstico gratuito do casal: 23 perguntas, resultado na hora.\nLink na bio."
+# Regras de 10/11/2026: o diagnóstico vem antes do livro, e toda peça que cita o diagnóstico avisa que ele é uma avaliação educativa.
+CTA_PADRAO = "Comece pelo diagnóstico gratuito do casal: 23 perguntas, resultado na hora.\nLink na bio."
+AVISO_IMG = "O diagnóstico do Mapa Afetivo é uma avaliação educativa. Não é um diagnóstico psicológico."
+AVISO_CAP = "Aviso: o diagnóstico do Mapa Afetivo é uma avaliação educativa. Não é um diagnóstico psicológico e não substitui avaliação profissional."
+
+def checar_aviso(texto):
+    """Legenda ou story que cita o diagnóstico precisa dizer que ele é uma avaliação educativa."""
+    t = (texto or "").lower()
+    if "diagnóstico" in t and "avaliação educativa" not in t:
+        raise ValueError("O texto cita o diagnóstico sem o aviso de avaliação educativa (AVISO_CAP).")
 PROIBIDO = ("supervis",)
 
 def checar_texto(*textos):
@@ -61,6 +70,7 @@ def render(key, post):
     os.makedirs("out", exist_ok=True)
     slides = post["slides"]; n = len(slides)
     checar_texto(post.get("caption"), post.get("refs"), *[x for s in slides for x in s])
+    checar_aviso(post.get("caption"))
     files = []
     for i, (tag, title, body, en) in enumerate(slides, 1):
         im = Image.new("RGB", (W, H), BG); d = ImageDraw.Draw(im)
@@ -86,6 +96,8 @@ def render(key, post):
             y += 44
             d.line((M, y, M + 80, y), fill="#C9C1B6", width=3)
             y = block(d, y + 32, chamado or CTA_PADRAO, font(34, 700), BLUE, 48)
+            if "diagnóstico" in (body + (chamado or CTA_PADRAO)).lower():
+                y = block(d, y + 14, AVISO_IMG, font(26, 400), MUTED, 36)
             assert y < H - 280, ("overflow", y)
             d.line((M, H - 270, W - M, H - 270), fill="#D9D2C8", width=2)
             block(d, H - 240, "Fontes: " + post["refs"], font(26, 400), MUTED, 36)

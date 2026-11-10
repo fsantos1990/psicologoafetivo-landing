@@ -15,7 +15,7 @@ POST = {
    "Ela diz: “olha esse vídeo”. Responder “mostra aí” conta como aproximação. Continuar no próprio celular sem levantar os olhos conta como afastamento.",
    "“Look at this video.” “Show me.” counts as turning toward. Staying on your own phone counts as turning away."),
   ("cta", None,
-   "Casais: hoje, reparem em quantas tentativas de conexão o outro faz e quantas vocês respondem.\n\nDiagnóstico gratuito do casal: 23 perguntas, resultado na hora.\nPara aprofundar: livro Mapa Afetivo, Capítulo 1.\nLink na bio.",
+   "Casais: hoje, reparem em quantas tentativas de conexão o outro faz e quantas vocês respondem.\n\nComece pelo diagnóstico gratuito do casal: 23 perguntas, resultado na hora.\nDepois, para aprofundar: livro Mapa Afetivo, Capítulo 1.\nLink na bio.",
    "Couples: today, notice how many bids your partner makes and how many you answer."),
  ],
  "refs": "Gottman & DeClaire (2001), The Relationship Cure · Driver & Gottman (2004), Family Process 43(3)",

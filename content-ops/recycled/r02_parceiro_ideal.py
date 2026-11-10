@@ -39,7 +39,9 @@ Na minha pesquisa de mestrado com 192 pessoas, quanto maior a distância entre o
 
 Critério: para cada item da sua lista, pergunte se a falta dele prejudica a sua rotina. Se prejudica, leve o assunto para uma conversa. Itens que vieram só do que você aprendeu sobre bons parceiros podem ficar como diferença.
 
-O diagnóstico gratuito do casal mostra a distância entre o seu parceiro ideal e o real. O livro Mapa Afetivo trata do tema no Capítulo 2, com uma atividade escrita. Ebook, R$ 39. O artigo completo está no blog. Link na bio.
+Comece pelo diagnóstico gratuito do casal: ele mostra a distância entre o seu parceiro ideal e o real. Depois, o livro Mapa Afetivo trata do tema no Capítulo 2, com uma atividade escrita. Ebook, R$ 39. O artigo completo está no blog. Link na bio.
+
+Aviso: o diagnóstico do Mapa Afetivo é uma avaliação educativa. Não é um diagnóstico psicológico e não substitui avaliação profissional.
 
 Ref: Santos (2019), dissertação de mestrado, UFBA.
 

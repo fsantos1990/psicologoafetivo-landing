@@ -155,9 +155,10 @@ def domingo():
     # sem adesivo de link: o caminho é a bio, dito no próprio story
     y = block(d, y + 200, "Link na bio.", font(76, 900), BLUE, 90)
     y = block(d, y + 10, "23 perguntas, resultado na hora.", font(40, 400), MUTED, 54)
+    block(d, y + 24, "Avaliação educativa. Não é um diagnóstico psicológico.", font(34, 400), MUTED, 46)
     f, fb = font(36, 400), font(36, 700)
     x = M
-    for t, ff, c in (("Para aprofundar: livro ", f, MUTED), ("Mapa Afetivo", fb, INK), (", R$ 39, no mesmo link.", f, MUTED)):
+    for t, ff, c in (("Depois do diagnóstico: livro ", f, MUTED), ("Mapa Afetivo", fb, INK), (", R$ 39.", f, MUTED)):
         d.text((x, H - 330), t, font=ff, fill=c); x += d.textlength(t, font=ff)
     d.text((M, H - 260), "@psicologoafetivo", font=font(32, 400), fill=MUTED)
     return im
@@ -207,11 +208,11 @@ def serie_b():
 # Kit dos destaques (Diagnóstico, Livro, App 30 dias). O terceiro story do Diagnóstico é o lembrete de domingo.
 KIT = [
  ("diag1", "texto", ("DIAGNÓSTICO GRATUITO", "Qual é o pilar mais baixo da sua relação?",
-   "23 perguntas, cerca de 5 minutos. Resultado na hora.",
-   "Free couple assessment, in Portuguese.")),
+   "23 perguntas, cerca de 5 minutos. Resultado na hora. Link na bio.",
+   "Avaliação educativa. Não é um diagnóstico psicológico.")),
  ("diag2", "texto", ("O QUE VOCÊ RECEBE", "Três leituras da sua relação.",
    "Os três pilares do amor, a distância entre o parceiro ideal e o real e o padrão das brigas de vocês.",
-   "Three readings: the pillars of love, the ideal-real gap and your conflict pattern.")),
+   "Avaliação educativa. Não é um diagnóstico psicológico.")),
  ("livro1", "texto", ("LIVRO MAPA AFETIVO", "O que a pesquisa sabe sobre relacionamentos.",
    "12 capítulos, com estudos de 2020 a 2025 e a minha pesquisa de mestrado com 192 pessoas.",
    "A 12-chapter book on relationship research, in Portuguese.")),
@@ -234,7 +235,7 @@ def kit():
     for key, tipo, a in KIT:
         if tipo == "texto": checar_texto(*a)
         im = expand(*a) if tipo == "texto" else app_story(*a)
-        im.save(f"stories/kit_{key}.png", optimize=True)
+        im.save(f"stories/kit2_{key}.png", optimize=True)
 
 if __name__ == "__main__":
     os.makedirs("stories", exist_ok=True)
@@ -242,6 +243,6 @@ if __name__ == "__main__":
         checar_texto(tpt, ten, lab, q, ins, en)
         teaser(tpt, ten).save(f"stories/{dt}_{key}_a.png", optimize=True)
         expand(lab, q, ins, en).save(f"stories/{dt}_{key}_b.png", optimize=True)
-    domingo().save("stories/domingo_diagnostico_v3.png", optimize=True)
+    domingo().save("stories/domingo_diagnostico_v4.png", optimize=True)
     serie_b()
     print(sorted(os.listdir("stories")))

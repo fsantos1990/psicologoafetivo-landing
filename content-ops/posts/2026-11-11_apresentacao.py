@@ -1,4 +1,4 @@
-# 11/11/2026 · apresentação do Mapa Afetivo (diagnóstico, livro e app). Aguardando aprovação.
+# 11/11/2026 · apresentação do Mapa Afetivo (diagnóstico, livro e app). Aprovado em 10/11.
 POST = {
  "pillar": "MAPA AFETIVO",
  "slides": [
@@ -15,7 +15,7 @@ POST = {
    "Quem compra o livro ganha o app do Plano de 30 Dias. Cada um entra do próprio celular, o casal registra as práticas da semana e compara as notas. Seu par não precisa comprar.",
    "Book buyers get the 30-day plan app. Each partner uses their own phone; your partner does not need to buy."),
   ("O QUE ELE NÃO É", None,
-   "É material educativo. Não substitui terapia de casal e não promete resultado em prazo fixo. Cada afirmação do livro vem com a fonte, e os limites de cada estudo estão explicados no texto.",
+   "O diagnóstico é uma avaliação educativa, não um diagnóstico psicológico. O livro e o app são material educativo: não substituem terapia de casal e não prometem resultado em prazo fixo.",
    "Educational material. It does not replace couples therapy or promise results on a deadline."),
   ("cta", None,
    "Comece pelo diagnóstico gratuito: 23 perguntas, resultado na hora.\n\nDiagnóstico, livro e app no mesmo lugar.\nLink na bio.",
@@ -32,7 +32,7 @@ O Mapa Afetivo é o projeto que junta o que eu pesquiso e o que eu vejo no consu
 
 3. App do Plano de 30 Dias. Vem com o livro. Cada um entra do próprio celular, o casal registra as práticas da semana e compara as notas. Seu par não precisa comprar.
 
-É material educativo: não substitui terapia de casal e não promete resultado em prazo fixo.
+O diagnóstico é uma avaliação educativa: não é um diagnóstico psicológico e não substitui avaliação profissional. O livro e o app são material educativo, não substituem terapia de casal e não prometem resultado em prazo fixo.
 
 Comece pelo diagnóstico gratuito. Link na bio.
 

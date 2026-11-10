@@ -15,7 +15,7 @@ POST = {
    "Combinem antes um sinal de pausa: uma palavra ou gesto que qualquer um pode usar. Quem pede a pausa diz quando volta, e volta em até 24 horas.",
    "Agree on a pause signal in advance. Whoever calls the pause says when they will come back, within 24 hours."),
   ("cta", None,
-   "Casais: escolham hoje o sinal de pausa de vocês e a regra de retorno.\n\nDiagnóstico gratuito do casal: 23 perguntas, resultado na hora.\nPara aprofundar: livro Mapa Afetivo, Capítulos 5 e 8.\nLink na bio.",
+   "Casais: escolham hoje o sinal de pausa de vocês e a regra de retorno.\n\nComece pelo diagnóstico gratuito do casal: 23 perguntas, resultado na hora.\nDepois, para aprofundar: livro Mapa Afetivo, Capítulos 5 e 8.\nLink na bio.",
    "Couples: choose your pause signal and your return rule today."),
  ],
  "refs": "Gottman (1994), What Predicts Divorce? · Gottman & Silver (1999), The Seven Principles for Making Marriage Work",
@@ -29,7 +29,9 @@ Como fazer: combinem antes um sinal de pausa, uma palavra ou gesto que qualquer 
 
 Para hoje: escolham o sinal de pausa de vocês e a regra de retorno.
 
-O diagnóstico gratuito do casal mostra o padrão de conflito que vocês repetem. O livro Mapa Afetivo trata de conflito e reparo nos Capítulos 5 e 8. Link na bio.
+Comece pelo diagnóstico gratuito do casal: ele mostra o padrão de conflito que vocês repetem. Depois, o livro Mapa Afetivo trata de conflito e reparo nos Capítulos 5 e 8. Link na bio.
+
+Aviso: o diagnóstico do Mapa Afetivo é uma avaliação educativa. Não é um diagnóstico psicológico e não substitui avaliação profissional.
 
 —
 
