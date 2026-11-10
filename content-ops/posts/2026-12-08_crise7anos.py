@@ -15,7 +15,7 @@ POST = {
    "Uma fase difícil perto dos 7 ou dos 10 anos é comum e não prova que a relação acabou. Média não é destino: cada casal pode estar acima ou abaixo da curva.",
    "A hard phase around year 7 or 10 is common and does not prove the relationship is over. An average is not a destiny."),
   ("cta", None,
-   "Casais: perguntem um ao outro qual foi o ano mais difícil até aqui e o que ajudou a passar por ele.\n\nDiagnóstico gratuito do casal: 23 perguntas, resultado na hora.\nPara aprofundar: livro Mapa Afetivo, Capítulo 7.\nLink na bio.",
+   "Casais: perguntem um ao outro qual foi o ano mais difícil até aqui e o que ajudou a passar por ele.\n\nComece pelo diagnóstico gratuito do casal: 23 perguntas, resultado na hora.\nDepois, para aprofundar: livro Mapa Afetivo, Capítulo 7.\nLink na bio.",
    "Couples: ask each other which year was the hardest so far and what helped you get through it."),
  ],
  "refs": "Bühler, Krauss & Orth (2021), Psychological Bulletin",
@@ -27,7 +27,9 @@ Uma fase difícil perto dos 7 ou dos 10 anos é comum e não prova que a relaç�
 
 Para hoje: perguntem um ao outro qual foi o ano mais difícil até aqui e o que ajudou a passar por ele.
 
-O diagnóstico gratuito do casal mostra onde vocês estão hoje nos três pilares. O livro Mapa Afetivo explica a curva no Capítulo 7. Link na bio.
+Comece pelo diagnóstico gratuito do casal: ele mostra onde vocês estão hoje nos três pilares. Depois, o livro Mapa Afetivo explica a curva no Capítulo 7. Link na bio.
+
+Aviso: o diagnóstico do Mapa Afetivo é uma avaliação educativa. Não é um diagnóstico psicológico e não substitui avaliação profissional.
 
 —
 
