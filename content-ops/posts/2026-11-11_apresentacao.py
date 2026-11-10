@@ -21,7 +21,7 @@ POST = {
    "Comece pelo diagnóstico gratuito: 23 perguntas, resultado na hora.\n\nDiagnóstico, livro e app no mesmo lugar.\nLink na bio.",
    "Start with the free assessment. Everything is at the link in bio."),
  ],
- "refs": "Santos, dissertação de mestrado em Psicologia Social, UFBA · Joel et al. (2020), PNAS · Eastwick et al. (2025), Journal of Personality and Social Psychology",
+ "refs": "Santos (2019), dissertação de mestrado, UFBA · Joel et al. (2020), PNAS · Eastwick et al. (2025), Journal of Personality and Social Psychology",
  "caption": """Qual é o pilar mais baixo da sua relação?
 
 O Mapa Afetivo é o projeto que junta o que eu pesquiso e o que eu vejo no consultório. Ele tem três partes:
@@ -42,7 +42,7 @@ Which pillar of your relationship is the lowest?
 
 Mapa Afetivo has three parts, all in Portuguese: a free 23-question couple assessment with a 7-day plan, a 12-chapter book on what research knows about relationships, and a 30-day plan app that comes with the book. It is educational material and does not replace couples therapy.
 
-Refs: Santos, dissertação de mestrado em Psicologia Social, UFBA; Joel et al. (2020), PNAS; Eastwick et al. (2025), Journal of Personality and Social Psychology.
+Refs: Santos (2019), dissertação de mestrado, UFBA; Joel et al. (2020), PNAS; Eastwick et al. (2025), Journal of Personality and Social Psychology.
 
 #terapiadecasal #relacionamentos #psicologia #mapaafetivo #couplestherapy #relationships""",
 }
