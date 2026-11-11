@@ -5,7 +5,12 @@
       "id": "r01_pesquisa192",
       "original_url": "https://www.instagram.com/p/DVJe3OuEXPU/",
       "original_data": "2026-02-24",
-      "original_metricas": {"alcance": 1193, "interacoes": 139, "salvamentos": 18, "compartilhamentos": 44},
+      "original_metricas": {
+        "alcance": 1193,
+        "interacoes": 139,
+        "salvamentos": 18,
+        "compartilhamentos": 44
+      },
       "reciclado_data": "2026-11-14T19:00:00-03:00",
       "reciclado_url": null,
       "reciclado_metricas": null,
@@ -16,11 +21,32 @@
       "id": "r02_parceiro_ideal",
       "original_url": "https://www.instagram.com/p/DXExRbvEYjb/",
       "original_data": "2026-04-13",
-      "original_metricas": {"alcance": 1343, "interacoes": 79, "salvamentos": 8, "compartilhamentos": 18},
+      "original_metricas": {
+        "alcance": 1343,
+        "interacoes": 79,
+        "salvamentos": 8,
+        "compartilhamentos": 18
+      },
       "reciclado_data": "2026-11-28T19:00:00-03:00",
       "reciclado_url": null,
       "reciclado_metricas": null,
       "blog_slug": "parceiro-ideal-parceiro-real",
+      "veredito": null
+    },
+    {
+      "id": "r03_ativacao",
+      "original_url": "https://www.instagram.com/p/DZOF45iDITT/",
+      "original_data": "2026-06-05",
+      "original_metricas": {
+        "alcance": 591,
+        "interacoes": 64,
+        "salvamentos": 11,
+        "compartilhamentos": 9
+      },
+      "reciclado_data": "2026-11-21T19:00:00-03:00",
+      "reciclado_url": null,
+      "reciclado_metricas": null,
+      "blog_slug": null,
       "veredito": null
     }
   ]
