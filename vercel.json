@@ -38,6 +38,16 @@
       "source": "/guia",
       "destination": "/guia-ibct.pdf",
       "permanent": false
+    },
+    {
+      "source": "/guia-act",
+      "destination": "/guia-act.pdf",
+      "permanent": false
+    },
+    {
+      "source": "/guide",
+      "destination": "/guide-ibct.pdf",
+      "permanent": false
     }
   ],
   "headers": [
@@ -51,6 +61,32 @@
         {
           "key": "Content-Disposition",
           "value": "inline; filename=\"Guia-IBCT-casais.pdf\""
+        }
+      ]
+    },
+    {
+      "source": "/guia-act.pdf",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex"
+        },
+        {
+          "key": "Content-Disposition",
+          "value": "inline; filename=\"Guia-ACT-terapia-individual.pdf\""
+        }
+      ]
+    },
+    {
+      "source": "/guide-ibct.pdf",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex"
+        },
+        {
+          "key": "Content-Disposition",
+          "value": "inline; filename=\"Guide-IBCT-couples.pdf\""
         }
       ]
     }
