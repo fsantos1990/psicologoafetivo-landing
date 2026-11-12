@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="referrer" content="no-referrer">
+<title>Mapa de valores | Felipe Santos, Psicólogo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/pacientes/base.css">
+<style>
+details.area{background:var(--card);border:1px solid var(--line);border-radius:14px;margin:0 0 10px}
+details.area > summary{list-style:none;cursor:pointer;padding:14px 16px;display:flex;justify-content:space-between;gap:12px;align-items:center;font-weight:700;border-radius:14px}
+details.area > summary::-webkit-details-marker{display:none}
+details.area > summary .st{font-weight:400;font-size:14px;color:var(--muted);white-space:nowrap;font-variant-numeric:tabular-nums}
+details.area[open] > summary{border-bottom:1px solid var(--line);border-radius:14px 14px 0 0}
+details.area .in{padding:14px 16px 16px}
+details.area .esc{margin-top:14px}
+</style>
+<script src="/avaliacao/config.js"></script>
+<script src="/pacientes/instrumentos.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
+</head>
+<body>
+<div class="wrap">
+<header class="top"><div class="brand">Felipe Santos · Psicólogo</div><div id="who" class="small"></div></header>
+<main id="app" aria-live="polite"><p class="muted">Carregando…</p></main>
+</div>
+<nav class="nav" id="nav" hidden><div class="in"><span class="st" id="st"></span><button type="button" class="btn" id="save" disabled>Salvar</button></div></nav>
+
+<script>
+(function(){
+"use strict";
+var I = window.Instrumentos, V = I.VALORES, CFG = window.AVALIACAO_CONFIG, esc = I.esc;
+var app = document.getElementById("app"), nav = document.getElementById("nav"), save = document.getElementById("save"), st = document.getElementById("st");
+if (!window.supabase) { app.innerHTML = '<div class="msg err">Não foi possível carregar a página. Confira a internet e recarregue.</div>'; return; }
+var sb = window.supabase.createClient(CFG.SUPABASE_URL, CFG.SUPABASE_ANON_KEY);
+var EMAIL = "", existe = false, gravado = {}, sujo = false, atual = null;
+function fmt(d){ return new Date(d).toLocaleString("pt-BR", { dateStyle: "short", timeStyle: "short" }); }
+
+// ---------- entrada ----------
+function telaLogin(msg, tipo){
+  nav.hidden = true; document.getElementById("who").innerHTML = "";
+  app.innerHTML = '<h1>Mapa de valores</h1>'+
+    '<p class="muted">Um exercício para enxergar o que importa para você em cada área da vida, e o quanto o seu dia a dia tem andado nessa direção. Você pode voltar e mudar as respostas quando quiser.</p>'+
+    '<div class="card"><form id="lf"><label class="f" for="em">Seu e-mail</label>'+
+    '<input type="email" id="em" required autocomplete="email" inputmode="email" autocapitalize="off" placeholder="seu@email.com">'+
+    '<p class="muted small" style="margin:8px 0 14px">Use o mesmo e-mail que você passou ao Felipe. Sem senha: você recebe um link de acesso a cada entrada.</p>'+
+    '<button class="btn full" type="submit" id="lb">Receber link de acesso</button></form></div>'+
+    (msg ? '<div class="msg '+(tipo||"info")+'" role="status">'+esc(msg)+'</div>' : '')+
+    '<p class="muted small">Só você e o seu psicólogo têm acesso às suas respostas.</p>';
+  document.getElementById("lf").onsubmit = function(e){
+    e.preventDefault();
+    var em = document.getElementById("em").value.trim().toLowerCase(), b = document.getElementById("lb");
+    b.disabled = true;
+    sb.auth.signInWithOtp({ email: em, options: { emailRedirectTo: location.origin + "/valores/" } }).then(function(r){
+      if (r.error) telaLogin(/rate|seconds|segundos/i.test(r.error.message) ? "Aguarde um minuto antes de pedir outro link." : "Não foi possível enviar o link. Tente de novo em instantes.", "err");
+      else telaLogin("Enviamos um link para " + em + ". Abra o e-mail neste mesmo aparelho e toque no link. Confira também o spam.", "ok");
+    });
+  };
+}
+
+function telaSemAcesso(){
+  nav.hidden = true;
+  app.innerHTML = '<h1>Mapa de valores</h1><div class="msg warn">O e-mail <b>'+esc(EMAIL)+'</b> ainda não está liberado para este exercício. '+
+    'Se você é paciente, confira se entrou com o mesmo e-mail que passou ao Felipe, ou avise-o para liberar.</div>'+
+    '<button class="btn alt" id="out2">Entrar com outro e-mail</button>';
+  document.getElementById("out2").onclick = sair;
+}
+
+function sair(){
+  if (sujo && !confirm("Há alterações que ainda não foram salvas. Sair mesmo assim?")) return;
+  sujo = false; sb.auth.signOut().then(function(){ telaLogin(); });
+}
+
+// ---------- formulário ----------
+function escala(id, rotulo, min, max, val){
+  var v = I.num(val);
+  return '<div class="esc'+(v==null?" vazio":"")+'" data-k="'+id+'"'+(v==null?"":' data-ok="1"')+'><div class="qt"><label for="r_'+id+'">'+esc(rotulo)+'</label><output>'+(v==null?"toque para marcar":v)+'</output></div>'+
+    '<input type="range" id="r_'+id+'" min="0" max="10" step="1" value="'+(v==null?5:v)+'">'+
+    '<div class="ends"><span>0 · '+esc(min)+'</span><span>'+esc(max)+' · 10</span></div></div>';
+}
+
+function coletar(){
+  var D = {};
+  V.areas.forEach(function(a){
+    ["txt","passo"].forEach(function(c){ var v = document.getElementById("t_"+a.id+"_"+c).value.trim(); if (v) D[a.id+"_"+c] = v; });
+    ["imp","acao"].forEach(function(c){ var box = app.querySelector('[data-k="'+a.id+"_"+c+'"]'); if (box.dataset.ok) D[a.id+"_"+c] = Number(box.querySelector("input").value); });
+  });
+  return D;
+}
+
+function resumo(D){
+  var d = I.distancias(D), h = I.mapaHTML(D);
+  if (d.length) h += '<p class="small" style="margin:12px 0 0"><b>Onde a distância é maior:</b> ' + d.slice(0,3).map(function(x){ return esc(x.a.pt) + " (" + x.imp + " de importância, " + x.acao + " de vivência)"; }).join("; ") + '. Bons pontos para conversarmos na sessão.</p>';
+  document.getElementById("mapa").innerHTML = h;
+  V.areas.forEach(function(a){
+    var i = D[a.id+"_imp"], v = D[a.id+"_acao"], el = document.getElementById("st_"+a.id);
+    el.textContent = i == null && v == null ? "a preencher" : "importância " + (i == null ? "–" : i) + " · vivência " + (v == null ? "–" : v);
+  });
+}
+
+function mudou(){
+  atual = coletar();
+  sujo = JSON.stringify(atual) !== JSON.stringify(gravado);
+  save.disabled = !sujo; save.textContent = "Salvar";
+  if (sujo) st.textContent = "Alterações não salvas";
+  resumo(atual);
+}
+
+function telaMapa(nome, row){
+  existe = !!row; gravado = (row && row.dados) || {}; sujo = false;
+  var D = gravado;
+  var h = '<h1>Mapa de valores</h1>'+
+    '<p>Olá, '+esc(String(nome).split(" ")[0])+'. Valores não são metas: são a direção em que você quer caminhar. Para cada área, escreva o que importa para você e dê duas notas: o quanto essa área é <b>importante</b> e o quanto você tem <b>vivido</b> de acordo com isso nas últimas semanas.</p>'+
+    '<p class="muted">Não precisa fazer tudo de uma vez. Salve e volte quando quiser; suas respostas ficam guardadas e você pode mudá-las.</p>'+
+    '<div class="card"><h2>Seu mapa</h2><div id="mapa"></div></div>';
+  h += V.areas.map(function(a, n){
+    return '<details class="area"'+(n===0 && !existe ? " open" : "")+'><summary><span>'+esc(a.pt)+'</span><span class="st" id="st_'+a.id+'"></span></summary><div class="in">'+
+      '<label class="f" for="t_'+a.id+'_txt">O que importa para você nessa área?</label><p class="muted small">'+esc(a.dica)+'</p>'+
+      '<textarea id="t_'+a.id+'_txt" maxlength="2000">'+esc(D[a.id+"_txt"])+'</textarea>'+
+      escala(a.id+"_imp", "O quanto essa área é importante para você?", "Nada", "Essencial", D[a.id+"_imp"])+
+      escala(a.id+"_acao", "Nas últimas semanas, o quanto você viveu de acordo com isso?", "Nada", "Totalmente", D[a.id+"_acao"])+
+      '<label class="f" for="t_'+a.id+'_passo">Um passo pequeno e possível para esta semana</label>'+
+      '<textarea id="t_'+a.id+'_passo" maxlength="1000" style="min-height:64px">'+esc(D[a.id+"_passo"])+'</textarea></div></details>';
+  }).join("");
+  if (!existe) h += '<div class="card" id="cons"><label class="check"><input type="checkbox" id="ok"><span>Concordo em guardar estas respostas e compartilhá-las com o meu psicólogo, Felipe Santos, para uso no meu acompanhamento. Só eu e ele temos acesso. As alterações ficam registradas com data. Os dados ficam guardados em um serviço de banco de dados com servidores nos Estados Unidos, com acesso protegido. Posso pedir a exclusão quando quiser.</span></label></div>';
+  h += '<div id="bot"></div>';
+  app.innerHTML = h;
+  nav.hidden = false;
+  st.textContent = row ? "Salvo em " + fmt(row.atualizado_em) : "Ainda não salvo";
+  save.disabled = true;
+
+  app.querySelectorAll(".esc").forEach(function(box){
+    var r = box.querySelector("input"), o = box.querySelector("output");
+    function marca(){ box.classList.remove("vazio"); box.dataset.ok = "1"; o.textContent = r.value; mudou(); }
+    ["input","change","pointerdown","keydown"].forEach(function(ev){ r.addEventListener(ev, function(){ setTimeout(marca, 0); }); });
+  });
+  app.querySelectorAll("textarea").forEach(function(t){ t.addEventListener("input", mudou); });
+  resumo(D);
+}
+
+function salvar(){
+  var bot = document.getElementById("bot"); bot.innerHTML = "";
+  if (!existe && !document.getElementById("ok").checked) {
+    bot.innerHTML = '<div class="msg err" role="alert">Marque a caixa de concordância para salvar.</div>';
+    document.getElementById("cons").scrollIntoView({ behavior: "smooth", block: "center" }); return;
+  }
+  var D = coletar();
+  save.disabled = true; save.textContent = "Salvando…";
+  var q = existe
+    ? sb.from("valores_mapas").update({ dados: D }).eq("email", EMAIL).select("atualizado_em")
+    : sb.from("valores_mapas").insert({ email: EMAIL, dados: D, consentimento: true }).select("atualizado_em");
+  q.then(function(r){
+    if (r.error || !r.data || !r.data.length) {
+      save.disabled = false; save.textContent = "Salvar";
+      bot.innerHTML = '<div class="msg err" role="alert">Não foi possível salvar. Confira a internet e tente de novo. Suas respostas continuam nesta tela.</div>';
+      return;
+    }
+    existe = true; gravado = D; sujo = false;
+    var c = document.getElementById("cons"); if (c) c.remove();
+    save.textContent = "Salvo"; st.textContent = "Salvo em " + fmt(r.data[0].atualizado_em);
+  });
+}
+save.onclick = salvar;
+window.addEventListener("beforeunload", function(e){ if (sujo) { e.preventDefault(); e.returnValue = ""; } });
+
+// ---------- roteamento ----------
+var aberto = "";
+function entrar(session){
+  if (!session) { aberto = ""; telaLogin(); return; }
+  var em = (session.user.email || "").toLowerCase();
+  if (aberto === em) return;            // renovação de sessão não recarrega o formulário
+  aberto = em; EMAIL = em;
+  document.getElementById("who").innerHTML = '<span class="muted">'+esc(EMAIL)+'</span> <button class="btn sm alt" id="out">Sair</button>';
+  document.getElementById("out").onclick = sair;
+  sb.from("pacientes").select("nome").eq("email", EMAIL).maybeSingle().then(function(p){
+    if (p.error) { app.innerHTML = '<div class="msg err">Não foi possível carregar. Recarregue a página.</div>'; return; }
+    if (!p.data) { telaSemAcesso(); return; }
+    sb.from("valores_mapas").select("dados,atualizado_em").eq("email", EMAIL).maybeSingle().then(function(m){
+      if (m.error) { app.innerHTML = '<div class="msg err">Não foi possível carregar. Recarregue a página.</div>'; return; }
+      telaMapa(p.data.nome, m.data);
+    });
+  });
+}
+sb.auth.getSession().then(function(r){ entrar(r.data.session); });
+sb.auth.onAuthStateChange(function(ev, s){
+  if (ev === "SIGNED_IN") setTimeout(function(){ entrar(s); }, 0);
+  if (ev === "SIGNED_OUT") { aberto = ""; }
+});
+})();
+</script>
+</body>
+</html>
