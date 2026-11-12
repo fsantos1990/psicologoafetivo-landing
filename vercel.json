@@ -19,6 +19,18 @@
       "destination": "/obrigado/index.html"
     },
     {
+      "source": "/checkin",
+      "destination": "/checkin/index.html"
+    },
+    {
+      "source": "/valores",
+      "destination": "/valores/index.html"
+    },
+    {
+      "source": "/pacientes",
+      "destination": "/pacientes/index.html"
+    },
+    {
       "source": "/(.*)",
       "destination": "/index.html"
     }
@@ -87,6 +99,57 @@
         {
           "key": "Content-Disposition",
           "value": "inline; filename=\"Guide-IBCT-couples.pdf\""
+        }
+      ]
+    },
+    {
+      "source": "/checkin/(.*)",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "no-referrer"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "DENY"
+        }
+      ]
+    },
+    {
+      "source": "/valores/(.*)",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "no-referrer"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "DENY"
+        }
+      ]
+    },
+    {
+      "source": "/pacientes/(.*)",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "no-referrer"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "DENY"
         }
       ]
     }
