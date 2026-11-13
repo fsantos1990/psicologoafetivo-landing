@@ -15,6 +15,22 @@
       "destination": "/livro/index.html"
     },
     {
+      "source": "/obrigado",
+      "destination": "/obrigado/index.html"
+    },
+    {
+      "source": "/checkin",
+      "destination": "/checkin/index.html"
+    },
+    {
+      "source": "/valores",
+      "destination": "/valores/index.html"
+    },
+    {
+      "source": "/pacientes",
+      "destination": "/pacientes/index.html"
+    },
+    {
       "source": "/(.*)",
       "destination": "/index.html"
     }
@@ -34,6 +50,16 @@
       "source": "/guia",
       "destination": "/guia-ibct.pdf",
       "permanent": false
+    },
+    {
+      "source": "/guia-act",
+      "destination": "/guia-act.pdf",
+      "permanent": false
+    },
+    {
+      "source": "/guide",
+      "destination": "/guide-ibct.pdf",
+      "permanent": false
     }
   ],
   "headers": [
@@ -47,6 +73,83 @@
         {
           "key": "Content-Disposition",
           "value": "inline; filename=\"Guia-IBCT-casais.pdf\""
+        }
+      ]
+    },
+    {
+      "source": "/guia-act.pdf",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex"
+        },
+        {
+          "key": "Content-Disposition",
+          "value": "inline; filename=\"Guia-ACT-terapia-individual.pdf\""
+        }
+      ]
+    },
+    {
+      "source": "/guide-ibct.pdf",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex"
+        },
+        {
+          "key": "Content-Disposition",
+          "value": "inline; filename=\"Guide-IBCT-couples.pdf\""
+        }
+      ]
+    },
+    {
+      "source": "/checkin/(.*)",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "no-referrer"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "DENY"
+        }
+      ]
+    },
+    {
+      "source": "/valores/(.*)",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "no-referrer"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "DENY"
+        }
+      ]
+    },
+    {
+      "source": "/pacientes/(.*)",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "no-referrer"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "DENY"
         }
       ]
     }

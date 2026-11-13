@@ -15,7 +15,7 @@ POST = {
    "Dizer o que faz você se sentir escolhido ou escolhida e combinar sinais concretos de compromisso: incluir nos planos, apresentar aos amigos, cumprir o que diz.",
    "Say what makes you feel chosen and agree on concrete signs of commitment: include each other in plans, keep your word."),
   ("cta", None,
-   "Casais: cada um completa a frase “eu me sinto escolhido quando você…” e conta para o outro.\n\nDiagnóstico gratuito do casal: 23 perguntas, resultado na hora.\nPara aprofundar: livro Mapa Afetivo, Capítulo 6.\nLink na bio.",
+   "Casais: cada um completa a frase “eu me sinto escolhido quando você…” e conta para o outro.\n\nComece pelo diagnóstico gratuito do casal: 23 perguntas, resultado na hora.\nDepois, para aprofundar: livro Mapa Afetivo, Capítulo 6.\nLink na bio.",
    "Couples: each of you completes “I feel chosen when you…” and tells the other."),
  ],
  "refs": "Joel et al. (2020), PNAS · Muise, Christofides & Desmarais (2009), CyberPsychology & Behavior",
@@ -29,7 +29,9 @@ O que ajuda: dizer o que faz você se sentir escolhido ou escolhida e combinar s
 
 Para hoje: cada um completa a frase “eu me sinto escolhido quando você…” e conta para o outro.
 
-O diagnóstico gratuito do casal mostra se o compromisso é o pilar mais baixo de vocês. O livro Mapa Afetivo trata dos preditores no Capítulo 6. Link na bio.
+Comece pelo diagnóstico gratuito do casal: ele mostra se o compromisso é o pilar mais baixo de vocês. Depois, o livro Mapa Afetivo trata dos preditores no Capítulo 6. Link na bio.
+
+Aviso: o diagnóstico do Mapa Afetivo é uma avaliação educativa. Não é um diagnóstico psicológico e não substitui avaliação profissional.
 
 —
 

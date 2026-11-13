@@ -15,7 +15,7 @@ POST = {
    "Um gosta de guardar, o outro de aproveitar. Decidir quanto vai para a viagem deste ano é solucionável. A diferença entre os dois jeitos tende a ficar. Com ela, o objetivo é conversar sem escalar, não convencer.",
    "One saves, the other spends. This year's trip budget is solvable. The difference in style tends to stay; the goal is to talk without escalating."),
   ("cta", None,
-   "Casais: cada um lista os três temas de briga mais repetidos. Depois, juntos, marquem quais são solucionáveis e quais são perpétuos.\n\nDiagnóstico gratuito do casal: 23 perguntas, resultado na hora.\nPara aprofundar: livro Mapa Afetivo, Capítulos 5 e 8.\nLink na bio.",
+   "Casais: cada um lista os três temas de briga mais repetidos. Depois, juntos, marquem quais são solucionáveis e quais são perpétuos.\n\nComece pelo diagnóstico gratuito do casal. Depois, o livro Mapa Afetivo, Capítulos 5 e 8.\nLink na bio.",
    "Couples: each list your three most repeated fights, then mark together which are solvable and which are perpetual."),
  ],
  "refs": "Gottman & Silver (1999), The Seven Principles for Making Marriage Work",
@@ -31,7 +31,9 @@ Exemplo: um gosta de guardar dinheiro, o outro de aproveitar. Decidir quanto vai
 
 Para hoje: cada um lista os três temas de briga mais repetidos. Depois, juntos, marquem quais são solucionáveis e quais são perpétuos.
 
-O diagnóstico gratuito do casal mostra o padrão de conflito que vocês repetem. O livro Mapa Afetivo trata do tema nos Capítulos 5 e 8. Link na bio.
+Comece pelo diagnóstico gratuito do casal: ele mostra o padrão de conflito que vocês repetem. Depois, o livro Mapa Afetivo trata do tema nos Capítulos 5 e 8. Link na bio.
+
+Aviso: o diagnóstico do Mapa Afetivo é uma avaliação educativa. Não é um diagnóstico psicológico e não substitui avaliação profissional.
 
 —
 

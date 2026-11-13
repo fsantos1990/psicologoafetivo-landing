@@ -14,3 +14,8 @@ Rotina semanal executada pelo Claude:
 - assuntos em alta no Brasil ligados a relacionamento (Google Trends, últimas ~24 h, onde aparece a fofoca do momento);
 - o que as pessoas digitam no Google sobre marido, namorado, traição, desejo, terapia etc., com 🆕 no que é novo desde a rodada anterior.
 Sementes e filtros ficam no topo do script.
+
+## Regras de texto (10/11/2026)
+
+- O diagnóstico vem antes do livro: a chamada é "Comece pelo diagnóstico gratuito" e, depois, o livro.
+- Toda peça que cita o diagnóstico avisa que ele é uma avaliação educativa, não um diagnóstico psicológico. Nas legendas, use `AVISO_CAP` de `tools/render.py`; no último slide o aviso entra sozinho; `render()` recusa legenda sem o aviso.
