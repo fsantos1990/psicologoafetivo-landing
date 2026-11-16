@@ -10,6 +10,90 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    id: "aplicativos-parceiro-ideal-satisfacao",
+    title: "Aplicativos de relacionamento e o parceiro ideal: o que a comparação faz com a satisfação",
+    excerpt:
+      "Na minha pesquisa com 192 pessoas, quanto maior a distância entre o parceiro ideal e o real, menor a satisfação. Veja como os aplicativos entram nessa comparação e um critério para usar no dia a dia.",
+    date: "16 de novembro de 2026",
+    author: "Felipe Santos",
+    image: "/blog/aplicativos-parceiro-ideal-satisfacao.jpg",
+    content: `
+      <h2>O parceiro ideal ganhou foto</h2>
+      <p>
+        Toda pessoa tem uma descrição interna do parceiro ideal. Antes dos aplicativos, essa descrição era montada com
+        filmes, com o casal observado em casa e com as histórias de amigos e parentes.
+      </p>
+      <p>
+        No aplicativo, o ideal passa a ter foto, descrição e localização. Cada perfil que aparece na tela oferece um novo
+        exemplo do que a pessoa poderia ter. O parceiro real, por outro lado, é conhecido por inteiro: tem dias ruins,
+        esquece compromissos, fica de mau humor de manhã. A comparação passa a acontecer entre uma pessoa inteira e a
+        melhor foto de várias outras.
+      </p>
+      <h2>O que a pesquisa mostrou</h2>
+      <p>
+        Na minha pesquisa de mestrado em Psicologia Social na UFBA, 192 pessoas em relacionamentos de pelo menos um ano
+        responderam a medidas de amor, ideais de parceiro, sexismo e satisfação. Dois resultados interessam aqui.
+      </p>
+      <ul>
+        <li>Quanto maior a distância entre o parceiro ideal e o parceiro real, menor a satisfação com a relação.</li>
+        <li>Intimidade e compromisso apareceram como os mecanismos que explicam a saúde da relação. A paixão não ocupou
+          esse papel.</li>
+      </ul>
+      <p>
+        O primeiro resultado é uma correlação. Ele não mostra se a distância reduz a satisfação ou se pessoas insatisfeitas
+        passam a ver o parceiro mais longe do ideal. A pesquisa também não mediu o uso de aplicativos. A ligação com os
+        aplicativos é uma implicação: se a referência de comparação sobe, a distância entre ideal e real tende a aumentar
+        sem que o parceiro tenha mudado, e essa distância acompanha uma satisfação menor.
+      </p>
+      <h2>Como isso aparece numa relação</h2>
+      <p>
+        Um exemplo comum: um casal está junto há três anos. Um dos dois apagou o aplicativo quando o namoro começou, mas
+        continua vendo perfis de pessoas desconhecidas nas redes sociais. Numa semana difícil, ele percebe que pensa nessas
+        pessoas sempre que a parceira chega cansada do trabalho e quer ficar em silêncio. A parceira continua igual, e o
+        número de comparações que ele faz por dia aumentou.
+      </p>
+      <p>
+        Para quem está solteiro, o efeito aparece de outra forma. Com muitos perfis disponíveis, é fácil descartar alguém
+        por um item da lista depois de uma conversa curta. Um encontro em que a pessoa pareceu menos interessante do que na
+        foto vira motivo para voltar ao aplicativo, antes que haja tempo para intimidade e compromisso se formarem.
+      </p>
+      <h2>Por que intimidade e compromisso importam aqui</h2>
+      <p>
+        Os dois fatores que explicaram a saúde da relação na pesquisa dependem de tempo com a mesma pessoa. Intimidade
+        inclui saber o que o outro viveu no dia e ser procurado quando algo importante acontece. Compromisso inclui manter
+        planos feitos a dois. Nenhum desses itens aparece num perfil, porque eles só existem depois de meses de convivência.
+      </p>
+      <p>
+        Na prática, isso significa que a comparação com perfis mede o parceiro real por critérios em que ele sempre perde,
+        como aparência numa foto escolhida, e deixa de fora os critérios que mais se ligaram à saúde da relação.
+      </p>
+      <h2>Um critério para usar quando a comparação aparecer</h2>
+      <p>
+        Quando notar que está comparando o parceiro com alguém das redes ou do aplicativo, faça três passos:
+      </p>
+      <ol>
+        <li>Anote o que essa pessoa parece oferecer. Por exemplo: "parece mais animada", "parece viajar mais".</li>
+        <li>Verifique se esse item falta de forma concreta na rotina de vocês ou se você só viu numa foto.</li>
+        <li>Se falta na rotina, transforme em um pedido específico ao parceiro: "Quero planejar uma viagem curta até
+          março, você topa escolher a data comigo no domingo?". Se veio só da foto, registre que a comparação não serve
+          de critério para avaliar a relação.</li>
+      </ol>
+      <h2>Para ir além</h2>
+      <p>
+        Comece pelo <a href="/mapa/">diagnóstico gratuito do casal</a>, que mostra a distância entre o seu parceiro ideal e
+        o real. O diagnóstico é uma avaliação educativa, não um diagnóstico psicológico, e não substitui avaliação
+        profissional. Depois, o livro <a href="/livro/">Mapa Afetivo</a> trata de aplicativos, escolha e abundância no
+        Capítulo 3, e apresenta os resultados da minha pesquisa no Capítulo 4. O ebook custa R$&nbsp;39.
+      </p>
+      <p>
+        Atendo casais online, em português e inglês, com experiência em casais interculturais.
+        <em>Online couples therapy in Portuguese and English.</em>
+      </p>
+      <p><em>Referência: Santos, F. M. S. (2019). Amor romântico, ideais e satisfação nos relacionamentos amorosos.
+        Dissertação de mestrado, Universidade Federal da Bahia.</em></p>
+    `,
+  },
+  {
     id: "parceiro-ideal-parceiro-real",
     title: "Parceiro ideal e parceiro real: com quem você está discutindo?",
     excerpt:
