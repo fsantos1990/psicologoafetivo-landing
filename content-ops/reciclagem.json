@@ -22,6 +22,17 @@
       "reciclado_metricas": null,
       "blog_slug": "parceiro-ideal-parceiro-real",
       "veredito": null
+    },
+    {
+      "id": "r03_aplicativos",
+      "original_url": "https://www.instagram.com/p/DV9Wul3Evgi/",
+      "original_data": "2026-03-16",
+      "original_metricas": {"alcance": 1034, "interacoes": 75, "salvamentos": 10, "compartilhamentos": 18},
+      "reciclado_data": "2026-12-05T19:00:00-03:00",
+      "reciclado_url": null,
+      "reciclado_metricas": null,
+      "blog_slug": "aplicativos-parceiro-ideal-satisfacao",
+      "veredito": null
     }
   ]
 }
