@@ -1,0 +1,38 @@
+name: publicar-instagram
+
+on:
+  schedule:
+    # a cada 15 min entre 18:00 e 20:45 de Salvador (21h-23h UTC)
+    - cron: "*/15 21-23 * * *"
+  workflow_dispatch:
+
+concurrency:
+  group: instagram-fila
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  publicar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Publicar itens vencidos
+        env:
+          IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
+          IG_USER_ID: ${{ secrets.IG_USER_ID }}
+        run: python3 content-ops/tools/publicar.py
+      - name: Salvar status da fila
+        if: always()
+        run: |
+          git config user.name "publicador-instagram"
+          git config user.email "actions@users.noreply.github.com"
+          git add content-ops/fila.json
+          git diff --cached --quiet && exit 0
+          git commit -m "fila: status de publicação"
+          for i in 1 2 3; do git pull --rebase && git push && break; sleep 5; done

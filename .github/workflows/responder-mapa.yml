@@ -1,0 +1,38 @@
+name: responder-mapa
+
+on:
+  schedule:
+    # de hora em hora, das 8h às 23h de Salvador
+    - cron: "7 11-23,0-2 * * *"
+  workflow_dispatch:
+
+concurrency:
+  group: instagram-respostas
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  responder:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Responder comentários MAPA
+        env:
+          IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
+          IG_USER_ID: ${{ secrets.IG_USER_ID }}
+        run: python3 content-ops/tools/responder_mapa.py
+      - name: Salvar respondidos
+        if: always()
+        run: |
+          git config user.name "publicador-instagram"
+          git config user.email "actions@users.noreply.github.com"
+          git add content-ops/respostas_mapa.json 2>/dev/null || exit 0
+          git diff --cached --quiet && exit 0
+          git commit -m "respostas MAPA: novos comentários respondidos"
+          for i in 1 2 3; do git pull --rebase && git push && break; sleep 5; done

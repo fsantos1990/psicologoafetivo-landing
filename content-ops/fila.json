@@ -1,0 +1,4 @@
+{
+  "como_usar": "Adicione itens com tools/agendar.py. O GitHub Actions (publicar-instagram.yml) publica os itens com status 'pendente' cujo horário já passou. Status possíveis: pendente, publicado, falhou.",
+  "itens": []
+}

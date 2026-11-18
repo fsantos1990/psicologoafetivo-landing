@@ -1,0 +1,29 @@
+name: renovar-token-instagram
+
+on:
+  schedule:
+    # dias 1 e 15, 09:17 de Salvador. O token dura 60 dias; renovar a cada ~15 dias deixa folga para falhas.
+    - cron: "17 12 1,15 * *"
+  workflow_dispatch:
+
+jobs:
+  renovar:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Renovar token e gravar no secret
+        env:
+          IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
+          GH_TOKEN: ${{ secrets.GH_PAT }}
+        run: |
+          set -euo pipefail
+          resp=$(curl -sS -G "https://graph.instagram.com/refresh_access_token" \
+            --data-urlencode "grant_type=ig_refresh_token" \
+            --data-urlencode "access_token=${IG_ACCESS_TOKEN}")
+          novo=$(echo "$resp" | jq -r '.access_token // empty')
+          if [ -z "$novo" ]; then
+            echo "Falha ao renovar: $(echo "$resp" | jq -c '.error // .')"
+            exit 1
+          fi
+          echo "::add-mask::$novo"
+          gh secret set IG_ACCESS_TOKEN --repo "${{ github.repository }}" --body "$novo"
+          echo "Token renovado. Validade: $(echo "$resp" | jq -r '.expires_in') segundos."
