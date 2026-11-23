@@ -10,6 +10,94 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    id: "compromisso-decisao-casal",
+    title: "Compromisso no casal: a decisão de continuar, tomada de novo no dia da briga",
+    excerpt:
+      "Na minha pesquisa com 192 pessoas, intimidade e compromisso explicaram a saúde da relação. Veja o que a pesquisa entende por compromisso e como transformar isso em combinados que valem durante uma briga.",
+    date: "23 de novembro de 2026",
+    author: "Felipe Santos",
+    image: "/blog/compromisso-decisao-casal.jpg",
+    content: `
+      <h2>O que a psicologia chama de compromisso</h2>
+      <p>
+        Em 1986, o psicólogo Robert Sternberg propôs que o amor tem três componentes que variam de forma independente:
+        intimidade, paixão e compromisso. Intimidade é a proximidade e a confiança entre os dois. Paixão é a atração e
+        o desejo. Compromisso é a parte da decisão: escolher a relação e manter essa escolha ao longo do tempo.
+      </p>
+      <p>
+        Essa divisão ajuda a entender por que um casal pode ter muita paixão e pouca estabilidade, ou o contrário. Ela
+        também mostra que o compromisso depende de escolhas repetidas. Quem decidiu ficar junto no começo do namoro
+        precisa decidir de novo em várias situações concretas: numa briga sobre dinheiro, numa fase de pouco sexo, num
+        ano em que um dos dois está sobrecarregado no trabalho.
+      </p>
+      <h2>O que a minha pesquisa mostrou</h2>
+      <p>
+        Na minha pesquisa de mestrado em Psicologia Social na UFBA, 192 pessoas em relacionamentos de pelo menos um ano
+        responderam a medidas de amor, ideais de parceiro, sexismo e satisfação. Intimidade e compromisso apareceram
+        como os mecanismos que explicam a saúde da relação. A paixão não ocupou esse papel.
+      </p>
+      <p>
+        Esse resultado é correlacional. Ele não prova que aumentar o compromisso melhora a relação. Ele indica onde
+        vale olhar quando um casal quer entender o que está acontecendo: a queda da paixão depois de alguns anos chama
+        atenção, mas foram intimidade e compromisso que acompanharam a saúde da relação.
+      </p>
+      <h2>Compromisso e infidelidade</h2>
+      <p>
+        Um estudo publicado em 2026 por Ghanbarian e colegas avaliou estudantes casados. Quem relatou mais compromisso
+        com o casamento mostrou atitudes menos favoráveis à infidelidade. No modelo testado, o compromisso funcionou
+        como mediador entre a intolerância à incerteza, a satisfação sexual e essas atitudes.
+      </p>
+      <p>
+        O estudo mediu atitudes, e uma atitude é diferente de um comportamento. Por isso, o dado serve como indício:
+        em quem tem mais compromisso, a infidelidade aparece como opção menos aceitável.
+      </p>
+      <h2>Como o compromisso aparece numa relação</h2>
+      <p>
+        Na clínica, o compromisso fica visível nos combinados que continuam valendo durante uma briga. Um exemplo: um
+        casal discute sobre a divisão das tarefas de casa. Os dois ficam com raiva e levantam a voz. Ainda assim, ninguém
+        xinga, ninguém ameaça ir embora e ninguém leva o assunto para a família. No dia seguinte, um dos dois retoma a
+        conversa para resolver o que ficou pendente.
+      </p>
+      <p>
+        Em outro casal, a mesma briga termina com uma ameaça de separação e três dias de silêncio. O tema era o mesmo.
+        A diferença está no que cada casal faz quando a raiva aparece. Combinados que só valem nos dias bons não
+        protegem a relação, porque os momentos de risco acontecem justamente nos dias ruins.
+      </p>
+      <p>
+        Esses combinados mudam ao longo da relação. Há fases de mais proximidade e fases de cansaço. O critério útil é
+        verificar se, depois de uma fase difícil, os dois voltam a conversar, atualizam o que foi combinado e consertam
+        o que deu errado.
+      </p>
+      <h2>Um exercício para fazer a dois</h2>
+      <ol>
+        <li>Escrevam juntos três combinados que valem mesmo no pior dia. Por exemplo: "não xingamos", "não ameaçamos
+          terminar no meio da briga", "quem sair da conversa diz quando volta".</li>
+        <li>Depois da próxima briga, releiam a lista e marquem quais foram cumpridos.</li>
+        <li>Um combinado que nunca é cumprido precisa ser renegociado ou sair da lista. Três itens bastam para começar.</li>
+      </ol>
+      <p>
+        Se um dos dois não consegue cumprir nenhum combinado mesmo querendo, ou se as brigas envolvem medo, humilhação
+        ou violência, o exercício não basta, e o caminho é procurar ajuda profissional.
+      </p>
+      <h2>Para ir além</h2>
+      <p>
+        Comece pelo <a href="/mapa/">diagnóstico gratuito do casal</a>, que mostra qual dos três pilares está mais baixo
+        na relação de vocês. O diagnóstico é uma avaliação educativa, não um diagnóstico psicológico, e não substitui
+        avaliação profissional. Depois, o livro <a href="/livro/">Mapa Afetivo</a> trata dos três pilares de Sternberg e
+        dos resultados da minha pesquisa no Capítulo 4, com um exercício escrito para o casal. O ebook custa R$&nbsp;39.
+      </p>
+      <p>
+        Atendo casais online, em português e inglês, com experiência em casais interculturais.
+        <em>Online couples therapy in Portuguese and English.</em>
+      </p>
+      <p><em>Referências: Sternberg, R. J. (1986). A triangular theory of love. Psychological Review, 93(2), 119–135.
+        Santos, F. M. S. (2019). Amor romântico, ideais e satisfação nos relacionamentos amorosos. Dissertação de
+        mestrado, Universidade Federal da Bahia. Ghanbarian, M., Hooman, F., Hafezi, F., &amp; Mashalpourfard, M. (2026).
+        Marital commitment as a mediator between intolerance of uncertainty, sexual satisfaction, and attitudes toward
+        infidelity among married students. Zahedan Journal of Research in Medical Sciences, 28(1), e166228.</em></p>
+    `,
+  },
+  {
     id: "aplicativos-parceiro-ideal-satisfacao",
     title: "Aplicativos de relacionamento e o parceiro ideal: o que a comparação faz com a satisfação",
     excerpt:
