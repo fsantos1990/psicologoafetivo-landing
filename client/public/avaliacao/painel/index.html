@@ -85,29 +85,83 @@ function loginView(msg){
   };
 }
 
-// ---------- gerador de links ----------
+// ---------- casais e convites ----------
+// Os casais ficam salvos na tabela avaliacao_casais (supabase/avaliacao-casais.sql),
+// então os convites continuam na tela depois de sair, recarregar ou trocar de app.
 function geradorHTML(){
-  return '<div class="card noprint"><h2>Gerar links para um casal</h2>'+
-    '<div class="row"><label class="f">Parceiro(a) 1<input id="g1" placeholder="Ana"></label>'+
-    '<label class="f">Parceiro(a) 2<input id="g2" placeholder="John"></label>'+
-    '<label class="f">Código do casal<input id="gc" placeholder="gerado automaticamente"></label>'+
-    '<label class="f">Idioma inicial<select id="gl"><option value="pt">Português</option><option value="en">English</option></select></label></div>'+
-    '<p></p><button class="btn" id="gb">Gerar</button><div id="gout"></div>'+
-    '<p class="muted">Cada parceiro(a) recebe o próprio link. O código agrupa as respostas no painel; use letras e números, sem dados sensíveis.</p></div>';
+  return '<div class="card noprint"><h2>Cadastrar casal</h2>'+
+    '<div class="row"><label class="f">Parceiro(a) 1<input id="g1" placeholder="Ana" maxlength="60"></label>'+
+    '<label class="f">Parceiro(a) 2<input id="g2" placeholder="John" maxlength="60"></label>'+
+    '<label class="f">Código do casal<input id="gc" placeholder="gerado automaticamente" maxlength="40"></label>'+
+    '<label class="f">Idioma do convite<select id="gl"><option value="pt">Português</option><option value="en">English</option></select></label></div>'+
+    '<p></p><button class="btn" id="gb">Criar casal</button> <span id="gmsg" class="muted"></span>'+
+    '<p class="muted">O casal fica salvo abaixo com um convite para cada um. Copie e cole no WhatsApp de cada pessoa. O código agrupa as respostas; use letras e números, sem dados sensíveis.</p></div>'+
+    '<div class="card noprint"><h2>Casais e convites</h2><div id="cas" class="muted">Carregando…</div></div>';
+}
+function linkDe(c, nome, lang){ return BASE + "?c=" + encodeURIComponent(c) + "&p=" + encodeURIComponent(nome) + (lang==="en"?"&lang=en":""); }
+function convite(c, nome, lang){
+  var url = linkDe(c, nome, lang);
+  if (lang === "en") return "Hi " + nome + "!\n\n" +
+    "Here is the link to the questionnaires for the initial assessment of our couples therapy:\n" + url + "\n\n" +
+    "Please answer on your own, without discussing with your partner. This link is just for you. It takes about 20 to 25 minutes, and you can stop and continue later on the same device. Only I will see your answers.\n\nFelipe";
+  return "Olá, " + nome + "! Tudo bem?\n\n" +
+    "Segue o link dos questionários da avaliação inicial da nossa terapia de casal:\n" + url + "\n\n" +
+    "Responda sozinho(a), sem conversar com seu parceiro(a) sobre as respostas. Este link é só seu. Leva cerca de 20 a 25 minutos e dá para parar e continuar depois no mesmo aparelho. As respostas chegam só para mim.\n\nFelipe";
+}
+function copiar(texto, botao){
+  function ok(){ var t = botao.textContent; botao.textContent = "Copiado ✓"; setTimeout(function(){ botao.textContent = t; }, 2000); }
+  if (navigator.clipboard && window.isSecureContext) navigator.clipboard.writeText(texto).then(ok, function(){ fallback(); });
+  else fallback();
+  function fallback(){ var ta = document.createElement("textarea"); ta.value = texto; document.body.appendChild(ta); ta.select(); try { document.execCommand("copy"); ok(); } catch(e){ alert("Não consegui copiar. Selecione o texto e copie manualmente."); } ta.remove(); }
+}
+function norm(s){ return slug(s); }
+function conviteHTML(c, nome, lang, respondeu){
+  var txt = convite(c, nome, lang);
+  return '<div style="margin-top:10px"><div style="display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap">'+
+    '<b>'+esc(nome)+' '+(respondeu?'<span class="pill verde">respondeu</span>':'<span class="pill amarela">pendente</span>')+'</b>'+
+    '<button class="btn sm" data-copy="'+esc(txt)+'">Copiar convite de '+esc(nome)+'</button></div>'+
+    '<textarea readonly rows="7" style="width:100%;margin-top:6px;font:inherit;font-size:14px;padding:9px 11px;border:1px solid var(--line);border-radius:10px;background:#fff;resize:vertical">'+esc(txt)+'</textarea></div>';
+}
+function carregarCasais(){
+  var el = document.getElementById("cas");
+  Promise.all([
+    sb.from("avaliacao_casais").select("*").order("criado_em",{ascending:false}).limit(300),
+    sb.from("avaliacoes").select("casal,parceiro").limit(2000)
+  ]).then(function(rs){
+    var rc = rs[0], ra = rs[1];
+    if (rc.error){ el.innerHTML = '<span class="low">Erro ao carregar os casais: '+esc(rc.error.message)+'</span><br>Se a tabela ainda não existe, rode <code>supabase/avaliacao-casais.sql</code> no SQL Editor do Supabase.'; return; }
+    if (!rc.data.length){ el.textContent = "Nenhum casal cadastrado ainda."; return; }
+    var resp = {}; (ra.data||[]).forEach(function(x){ (resp[x.casal] = resp[x.casal] || []).push(norm(x.parceiro)); });
+    el.classList.remove("muted");
+    el.innerHTML = rc.data.map(function(k){
+      var rr = resp[k.codigo] || [];
+      return '<details style="border-top:1px solid var(--line);padding:10px 0"'+(rr.length<2?' open':'')+'>'+
+        '<summary style="cursor:pointer"><b>'+esc(k.parceiro1)+' & '+esc(k.parceiro2)+'</b> <span class="muted">· '+esc(k.codigo)+' · criado em '+fmt(k.criado_em)+' · '+rr.length+'/2 resposta(s)</span></summary>'+
+        conviteHTML(k.codigo, k.parceiro1, k.idioma, rr.indexOf(norm(k.parceiro1))>-1) +
+        conviteHTML(k.codigo, k.parceiro2, k.idioma, rr.indexOf(norm(k.parceiro2))>-1) +
+        '<p style="display:flex;gap:8px;flex-wrap:wrap;margin:10px 0 0">'+(rr.length?'<a class="btn sm alt" href="?casal='+encodeURIComponent(k.codigo)+'">Ver respostas</a>':'')+
+        '<button class="btn sm danger" data-delcasal="'+esc(k.codigo)+'">Remover da lista</button></p></details>';
+    }).join("");
+    el.querySelectorAll("[data-copy]").forEach(function(b){ b.onclick = function(){ copiar(b.dataset.copy, b); }; });
+    el.querySelectorAll("[data-delcasal]").forEach(function(b){ b.onclick = function(){
+      if (!confirm("Remover este casal da lista de convites? As respostas já enviadas continuam guardadas.")) return;
+      sb.from("avaliacao_casais").delete().eq("codigo", b.dataset.delcasal).then(function(x){ if (x.error) alert(x.error.message); carregarCasais(); });
+    }; });
+  });
 }
 function bindGerador(){
   document.getElementById("gb").onclick = function(){
-    var n1 = document.getElementById("g1").value.trim(), n2 = document.getElementById("g2").value.trim();
+    var n1 = document.getElementById("g1").value.trim(), n2 = document.getElementById("g2").value.trim(), msg = document.getElementById("gmsg");
+    if (!n1 || !n2){ msg.textContent = "Preencha o nome dos dois."; return; }
     var c = slug(document.getElementById("gc").value) || (slug(n1).slice(0,6)+"-"+slug(n2).slice(0,6)+"-"+Math.random().toString(36).slice(2,6));
-    document.getElementById("gc").value = c;
-    var lang = document.getElementById("gl").value;
-    var out = [n1||"Parceiro 1", n2||"Parceiro 2"].map(function(n){
-      var url = BASE + "?c=" + encodeURIComponent(c) + "&p=" + encodeURIComponent(n) + (lang==="en"?"&lang=en":"");
-      var wa = "https://wa.me/?text=" + encodeURIComponent((lang==="en"?"Hi "+n+", here is your assessment questionnaire link. Please answer on your own: ":"Olá, "+n+". Este é o seu link dos questionários de avaliação. Responda sozinho(a): ")+url);
-      return '<div class="link"><b style="min-width:80px">'+esc(n)+'</b><code>'+esc(url)+'</code><button class="btn sm alt" data-copy="'+esc(url)+'">Copiar</button><a class="btn sm" href="'+wa+'" target="_blank" rel="noopener">WhatsApp</a></div>';
-    }).join("");
-    document.getElementById("gout").innerHTML = out;
-    document.querySelectorAll("[data-copy]").forEach(function(b){ b.onclick = function(){ navigator.clipboard.writeText(b.dataset.copy).then(function(){ b.textContent = "Copiado"; }); }; });
+    var btn = this; btn.disabled = true; msg.textContent = "Salvando…";
+    sb.from("avaliacao_casais").insert({ codigo: c, parceiro1: n1, parceiro2: n2, idioma: document.getElementById("gl").value }).then(function(r){
+      btn.disabled = false;
+      if (r.error){ msg.innerHTML = '<span class="low">'+(r.error.code==="23505"?"Já existe um casal com este código. Escolha outro.":"Erro: "+esc(r.error.message))+'</span>'; return; }
+      msg.textContent = "Casal criado. Os convites estão logo abaixo.";
+      ["g1","g2","gc"].forEach(function(id){ document.getElementById(id).value = ""; });
+      carregarCasais();
+    });
   };
 }
 
@@ -115,6 +169,7 @@ function bindGerador(){
 function listaView(){
   app.innerHTML = geradorHTML() + '<div class="card"><h2>Respostas recebidas</h2><div id="lst" class="list muted">Carregando…</div></div>';
   bindGerador();
+  carregarCasais();
   sb.from("avaliacoes").select("id,criado_em,casal,parceiro,lido").order("criado_em",{ascending:false}).limit(500).then(function(r){
     var el = document.getElementById("lst");
     if (r.error){ el.textContent = "Erro: " + r.error.message; return; }
@@ -215,15 +270,18 @@ function casalView(casal){
   });
 }
 
+var rotaUser = null;
 function route(session){
-  if (!session){ loginView(); return; }
+  if (!session){ rotaUser = null; loginView(); return; }
+  rotaUser = session.user.id;
   document.getElementById("who").innerHTML = '<span class="muted">'+esc(session.user.email)+'</span> <button class="btn sm alt" id="out">Sair</button>';
   document.getElementById("out").onclick = function(){ sb.auth.signOut().then(function(){ loginView(); }); };
   var c = new URLSearchParams(location.search).get("casal");
   if (c) casalView(c); else listaView();
 }
 sb.auth.getSession().then(function(r){ route(r.data.session); });
-sb.auth.onAuthStateChange(function(ev, s){ if (ev === "SIGNED_IN") route(s); });
+// O Supabase repete o evento SIGNED_IN quando a aba volta ao foco; antes isso redesenhava a página e apagava o que estava na tela.
+sb.auth.onAuthStateChange(function(ev, s){ if (ev === "SIGNED_IN" && s && s.user.id !== rotaUser) route(s); });
 })();
 </script>
 </body>
