@@ -2,17 +2,18 @@
 
 Páginas:
 - `/avaliacao/?c=CODIGO&p=NOME` formulário que o cliente responde (PT/EN, celular e PC)
-- `/avaliacao/painel/` painel do terapeuta: gera links, lista respostas, mostra escores e comparativo do casal
+- `/avaliacao/painel/` painel do terapeuta: cadastra casais (salvos no banco) com o texto do convite de cada um para copiar e colar no WhatsApp, lista respostas, mostra escores e comparativo do casal
 
 Arquivos:
 - `client/public/avaliacao/instrumentos.js` itens dos 5 questionários e regras de correção
 - `client/public/avaliacao/config.js` URL e anon key do Supabase
 - `supabase/avaliacao.sql` tabela e regras de acesso (RLS)
+- `supabase/avaliacao-casais.sql` tabela dos casais cadastrados no painel (só o terapeuta acessa)
 - `supabase/aviso-email.sql` aviso por e-mail via Resend (gatilho no banco, chave no Vault)
 
 ## Configuração (uma vez, ~15 min)
 
-1. **Banco.** Supabase > SQL Editor > cole `supabase/avaliacao.sql` > Run.
+1. **Banco.** Supabase > SQL Editor > cole `supabase/avaliacao.sql` > Run. Depois faça o mesmo com `supabase/avaliacao-casais.sql`.
 2. **Seu login.** Supabase > Authentication > Users > Add user > seu e-mail (o painel entra por link mágico; ninguém mais consegue criar conta).
    Em Authentication > URL Configuration, adicione `https://www.psicologoafetivo.com.br/avaliacao/painel/` em Redirect URLs.
 3. **Chaves.** Supabase > Project Settings > API: copie Project URL e anon public key para `client/public/avaliacao/config.js`.
